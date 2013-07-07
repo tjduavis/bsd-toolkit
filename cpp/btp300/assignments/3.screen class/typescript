@@ -1,0 +1,438 @@
+Script command is started on Fri Dec 16 00:50:37 EST 2005.$ whoami
+tjduavis
+$ cat Scr   Screen.h
+/*******************************************************************************
+ * Assignment 3 Version 1.0                                                    *
+ * Screen Class                                                                * 
+ * File           : Field.h                                                    * 
+ * Author         : Timothy Duavis                                             *
+ * Last Modified  : December 15, 2005                                          *
+ * Description    : An object-oriented wrapper, for Direct Terminal Library    *
+ *                  This wrapper will be the foundation for typical data       *
+ *                  programs, which contains a Field and Screen.               *
+ *                  *This program is powered by Chris' dtio                    *
+ * Upgrade(s)     : New derieved fields with usefull characteristics.          *
+ * Specs created  : Chris S. - Seneca College                                  * 
+ *******************************************************************************/
+
+#include "Field.h"
+
+// A Field Node, for Screen to allocate
+// for every occurence of Field that is created
+// using a link list data structure.
+//
+class fieldNode {
+        Field* data;
+    fieldNode* next;
+    fieldNode* prev;
+        
+    public:
+    fieldNode(Field* d, fieldNode* n, fieldNode* p) : data(d), next(n), prev(p) { }
+    fieldNode* goNext() { return next; }
+    fieldNode* goPrev() { return prev; }
+    Field* getData() { return data; }
+    void setNext(fieldNode* n) { next = n; }
+    void setPrev(fieldNode* p) { prev = p; }
+};
+
+// Represents a field on a screen layout
+//
+class Screen {
+        int famt;
+        fieldNode* currentNode;
+        fieldNode* initNode;
+        fieldNode* lastNode;
+        
+        void initScreen(const Screen& src) {
+                fieldNode* tempNode = src.initNode;
+                currentNode = NULL;
+                initNode = NULL;
+                famt = src.famt;
+                while (tempNode) {
+                        fieldNode* link = new fieldNode(tempNode->getData()->clone(),NULL,currentNode);
+                        appendLast(link);
+                        tempNode = tempNode->goNext();
+                }
+        }
+        void appendLast(fieldNode* lk) {
+                if (initNode) {
+                        currentNode->setNext(lk);
+                } else {
+                        initNode = lk;
+                }
+                currentNode = lastNode = lk;
+        }
+        int NavigateEdit(int *,bool);
+        
+        public:
+        Screen() : currentNode(NULL), initNode(NULL), lastNode(NULL) { famt = 0; };
+        Screen(const Screen& src) { initScreen(src); }
+        ~Screen() {
+                while(currentNode = initNode) {
+                        initNode = currentNode->goNext();
+                        delete currentNode;
+                }
+        }
+        
+        Screen& operator+=(const Field& rhs) {
+                Field* tempData = rhs.clone();
+                fieldNode* link = new fieldNode(tempData,NULL,currentNode);
+        
+                appendLast(link);
+                famt++;
+        
+                return *this;
+        }
+        Screen& operator=(const Screen& rhs) { if (this != &rhs) { initScreen(rhs); } return *this; }
+
+        int add(int r, int c, int w) {
+                Field* tempData = new Field(r,c,w);
+                fieldNode* link = new fieldNode(tempData,NULL,currentNode);
+        
+                appendLast(link);
+                famt++;
+                return famt;
+        }
+        int add(int r, int c, int w, const char* s) {
+                Field* tempData = new Field(r,c,w,s);
+                fieldNode* link = new fieldNode(tempData,NULL,currentNode);
+        
+                appendLast(link);
+                famt++;
+                return famt;
+        }
+        int add(int r, int c, int w, const char* s, bool e) {
+                Field* tempData = new Field(r,c,w,s,e);
+                fieldNode* link = new fieldNode(tempData,NULL,currentNode);
+        
+                appendLast(link);
+                famt++;
+                return famt;
+        }
+        void display() {
+                fieldNode* tempData = initNode;
+                if (tempData = tempData->goNext()) {
+                        for (tempData = initNode; tempData; tempData = tempData->goNext()) {
+                                tempData->getData()->display();
+                        }
+                } else {
+                        tempData = initNode;
+                        tempData->getData()->display();
+                }
+        }
+        void display(bool clear) {
+                if (clear) { dtioClear(); }
+                        display();
+        }
+        int edit() {
+                static int empty = 0;
+                return NavigateEdit(&empty,false);
+        }
+        int edit(bool clear) {
+                if (clear) { dtioClear(); }
+                return edit();
+        }
+        int edit(int *pfield) {
+                return NavigateEdit(pfield,true);
+        }
+        int edit(int *pfield, bool clear) {
+                if (clear) { dtioClear(); }
+                return edit(pfield);
+        }
+        Field* getField(int i) {
+                int j;
+                currentNode = initNode;
+                for (j = 0; j < i && currentNode; j++)
+                        currentNode = currentNode->goNext();
+                if (j != i) { currentNode = initNode; }
+        
+                return currentNode->getData();
+        }
+        int remove(int);
+};
+$ cat Screen.cpp
+/*******************************************************************************
+ * Assignment 3 Version 1.0                                                    *
+ * Screen Class                                                                *
+ * File           : Screen.cpp                                                 * 
+ * Author         : Timothy Duavis                                             *
+ * Last Modified  : December 15, 2005                                          *
+ * Description    : An object-oriented wrapper, for Direct Terminal Library    *
+ *                  This wrapper will be the foundation for typical data       *
+ *                  programs, which contains a Field and Screen.               *
+ *                  *This program is powered by Chris' dtio                    *
+ * Specs created  : Chris S. - Seneca College                                  * 
+ *******************************************************************************/
+
+#include "Screen.h"
+
+// controls the navigation for edit
+// pointer to 'i' specifies the field number while,
+// flag queField specifies if caller has requested a que
+// for a field to be edited.
+//
+int Screen::NavigateEdit(int* i,bool queField) {
+        int fieldNum = *i;
+        int nav = 0;
+        bool keepgoing = true;
+        static bool selectUP = false;
+        static bool nonNavKeys = false;
+        bool selectEnter = false;
+        bool uniq_select = false;
+        
+        if (queField && !fieldNum) { 
+                currentNode = initNode;
+        } else if (!queField) {
+                currentNode = initNode;
+        }
+        
+        while (keepgoing) {
+                nav = currentNode->getData()->edit();
+                if (nav) {
+                        uniq_select = true;
+                        if (queField) keepgoing = false;
+                        if (nav == ENTER || nav == TAB || nav == DOWN) {
+                                selectUP = false;
+                                nonNavKeys = false;
+                                currentNode = currentNode->goNext();
+                                fieldNum++;
+                                if (!currentNode) {
+                                        currentNode = initNode;
+                                        fieldNum = 0;
+                                }                       
+                                if (nav == ENTER)
+                                        selectEnter = true;
+                                else
+                                        selectEnter = false;
+                        } else if (nav == UP) {
+                                selectEnter = false;
+                                selectUP = true;
+                                nonNavKeys = false;
+                                currentNode = currentNode->goPrev();
+                                fieldNum--;
+                                if (!currentNode) {
+                                        currentNode = lastNode;
+                                        fieldNum = famt - 1;
+                                }                               
+                        } else {
+                                nonNavKeys = true;
+                                if (nav == ESCAPE) 
+                                        keepgoing = false;
+                        }
+                } else if (!nonNavKeys) {
+                        uniq_select = false;
+                        if (selectUP) {
+                                fieldNum - 1 <= 0 ? fieldNum = famt - 1 : fieldNum--;
+                                currentNode = initNode;
+                                for (int j = 0; j < fieldNum; j++)
+                                        currentNode = currentNode->goNext();
+                        } else {
+                                if (fieldNum + 1 == famt) {
+                                        fieldNum = 0;
+                                        if (selectEnter) keepgoing = false;
+                                } else {
+                                        fieldNum++;
+                                }
+                                currentNode = initNode;
+                                for (int j = 0; j < fieldNum; j++)
+                                        currentNode = currentNode->goNext();
+                        }
+                } else {
+                        uniq_select = false;
+                        currentNode = initNode;
+                        for (int j = 0; j < fieldNum; j++)
+                                currentNode = currentNode->goNext();
+                        nonNavKeys = false;
+                }
+                if (selectEnter && fieldNum >= famt - 1) {
+                        keepgoing = false;
+                } else if (!nonNavKeys) {
+                        keepgoing = true;
+                }
+        }
+        if (queField) { *i = fieldNum; }
+        return nav;
+}
+
+// removes field specified by param 'i',
+// and moves everything to the beginning by one.
+//
+int Screen::remove(int i) {
+        if (i >= 0) {
+                int j;
+                currentNode = initNode;
+                for (j = 0; j < i && currentNode; j++) {
+                        currentNode = currentNode->goNext();
+                }
+                if (j == i) {
+                        fieldNode* tempNode = currentNode;
+                        fieldNode* replace = currentNode->goNext();
+                        if (!replace) {
+                                //field to delete is the last
+                                replace = currentNode->goPrev(); 
+                        } else {
+                                currentNode = currentNode->goPrev(); 
+                                if (!currentNode) { 
+                                        currentNode = initNode;
+                                }
+                        }
+                        currentNode->setNext(replace);
+                        delete tempNode;
+                        for (fieldNode* setLast = initNode; setLast; setLast = setLast->goNext()) {
+                                lastNode = setLast;
+                        }
+                        famt-=j;
+                }
+        }
+        return famt;
+}$ cat Field.h
+/*******************************************************************************
+ * Assignment 3 Version 1.0                                                    *
+ * Screen Class                                                                *
+ * File           : Field.h                                                    * 
+ * Author         : Timothy Duavis                                             *
+ * Last Modified  : December 15, 2005                                          *
+ * Description    : An object-oriented wrapper, for Direct Terminal Library    *
+ *                  This wrapper will be the foundation for typical data       *
+ *                  programs, which contains a Field and Screen.               *
+ *                  *This program is powered by Chris' dtio                    *
+ * Specs created  : Chris S. - Seneca College                                  * 
+ *******************************************************************************/
+ 
+#include <cstdio>
+#include <cstring>
+#include <new>
+using namespace std;
+extern "C" {
+        #include "dtio.h"
+}
+
+// Field class, represents either a label
+// or an editable string.
+//
+class Field {
+        int row;
+        int column;
+        int width;
+        char* str;
+        bool toEdit;
+        int index;
+        
+        void initField(const Field& src) {
+                initField(src.row,src.column,src.width,src.str);
+                index = src.index;
+                toEdit = src.toEdit;
+        }
+        void initField(int rChk,int cChk, int wChk, const char* sChk) {
+                int i = 0;
+                if (rChk > dtioRows()) row = dtioRows() - 1;
+                else if (rChk > 0)     row = rChk;
+                else                   row = 0;
+                
+                if (cChk > dtioColumns())  column = dtioColumns() - 1;
+                else if (cChk > 0)         column = cChk;
+                else                       column = 0;
+        
+                if (cChk + wChk > dtioColumns()) 
+                        width = dtioColumns() - column;
+                else
+                        width = wChk;
+                str = new char[width+1];
+                if (sChk) {
+                        for (i = 0; i < width; i++)
+                                str[i] = sChk[i];
+                        str[i] = '\0';
+                } else {
+                        str[i] = '\0';
+                }
+        }               
+        public:
+        Field() : str(NULL), toEdit(true) { row = column = width = index = 0; }
+        Field(const Field& src) {
+                initField(src);
+        }
+        Field(int r, int c, int w, const char* s = NULL, bool e = true) {
+                initField(r,c,w,s);
+                index = 0;
+                toEdit = e;
+        }       
+        ~Field() { if (str) delete [] str; }
+        Field& operator=(const Field& rhs) {
+                if (this != &rhs) {
+                        if (str) delete [] str;
+                        initField(rhs);
+                }
+                return *this;   
+        }
+        virtual void display() {
+                dtioDisplay(str,row,column,width);
+        }
+        virtual int edit() {
+                int exit = 0;
+                dtioCursor(row,index);
+                if (toEdit) {
+                        exit = dtioEdit(str, row, column, width, &index);
+                } else if (str[0] != '\0') {
+                        dtioDisplay(str, row, column, width);
+                }
+                return exit;
+        }
+        virtual bool editable() const {
+                bool editField = false;
+                if (toEdit) { editField = true; }
+                return editField;
+        }
+        virtual void* data() { return str; }
+        virtual Field* clone() const {
+                Field* temp = new Field(row, column, width, str, toEdit);
+                return  temp ? temp : NULL;
+        }
+};$ c++ -;l  lcurses a3test.cpp Screen.c[ pp a _dtio.o -o a3
+a3test.cpp:
+Screen.cpp:
+ld: 0711-224 WARNING: Duplicate symbol: .fieldNode::goNext()
+ld: 0711-224 WARNING: Duplicate symbol: .fieldNode::getData()
+ld: 0711-224 WARNING: Duplicate symbol: .fieldNode::setNext(fieldNode*)
+ld: 0711-345 Use the -bloadmap or -bnoquiet option to obtain more information.
+$ a3
+=[?7h[?1l(B=[m(B[H[2JUpper Left Corner
+^Field 1[21CPERFORMING FIELD TESTS
+[21CShould be an H here->H
+[86CField 2^
+[55C1 constructed
+[38DDerived cloning is ok    2 constructed
+[13D3 constructed
+[13D4 constructed
+[13D5 constructed
+[13D6 constructed
+[58DEdit this : edit this![23C7 constructed
+[58D^Field 3    ^Field 4[25C8 constructed
+[13D9 constructed
+[13Dcloning tested
+[14Deditable() tested
+[17Dnon-editable tested[18;6HDone ? n
+Field^7     ^Field 8
+
+
+
+
+Prompt : Change the contents of Field 4 above[11;23Hdit this! [10Dit this! [9Dt this! [8D this! [7Dthis! [6DThis is a test
+[7D5[20;6HKey pressed <Enter> this![24;39H5[11;23Hhis is a test [14Dis is a test [13Ds is a test [12D is a test [11Dis a test [10Ds a test [9D a test [8Da test [7D test [6Dtest est st t  It is a
+[7D        [15;6H^Field 6[20;26HIt[@ is a[24;10HEnter something into [2P[6C6[14;6HHi![20;26HHi![K[24;16H'y' i[6P[10C8 to exit[18;13H y[H
+        [32CSCREEN[@[11;31HTest Screen
+[31D        [14;11HName:
+[10D        [17;56HField Tests Completed
+
+                    [35Cthree fields displayed
+[52Dy  [24;10HPress any key to continue ... [15C[4A screen copied[24;10HEnter something into the Name field above[14;19HTimothy Duavis[22D        <-Name: should be gone[20;19HUnknown key : code 0> Timothy Duavis
+ last field altered[24;11Hdit the '<-Name ...' [8P[10Ad-Name: should be gone [22DName: should be gone [21Dame: should be gone [20Dme: should be gone [19De: should be gone [18D: should be gone [17D should be gone [16DB should be gone[15DT should be gone[15DP should be gone[15D3 should be gone[15D0 should be gone[15D0 should be gone[15D[4;21HLast Test[6;6HURL:[21C                     [9;6HIP Addr:[20;41HBTP300 should b
+
+remove & edit tested[24;11Hnter URL and IP Addr Fields, F1 for help[6;16Hwww.hahaha.com[9;16H[16;6He.g. 123.123.123.2[9;16H123.123.123.5[24;10HPress any key to continue ... [K[15C[2;30H[K[20;6HPrepare a screen shot if the results look correct 
+
+
+Screen Tests Completed
+[23D[45D[K[45C
+>[?7hHost www.hahaha.com is 123.123.123.5
+$ exit
+
+Script command is complete on Fri Dec 16 00:53:45 EST 2005.

@@ -1,0 +1,1 @@
+bcc32 a3main.cpp p1.cpp p2.cpp Timothy.cpp expgame.obj screen.obj dio.obj %1 %2

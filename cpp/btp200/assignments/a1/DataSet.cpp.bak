@@ -1,0 +1,159 @@
+/*
+* DataSet.cpp
+*    Author: Timothy Duavis
+*    Last Modified: Jan 31/05
+*/
+
+#include "DataSet.h"
+
+//DataPoint Class
+//-----------------------------------------------//
+int DataPoint::loadFromFile(FILE* fp){
+	int check,readFile = 0;
+
+	check=fscanf(fp,"%lf %lf",&abscissa, &ordinate);
+	printf("check: %d\n",check);
+	printf("x: %d y: %lf\n",abscissa,ordinate);
+	if(check==2){
+		readFile++;
+	}
+	else if(check==EOF)
+		readFile=EOF;
+
+	return readFile;
+}
+
+double DataPoint::getx() const{
+	return abscissa;
+}
+
+double DataPoint::gety() const{
+	return ordinate;
+}
+
+//DataSet Class
+//------------------------------------------------//
+//Priviate Definitions: Modifiers
+double DataSet::calc_slope(){
+	double numerator, denominator,x,y;
+
+	for (j=0; j<numDataPts; j++)
+			meanX += (Pts[j].getx());
+		meanX /= numDataPts;
+
+	for (j=0; j<numDataPts; j++)
+			meanY += (Pts[j].gety());
+		meanY /= numDataPts;
+
+	for (j=0; j<numDataPts; j++){
+			x=Pts[j].getx();
+			y=Pts[j].gety();
+			numerator += ( (x) - meanX ) + ( (y) - meanY );
+			denominator += sqrt( (Pts[j].getx()) - meanX );
+		}
+
+	slopeValue =  numerator / denominator;
+	return slopeValue;
+}
+
+double DataSet::calc_intercept(){
+		slopeValue = slope();
+		interceptValue = meanY - (slopeValue * meanX);
+	return interceptValue;
+}
+
+double DataSet::calc_correlation(){
+		double numerator, denominator,x,y;
+		Pts = new DataPoint [numDataPts];
+
+		for (j=0; j<numDataPts; j++){
+			x=Pts[j].getx();
+			y=Pts[j].gety();
+			sumSqrsX += x * x;
+			sumSqrsY += y * y;
+		}
+
+		double rootedX, rootedY;
+		rootedX = (sumSqrsX / numDataPts) - (meanX * meanX);
+		rootedY = (sumSqrsY / numDataPts) - (meanY * meanY);
+		devtnX = sqrt(rootedX);
+		devtnY = sqrt(rootedY);
+
+		for (j=0; j<numDataPts; j++){
+			x=Pts[j].getx();
+			y=Pts[j].gety();
+			numerator += x*y;
+		}
+		numerator /= numDataPts - (meanX*meanY);
+
+		correlationValue = numerator / (devtnX*devtnY);
+	return correlationValue;
+}
+
+
+//Public Definitions: Modifiers
+bool DataSet::loadFromFile(const char* filename){
+	bool success;
+	int numLines = 0;
+	FILE* DataFile = NULL;
+	numDataPts = 0;
+
+	printf("enter classDataSet\n");
+	//strcpy(labelFile,filename);
+
+	DataFile = fopen(filename,"r");
+	if (DataFile != NULL){
+		//Reads Num. of Lines in file for class array
+		while(EOF!=fgetc(DataFile)){
+			numLines++;
+		}
+
+		Pts = new DataPoint [numLines];
+		//number of lines Read successfully
+		for(int i=0; numDataPts != EOF; i++){
+			numDataPts += Pts[i].loadFromFile(DataFile);
+			printf("%d\n",numDataPts);
+		}
+
+		success = true;
+
+		slopeValue=calc_slope();
+		interceptValue=calc_intercept();
+		correlationValue=calc_correlation();
+	}
+	else
+		success = false;
+
+	fclose(DataFile);
+	return success;
+}
+
+void DataSet::closeUp(){
+	delete [] Pts;
+}
+
+//Public Defintions: Queries
+DataPoint DataSet::point(int i) const{
+	return Pts[i];
+}
+
+const char* DataSet::label() const{
+	return labelFile;
+}
+
+
+int DataSet::nPoints() const{
+	return numDataPts;
+}
+
+double DataSet::slope() const{
+	return slopeValue;
+}
+
+double DataSet::intercept() const{
+	return interceptValue;
+}
+
+double DataSet::correlation() const{
+	return correlationValue;
+}

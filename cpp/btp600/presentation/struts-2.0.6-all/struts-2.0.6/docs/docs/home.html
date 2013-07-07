@@ -1,0 +1,339 @@
+
+<!-- 
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE- 2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License. 
+-->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+  <HEAD>
+    <LINK type="text/css" rel="stylesheet" href="resources/space.css">
+    <STYLE type="text/css">
+      .footer {
+        background-image:      url('http://cwiki.apache.org/confluence/images/border/border_bottom.gif');
+        background-repeat:     repeat-x;
+        background-position:   left top;
+        padding-top:           4px;
+        color:                 #666;
+      }
+    </STYLE>
+    <SCRIPT type="text/javascript" language="javascript">
+      var hide = null;
+      var show = null;
+      var children = null;
+
+      function init() {
+        /* Search form initialization */
+        var form = document.forms['search'];
+        if (form != null) {
+          form.elements['domains'].value = location.hostname;
+          form.elements['sitesearch'].value = location.hostname;
+        }
+
+        /* Children initialization */
+        hide = document.getElementById('hide');
+        show = document.getElementById('show');
+        children = document.all != null ?
+                   document.all['children'] :
+                   document.getElementById('children');
+        if (children != null) {
+          children.style.display = 'none';
+          show.style.display = 'inline';
+          hide.style.display = 'none';
+        }
+      }
+
+      function showChildren() {
+        children.style.display = 'block';
+        show.style.display = 'none';
+        hide.style.display = 'inline';
+      }
+
+      function hideChildren() {
+        children.style.display = 'none';
+        show.style.display = 'inline';
+        hide.style.display = 'none';
+      }
+    </SCRIPT>
+    <TITLE>Home</TITLE>
+  <META http-equiv="Content-Type" content="text/html;charset=UTF-8"></HEAD>
+  <BODY onload="init()">
+    <TABLE border="0" cellpadding="2" cellspacing="0" width="100%">
+      <TR class="topBar">
+        <TD align="left" valign="middle" class="topBarDiv" nowrap="">
+          &nbsp;<A href="" title="Apache Struts 2 Documentation">Apache Struts 2 Documentation</A>&nbsp;&gt;&nbsp;<A href="" title="Home">Home</A>
+        </TD>
+        <TD align="right" valign="middle" nowrap="">
+          <FORM name="search" action="http://www.google.com/search" method="get">
+            <INPUT type="hidden" name="ie" value="UTF-8">
+            <INPUT type="hidden" name="oe" value="UTF-8">
+            <INPUT type="hidden" name="domains" value="">
+            <INPUT type="hidden" name="sitesearch" value="">
+            <INPUT type="text" name="q" maxlength="255" value="">        
+            <INPUT type="submit" name="btnG" value="Google Search">
+          </FORM>
+        </TD>
+      </TR> 
+    </TABLE>
+
+    <DIV id="PageContent">
+      <DIV class="pageheader" style="padding: 6px 0px 0px 0px;">
+        <!-- We'll enable this once we figure out how to access (and save) the logo resource -->
+        <!--img src="/wiki/images/confluence_logo.gif" style="float: left; margin: 4px 4px 4px 10px;" border="0"-->
+        <DIV style="margin: 0px 10px 0px 10px" class="smalltext">Apache Struts 2 Documentation</DIV>
+        <DIV style="margin: 0px 10px 8px 10px" class="pagetitle">Home</DIV>
+
+        <DIV class="greynavbar" align="right" style="padding: 2px 10px; margin: 0px;">
+          <A href="http://cwiki.apache.org/confluence/pages/editpage.action?pageId=14153">
+            <IMG src="http://cwiki.apache.org/confluence/images/icons/notep_16.gif" height="16" width="16" border="0" align="absmiddle" title="Edit Page"></A>
+            <A href="http://cwiki.apache.org/confluence/pages/editpage.action?pageId=14153">Edit Page</A>
+          &nbsp;
+          <A href="http://cwiki.apache.org/confluence/pages/listpages.action?key=WW">
+            <IMG src="http://cwiki.apache.org/confluence/images/icons/browse_space.gif" height="16" width="16" border="0" align="absmiddle" title="Browse Space"></A>
+            <A href="http://cwiki.apache.org/confluence/pages/listpages.action?key=WW">Browse Space</A>
+          &nbsp;
+          <A href="http://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=14153">
+            <IMG src="http://cwiki.apache.org/confluence/images/icons/add_page_16.gif" height="16" width="16" border="0" align="absmiddle" title="Add Page"></A>
+          <A href="http://cwiki.apache.org/confluence/pages/createpage.action?spaceKey=WW&fromPageId=14153">Add Page</A>
+          &nbsp;
+          <A href="http://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=14153">
+            <IMG src="http://cwiki.apache.org/confluence/images/icons/add_blogentry_16.gif" height="16" width="16" border="0" align="absmiddle" title="Add News"></A>
+          <A href="http://cwiki.apache.org/confluence/pages/createblogpost.action?spaceKey=WW&fromPageId=14153">Add News</A>
+        </DIV>
+      </DIV>
+      <DIV class="pagesubheading" style="margin: 0px 10px 0px 10px;">
+                    Added by     <A href="http://cwiki.apache.org/confluence/users/viewuserprofile.action?username=savaki">savaki</A>, last edited by     <A href="http://cwiki.apache.org/confluence/users/viewuserprofile.action?username=husted">Ted Husted</A> on Feb 12, 2007
+                      &nbsp;(<A href="http://cwiki.apache.org/confluence/pages/diffpages.action?pageId=14153&originalId=45472">view change</A>)
+              
+      </DIV>
+
+      <DIV class="pagecontent">
+        <DIV class="wiki-content">
+          <P><IMG class="emoticon" src="http://cwiki.apache.org/confluence/images/icons/emoticons/lightbulb_on.gif" height="16" width="16" align="absmiddle" alt="" border="0"> Impatient? Try our <SPAN class="nobr"><A href="http://struts.apache.org/2.x/docs/bootstrap.html" title="Visit page outside Confluence" rel="nofollow">Bootstrap Tutorial<SUP><IMG class="rendericon" src="http://cwiki.apache.org/confluence/images/icons/linkext7.gif" height="7" width="7" align="absmiddle" alt="" border="0"></SUP></A></SPAN> and the <SPAN class="nobr"><A href="http://planetstruts.org/struts2-mailreader/Tour.do" title="Visit page outside Confluence" rel="nofollow">MailReader Tour<SUP><IMG class="rendericon" src="http://cwiki.apache.org/confluence/images/icons/linkext7.gif" height="7" width="7" align="absmiddle" alt="" border="0"></SUP></A></SPAN>.</P>
+
+<P>Apache Struts 2 is an elegant, extensible framework for building enterprise-ready Java web applications. <SPAN class="nobr"><A href="http://struts.apache.org/downloads.html" title="Visit page outside Confluence" rel="nofollow">Distributions of Struts 2<SUP><IMG class="rendericon" src="http://cwiki.apache.org/confluence/images/icons/linkext7.gif" height="7" width="7" align="absmiddle" alt="" border="0"></SUP></A></SPAN> are available as a free download under the Apache License. </P>
+
+<UL>
+	<LI>For more about the Apache Struts project, visit the <SPAN class="nobr"><A href="http://struts.apache.org/" title="Visit page outside Confluence" rel="nofollow">project web site<SUP><IMG class="rendericon" src="http://cwiki.apache.org/confluence/images/icons/linkext7.gif" height="7" width="7" align="absmiddle" alt="" border="0"></SUP></A></SPAN>.</LI>
+	<LI>For more about Struts Plugins, visit the <SPAN class="nobr"><A href="http://cwiki.apache.org/S2PLUGINS/home.html" title="Visit page outside Confluence" rel="nofollow">Struts 2 Plugin Registry<SUP><IMG class="rendericon" src="http://cwiki.apache.org/confluence/images/icons/linkext7.gif" height="7" width="7" align="absmiddle" alt="" border="0"></SUP></A></SPAN>.</LI>
+	<LI>For other community-supported Struts resources, visit the <SPAN class="nobr"><A href="http://cwiki.apache.org/S2WIKI/home.html" title="Visit page outside Confluence" rel="nofollow">Struts 2 Wiki<SUP><IMG class="rendericon" src="http://cwiki.apache.org/confluence/images/icons/linkext7.gif" height="7" width="7" align="absmiddle" alt="" border="0"></SUP></A></SPAN>.</LI>
+</UL>
+
+
+<H2><A name="Home-GettingStarted"></A>Getting Started</H2>
+
+<P>The documentation is grouped into three areas. </P>
+
+<TABLE class="confluenceTable"><TBODY>
+<TR>
+<TH class="confluenceTh"> <A href="tutorials.html" title="Tutorials">Tutorials</A> </TH>
+<TD class="confluenceTd"> Our tutorials are designed to help you get started with the framework ASAP. We offer an all-purpose &quot;Bootstrap&quot; tutorial as well as specialty tutorials on portlets and database access. </TD>
+</TR>
+<TR>
+<TH class="confluenceTh"> <A href="guides.html" title="Guides">Guides</A> </TH>
+<TD class="confluenceTd"> Our in-depth guides focus on specific components of the framework, such as the Core framework, Struts Tags, and optional Extensions, as well as migrating from Struts 1 or WebWork 2. </TD>
+</TR>
+<TR>
+<TH class="confluenceTh"> <A href="faqs.html" title="FAQs">FAQs</A> </TH>
+<TD class="confluenceTd"> Our FAQs provide a wide range of rapid-fire &quot;HOWTOs&quot; in question-and-answer format. </TD>
+</TR>
+</TBODY></TABLE>
+
+<P><IMG class="emoticon" src="http://cwiki.apache.org/confluence/images/icons/emoticons/lightbulb_on.gif" height="16" width="16" align="absmiddle" alt="" border="0"> An <A href="overview.html" title="Overview">overview</A> of all three areas is available.</P>
+
+<H2><A name="Home-ApacheStruts2ArchitectureinaNutshell"></A>Apache Struts 2 Architecture in a Nutshell</H2>
+
+<TABLE class="confluenceTable"><TBODY>
+<TR>
+<TD class="confluenceTd"> <IMG src="nutshell.data/struts2-arch.png" align="absmiddle" border="0"> </TD>
+<TD class="confluenceTd"><OL>
+	<LI>The web browser requests a resource (/mypage.action, /reports/myreport.pdf, et cetera)</LI>
+	<LI>The Filter Dispatcher looks at the request and determines the appropriate Action</LI>
+	<LI>The Interceptors automatically apply common functionality to the request, like workflow, validation, and file upload handling</LI>
+	<LI>The Action method executes, usually storing and/or retrieving information from a database</LI>
+	<LI>The Result renders the output to the browser, be it HTML, images, PDF, or something else</LI>
+</OL>
+</TD>
+</TR>
+</TBODY></TABLE>
+
+<H2><A name="Home-StrutsTagsinanutshell"></A>Struts Tags in a nutshell</H2>
+
+<P>The Struts Tags help you create rich web applications with a minimum of coding. Often, much of the coding effort in a web application goes into the pages. The Struts Tags reduce effort by reducing code.</P>
+
+<DIV class="code"><DIV class="codeHeader"><B>Without Struts Tags (a partial form)</B></DIV><DIV class="codeContent">
+<PRE class="code-java">&lt;% User user = ActionContext.getContext() %&gt;
+&lt;form action=<SPAN class="code-quote">&quot;Profile_update.action&quot;</SPAN> method=<SPAN class="code-quote">&quot;post&quot;</SPAN>&gt;
+ &lt;table&gt;
+  &lt;tr&gt;
+    &lt;td&gt; align=<SPAN class="code-quote">&quot;right&quot;</SPAN>&lt;label&gt;First name:&lt;/label&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;input type=<SPAN class="code-quote">&quot;text&quot;</SPAN> name=<SPAN class="code-quote">&quot;user.firstname&quot;</SPAN>
+       value=&quot;&lt;%=user.getFirstname() %&gt; /&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td&gt;
+    &lt;input type=<SPAN class="code-quote">&quot;radio&quot;</SPAN> name=<SPAN class="code-quote">&quot;user.gender&quot;</SPAN> value=<SPAN class="code-quote">&quot;0&quot;</SPAN> 	 
+      id=<SPAN class="code-quote">&quot;user.gender0&quot;</SPAN> 
+     &lt;% <SPAN class="code-keyword">if</SPAN> (user.getGender()==0) { %&gt; 
+     checked=<SPAN class="code-quote">&quot;checked&quot;</SPAN> %&gt; } %&gt; /&gt;
+     &lt;label <SPAN class="code-keyword">for</SPAN>=<SPAN class="code-quote">&quot;user.gender0&quot;</SPAN>&gt;Female&lt;/label&gt;
+...</PRE>
+</DIV></DIV>
+
+<P>Looking over the markup, it's easy to see why Java web development without the aid from a modern framework is hard!  So far, we've only coded two controls, and there are six more to go! Let's rewrite and finish the form using Struts Tags.</P>
+
+
+<TABLE class="confluenceTable"><TBODY>
+<TR>
+<TD class="confluenceTd"> <IMG src="nutshell.data/nutshell.GIF" align="absmiddle" border="0"> </TD>
+<TD class="confluenceTd"> <DIV class="code"><DIV class="codeHeader"><B>After Struts Tags (a complete form)</B></DIV><DIV class="codeContent">
+<PRE class="code-java">&lt;s:actionerror/&gt;
+&lt;s:form action=<SPAN class="code-quote">&quot;Profile_update&quot;</SPAN> validate=<SPAN class="code-quote">&quot;<SPAN class="code-keyword">true</SPAN>&quot;</SPAN>&gt;
+ &lt;s:textfield label=<SPAN class="code-quote">&quot;Username&quot;</SPAN> name=<SPAN class="code-quote">&quot;username&quot;</SPAN>/&gt;
+ &lt;s:password label=<SPAN class="code-quote">&quot;Password&quot;</SPAN> name=<SPAN class="code-quote">&quot;password&quot;</SPAN>/&gt;
+ &lt;s:password label=<SPAN class="code-quote">&quot;(Repeat) Password&quot;</SPAN> name=<SPAN class="code-quote">&quot;password2&quot;</SPAN>/&gt;
+ &lt;s:textfield label=<SPAN class="code-quote">&quot;Full Name&quot;</SPAN> name=<SPAN class="code-quote">&quot;fullName&quot;</SPAN>/&gt;
+ &lt;s:textfield label=<SPAN class="code-quote">&quot;From Address&quot;</SPAN> name=<SPAN class="code-quote">&quot;fromAddress&quot;</SPAN>/&gt;
+ &lt;s:textfield label=<SPAN class="code-quote">&quot;Reply To Address&quot;</SPAN> name=<SPAN class="code-quote">&quot;replyToAddress&quot;</SPAN>/&gt;
+ &lt;s:submit value=<SPAN class="code-quote">&quot;Save&quot;</SPAN> name=<SPAN class="code-quote">&quot;Save&quot;</SPAN>/&gt;
+ &lt;s:submit action=<SPAN class="code-quote">&quot;Register_cancel&quot;</SPAN> value=<SPAN class="code-quote">&quot;Cancel&quot;</SPAN> name=<SPAN class="code-quote">&quot;Cancel&quot;</SPAN>
+   onclick=<SPAN class="code-quote">&quot;form.onsubmit=<SPAN class="code-keyword">null</SPAN>&quot;</SPAN>/&gt;
+&lt;/s:form&gt;</PRE>
+</DIV></DIV> <TABLE cellpadding="5" width="85%" cellspacing="8px" class="tipMacro" border="0" align="center"><COLGROUP><COL width="24"><COL></COLGROUP><TR><TD valign="top"><IMG src="http://cwiki.apache.org/confluence/images/icons/emoticons/check.gif" width="16" height="16" align="absmiddle" alt="" border="0"></TD><TD> The Struts Tags also support validation and localization as a first-class features. So not only is there less code, but there is <EM>more</EM> utility. 
+
+<P>In about the same amount of code as two conventional controls, the Struts Tags can a create an entire data-input form with eight controls. Not only is there less code, but the code is easier to read and maintain. </P></TD></TR></TABLE></TD>
+</TR>
+</TBODY></TABLE>
+
+<H2><A name="Home-StrutsConfigurationinaNutshell"></A>Struts Configuration in a Nutshell</H2>
+
+<P>A web application uses a deployment descriptor to initialize resources like filters and listeners. The web deployment descriptor is formatted as a XML document and named <TT>web.xml</TT>. Struts can either initializes its resources by scanning your classes using Java packages declared in this <TT>web.xml</TT> file, or you can have full control over the configuration via a configuration file, named <TT>struts.xml</TT>. These resources include action mappings, to direct input to server-side Action classes, and result types, to select output pages. </P>
+
+<P>Here's a typical configuration (<TT>struts.xml</TT>) for a login workflow:</P>
+
+<DIV class="code"><DIV class="codeContent">
+<PRE class="code-java">&lt;struts&gt;
+    &lt;<SPAN class="code-keyword">package</SPAN> name=<SPAN class="code-quote">&quot;<SPAN class="code-keyword">default</SPAN>&quot;</SPAN> <SPAN class="code-keyword">extends</SPAN>=<SPAN class="code-quote">&quot;struts-<SPAN class="code-keyword">default</SPAN>&quot;</SPAN>&gt;
+
+        &lt;action name=<SPAN class="code-quote">&quot;Logon&quot;</SPAN> class=<SPAN class="code-quote">&quot;mailreader2.Logon&quot;</SPAN>&gt;
+            &lt;result name=<SPAN class="code-quote">&quot;input&quot;</SPAN>&gt;/pages/Logon.jsp&lt;/result&gt;
+            &lt;result name=<SPAN class="code-quote">&quot;cancel&quot;</SPAN> type=<SPAN class="code-quote">&quot;redirect-action&quot;</SPAN>&gt;Welcome&lt;/result&gt;
+            &lt;result type=<SPAN class="code-quote">&quot;redirect-action&quot;</SPAN>&gt;MainMenu&lt;/result&gt;
+            &lt;result name=<SPAN class="code-quote">&quot;expired&quot;</SPAN> type=<SPAN class="code-quote">&quot;chain&quot;</SPAN>&gt;ChangePassword&lt;/result&gt;
+        &lt;/action&gt;
+
+        &lt;action name=<SPAN class="code-quote">&quot;Logoff&quot;</SPAN> class=<SPAN class="code-quote">&quot;mailreader2.Logoff&quot;</SPAN>&gt;
+            &lt;result type=<SPAN class="code-quote">&quot;redirect-action&quot;</SPAN>&gt;Welcome&lt;/result&gt;
+        &lt;/action&gt;
+
+    &lt;/<SPAN class="code-keyword">package</SPAN>&gt;
+&lt;/struts&gt;</PRE>
+</DIV></DIV>
+
+<P><IMG class="emoticon" src="http://cwiki.apache.org/confluence/images/icons/emoticons/lightbulb_on.gif" height="16" width="16" align="absmiddle" alt="" border="0"> The framework provides general-purpose defaults, so we can start using Struts right away, &quot;out of the box&quot;. Any factory defaults can be overridden in an application's configuration, as needed.</P>
+
+<H2><A name="Home-StrutsMVCinaNutshell"></A>Struts MVC in a Nutshell</H2>
+
+<P>Struts is a <SPAN class="nobr"><A href="http://struts.apache.org/primer.html#mvc" title="Visit page outside Confluence" rel="nofollow">Model View Controller<SUP><IMG class="rendericon" src="http://cwiki.apache.org/confluence/images/icons/linkext7.gif" height="7" width="7" align="absmiddle" alt="" border="0"></SUP></A></SPAN> framework. Struts provides Controller and View components, and integrates with other technologies to provide the Model. The framework's Controller acts as a bridge between the application's Model and the web View. </P>
+
+<P>To make it easier to present dynamic data, the framework includes a library of markup tags. The tags interact with the framework's validation and internationalization features, to ensure that input is correct and output is localized. The tag library can be used with JSP, FreeMarker, or Velocity. Of course, other tag libraries, JSTL, and AJAX can also be used, with or without the Struts tags. JavaServer Faces components are also supported.</P>
+
+<P>When a request is received, the Controller invokes an Action class. The Action class examines or updates the application's state by consulting the Model (or, preferably, an interface representing the Model). To transfer data between the Model and the View, properties can be placed on the Action class, or on a plain old JavaBean. </P>
+
+<P>Most often, the Model is represented as a graph of JavaBean objects. The Model should do the &quot;heavy lifting&quot;, and the Action will act as a &quot;traffic cop&quot; or adapter. The framework provides sophisticated, automatic type conversion to simplify transfering data between rich domain objects and text-only HTTP requests. </P>
+
+<P>Struts is extensible. <EM>Very</EM> extensible. Every class deployed by the framework is based on an interface. We provide all the base classes an application may ever need, but if we missed something, it's easy to add your own. We provide the general-purpose framework, but you can still write <EM>your</EM> application <EM>your</EM> way.</P>
+
+<H2><A name="Home-IsStrutsthebestchoiceforeveryproject%3F"></A>Is Struts the best choice for every project?</H2>
+
+<P>Apache Struts 2 helps you create an extensible development environment for enterprise-grade applications, based on industry standards and proven design patterns. If you need to write a very simple application, with a handful of pages, then you might consider a &quot;Model 1&quot; solution that uses only server pages.</P>
+
+<P>But, if you are writing a more complicated application, with dozens of pages, that need to be maintained over time, then Struts can help. For more about whether Model 1 or MVC/Model 2 is right for you, see <SPAN class="nobr"><A href="http://www.javaworld.com/javaworld/jw-12-1999/jw-12-ssj-jspmvc.html" title="Visit page outside Confluence" rel="nofollow">Understanding JavaServer Pages Model 2 architecture<SUP><IMG class="rendericon" src="http://cwiki.apache.org/confluence/images/icons/linkext7.gif" height="7" width="7" align="absmiddle" alt="" border="0"></SUP></A></SPAN>. </P>
+
+<H2><A name="Home-PlatformRequirements"></A>Platform Requirements </H2>
+
+<P>Struts 2 requires </P>
+
+<UL>
+	<LI>Servlet API 2.4</LI>
+	<LI>JSP API 2.0</LI>
+	<LI>Java 5</LI>
+</UL>
+
+
+<P>For a full list of requirements, including dependencies used by optional plugins, see <SPAN class="nobr"><A href="http://struts.apache.org/2.x/struts2-core/dependencies.html" title="Visit page outside Confluence" rel="nofollow">Project Dependencies<SUP><IMG class="rendericon" src="http://cwiki.apache.org/confluence/images/icons/linkext7.gif" height="7" width="7" align="absmiddle" alt="" border="0"></SUP></A></SPAN> </P>
+
+<P><IMG class="emoticon" src="http://cwiki.apache.org/confluence/images/icons/emoticons/check.gif" height="16" width="16" align="absmiddle" alt="" border="0"> An alternate set of JARs for Java 4 are also available. See the &quot;J4&quot; distribution.</P>
+
+<H2><A name="Home-QuickLinks"></A>Quick Links </H2>
+
+<TABLE class="confluenceTable"><TBODY>
+<TR>
+<TD class="confluenceTd"><UL>
+	<LI><SPAN class="nobr"><A href="http://struts.apache.org/" title="Visit page outside Confluence" rel="nofollow">Apache Struts Home<SUP><IMG class="rendericon" src="http://cwiki.apache.org/confluence/images/icons/linkext7.gif" height="7" width="7" align="absmiddle" alt="" border="0"></SUP></A></SPAN></LI>
+	<LI><SPAN class="nobr"><A href="http://struts.apache.org/downloads.html" title="Visit page outside Confluence" rel="nofollow">Distributions<SUP><IMG class="rendericon" src="http://cwiki.apache.org/confluence/images/icons/linkext7.gif" height="7" width="7" align="absmiddle" alt="" border="0"></SUP></A></SPAN></LI>
+	<LI><SPAN class="nobr"><A href="http://struts.apache.org/faqs.html" title="Visit page outside Confluence" rel="nofollow">Project FAQ<SUP><IMG class="rendericon" src="http://cwiki.apache.org/confluence/images/icons/linkext7.gif" height="7" width="7" align="absmiddle" alt="" border="0"></SUP></A></SPAN></LI>
+	<LI><SPAN class="nobr"><A href="http://struts.apache.org/mail.html" title="Visit page outside Confluence" rel="nofollow">Mailing lists<SUP><IMG class="rendericon" src="http://cwiki.apache.org/confluence/images/icons/linkext7.gif" height="7" width="7" align="absmiddle" alt="" border="0"></SUP></A></SPAN></LI>
+	<LI><SPAN class="nobr"><A href="http://issues.apache.org/struts/secure/Dashboard.jspa" title="Visit page outside Confluence" rel="nofollow">Issue Tracking (JIRA)<SUP><IMG class="rendericon" src="http://cwiki.apache.org/confluence/images/icons/linkext7.gif" height="7" width="7" align="absmiddle" alt="" border="0"></SUP></A></SPAN></LI>
+</UL>
+</TD>
+<TD class="confluenceTd"><UL>
+	<LI><A href="../S2WIKI/home.html" title="Home">Struts 2 Wiki space</A></LI>
+	<LI><SPAN class="nobr"><A href="http://www.PlanetStruts.org/" title="Visit page outside Confluence" rel="nofollow">Planet Struts<SUP><IMG class="rendericon" src="http://cwiki.apache.org/confluence/images/icons/linkext7.gif" height="7" width="7" align="absmiddle" alt="" border="0"></SUP></A></SPAN></LI>
+	<LI><SPAN class="nobr"><A href="http://www.StrutsCentral.net/" title="Visit page outside Confluence" rel="nofollow">Struts Central<SUP><IMG class="rendericon" src="http://cwiki.apache.org/confluence/images/icons/linkext7.gif" height="7" width="7" align="absmiddle" alt="" border="0"></SUP></A></SPAN></LI>
+	<LI><SPAN class="nobr"><A href="http://www.ApacheBookstore.com/" title="Visit page outside Confluence" rel="nofollow">Apache Bookstore<SUP><IMG class="rendericon" src="http://cwiki.apache.org/confluence/images/icons/linkext7.gif" height="7" width="7" align="absmiddle" alt="" border="0"></SUP></A></SPAN></LI>
+	<LI><SPAN class="nobr"><A href="http://wiki.javascud.org/display/ww2cndoc/WebWork" title="Visit page outside Confluence" rel="nofollow">WebWork wiki in Chinese <SUP><IMG class="rendericon" src="http://cwiki.apache.org/confluence/images/icons/linkext7.gif" height="7" width="7" align="absmiddle" alt="" border="0"></SUP></A></SPAN></LI>
+</UL>
+</TD>
+</TR>
+</TBODY></TABLE>
+
+<H2><A name="Home-Next%3ATutorials"></A>Next: <A href="tutorials.html" title="Tutorials">Tutorials</A></H2>
+
+        </DIV>
+
+                  <DIV class="tabletitle">
+            Children
+            <SPAN class="smalltext" id="show" style="display: inline;">
+              <A href="javascript:showChildren()">Show Children</A></SPAN>
+            <SPAN class="smalltext" id="hide" style="display: none;">
+              <A href="javascript:hideChildren()">Hide Children</A></SPAN>
+          </DIV>
+          <DIV class="greybox" id="children" style="display: none;">
+                                      <A href="tutorials.html" title="Tutorials">Tutorials</A>
+              <SPAN class="smalltext">(Apache Struts 2 Documentation)</SPAN>
+              <BR>
+                          <A href="overview.html" title="Overview">Overview</A>
+              <SPAN class="smalltext">(Apache Struts 2 Documentation)</SPAN>
+              <BR>
+                          <A href="faqs.html" title="FAQs">FAQs</A>
+              <SPAN class="smalltext">(Apache Struts 2 Documentation)</SPAN>
+              <BR>
+                          <A href="guides.html" title="Guides">Guides</A>
+              <SPAN class="smalltext">(Apache Struts 2 Documentation)</SPAN>
+              <BR>
+                      </DIV>
+        
+      </DIV>
+    </DIV>
+    <DIV class="footer">
+      Generated by
+      <A href="http://www.atlassian.com/confluence/">Atlassian Confluence</A> (Version: 2.2.9 Build: 527 Sep 07, 2006)
+      <A href="http://could.it/autoexport/">AutoExport Plugin</A> (Version: Unknown - PluginManager Error)
+    </DIV>
+  </BODY>
+</HTML>

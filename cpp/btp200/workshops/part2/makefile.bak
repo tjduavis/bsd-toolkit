@@ -1,0 +1,9 @@
+ # makefile for modular
+ # Jan 14 2005
+ # BTP200
+modular: modular.o getPosInt.o
+	c++ modular.o getPosInt.o -o modular
+modular.o: modular.cpp getPosInt.h modular.h
+	c++ -c modular.cpp
+getPosInt.o: getPosInt.cpp getPosInt.h
+	c++ -c getPosInt.cpp

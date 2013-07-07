@@ -1,0 +1,39 @@
+/*
+* TDirectory.h
+* Author: Timothy Duavis
+* Last Modified: Feb 1/05
+* Purpose: structure prototype and libraries for workshop3.cpp
+*/
+
+#include<new>
+#include<iostream.h>
+using namespace std;
+
+#define FILE_LENGTH 21
+#define STR_SIZE 16
+
+struct Listing
+{
+	private:
+		char firstName[STR_SIZE];
+		char lastName[STR_SIZE];
+		char location[STR_SIZE];
+		char phoneNum[STR_SIZE];
+	public:
+		bool loadFileData(FILE* fp);
+		const char* given() const;
+		const char* surname() const;
+		const char* address() const;
+		const char* telephone() const;
+};
+
+struct TDirectory
+{
+	private:
+		int NumEntry;
+		Listing* list;
+	public:
+		bool loadFileData(const char* filename);
+		void display() const;
+		void close();
+};

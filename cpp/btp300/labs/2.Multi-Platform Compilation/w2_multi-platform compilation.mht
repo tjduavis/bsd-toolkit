@@ -1,0 +1,382 @@
+From: <Saved by Microsoft Internet Explorer 5>
+Subject: Seneca | School of Computer Studies | Object-Oriented Programming I - C++
+Date: Wed, 21 Dec 2005 12:45:48 -0500
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----=_NextPart_000_01EA_01C6062C.78102710"
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.2670
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_01EA_01C6062C.78102710
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/workshops/w2_p.html
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<?xml version=3D'1.0' encoding=3D'UTF-8'?><HTML lang=3Den-us=20
+xmlns=3D"http://www.w3.org/1999/xhtml"><HEAD><TITLE>Seneca | School of =
+Computer Studies | Object-Oriented Programming I - C++</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META http-equiv=3DPICS-Label=20
+content=3D'(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r =
+(cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen =
+true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true =
+r (SS~~000 1))'>
+<META content=3D"(c) Copyright Seneca College 2005" name=3DCopyright>
+<META=20
+content=3D"Welcome to the Bachelors Degree of Software Development =
+Program Web Site.  On this site you can find an intermediate course on =
+object-oriented programming in C++.  Designed by Chris Szalwinski."=20
+name=3DDescription>
+<META=20
+content=3D"This subject expands on introductory elements of C++ and =
+covers intermediate C features.  The emphasis throughout is to prepare =
+for the solution of large problems."=20
+name=3DAbstract>
+<META content=3Dchris.szalwinski@senecac.on.ca name=3DAuthor>
+<META content=3D"software development, object-oriented programming, =
+lecture notes"=20
+name=3DKeywords><LINK =
+href=3D"http://cs.senecac.on.ca/~btp300/pages/style.043.css"=20
+type=3Dtext/css rel=3Dstylesheet><LINK media=3Dscreen=20
+href=3D"http://cs.senecac.on.ca/~btp300/pages/styleSPrint.043.css" =
+type=3Dtext/css=20
+rel=3Dstylesheet><LINK media=3Dprint=20
+href=3D"http://cs.senecac.on.ca/~btp300/pages/stylePPrint.043.css" =
+type=3Dtext/css=20
+rel=3Dstylesheet>
+<META content=3D"MSHTML 6.00.2900.2802" name=3DGENERATOR></HEAD>
+<BODY>
+<TABLE cellSpacing=3D0 cellPadding=3D0><!-- Body Cell -->
+  <TBODY>
+  <TR height=3D600><!-- Content Area -->
+    <TD class=3Dtbody bgColor=3D#ffffff>
+      <TABLE cellPadding=3D10 width=3D"100%">
+        <TBODY>
+        <TR>
+          <TD vAlign=3Dtop bgColor=3D#ffffff><BR>
+            <CENTER><SPAN class=3Dtexth>Module B - Pre-Processing</SPAN> =
+
+            <BR><BR><SPAN class=3Dtexthead>Multi-Platform =
+Compilation</SPAN>=20
+            <BR><BR><SPAN class=3Dtextagend>Workshop 2</SPAN> =
+</CENTER><BR><BR>
+            <P>In this workshop, you are to research key codes for =
+direct=20
+            terminal input and to design a direct terminal I/O library =
+that=20
+            hides platform dependencies.&nbsp; </P><BR>
+            <P class=3Dsection>Learning Outcome</P>
+            <P>Upon successful completion of this workshop, you will be =
+able=20
+            <UL>
+              <LI>to create multi-platform programs that require =
+customized code=20
+              for different platforms,=20
+              <LI>to use experimentation to discover how previously =
+unstudied=20
+              library functions work, and=20
+              <LI>to design and create the C code that implements =
+specifications=20
+              that require the use of direct console input/output. =
+</LI></UL>
+            <P></P><BR>
+            <P class=3Dsection>Specifications</P>
+            <P>Write two separate programs that display the key codes =
+returned=20
+            on two platforms that use different direct terminal =
+libraries=20
+            (select two of the following):&nbsp;=20
+            <UL>
+              <LI>Borland 5.5 using the <SPAN =
+class=3Dcode>conio.h</SPAN> library=20
+              <LI>VS .net 2003 using the <SPAN =
+class=3Dcode>conio.h</SPAN> library=20
+
+              <LI>phobos using the <SPAN class=3Dcode>curses.h</SPAN> =
+library=20
+              <LI>matrix using the <SPAN class=3Dcode>curses.h</SPAN> =
+library=20
+            </LI></UL>Some key presses on some platforms return more =
+than one=20
+            key code (up to 5 key codes for a single press).&nbsp; The =
+name of=20
+            the function that returns the key code(s) for a key press is =
+<SPAN=20
+            class=3Dcode>int getch()</SPAN>.&nbsp; [Hint: place calls to =
+<SPAN=20
+            class=3Dcode>getch()</SPAN> and <SPAN =
+class=3Dcode>printf(...)</SPAN> in=20
+            an iterative loop in your main program.]=20
+            <P></P>
+            <P>Prepare a table that lists side-by-side the key codes =
+returned=20
+            for the platforms investigated.&nbsp; Since all platforms =
+return the=20
+            ASCII value for any ASCII key that is pressed, only tabulate =
+the key=20
+            codes for the non-ASCII keys.&nbsp; </P>
+            <P class=3Dssection>dtio.h</P>
+            <P>Define your own set of unique universal key codes to =
+identify the=20
+            non-ASCII keys.&nbsp; Use the following symbolic names:=20
+            <UL>
+              <LI>HOME=20
+              <LI>UP=20
+              <LI>DOWN=20
+              <LI>LEFT=20
+              <LI>RIGHT=20
+              <LI>END=20
+              <LI>PGDN=20
+              <LI>PGUP=20
+              <LI>DEL=20
+              <LI>INSERT=20
+              <LI>F(n) - where n is any value between 1 and 12 inclusive =
+
+            </LI></UL>Place your definitions in a file named <SPAN=20
+            class=3Dcode>dtio.h</SPAN>.&nbsp; Specify the platform that =
+is in use=20
+            in <SPAN class=3Dcode>dtio.h</SPAN> also.&nbsp;=20
+            <P></P>
+            <P class=3Dssection>dtio.c</P>
+            <P>Write a library with a source file named <SPAN=20
+            class=3Dcode>dtio.c</SPAN> that contains four functions:=20
+            <UL>
+              <LI><SPAN class=3Dcode>void dtioStart()</SPAN> - =
+initializes the=20
+              direct terminal routines (if necessary),=20
+              <LI><SPAN class=3Dcode>int dtioGetchar()</SPAN> - returns =
+the=20
+              universal key code that identifies the key pressed,=20
+              <LI><SPAN class=3Dcode>void dtioFlush()</SPAN> - displays =
+the=20
+              characters still in the output buffer (if any), and=20
+              <LI><SPAN class=3Dcode>void dtioStop()</SPAN> - cleans up =
+direct=20
+              terminal I/O. </LI></UL>Include the appropriate header =
+file for the=20
+            direct terminal library that the selected platform uses =
+<SPAN=20
+            class=3Dcode>conio.h</SPAN> or <SPAN =
+class=3Dcode>curses.h</SPAN>.&nbsp;=20
+            Design your code to work without modification for any =
+platform=20
+            specified in <SPAN class=3Dcode>dtio.h</SPAN>=20
+            <P></P>
+            <P class=3Dssection>findKey.c</P>
+            <P>Finally, write a main program in a file named <SPAN=20
+            class=3Dcode>findKey.c</SPAN> that tests your <SPAN =
+class=3Dcode>int=20
+            dtioGetchar()</SPAN> function.&nbsp; Do not include any =
+information=20
+            about the platform in use in this file other than indirectly =
+through=20
+
+            <TABLE width=3D"45%">
+              <TBODY>
+              <TR>
+                <TD><BR><PRE> #include =
+"dtio.h"</PRE><BR></TD></TR></TBODY></TABLE></P>
+            <P class=3Dssection>Transparency</P>
+            <P>When switching from one platform to another, you only =
+need to=20
+            change the platform identifer in your <SPAN =
+class=3Dcode>dtio.h</SPAN>=20
+            header file.&nbsp; You should not need to change any code in =
+either=20
+            <SPAN class=3Dcode>dtio.c</SPAN> or <SPAN=20
+            class=3Dcode>findKey.c</SPAN>.&nbsp; In other words, your =
+application=20
+            should be platform transparent.&nbsp; </P>
+            <P>Prepare screenshots of your test runs and include them =
+with your=20
+            source code in your submission.&nbsp;=20
+        </P><BR><BR><BR><BR></TD></TR></TBODY></TABLE></TD></TR><!-- =
+Footer -->
+  <TR>
+    <TD class=3Dtbody>
+      <TABLE cellPadding=3D1 width=3D"90%" align=3Dcenter>
+        <TBODY>
+        <TR>
+          <TD class=3Dtext3 width=3D"50%">
+            <SCRIPT language=3Djavascript>=0A=
+						var lh =3D document.location.href;=0A=
+						document.write(lh)=0A=
+						</SCRIPT>
+            &nbsp;&nbsp; </TD>
+          <TD class=3Dtext3 align=3Dright width=3D"50%">
+            <SCRIPT language=3Djavascript>=0A=
+						var lm =3D document.lastModified.slice(0,-3);=0A=
+						document.write("Last Modified: " +lm)=0A=
+						</SCRIPT>
+            &nbsp;&nbsp; =
+</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></BODY></HTML>
+
+------=_NextPart_000_01EA_01C6062C.78102710
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/style.043.css
+
+BODY {
+	MARGIN-TOP: 0px; BACKGROUND: #ffffff; MARGIN-LEFT: 0px
+}
+IMG {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; VERTICAL-ALIGN: bottom; =
+BORDER-LEFT: 0px; BORDER-BOTTOM: 0px
+}
+P {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+TABLE {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: =
+0px
+}
+TD {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+UL {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+LI {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+PRE {
+	FONT-WEIGHT: bold; FONT-SIZE: small; BACKGROUND: #ffffe0; MARGIN-LEFT: =
+15px; COLOR: navy; FONT-FAMILY: "Courier New", serif
+}
+.tbody {
+	BACKGROUND: #ffffff; WIDTH: 700px
+}
+.text3 {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+.panel1 {
+	BACKGROUND: #aee7fc
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+.texth {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.quote {
+	FONT-SIZE: small; FONT-STYLE: italic; FONT-FAMILY: "Times New Roman", =
+serif
+}
+.textagend {
+	FONT-SIZE: small; COLOR: red; FONT-FAMILY: "Times New Roman", serif
+}
+.section {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; TEXT-TRANSFORM: uppercase; COLOR: =
+#4599b1; FONT-FAMILY: "Times New Roman", serif
+}
+.ssection {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.sssection {
+	FONT-WEIGHT: bold; FONT-SIZE: small; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.top {
+	VERTICAL-ALIGN: top
+}
+.tup {
+	VERTICAL-ALIGN: top; COLOR: blue
+}
+.defin {
+	FONT-WEIGHT: bold; FONT-SIZE: small; BACKGROUND: #ffffff; COLOR: =
+maroon; FONT-FAMILY: "Courier New", serif
+}
+.desc {
+	BACKGROUND: #ededfe; TEXT-ALIGN: center
+}
+.value {
+	BACKGROUND: #ffffc6; TEXT-ALIGN: center
+}
+.addre {
+	BACKGROUND: #aee7fc; TEXT-ALIGN: left
+}
+.addrec {
+	BACKGROUND: #aee7fc; TEXT-ALIGN: center
+}
+.oper {
+	COLOR: maroon; FONT-STYLE: italic
+}
+.code {
+	FONT-WEIGHT: bold; FONT-SIZE: small; VERTICAL-ALIGN: baseline; COLOR: =
+navy; FONT-FAMILY: "Courier New", serif
+}
+.high {
+	COLOR: maroon
+}
+.result {
+	BACKGROUND: #f7ffce
+}
+.error {
+	BACKGROUND: #ffe7c6
+}
+.white {
+	BACKGROUND: #ffffff
+}
+
+------=_NextPart_000_01EA_01C6062C.78102710
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/styleSPrint.043.css
+
+BODY {
+	BACKGROUND: #ffffff
+}
+A {
+	VERTICAL-ALIGN: middle; COLOR: #0000ff; TEXT-DECORATION: underline
+}
+A:hover {
+	BACKGROUND: #ededfe; COLOR: #0000ff
+}
+.text0 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text1 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text2 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text3 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text4 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text9 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+
+------=_NextPart_000_01EA_01C6062C.78102710
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/stylePPrint.043.css
+
+A {
+	VERTICAL-ALIGN: middle; TEXT-DECORATION: none
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+
+------=_NextPart_000_01EA_01C6062C.78102710--

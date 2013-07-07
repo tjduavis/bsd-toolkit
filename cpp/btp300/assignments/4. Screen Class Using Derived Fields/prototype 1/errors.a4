@@ -1,0 +1,29 @@
+
+C:\Documents and Settings\TJ Duavis\My Documents\BSD\sem3\btp300\assignments\4. Screen Cla
+ss Using Derived Fields>cl a4test.cpp Screen.cpp v_dtio.obj
+Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3077 for 80x86
+Copyright (C) Microsoft Corporation 1984-2002. All rights reserved.
+
+a4test.cpp
+a4test.cpp(253) : error C2635: cannot convert a 'Field*' to a 'DVField*'; conversion from
+a virtual base class is implied
+        c:\Documents and Settings\TJ Duavis\My Documents\BSD\sem3\btp300\assignments\4. Sc
+reen Class Using Derived Fields\Field.h(22) : see declaration of 'Field'
+        c:\Documents and Settings\TJ Duavis\My Documents\BSD\sem3\btp300\assignments\4. Sc
+reen Class Using Derived Fields\Screen.h(368) : see declaration of 'DVField'
+a4test.cpp(253) : error C2679: binary '=' : no operator found which takes a right-hand ope
+rand of type 'double' (or there is no acceptable conversion)
+a4test.cpp(268) : error C2635: cannot convert a 'Field*' to a 'DVField*'; conversion from
+a virtual base class is implied
+        c:\Documents and Settings\TJ Duavis\My Documents\BSD\sem3\btp300\assignments\4. Sc
+reen Class Using Derived Fields\Field.h(22) : see declaration of 'Field'
+        c:\Documents and Settings\TJ Duavis\My Documents\BSD\sem3\btp300\assignments\4. Sc
+reen Class Using Derived Fields\Screen.h(368) : see declaration of 'DVField'
+a4test.cpp(268) : error C2440: 'type cast' : cannot convert from 'Field' to 'double'
+        No user-defined-conversion operator available that can perform this conversion, or
+ the operator cannot be called
+Screen.cpp
+Generating Code...
+
+C:\Documents and Settings\TJ Duavis\My Documents\BSD\sem3\btp300\assignments\4. Screen Cla
+ss Using Derived Fields>

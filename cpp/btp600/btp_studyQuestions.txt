@@ -1,0 +1,6 @@
+notepad:
+Pattern Analysis
+================
+how the pattern wworks?
+what are the beneifts? trade offs?
+when would you apply?

@@ -1,0 +1,54 @@
+        #include <iostream.h>
+        #include <strstream.h>
+        class studentbase {
+            char name[31];
+            double mark;
+          public:
+            studentbase() {}
+            studentbase(char n[], double m = -1) { set(n, m); }
+            void extract(char s[]) { strcpy(s, name); }
+            double extract() { return mark; }
+            void setname(char s[]) { strcpy(name, s); }
+            virtual void setmark(double m) { mark = m; }
+            void set(char n[], double m = -1) { setname(n); setmark(m); }
+        };
+        class fixstudent : virtual public studentbase {
+          public:
+            fixstudent() {}
+            fixstudent(char n[], double m = -1) : studentbase(n, m) {}
+            void setmark(double m) { studentbase::setmark(m * 1.1); }
+        };
+        class ostudent : virtual public studentbase {
+          public:
+            ostudent(){}
+            ostudent(char n[], double m = -1) : studentbase(n, m) {}
+            void out(ostream &os);
+        };
+        class student : public fixstudent, public ostudent {
+          public:
+            student() {}
+            student(char n[], double m = -1) : fixstudent(n, m) {}
+        };
+        void ostudent::out(ostream &os)
+        {
+            char nm[31];
+            extract(nm);
+            double mk = extract();
+            os << "Student: " << nm << (mk<0 ? " is incomplete" : " gets ");
+            if (mk >= 0) cout << mk;
+            cout << endl;
+        }
+        int main()
+        {
+            student s[3];
+            s[0].set("John Lennon");
+            s[1].set("Richard Starkey", 55.0);
+            s[2].set("George Harrison", 70.0);
+            cout.setf(ios::fixed);
+            cout.precision(1);
+            for (int i = 0; i < 3; i++) {
+                cout << i + 1 << ". ";
+                s[i].out(cout);
+            }
+            return 0;
+        }

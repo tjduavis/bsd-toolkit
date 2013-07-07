@@ -1,0 +1,35 @@
+/*
+* DataSet.h
+*   Author: Timothy Duavis
+*   Date: Feb 04/05
+*/
+
+#include <new>
+#include <math.h>
+
+//holds information for single data point
+class DataPoint{
+	double abscissa;
+	double ordinate;
+
+	public:
+		int loadFromFile(FILE* fp);
+		double getx() const;
+		double gety() const;
+};
+
+//objects holds the info for set of data points
+class DataSet{
+	int numDataPts;
+	DataPoint* Pts;
+
+	public:
+		bool loadFromFile(const char* filename);
+		void closeUp();
+		const char* label() const;
+
+		double intercept() const;
+		double correlation() const;
+		int nPoints() const;
+		DataPoint point(int i) const;
+};                                 

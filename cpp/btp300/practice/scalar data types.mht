@@ -1,0 +1,305 @@
+From: <Saved by Microsoft Internet Explorer 5>
+Subject: Seneca | School of Computer Studies | Object-Oriented Programming I - C++
+Date: Wed, 21 Dec 2005 12:43:02 -0500
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----=_NextPart_000_01AB_01C6062C.14CC5160"
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.2670
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_01AB_01C6062C.14CC5160
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/handouts/h3_p.html
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<?xml version=3D'1.0' encoding=3D'UTF-8'?><HTML lang=3Den-us=20
+xmlns=3D"http://www.w3.org/1999/xhtml"><HEAD><TITLE>Seneca | School of =
+Computer Studies | Object-Oriented Programming I - C++</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META http-equiv=3DPICS-Label=20
+content=3D'(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r =
+(cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen =
+true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true =
+r (SS~~000 1))'>
+<META content=3D"(c) Copyright Seneca College 2005" name=3DCopyright>
+<META=20
+content=3D"Welcome to the Bachelors Degree of Software Development =
+Program Web Site.  On this site you can find an intermediate course on =
+object-oriented programming in C++.  Designed by Chris Szalwinski."=20
+name=3DDescription>
+<META=20
+content=3D"This subject expands on introductory elements of C++ and =
+covers intermediate C features.  The emphasis throughout is to prepare =
+for the solution of large problems."=20
+name=3DAbstract>
+<META content=3Dchris.szalwinski@senecac.on.ca name=3DAuthor>
+<META content=3D"software development, object-oriented programming, =
+lecture notes"=20
+name=3DKeywords><LINK =
+href=3D"http://cs.senecac.on.ca/~btp300/pages/style.043.css"=20
+type=3Dtext/css rel=3Dstylesheet><LINK media=3Dscreen=20
+href=3D"http://cs.senecac.on.ca/~btp300/pages/styleSPrint.043.css" =
+type=3Dtext/css=20
+rel=3Dstylesheet><LINK media=3Dprint=20
+href=3D"http://cs.senecac.on.ca/~btp300/pages/stylePPrint.043.css" =
+type=3Dtext/css=20
+rel=3Dstylesheet>
+<META content=3D"MSHTML 6.00.2900.2802" name=3DGENERATOR></HEAD>
+<BODY>
+<TABLE cellSpacing=3D0 cellPadding=3D0><!-- Body Cell -->
+  <TBODY>
+  <TR height=3D600><!-- Content Area -->
+    <TD class=3Dtbody bgColor=3D#ffffff>
+      <TABLE cellPadding=3D10 width=3D"100%">
+        <TBODY>
+        <TR>
+          <TD vAlign=3Dtop bgColor=3D#ffffff><BR>
+            <CENTER><SPAN class=3Dtexth>Handouts</SPAN> <BR><BR><SPAN=20
+            class=3Dtexthead>In-Class Practice - Scalar Data =
+Types</SPAN>=20
+            </CENTER><BR><BR><BR>
+            <P>What is the output of the following program=20
+            <TABLE width=3D"45%">
+              <TBODY>
+              <TR>
+                <TD><BR><PRE> /* Scalar Data Types    */
+ /* BTP300               */
+ /* Sep 19 2005          */
+
+ #include &lt;stdio.h&gt;
+ void ding(const char *);
+ typedef unsigned bell;
+
+ int main( ) {
+     int i;
+
+     for (i =3D 0; i &lt; 10; i++)&nbsp;
+         ding("Ka Boom");
+
+     return 0;
+ }
+
+ void ding(const char *s) {
+     static bell b =3D 5;
+
+     printf("%d ", b--);
+     if (b =3D=3D 0) {
+         printf("%s\n", s);
+         b =3D 5;
+     }
+ }</PRE><BR></TD></TR></TBODY></TABLE>Write your output here:=20
+            <TABLE width=3D"45%">
+              <TBODY>
+              <TR>
+                <TD><BR><PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE><BR></TD></TR></TBODY></TABLE></P><BR><BR><BR></TD></TR></TBODY></T=
+ABLE></TD></TR><!-- Footer -->
+  <TR>
+    <TD class=3Dtbody>
+      <TABLE cellPadding=3D1 width=3D"90%" align=3Dcenter>
+        <TBODY>
+        <TR>
+          <TD class=3Dtext3 width=3D"50%">
+            <SCRIPT language=3Djavascript>=0A=
+						var lh =3D document.location.href;=0A=
+						document.write(lh)=0A=
+						</SCRIPT>
+            &nbsp;&nbsp; </TD>
+          <TD class=3Dtext3 align=3Dright width=3D"50%">
+            <SCRIPT language=3Djavascript>=0A=
+						var lm =3D document.lastModified.slice(0,-3);=0A=
+						document.write("Last Modified: " +lm)=0A=
+						</SCRIPT>
+            &nbsp;&nbsp; =
+</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></BODY></HTML>
+
+------=_NextPart_000_01AB_01C6062C.14CC5160
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/style.043.css
+
+BODY {
+	MARGIN-TOP: 0px; BACKGROUND: #ffffff; MARGIN-LEFT: 0px
+}
+IMG {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; VERTICAL-ALIGN: bottom; =
+BORDER-LEFT: 0px; BORDER-BOTTOM: 0px
+}
+P {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+TABLE {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: =
+0px
+}
+TD {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+UL {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+LI {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+PRE {
+	FONT-WEIGHT: bold; FONT-SIZE: small; BACKGROUND: #ffffe0; MARGIN-LEFT: =
+15px; COLOR: navy; FONT-FAMILY: "Courier New", serif
+}
+.tbody {
+	BACKGROUND: #ffffff; WIDTH: 700px
+}
+.text3 {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+.panel1 {
+	BACKGROUND: #aee7fc
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+.texth {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.quote {
+	FONT-SIZE: small; FONT-STYLE: italic; FONT-FAMILY: "Times New Roman", =
+serif
+}
+.textagend {
+	FONT-SIZE: small; COLOR: red; FONT-FAMILY: "Times New Roman", serif
+}
+.section {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; TEXT-TRANSFORM: uppercase; COLOR: =
+#4599b1; FONT-FAMILY: "Times New Roman", serif
+}
+.ssection {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.sssection {
+	FONT-WEIGHT: bold; FONT-SIZE: small; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.top {
+	VERTICAL-ALIGN: top
+}
+.tup {
+	VERTICAL-ALIGN: top; COLOR: blue
+}
+.defin {
+	FONT-WEIGHT: bold; FONT-SIZE: small; BACKGROUND: #ffffff; COLOR: =
+maroon; FONT-FAMILY: "Courier New", serif
+}
+.desc {
+	BACKGROUND: #ededfe; TEXT-ALIGN: center
+}
+.value {
+	BACKGROUND: #ffffc6; TEXT-ALIGN: center
+}
+.addre {
+	BACKGROUND: #aee7fc; TEXT-ALIGN: left
+}
+.addrec {
+	BACKGROUND: #aee7fc; TEXT-ALIGN: center
+}
+.oper {
+	COLOR: maroon; FONT-STYLE: italic
+}
+.code {
+	FONT-WEIGHT: bold; FONT-SIZE: small; VERTICAL-ALIGN: baseline; COLOR: =
+navy; FONT-FAMILY: "Courier New", serif
+}
+.high {
+	COLOR: maroon
+}
+.result {
+	BACKGROUND: #f7ffce
+}
+.error {
+	BACKGROUND: #ffe7c6
+}
+.white {
+	BACKGROUND: #ffffff
+}
+
+------=_NextPart_000_01AB_01C6062C.14CC5160
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/styleSPrint.043.css
+
+BODY {
+	BACKGROUND: #ffffff
+}
+A {
+	VERTICAL-ALIGN: middle; COLOR: #0000ff; TEXT-DECORATION: underline
+}
+A:hover {
+	BACKGROUND: #ededfe; COLOR: #0000ff
+}
+.text0 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text1 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text2 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text3 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text4 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text9 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+
+------=_NextPart_000_01AB_01C6062C.14CC5160
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/stylePPrint.043.css
+
+A {
+	VERTICAL-ALIGN: middle; TEXT-DECORATION: none
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+
+------=_NextPart_000_01AB_01C6062C.14CC5160--

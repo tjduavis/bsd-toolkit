@@ -1,0 +1,18 @@
+Name: Timothy Duavis
+Student Number: 019-261-049
+Section: A/B
+Assignment 1 – Question 2b
+
+CList(); - Run Time: BigO of 1
+CList(const CList<T>& src); - Run Time: BigO of N
+~CList(); - Run Time: BigO of N
+CList<T>& operator=(const CList<T>& rhs); - Run Time: BigO of N
+void insert(const T& data); - Run Time: BigO of 1
+void append(const T& data); - Run Time: BigO of 1
+bool remove(); - Run Time: Run Time: BigO of 1
+const T& curr() const; - Run Time: BigO of 1
+bool isempty() const; - Run Time: BigO of 1
+void goFwd(); - Run Time: BigO of 1
+void goBack(); - Run Time: BigO of 1
+bool get(T passback[], int max) const; - Run Time: BigO of N
+bool find(const void* key, bool (*match)(const void*,const T&)); - Run Time: BigO of N

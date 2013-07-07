@@ -1,0 +1,60 @@
+From: <Saved by Microsoft Internet Explorer 5>
+Subject: 
+Date: Wed, 21 Dec 2005 12:50:41 -0500
+MIME-Version: 1.0
+Content-Type: text/html;
+	charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/tests/solutions/btp300mu.q1.053.c.solution
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.2670
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Dwindows-1252">
+<META content=3D"MSHTML 6.00.2900.2802" name=3DGENERATOR></HEAD>
+<BODY><PRE> /* Make Up Test - Exchange Function
+  * BTP300
+  * Nov 7 2005
+  * btp300mu.q1.053.c
+  */
+
+ #include &lt;stdio.h&gt;
+
+ int intgtr(int *a, int *b) { return *a &gt; *b; }
+ int dblles(double *a, double *b) { return *a &lt; *b; }
+
+ int exchange(void *a, void *b, int n, int (*comp)(void *, void *)) {
+     int i, rc;
+     char c, *aa =3D (char *)a, *bb =3D (char *)b;
+
+     rc =3D comp(a, b);
+     if (rc) {
+         for (i =3D 0; i &lt; n; i++) {
+             c =3D *aa;
+             *aa =3D *bb;
+             *bb =3D c;
+             aa++;
+             bb++;
+         }
+     }
+     return rc;
+ }
+
+ int main(void) {
+     int b, x =3D 4, y =3D 3;
+     double v =3D 1.7, w =3D 2.3;
+
+     b =3D exchange(&amp;x, &amp;y, sizeof(int),    (int (*)(void *, =
+void *))intgtr);
+     printf("%d %d %d\n", b, x, y);
+     b =3D exchange(&amp;v, &amp;w, sizeof(double), (int (*)(void *, =
+void *))dblles);
+     printf("%d %3.1lf %3.1lf\n", b, v, w);
+     b =3D exchange(&amp;v, &amp;w, sizeof(double), (int (*)(void *, =
+void *))dblles);
+     printf("%d %3.1lf %3.1lf\n", b, v, w);
+
+     return 0;
+ }
+</PRE></BODY></HTML>

@@ -1,0 +1,36 @@
+bst::~bst() {
+	theRealDestructor(root_);
+}
+
+void bst::theRealDestructor(Node*& n) {
+	if (!n) { }
+	else {
+		theRealDestructor(n->right_);
+		theRealDestructor(n->left_);
+		delete n;
+		n = NULL;
+	}	
+}
+
+Height - # Nodes from root to futhest leaf inclusive
+
+Balance
+	Perfectly Balanced Tree - # nodes in left and right
+				  subtrees differe by no more than one for
+				  all subtrees
+				- to reach any node is O (log n)
+				- slow to maintain
+
+A.V.L Tree
+	- Binary Search Trees that are height balanced.
+	- Height Balance is maintained during operations
+	- To do this each node keeps track of the height balance at that node. 
+	  This is calculated as: Height right - Height left
+
+	Insertion:
+		- initially the algorithm is the same as a B.S.T
+		- starting at the new node, adjust the height balance of all
+		  nodes going to the root.
+		
+		 if a nodes height balance >= 2 or <= -2
+		 rotation is done to fix the problem

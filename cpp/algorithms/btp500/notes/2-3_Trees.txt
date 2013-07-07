@@ -1,0 +1,22 @@
+
+
+
+Algorithm For 2-3 Trees (specific version of B-Trees)
+
+1. Do not create new nodes when inserting.
+2. Find the leaf node where vlaue belongs.
+3. If the leaf node has one value, add new values to that ndoes.
+4. If leaf node already has two values, promote the median value to the parent and split node in two.
+5. If the node being split was the root node, a new root is created.
+
+
+Example
+5, 10, 15, 20, 25, 30, 35
+
+1. 5-> Node (5
+2. 10-> Node (5, 10)
+3. 15-> Node (5, 10, 15) -> split and promote -> Node (10) -> Left children (5) Right children(15)
+4. 20-> Node (10) -> Left children(5) Right children(15 20)
+5. 25-> Node (10 20) ->left chidlren (5) Middle children(20) right children(25)
+6. 30-> Node (10 20) ->left children (5) middle children(15) right children(25 30)
+7. 35-> Node (10 20) ->left children (5) middle children(15) right children(25 30 35) ->Node (10 20 30) ->left(5) left2(15) right2(25) right(35) ->Node (20) -> leftNode 10 rightNode 30 -> left of 10 (5) right of 10 (15) ->

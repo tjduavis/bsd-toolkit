@@ -1,0 +1,310 @@
+From: <Saved by Microsoft Internet Explorer 5>
+Subject: 
+Date: Wed, 21 Dec 2005 12:57:32 -0500
+MIME-Version: 1.0
+Content-Type: text/html;
+	charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/tests/oop444fe.971
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.2670
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Dwindows-1252">
+<META content=3D"MSHTML 6.00.2900.2802" name=3DGENERATOR></HEAD>
+<BODY><PRE>    OOP444 =
+----------------------------------------------------- Spring 1997
+
+    Answer all questions in the examination booklets provided.  There  =
+is  a
+    total of 40 marks (10 marks per question).
+
+    1. Determine the exact output of the following program:
+
+      #include &lt;iostream.h&gt;
+      #include &lt;string.h&gt;
+      class shape {
+          char name[21];
+        public:
+          shape(char n[]) { strcpy(name, n); }
+          virtual ~shape() {}
+          virtual double area() =3D 0;
+          virtual double circumference() =3D 0;
+          virtual double height() =3D 0;
+          virtual double width() =3D 0;
+          void show() { cout &lt;&lt; name &lt;&lt; " - area: " &lt;&lt; =
+area() &lt;&lt;
+                        "  height: " &lt;&lt; height() &lt;&lt; endl; }
+      };
+      class rectangle: virtual public shape {
+          double w;
+          double h;
+        public:
+          rectangle(double width, double height): shape("rectangle") {
+              w =3D width; h =3D height; }
+          double area() { return w * h; }
+          double circumference() { return 2*(w + h); }
+          double height() { return h; }
+          double width() { return w; }
+      };
+      class square: public rectangle {
+        public:
+          square(double length):rectangle(length, length), =
+shape("square") {}
+      };
+      class circle: public square {
+        public:
+          circle(double radius):square(radius * 2), shape("circle") {}
+          double area() { return 3.1 * height() * height() / 4; }
+          double circumference() { return 3.1 * height(); }
+      };
+      int main()
+      {
+          rectangle *x[4];
+          x[0] =3D new circle(2);
+          x[1] =3D new square(4);
+          x[2] =3D new rectangle(2, 3);
+          x[3] =3D new rectangle(1, 1.5);
+          for (int i =3D 0; i &lt; 4; i++) {
+              x[i]-&gt;show();
+              delete x[i];
+          }
+          return 0;
+      }
+
+
+
+
+    OOP Using C++ II ------------------------------------- Final =
+Examination
+    OOP444 ----------------------------------------------------- Spring =
+1997
+
+    2. Code a class, called a jobfile, which stores a list of job =
+applicants
+       in a fixed-length record file. A "job applicant" is  defined  by  =
+the
+       structure:
+
+         struct applicant {
+            char name[61];  // applicant's name
+            char phone[21]; // phone number
+            long date;      // date of application in yyyymmdd format
+         };
+
+       When instantiated, a jobfile  may  be  supplied  with  a  file  =
+name,
+       although a default name of "appliers.dat" should be used if  none =
+ is
+       supplied. The specified file should be created if it doesn't  =
+already
+       exist. When destroyed, the jobfile should be closed.
+
+       A jobfile has the following member functions:
+
+            applicant read(int n) - reads record number n from the file  =
+and
+             returns it. Record number 1 is the first record on file.
+
+            void write(applicant a, int n) - stores the  supplied  =
+applicant
+             in record number n of the file, where record number  1  is  =
+the
+             first record.
+
+            int  status()  -  returns  true  if  the  last   operation   =
+was
+             successful,  or  false  otherwise.  (Examples  of  =
+unsuccessful
+             operations  are:  the  file  couldn't  be  opened,  reading =
+  a
+             particular record fails, writing a  particular  record  =
+fails).
+             Note that if possible, an  unsuccessful  operation  should  =
+NOT
+             stop the jobfile from performing future operations (hint: =
+clear
+             the file stream if it fails).
+
+            long count() - returns the number  of  applicants  currently =
+ on
+             file.
+
+       HINT: Derive jobfile from fstream (in fact, fstream can be a  =
+private
+       base class). [You don't *have* to follow this hint if you can =
+come up
+       with an apporach you like better]
+
+       Some partial use of a jobfile might be:
+
+            jobfile f("slaves.dat");
+            if (!f.status())
+                    cout &lt;&lt; "error opening file!\n";
+            applicant person;
+            strcpy(person.name, "Homer Simpson");
+            strcpy(person.phone, "666-6666");
+            person.date=3D19810217; // waiting since Feb 17, 1981
+            f.write(person, 13);  // put Homer into record #13
+            person =3D f.read(25);  // now read record #25
+            if (!f.status())
+                    cout &lt;&lt; "error reading record 25\n";
+            ...etc.
+
+
+
+
+    OOP Using C++ II ------------------------------------- Final =
+Examination
+    OOP444 ----------------------------------------------------- Spring =
+1997
+
+    3. Derive a class from jobfile (defined in question 2), called =
+hirefile,
+       which is constructed and destructed the same  way  as  a  =
+jobfile.  A
+       hirefile can be used to get the next available  applicant,  based =
+ on
+       how long the applicants have been waiting (those waiting the  =
+longest
+       get picked first). A special application date of 0 is used to =
+mark an
+       applicant as "no longer waiting".
+
+       A hirefile has the following member functions:
+
+            long count() - returns the number of applicants on file who  =
+are
+             still waiting for a job (i.e. application date is =
+non-zero).
+
+            applicant hire() - returns the applicant in the  file  with  =
+the
+             oldest non-zero application date (i.e.  the  smallest  =
+non-zero
+             number). The application date for that record in  the  file =
+ is
+             reset to zero. (The application date originally read  from  =
+the
+             file  is  returned  as  part  of  the  return  value).  If  =
+two
+             applicants have the same application date, the one that =
+appears
+             earliest in the file should be picked first.
+
+            void add(applicant) - stores the supplied applicant in the =
+first
+             available  location  in  the  file.  Any  record  with  a  =
+zero
+             application date may be replaced with  a  new  applicant.  =
+Only
+             when all records on file have non-zero application dates =
+should
+             an applicant be added at the end of the file.
+
+       Note that, although this class is derived  from  the  jobfile  =
+class,
+       your marks for this question do not depend  on  your  answer  to  =
+the
+       previous question, as long  as  your  answer  only  uses  the  =
+public
+       features of jobfile as described in the previous question.
+
+       HINT: Do not strive for efficiency.  Simply  loop  through  the  =
+file
+       everytime you need to.
+
+       Some partial use of a hirefile might be:
+
+            hirefile f("slaves.dat");
+            if (!f.status())
+                cout &lt;&lt; "error opening file!\n";
+            applicant workcrew[10];
+            if (f.count() &lt; 10)     // see if we have ten workers =
+available
+                cout &lt;&lt; "insufficient supply of workers!\n";
+            else=20
+                for (int i =3D 0; i &lt; 10; i++)    // read next 10 =
+available
+                    workcrew[i] =3D f.hire();     // workers from the =
+file
+            applicant newperson;
+            strcpy(newperson.name, "Homer Simpson");
+            strcpy(newperson.phone, "666-6666");
+            newperson.date=3D19970217; // waiting since Feb 17, 1997
+            f.add(newperson);        // put Homer into next unused slot
+            ...etc.
+
+
+
+
+
+
+    OOP Using C++ II ------------------------------------- Final =
+Examination
+    OOP444 ----------------------------------------------------- Spring =
+1997
+
+    4. Determine the exact output of the following program:
+
+      #include &lt;iostream.h&gt;
+      #include &lt;string.h&gt;
+
+      template &lt;class A&gt;
+      class creature {
+          A s;
+          char n[21];
+        public:
+          creature(char *nm, A so) { strcpy(n, nm); s =3D so; }
+          void show() const { cout &lt;&lt; n &lt;&lt; ":";=20
+                              s.make(cout);=20
+                              cout &lt;&lt; endl;=20
+                            }
+      };
+
+      class noisy {
+          char s1[21];
+          char s2[21];
+        public:
+          noisy(char *str1=3D"", char *str2=3D"") { strcpy(s2, str1);=20
+                                                strcpy(s1, str2);=20
+                                              }
+          void make(ostream &amp;os) const { os &lt;&lt; s1 &lt;&lt; s2; =
+}
+      };
+
+      class noisier {
+          char s[21];
+          int n;
+        public:
+          noisier(char *str=3D"", int num =3D 5) { strcpy(s, str); n =3D =
+num; }
+          void make(ostream &amp;os) const {
+              char last =3D ' ';
+              int i;
+              for (i =3D 0; s[i]; i++) {
+                  os &lt;&lt; s[i];
+                  last =3D s[i];
+              }
+              for (i =3D 0; i &lt; n; i++)
+                  os &lt;&lt; last;
+          }
+      };
+
+      int main() {
+          creature&lt;noisy&gt; a("cat", noisy("ow", "me")),=20
+                          b("pig", noisy("ink", "o"));
+          creature&lt;noisier&gt; c("cow", noisier("mo")),=20
+                            d("sheep", noisier("ba", 3));
+          a.show(); b.show(); c.show(); d.show();
+          return 0;
+      }
+
+
+
+
+
+    OOP Using C++ II ------------------------------------- Final =
+Examination
+</PRE></BODY></HTML>

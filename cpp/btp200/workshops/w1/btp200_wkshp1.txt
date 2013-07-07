@@ -1,0 +1,17 @@
+Compiling Modular Source Code
+workshop 1
+
+.NET
+====
+modular     : 104 kb
+
+Phobos
+======
+modular	    : 128 kb
+
+Borland
+=======
+modular	    : 146 kb
+
+	    	
+

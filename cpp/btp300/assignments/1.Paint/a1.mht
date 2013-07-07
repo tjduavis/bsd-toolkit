@@ -1,0 +1,471 @@
+From: <Saved by Microsoft Internet Explorer 5>
+Subject: Seneca | School of Computer Studies | Object-Oriented Programming I - C++
+Date: Wed, 21 Dec 2005 13:04:43 -0500
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----=_NextPart_000_0266_01C6062F.1C958B70"
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.2670
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0266_01C6062F.1C958B70
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/assignments/a1_p.html
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<?xml version=3D'1.0' encoding=3D'UTF-8'?><HTML lang=3Den-us=20
+xmlns=3D"http://www.w3.org/1999/xhtml"><HEAD><TITLE>Seneca | School of =
+Computer Studies | Object-Oriented Programming I - C++</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META http-equiv=3DPICS-Label=20
+content=3D'(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r =
+(cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen =
+true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true =
+r (SS~~000 1))'>
+<META content=3D"(c) Copyright Seneca College 2005" name=3DCopyright>
+<META=20
+content=3D"Welcome to the Bachelors Degree of Software Development =
+Program Web Site.  On this site you can find an intermediate course on =
+object-oriented programming in C++.  Designed by Chris Szalwinski."=20
+name=3DDescription>
+<META=20
+content=3D"This subject expands on introductory elements of C++ and =
+covers intermediate C features.  The emphasis throughout is to prepare =
+for the solution of large problems."=20
+name=3DAbstract>
+<META content=3Dchris.szalwinski@senecac.on.ca name=3DAuthor>
+<META content=3D"software development, object-oriented programming, =
+lecture notes"=20
+name=3DKeywords><LINK =
+href=3D"http://cs.senecac.on.ca/~btp300/pages/style.043.css"=20
+type=3Dtext/css rel=3Dstylesheet><LINK media=3Dscreen=20
+href=3D"http://cs.senecac.on.ca/~btp300/pages/styleSPrint.043.css" =
+type=3Dtext/css=20
+rel=3Dstylesheet><LINK media=3Dprint=20
+href=3D"http://cs.senecac.on.ca/~btp300/pages/stylePPrint.043.css" =
+type=3Dtext/css=20
+rel=3Dstylesheet>
+<META content=3D"MSHTML 6.00.2900.2802" name=3DGENERATOR></HEAD>
+<BODY>
+<TABLE cellSpacing=3D0 cellPadding=3D0><!-- Body Cell -->
+  <TBODY>
+  <TR height=3D600><!-- Content Area -->
+    <TD class=3Dtbody bgColor=3D#ffffff>
+      <TABLE cellPadding=3D10 width=3D"100%">
+        <TBODY>
+        <TR>
+          <TD vAlign=3Dtop bgColor=3D#ffffff><BR>
+            <CENTER><SPAN class=3Dtexth>Assignment 1<BR>Version 1.01 - =
+changes in=20
+            <FONT color=3Dblue><B>blue</B></FONT> </SPAN><BR><BR><SPAN=20
+            class=3Dtexthead>Paint a Screen</SPAN> <BR><BR><SPAN =
+class=3Dtexth>Due -=20
+            Sunday September 25 at 11:59pm<BR></SPAN></CENTER><BR><BR>
+            <P>As your first assignment this semester, you are to write =
+a direct=20
+            terminal library of functions that works on four different =
+platforms=20
+            and use that library to paint a screen. </P><BR>
+            <P class=3Dsection>Learning Outcome</P>
+            <P>Upon successful completion of this assignment, you will =
+have=20
+            demonstrated the abilities=20
+            <UL>
+              <LI>to analyze functional descriptions of modules that =
+require the=20
+              use of such technologies as direct console input/output,=20
+              <LI>to design and create the C code that implements those=20
+              specifications, and=20
+              <LI>to create a multi-platform program that requires =
+customized=20
+              code for each different platform.&nbsp; </LI></UL>
+            <P></P><BR>
+            <P class=3Dsection>Background</P>
+            <P>The <SPAN class=3Dcode>stdio.h</SPAN> functions of the =
+standard C=20
+            library provide limited input/output facilities.&nbsp; More=20
+            sophisticated facilities with cursor control have been =
+developed=20
+            outside any common standard.&nbsp; Typically, each compiler =
+has its=20
+            own set of proprietary library routines that access =
+terminals at a=20
+            low level.&nbsp; Since a common standard is absent, code =
+that uses=20
+            these facilities is not portable.&nbsp; If we include such=20
+            facilities in our programs and expect our programs to run on =
+a=20
+            variety of platforms, we need to write dedicated code for =
+each=20
+            platform.&nbsp; Moreover, we need a simple and =
+straightforward=20
+            method of managing switches from one platform to =
+another.&nbsp;=20
+            </P><BR>
+            <P class=3Dsection>Specifications</P>
+            <P>For this assignment, you are to write a program that =
+places=20
+            characters at various positions on a screen.&nbsp; For this, =
+you=20
+            will need to design and to code a library that contains at =
+least ten=20
+            functions:=20
+            <UL>
+              <LI><SPAN class=3Dcode>void dtioStart(void)</SPAN> =
+initializes the=20
+              full screen routines.&nbsp; This function is called before =
+calling=20
+              any other <SPAN class=3Dcode>dtio</SPAN> function and only =
+once=20
+              before calling <SPAN class=3Dcode>dtioStop()</SPAN>.=20
+              <LI><SPAN class=3Dcode>void dtioStop(void)</SPAN> shuts =
+down the=20
+              full screen routines and ensures that the cursor is not =
+left in=20
+              the middle of the screen, which may be partly filled with=20
+              characters.&nbsp; Any program that has called <SPAN=20
+              class=3Dcode>dtioStart()</SPAN> must call this function =
+before=20
+              terminating.=20
+              <LI><SPAN class=3Dcode>int dtioRows(void)</SPAN> returns =
+the number=20
+              of rows on the screen.=20
+              <LI><SPAN class=3Dcode>int dtioColumns(void)</SPAN> =
+returns the=20
+              number of columns on the screen.=20
+              <LI><SPAN class=3Dcode>void dtioClear(void)</SPAN> clears =
+the screen=20
+              and leaves the cursor in the upper left-hand corner of the =
+screen.=20
+
+              <LI><SPAN class=3Dcode>void dtioFlush(void)</SPAN> ensures =
+that any=20
+              output sent to the screen is displayed on the screen (that =
+is,=20
+              this function flushes the output buffer).=20
+              <LI><SPAN class=3Dcode>int dtioGetchar(void)</SPAN> =
+displays all=20
+              output that has been sent to the screen (if any is pending =
+to be=20
+              displayed), waits for a key to be pressed and returns an =
+<SPAN=20
+              class=3Dcode>int</SPAN> value that uniquely identifies the =
+key=20
+              pressed.&nbsp; The value for a non-ASCII key is platform=20
+              dependent.&nbsp; To accomodate this dependency, define the =
+
+              following symbolic names:=20
+              <UL>
+                <LI>UP - the up arrow key value,=20
+                <LI>DOWN - the down arrow key value,=20
+                <LI>LEFT - the left arrow key value,=20
+                <LI>RIGHT - the right arrow key value,=20
+                <LI>PGUP - the Page Up key value,=20
+                <LI>PGDN - the Page Down key value,=20
+                <LI>HOME - the Home kay value,=20
+                <LI>END - the End key value,=20
+                <LI>ENTER - the Enter key value,=20
+                <LI>TAB - the Tab key value,=20
+                <LI>BACKSPACE - the Backspace key value,=20
+                <LI>ESCAPE - the Escape key value,=20
+                <LI><FONT color=3Dblue><B>DEL</B></FONT> - the Delete =
+key value,=20
+                <LI>INSERT - the Insert key value,=20
+                <LI>F(n) - the function key value, where n is a number =
+from 1=20
+                through 12,=20
+                <LI><FONT color=3Dblue><B>UNKNOWN</B></FONT> - an =
+unknown=20
+                non-ASCII key. </LI></UL>and map the platform specific =
+key code(s)=20
+              onto these names.&nbsp; That is, your function returns one =
+of=20
+              these universal values for any non-ASCII key press.&nbsp;=20
+              <LI><SPAN class=3Dcode>void dtioCursor(int row, int =
+column)</SPAN>=20
+              positions the cursor at the row and column specified, =
+where row 0=20
+              is the top row and column 0 is the leftmost column.&nbsp; =
+This=20
+              function has undefined results if either parameter is=20
+              invalid.&nbsp; This function does not flush the output=20
+              buffer.&nbsp;=20
+              <LI><SPAN class=3Dcode>void dtioPutchar(int c)</SPAN> =
+displays the=20
+              character <SPAN class=3Dcode>c</SPAN> at the current =
+cursor position=20
+              and advances the cursor by one position to the =
+right.&nbsp; If the=20
+              cursor is already at the rightmost column of the screen, =
+the=20
+              advance is system dependent.&nbsp; This function does not =
+flush=20
+              the output buffer.&nbsp;=20
+              <LI><SPAN class=3Dcode>void dtioPuts(const char *s)</SPAN> =
+displays=20
+              the null-terminated string pointed to by <SPAN =
+class=3Dcode>s</SPAN>=20
+              starting at the current cursor position.&nbsp; The =
+function leaves=20
+              the cursor just after the last character displayed.&nbsp; =
+If the=20
+              string exceeds in length the available space on the =
+current line=20
+              of output, this function has undefined results.&nbsp; This =
+
+              function does not flush the output buffer.&nbsp; =
+</LI></UL>Save your=20
+            design in a file named <SPAN class=3Dcode>dtio.c</SPAN> and =
+the=20
+            associated header information in a file named <SPAN=20
+            class=3Dcode>dtio.h</SPAN>.=20
+            <P></P>
+            <P>Write your own main program to place a variety of =
+characters on a=20
+            screen using your direct terminal library.</P><BR>
+            <P class=3Dsection>Submission Requirements</P>
+            <P>Compile and test your functions with the test main <SPAN=20
+            class=3Dcode><A=20
+            =
+href=3D"http://cs.senecac.on.ca/~btp300/pages/assignments/a1test.c">a1tes=
+t.c</A></SPAN>=20
+            in the following four command-line environments=20
+            <UL>
+              <LI>Local PC: MS DOS Borland 5.5=20
+              <LI>Local PC: MS DOS Visual Studio .net 2003=20
+              <LI>phobos: AIX cc=20
+              <LI>matrix: Linux gcc </LI></UL>For submission purposes, =
+your=20
+            functions must compile, link and run without errors in each=20
+            environment and pass all of the tests.&nbsp; At most, you =
+should=20
+            only need to modify one or two lines of <SPAN=20
+            class=3Dcode>dtio.h</SPAN> in switching from one environment =
+to=20
+            another.&nbsp; Capture a screen shot of the display of your =
+test=20
+            program in each environment.&nbsp;=20
+            <P></P>
+            <P>Prepare a typescript that includes a copy of your header =
+and=20
+            implementation files along with a compilation on =
+phobos.&nbsp;=20
+            Upload this typescript along with copies of the screen shots =
+of=20
+            <UL>
+              <LI>the test runs from each environment.&nbsp;=20
+              <LI>the results of painting the screen with your own main =
+program.=20
+              </LI></UL>
+            <P></P>
+            <P class=3Dssection>Grading</P>
+            <P>This assignment is worth 6% of your final mark. </P>
+            <P>The base mark for a program with no apparent logic flaws =
+is=20
+            9/10.&nbsp; To earn more, your code must include innovative =
+elements=20
+            without violating the specs.&nbsp; If your code contains one =
+major=20
+            or more than one minor logic flaw, you will be asked to fix =
+and to=20
+            resubmit your code, which will attract a 20% penalty.&nbsp; =
+The late=20
+            penalty is 10%, so it is better to submit a working version =
+late=20
+            than to submit a flawed version on time.&nbsp; Very late =
+assignments=20
+            and resubmissions will attract a further 10% penalty.&nbsp; =
+</P>
+            <P>Regardless of how long it takes you to complete this =
+assignment,=20
+            you still need to submit a completed working version in =
+order to=20
+            pass this subject. =
+</P><BR><BR><BR></TD></TR></TBODY></TABLE></TD></TR><!-- Footer -->
+  <TR>
+    <TD class=3Dtbody>
+      <TABLE cellPadding=3D1 width=3D"90%" align=3Dcenter>
+        <TBODY>
+        <TR>
+          <TD class=3Dtext3 width=3D"50%">
+            <SCRIPT language=3Djavascript>=0A=
+						var lh =3D document.location.href;=0A=
+						document.write(lh)=0A=
+						</SCRIPT>
+            &nbsp;&nbsp; </TD>
+          <TD class=3Dtext3 align=3Dright width=3D"50%">
+            <SCRIPT language=3Djavascript>=0A=
+						var lm =3D document.lastModified.slice(0,-3);=0A=
+						document.write("Last Modified: " +lm)=0A=
+						</SCRIPT>
+            &nbsp;&nbsp; =
+</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></BODY></HTML>
+
+------=_NextPart_000_0266_01C6062F.1C958B70
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/style.043.css
+
+BODY {
+	MARGIN-TOP: 0px; BACKGROUND: #ffffff; MARGIN-LEFT: 0px
+}
+IMG {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; VERTICAL-ALIGN: bottom; =
+BORDER-LEFT: 0px; BORDER-BOTTOM: 0px
+}
+P {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+TABLE {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: =
+0px
+}
+TD {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+UL {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+LI {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+PRE {
+	FONT-WEIGHT: bold; FONT-SIZE: small; BACKGROUND: #ffffe0; MARGIN-LEFT: =
+15px; COLOR: navy; FONT-FAMILY: "Courier New", serif
+}
+.tbody {
+	BACKGROUND: #ffffff; WIDTH: 700px
+}
+.text3 {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+.panel1 {
+	BACKGROUND: #aee7fc
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+.texth {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.quote {
+	FONT-SIZE: small; FONT-STYLE: italic; FONT-FAMILY: "Times New Roman", =
+serif
+}
+.textagend {
+	FONT-SIZE: small; COLOR: red; FONT-FAMILY: "Times New Roman", serif
+}
+.section {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; TEXT-TRANSFORM: uppercase; COLOR: =
+#4599b1; FONT-FAMILY: "Times New Roman", serif
+}
+.ssection {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.sssection {
+	FONT-WEIGHT: bold; FONT-SIZE: small; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.top {
+	VERTICAL-ALIGN: top
+}
+.tup {
+	VERTICAL-ALIGN: top; COLOR: blue
+}
+.defin {
+	FONT-WEIGHT: bold; FONT-SIZE: small; BACKGROUND: #ffffff; COLOR: =
+maroon; FONT-FAMILY: "Courier New", serif
+}
+.desc {
+	BACKGROUND: #ededfe; TEXT-ALIGN: center
+}
+.value {
+	BACKGROUND: #ffffc6; TEXT-ALIGN: center
+}
+.addre {
+	BACKGROUND: #aee7fc; TEXT-ALIGN: left
+}
+.addrec {
+	BACKGROUND: #aee7fc; TEXT-ALIGN: center
+}
+.oper {
+	COLOR: maroon; FONT-STYLE: italic
+}
+.code {
+	FONT-WEIGHT: bold; FONT-SIZE: small; VERTICAL-ALIGN: baseline; COLOR: =
+navy; FONT-FAMILY: "Courier New", serif
+}
+.high {
+	COLOR: maroon
+}
+.result {
+	BACKGROUND: #f7ffce
+}
+.error {
+	BACKGROUND: #ffe7c6
+}
+.white {
+	BACKGROUND: #ffffff
+}
+
+------=_NextPart_000_0266_01C6062F.1C958B70
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/styleSPrint.043.css
+
+BODY {
+	BACKGROUND: #ffffff
+}
+A {
+	VERTICAL-ALIGN: middle; COLOR: #0000ff; TEXT-DECORATION: underline
+}
+A:hover {
+	BACKGROUND: #ededfe; COLOR: #0000ff
+}
+.text0 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text1 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text2 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text3 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text4 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text9 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+
+------=_NextPart_000_0266_01C6062F.1C958B70
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/stylePPrint.043.css
+
+A {
+	VERTICAL-ALIGN: middle; TEXT-DECORATION: none
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+
+------=_NextPart_000_0266_01C6062F.1C958B70--

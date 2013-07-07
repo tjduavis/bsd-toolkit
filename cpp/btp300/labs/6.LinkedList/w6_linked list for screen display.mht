@@ -1,0 +1,443 @@
+From: <Saved by Microsoft Internet Explorer 5>
+Subject: Seneca | School of Computer Studies | Object-Oriented Programming I - C++
+Date: Wed, 21 Dec 2005 12:47:15 -0500
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----=_NextPart_000_020E_01C6062C.AB6EC990"
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.2670
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_020E_01C6062C.AB6EC990
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/workshops/w6_p.html
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<?xml version=3D'1.0' encoding=3D'UTF-8'?><HTML lang=3Den-us=20
+xmlns=3D"http://www.w3.org/1999/xhtml"><HEAD><TITLE>Seneca | School of =
+Computer Studies | Object-Oriented Programming I - C++</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META http-equiv=3DPICS-Label=20
+content=3D'(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r =
+(cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen =
+true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true =
+r (SS~~000 1))'>
+<META content=3D"(c) Copyright Seneca College 2005" name=3DCopyright>
+<META=20
+content=3D"Welcome to the Bachelors Degree of Software Development =
+Program Web Site.  On this site you can find an intermediate course on =
+object-oriented programming in C++.  Designed by Chris Szalwinski."=20
+name=3DDescription>
+<META=20
+content=3D"This subject expands on introductory elements of C++ and =
+covers intermediate C features.  The emphasis throughout is to prepare =
+for the solution of large problems."=20
+name=3DAbstract>
+<META content=3Dchris.szalwinski@senecac.on.ca name=3DAuthor>
+<META content=3D"software development, object-oriented programming, =
+lecture notes"=20
+name=3DKeywords><LINK =
+href=3D"http://cs.senecac.on.ca/~btp300/pages/style.043.css"=20
+type=3Dtext/css rel=3Dstylesheet><LINK media=3Dscreen=20
+href=3D"http://cs.senecac.on.ca/~btp300/pages/styleSPrint.043.css" =
+type=3Dtext/css=20
+rel=3Dstylesheet><LINK media=3Dprint=20
+href=3D"http://cs.senecac.on.ca/~btp300/pages/stylePPrint.043.css" =
+type=3Dtext/css=20
+rel=3Dstylesheet>
+<META content=3D"MSHTML 6.00.2900.2802" name=3DGENERATOR></HEAD>
+<BODY>
+<TABLE cellSpacing=3D0 cellPadding=3D0><!-- Body Cell -->
+  <TBODY>
+  <TR height=3D600><!-- Content Area -->
+    <TD class=3Dtbody bgColor=3D#ffffff>
+      <TABLE cellPadding=3D10 width=3D"100%">
+        <TBODY>
+        <TR>
+          <TD vAlign=3Dtop bgColor=3D#ffffff><BR>
+            <CENTER><SPAN class=3Dtexth>Module F - Data =
+Structures</SPAN>=20
+            <BR><BR><SPAN class=3Dtexthead>A Linked List for Screen=20
+            Displays</SPAN> <BR><BR><SPAN class=3Dtextagend>Workshop =
+6</SPAN>=20
+            </CENTER><BR><BR>
+            <P>In this workshop, you are to create a class wrapper for=20
+            displaying fields on a console screen. </P><BR>
+            <P class=3Dsection>Learning Outcome</P>
+            <P>Upon successful completion of this workshop, you will be =
+able to=20
+            design and to code=20
+            <UL>
+              <LI>data structures that effectively use the memory =
+available at=20
+              run-time. </LI></UL>
+            <P></P><BR>
+            <P class=3Dsection>Specifications</P>
+            <P>Design and code a class named <SPAN =
+class=3Dcode>Field</SPAN> that=20
+            holds information about a character string on a =
+screen.&nbsp; Upon=20
+            instantiation, a <SPAN class=3Dcode>Field</SPAN> accepts:=20
+            <UL>
+              <LI>the row number on which the string is to be displayed, =
+
+              <LI>the column number at which the string is to start to =
+be=20
+              displayed,=20
+              <LI>the width of the field within which the string is to =
+fit, and=20
+              <LI>the initial value for the string in null-terminated =
+form.=20
+            </LI></UL>If the field width is too long to fit on the =
+screen, the=20
+            width is reduced so that the field does fit on the =
+screen.&nbsp;=20
+            Similarily, if the initial value of the string is longer =
+than the=20
+            field width, only as many character as can fit within the =
+width are=20
+            accepted.&nbsp;=20
+            <P></P>
+            <P>Your <SPAN class=3Dcode>Field</SPAN> class includes the =
+following=20
+            member functions:=20
+            <UL>
+              <LI><SPAN class=3Dcode>void display()</SPAN> display the =
+field in=20
+              its own position.&nbsp; On systems where terminal output =
+is=20
+              buffered, your function does not flush the screen =
+buffer.&nbsp; If=20
+              the field's value is shorter than its specified width, =
+your=20
+              function fills the empty portion with blank spaces.&nbsp;=20
+              <LI><SPAN class=3Dcode>Field* clone()</SPAN> dynamically =
+allocates a=20
+              separate instance of a <SPAN class=3Dcode>Field</SPAN> =
+using the the=20
+              current object's data to make a copy of itself and returns =
+the=20
+              address of that copy.&nbsp; Your function leaves the =
+deallocation=20
+              of the space for the copy to the caller.&nbsp; =
+</LI></UL>Since your=20
+            class can take a string of any length, your design includes =
+a copy=20
+            constructor, assignment operator and destructor.&nbsp;=20
+            <P></P>
+            <P>Design and code another class named <SPAN=20
+            class=3Dcode>Screen</SPAN> that manages <SPAN =
+class=3Dcode>Field</SPAN>=20
+            objects.&nbsp; Your class keeps the objects in the order in =
+which=20
+            they were added using a linked list.&nbsp; </P>
+            <P>Your <SPAN class=3Dcode>Screen</SPAN> class includes the =
+following=20
+            member functions:=20
+            <UL>
+              <LI><SPAN class=3Dcode>int add(int r, int c, int w, const =
+char*=20
+              s)</SPAN> adds a field object to the screen, where r is =
+the row=20
+              number on the screen, c is the column number on the =
+screen, w is=20
+              the fied width and s points to the string to be stored in =
+the=20
+              field.&nbsp; Your function returns the number of fields on =
+the=20
+              screen after having adding this new field.&nbsp;=20
+              <LI><SPAN class=3Dcode>void display(bool clear)</SPAN> =
+takes an=20
+              optional parameter that specifies whether to clear the =
+screen=20
+              first and displays all fields managed by your screen =
+object in the=20
+              order in which the fields have been added.&nbsp; On =
+systems that=20
+              buffer terminal output, this function does not flush the =
+output=20
+              buffer.&nbsp; The default value of the parameter is <SPAN=20
+              class=3Dcode>false</SPAN>. </LI></UL>Your <SPAN =
+class=3Dcode>add</SPAN>=20
+            function makes a copy of a field using the <SPAN=20
+            class=3Dcode>clone()</SPAN> function rather than the copy=20
+            constructor.&nbsp; Creating a <SPAN =
+class=3Dcode>Screen</SPAN> object=20
+            or adding a <SPAN class=3Dcode>Field</SPAN> object to the =
+screen does=20
+            not cause any field of the screen to be displayed or=20
+            re-displayed.&nbsp;=20
+            <P></P>Since your <SPAN class=3Dcode>Screen</SPAN> class use =
+resources=20
+            in managing its fields, your class needs a copy constructor, =
+
+            assignment operator and destructor.=20
+            <P></P>
+            <P>Store your class declarations in a header file named =
+<SPAN=20
+            class=3Dcode>Screen.h</SPAN> and your implementations in a =
+file named=20
+            <SPAN class=3Dcode>Screen.cpp</SPAN>.&nbsp; </P>
+            <P>Your class, when used with the following program=20
+            <TABLE width=3D"45%">
+              <TBODY>
+              <TR>
+                <TD><BR><PRE> // Screen Display
+ // Workshop 6
+ // screenDisplay.cpp
+ // BTP300
+ // Oct 11 2005
+
+ #include "screen.h"
+
+ int main() {
+ 	Screen s, t;
+
+ 	s.add(2, 4, 11,  "Hello World!");
+ 	s.add(2, 69, 30, "Off the Edge");
+ 	s.add(3, 5, 15,  "This is BTP300");
+ 	s.add(4, 6, 20,  "Good Morning, Canada!");
+ 	s.add(5, 7, 30,  "Time To Finish Assignment 2!");&nbsp;
+ 	s.add(6, 8, 5,   "");
+ 	s.display();
+ 	system("pause");
+
+ 	t =3D s;
+ 	t.add(7, 9, 10,   "One more!");
+ 	t.display(true);
+  	system("pause");
+
+ 	Screen u =3D s;
+ 	u.display(true);
+ 	system("pause");
+
+ 	return 0;
+ }</PRE><BR></TD></TR></TBODY></TABLE>produces output something=20
+            like:=20
+            <TABLE width=3D"45%">
+              <TBODY>
+              <TR>
+                <TD><BR><PRE class=3Dresult>
+
+    Hello World                                                      Off =
+the Edg&nbsp;
+     This is BTP300
+      Good Morning, Canada
+       Time To Finish Assignment 2!
+             Press any key to continue . . =
+.</PRE><BR></TD></TR></TBODY></TABLE>then=20
+            like:=20
+            <TABLE width=3D"45%">
+              <TBODY>
+              <TR>
+                <TD><BR><PRE class=3Dresult>
+
+    Hello World                                                      Off =
+the Edg&nbsp;
+     This is BTP300
+      Good Morning, Canada
+       Time To Finish Assignment 2!
+
+         One more! Press any key to continue . . =
+.</PRE><BR></TD></TR></TBODY></TABLE>and=20
+            finally like:=20
+            <TABLE width=3D"45%">
+              <TBODY>
+              <TR>
+                <TD><BR><PRE class=3Dresult>
+
+    Hello World                                                      Off =
+the Edg&nbsp;
+     This is BTP300
+      Good Morning, Canada
+       Time To Finish Assignment 2!
+             Press any key to continue . . =
+.</PRE><BR></TD></TR></TBODY></TABLE></P><BR><BR><BR></TD></TR></TBODY></=
+TABLE></TD></TR><!-- Footer -->
+  <TR>
+    <TD class=3Dtbody>
+      <TABLE cellPadding=3D1 width=3D"90%" align=3Dcenter>
+        <TBODY>
+        <TR>
+          <TD class=3Dtext3 width=3D"50%">
+            <SCRIPT language=3Djavascript>=0A=
+						var lh =3D document.location.href;=0A=
+						document.write(lh)=0A=
+						</SCRIPT>
+            &nbsp;&nbsp; </TD>
+          <TD class=3Dtext3 align=3Dright width=3D"50%">
+            <SCRIPT language=3Djavascript>=0A=
+						var lm =3D document.lastModified.slice(0,-3);=0A=
+						document.write("Last Modified: " +lm)=0A=
+						</SCRIPT>
+            &nbsp;&nbsp; =
+</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></BODY></HTML>
+
+------=_NextPart_000_020E_01C6062C.AB6EC990
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/style.043.css
+
+BODY {
+	MARGIN-TOP: 0px; BACKGROUND: #ffffff; MARGIN-LEFT: 0px
+}
+IMG {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; VERTICAL-ALIGN: bottom; =
+BORDER-LEFT: 0px; BORDER-BOTTOM: 0px
+}
+P {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+TABLE {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: =
+0px
+}
+TD {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+UL {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+LI {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+PRE {
+	FONT-WEIGHT: bold; FONT-SIZE: small; BACKGROUND: #ffffe0; MARGIN-LEFT: =
+15px; COLOR: navy; FONT-FAMILY: "Courier New", serif
+}
+.tbody {
+	BACKGROUND: #ffffff; WIDTH: 700px
+}
+.text3 {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+.panel1 {
+	BACKGROUND: #aee7fc
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+.texth {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.quote {
+	FONT-SIZE: small; FONT-STYLE: italic; FONT-FAMILY: "Times New Roman", =
+serif
+}
+.textagend {
+	FONT-SIZE: small; COLOR: red; FONT-FAMILY: "Times New Roman", serif
+}
+.section {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; TEXT-TRANSFORM: uppercase; COLOR: =
+#4599b1; FONT-FAMILY: "Times New Roman", serif
+}
+.ssection {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.sssection {
+	FONT-WEIGHT: bold; FONT-SIZE: small; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.top {
+	VERTICAL-ALIGN: top
+}
+.tup {
+	VERTICAL-ALIGN: top; COLOR: blue
+}
+.defin {
+	FONT-WEIGHT: bold; FONT-SIZE: small; BACKGROUND: #ffffff; COLOR: =
+maroon; FONT-FAMILY: "Courier New", serif
+}
+.desc {
+	BACKGROUND: #ededfe; TEXT-ALIGN: center
+}
+.value {
+	BACKGROUND: #ffffc6; TEXT-ALIGN: center
+}
+.addre {
+	BACKGROUND: #aee7fc; TEXT-ALIGN: left
+}
+.addrec {
+	BACKGROUND: #aee7fc; TEXT-ALIGN: center
+}
+.oper {
+	COLOR: maroon; FONT-STYLE: italic
+}
+.code {
+	FONT-WEIGHT: bold; FONT-SIZE: small; VERTICAL-ALIGN: baseline; COLOR: =
+navy; FONT-FAMILY: "Courier New", serif
+}
+.high {
+	COLOR: maroon
+}
+.result {
+	BACKGROUND: #f7ffce
+}
+.error {
+	BACKGROUND: #ffe7c6
+}
+.white {
+	BACKGROUND: #ffffff
+}
+
+------=_NextPart_000_020E_01C6062C.AB6EC990
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/styleSPrint.043.css
+
+BODY {
+	BACKGROUND: #ffffff
+}
+A {
+	VERTICAL-ALIGN: middle; COLOR: #0000ff; TEXT-DECORATION: underline
+}
+A:hover {
+	BACKGROUND: #ededfe; COLOR: #0000ff
+}
+.text0 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text1 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text2 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text3 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text4 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text9 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+
+------=_NextPart_000_020E_01C6062C.AB6EC990
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/stylePPrint.043.css
+
+A {
+	VERTICAL-ALIGN: middle; TEXT-DECORATION: none
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+
+------=_NextPart_000_020E_01C6062C.AB6EC990--

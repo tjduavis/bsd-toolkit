@@ -1,0 +1,662 @@
+/***************************************************************************/
+/* Assignment 3 - Draft version                                            */
+/* DataSet.cpp                                                             */
+/*       Purpose: - to design, code and test a class for data set objects  */
+/*                  that performs a linear regression analyses on those    */
+/*                  objects. Including outliners analysis                  */
+/*            - upgrade version include the concatenation of two data sets.*/                                                                       
+/*                                                                         */
+/*    Author: Timothy Duavis                                               */
+/*    Last Modified: Feb 27/05                                             */
+/***************************************************************************/
+
+//Library*******************************************************************/
+#include "DataSet.h"
+
+//**********************DataPoint Class Definitions*************************/
+//Public: Modifiers*********************************************************/
+/*--------------------------------------------------------*/
+/* DataPoint() - Constructor                              */
+/*      purpose: Initialize private variables             */
+/*--------------------------------------------------------*/
+DataPoint::DataPoint(){
+	abscissa = 0.00;
+	ordinate = 0.00;
+	outliner = 0;
+}
+
+/*--------------------------------------------------------*/
+/* loadFromFile - function                                */
+/*      Purpose:Reads the abscissa and ordinate from file */
+/*          pointed by fp. returns successful values read,*/
+/*          EOF if not. if readed values are incorrect,   */
+/*          abscissa and ordinate set to 0.               */
+/*--------------------------------------------------------*/
+int DataPoint::loadFromFile(FILE* fp){
+	int check;
+
+	if(fp!=NULL){
+		check=fscanf(fp,"%lf %lf",&abscissa, &ordinate);
+		if(check!=2 && check!=-1){
+			abscissa = 0;
+			ordinate = 0;
+		}
+	} else
+		check=EOF;
+
+	return check;
+}
+
+/*--------------------------------------------------------*/
+/* saveToFile(FILE* fp) - Modifier                        */
+/*      purpose: saves abscissa and ordinate values of to */
+/*               to file with '\n' as terminator          */
+/*--------------------------------------------------------*/
+bool DataPoint::saveToFile(FILE* fp){
+	bool ok;
+	int check;
+
+	if(fp!=NULL){
+		check=fprintf(fp,"%10.2lf %10.2lf\n",abscissa, ordinate);
+
+		if(check!=EOF)
+			ok = true;
+		else
+			ok = false;
+
+	} else
+		ok = false;
+
+	return ok;
+}
+
+/*--------------------------------------------------------*/
+/* SetOutliner(int i) - Modifier                          */
+/*      purpose: sets outliner value to be included (0) or*/
+/*                       excluded (1).                    */
+/*--------------------------------------------------------*/
+int DataPoint::SetOutliner(int i){
+	switch(i){
+		case INCLUDED:
+			outliner = 0;
+			break;
+		case EXCLUDED:
+			outliner = 1;
+			break;
+	}
+
+	return outliner;
+}
+
+/*--------------------------------------------------------*/
+/* appendx(int) - modifier                                */
+/*      purpose: append x value                           */
+/*--------------------------------------------------------*/
+void DataPoint::appendx(double Xvalue) {
+	abscissa = Xvalue;
+}
+
+/*--------------------------------------------------------*/
+/* appendy(int) - modifier                                */
+/*      purpose: append y value                           */
+/*--------------------------------------------------------*/
+void DataPoint::appendy(double Yvalue) {
+	ordinate = Yvalue;
+}
+
+/*--------------------------------------------------------*/
+/* == - Operator function                                 */
+/*      purpose: if 2 instance of class are equal return  */
+/*               true otherwise false.                    */
+/*--------------------------------------------------------*/
+bool operator==(const DataPoint& PtA, const DataPoint& PtB){
+	bool equal = false;
+
+	if (PtA.abscissa == PtB.abscissa && PtA.ordinate == PtB.ordinate)
+		equal = true;
+
+	return equal;
+}
+
+//Public: Queries***********************************************************/
+/*--------------------------------------------------------*/
+/* DisplayOutliner - Querie                               */
+/*      purpose: displays outliner value                  */
+/*--------------------------------------------------------*/
+int DataPoint::DisplayOutliner() const{
+	return outliner;
+}
+
+/*--------------------------------------------------------*/
+/* getx - function                                        */
+/*      purpose:Query that returns the abscissa.          */
+/*--------------------------------------------------------*/
+double DataPoint::getx() const{
+	return abscissa;
+}
+
+/*--------------------------------------------------------*/
+/* gety - function                                        */
+/*      Purpose:Query that returns the ordinate.          */
+/*--------------------------------------------------------*/
+double DataPoint::gety() const{
+	return ordinate;
+}
+
+//**********************DataSet Class Definitions***************************/
+//Private Definitions: Modifiers********************************************/
+/*--------------------------------------------------------*/
+/* calc_slope - function                                  */
+/*      purpose:Calculates slope and returns double to    */
+/*          private DataSet Class.                        */
+/*--------------------------------------------------------*/
+double DataSet::calc_slope(){
+	int excluded=0;
+	double numerator=0, denominator=0;
+
+	//initialize
+	meanX=0;
+	meanY=0;
+
+	for (j=0; j<numDataPts; j++){
+		//outliner excluded
+		if(Pts[j].DisplayOutliner()==0){
+			meanX += Pts[j].getx();
+			meanY += Pts[j].gety();
+		} else {
+			//number of excluded points
+			++excluded;
+		}
+	}
+
+	meanX /= (numDataPts - excluded);
+	meanY /= (numDataPts - excluded);
+
+	for (j=0; j<numDataPts; j++){
+		//outliner excluded
+		if(Pts[j].DisplayOutliner()==0){
+			numerator += (Pts[j].getx() - meanX)*(Pts[j].gety()-meanY);
+			denominator += pow((Pts[j].getx()-meanX),SQUARE);
+		}
+	}
+
+	if(denominator==0)
+		slopeValue=0;
+	else
+		slopeValue = numerator / denominator;
+
+	return slopeValue;
+}
+
+/*--------------------------------------------------------*/
+/* calc_intercept - function                              */
+/*      Purpose:Calculates intercept and returns double to*/
+/*          private DataSet Class.                        */
+/*--------------------------------------------------------*/
+double DataSet::calc_intercept(){
+	return ( interceptValue = meanY - (slope() * meanX) );
+}
+
+/*--------------------------------------------------------*/
+/* calc_correlation - function                            */
+/*      Purpose:Calculates correlation and returns double */
+/*          to private DataSet Class.                     */
+/*--------------------------------------------------------*/
+double DataSet::calc_correlation(){
+	int excluded;
+	double rootedX, rootedY;
+	double numerator;
+
+	//initialize
+	numerator = 0;
+	excluded = 0;
+	sumSqrsX = 0;
+	sumSqrsY = 0;
+
+	for (j=0; j<numDataPts; j++){
+		//outliner excluded
+		if(Pts[j].DisplayOutliner()==0){
+			sumSqrsX += pow(Pts[j].getx(),SQUARE);
+			sumSqrsY += pow(Pts[j].gety(),SQUARE);
+		} else {
+			//number of excluded points
+			excluded++;
+		}
+	}
+
+	rootedX = (sumSqrsX / (numDataPts-excluded)) - pow(meanX,SQUARE);
+	rootedY = (sumSqrsY / (numDataPts-excluded)) - pow(meanY,SQUARE);
+
+	devtnX = sqrt(rootedX);
+	devtnY = sqrt(rootedY);
+
+	//reset excluded
+	excluded=0;
+	for (j=0; j<numDataPts; j++){
+		//outliner excluded
+		if(Pts[j].DisplayOutliner()==0)
+			numerator += Pts[j].getx()*Pts[j].gety();
+		else{
+			//number of excluded points
+			++excluded;
+		}
+	}
+
+	numerator /= (numDataPts - excluded);
+	numerator -= (meanX*meanY);
+
+	correlationValue = numerator / (devtnX*devtnY);
+
+	return correlationValue;
+}
+//Public Definitions: Modifiers*********************************************/
+/*--------------------------------------------------------*/
+/* DataSet() - Constructor                                */
+/*      purpose: Initialize private variables             */
+/*--------------------------------------------------------*/
+DataSet::DataSet(){
+	numDataPts = 0;
+
+	labelFile = NULL;
+	Pts = NULL;
+
+	j = 0;
+	slopeValue = 0.0;
+	interceptValue = 0.0;
+	meanX = 0.0;
+	meanY = 0.0;
+	sumSqrsX = 0.0;
+	sumSqrsY = 0.0;
+	devtnX = 0.0;
+	devtnY = 0.0;
+	correlationValue = 0.0;
+	devRatio = 0.0;
+	numOutliner = 0;
+}
+
+/*--------------------------------------------------------*/
+/* DataSet(const DataSet&) - Copy Constructor             */
+/*      purpose: copy constructor for deep copying        */
+/*--------------------------------------------------------*/
+DataSet::DataSet(const DataSet& toCopied) {
+	copyClone(toCopied);
+}
+
+/*--------------------------------------------------------*/
+/* ~DataSet() - Deconstructor                             */
+/*      purpose: deallocates dynamic memory Pts           */
+/*--------------------------------------------------------*/
+DataSet::~DataSet() {
+	if (Pts) delete [] Pts;
+	if (labelFile) delete [] labelFile;
+}
+
+/*--------------------------------------------------------*/
+/* copyClone - modifier                                   */
+/*      purpose: copy function for copy constructor and   */
+/*                               assignment operator      */
+/*--------------------------------------------------------*/
+void DataSet::copyClone(DataSet& cpySource) {
+	if(cpySource.labelFile!=NULL) {
+		labelFile = new char [strlen(cpySource.labelFile)+1];
+		strcpy(labelFile,cpySource.labelFile);
+	} else
+		labelFile = NULL;
+
+	Pts = new DataPoint [cpySource.numDataPts];
+
+	for(j=0; j<cpySource.numDataPts; j++) {
+		Pts[j].appendx(cpySource.Pts[j].getx());
+		Pts[j].appendy(cpySource.Pts[j].gety());
+	}
+
+	numDataPts = cpySource.numDataPts;
+	j = cpySource.j;
+	slopeValue = cpySource.slopeValue;
+	interceptValue = cpySource.interceptValue;
+	meanX = cpySource.meanX;
+	meanY = cpySource.meanY;
+	sumSqrsX = cpySource.sumSqrsX;
+	devtnX = cpySource.devtnX;
+	devtnY = cpySource.devtnY;
+	correlationValue = cpySource.correlationValue;
+	devRatio = cpySource.devRatio;
+	numOutliner = cpySource.numOutliner;
+}
+
+/*--------------------------------------------------------*/
+/* loadFromFile - function                                */
+/*      Purpose:opens null-terminated from user, and makes*/
+/*              a copy. file contains data points in set, */
+/*              copies data points (one abscissa and      */
+/*              ordinate)                                 */
+/*--------------------------------------------------------*/
+bool DataSet::loadFromFile(const char* filename){
+	bool success = false;
+	int numLines = 0, quit=0, check;
+	FILE* DataFile = NULL;
+
+	//Private variables initialized
+	Pts = NULL;
+	numDataPts = 0;
+
+	labelFile = new char [strlen(filename)+1];
+	strcpy(labelFile,filename);
+
+	DataFile = fopen(filename,"r");
+	if (DataFile != NULL){
+		//Reads Num. of Lines in file for class array
+		do{
+			check=fgetc(DataFile);
+			if(check=='\n')
+				numLines+=1;
+		}while(check!=EOF);
+		//Adds 1,since EOF considering end of sentence as new line
+		numLines+=1;
+		//reset file to read from begginning
+		rewind(DataFile);
+
+		//Creates Instance for DataPoint with numLines amount of space
+		Pts = new DataPoint [numLines];
+		//number of lines Read successfully
+		for(int i=0; quit==0; i++){
+			int goodValue = Pts[i].loadFromFile(DataFile);
+			if(goodValue==EOF)
+				quit=1;
+			else if(goodValue==2){
+				goodValue/=2;
+				numDataPts+=goodValue;
+			}
+		}
+
+		if(numDataPts!=0){
+			//Call private functions that does the calculations
+			slopeValue=calc_slope();
+			interceptValue=calc_intercept();
+			correlationValue=calc_correlation();
+			success = true;
+		}
+		else if(numDataPts==0){
+			//Set calculatedValue to 0, if there are no files
+			slopeValue=0;
+			interceptValue=0;
+			correlationValue=0;
+		}
+		//Close file
+		fclose(DataFile);
+	}
+
+	return success;
+}
+
+/*--------------------------------------------------------*/
+/* saveToFile(const char* filename) - function            */
+/*      Purpose:opens null-terminated from user, and makes*/
+/*              a copy. file contains data points in set, */
+/*              copies data points (one abscissa and      */
+/*              ordinate)                                 */
+/*--------------------------------------------------------*/
+bool DataSet::saveToFile(const char* filename) {
+	bool ok = true;
+	FILE* DataFile = NULL;
+
+	if (filename!=NULL) {
+		labelFile = new char [strlen(filename)+1];
+		strcpy(labelFile,filename);
+
+		DataFile = fopen(filename,"w");
+		if (DataFile!=NULL) {
+			for (j=0; j<numDataPts; j++) {
+				ok = Pts[j].saveToFile(DataFile);
+				if (ok == false)
+					j = numDataPts;
+			}
+
+			fclose(DataFile);
+		} else
+			ok = false;
+	} else
+		ok = false;
+
+	return ok;
+}
+
+/*--------------------------------------------------------*/
+/* include() - function                                   */
+/*      purpose: sets outliner mask for all pts to be     */
+/*           included in calc                             */
+/*--------------------------------------------------------*/
+void DataSet::include(){
+	for(j=0; j<numDataPts; j++)
+		Pts[j].SetOutliner(INCLUDED);
+	slopeValue=calc_slope();
+	interceptValue=calc_intercept();
+	correlationValue=calc_correlation();
+}
+
+/*--------------------------------------------------------*/
+/* include(double) - function                             */
+/*      purpose: sets outliner mask for pts to be excluded*/
+/*               in calc.                                 */
+/*--------------------------------------------------------*/
+void DataSet::include(double tolerance){
+	numOutliner = 0;
+
+	for(j=0; j<numDataPts; j++){
+		devRatio = chauvenet(j);
+
+		if (devRatio > tolerance){
+			Pts[j].SetOutliner(EXCLUDED);
+			++numOutliner;
+		}
+	}
+
+	slopeValue=calc_slope();
+	interceptValue=calc_intercept();
+	correlationValue=calc_correlation();
+}
+
+/*--------------------------------------------------------*/
+/* outliner(int) - function                               */
+/*      purpose: true if pt is outliner, otherwise falser */
+/*--------------------------------------------------------*/
+bool DataSet::outlier(int xy) const{
+	bool good=false;
+
+	if(xy < 0 || xy >= numDataPts)
+		good = true;
+	else if (Pts[xy].DisplayOutliner()==1)
+		good=true;
+
+	return good;
+}
+
+/*--------------------------------------------------------*/
+/* outliner() - function                                  */
+/*      purpose: returns number of outliners              */
+/*--------------------------------------------------------*/
+int DataSet::outlier() const{
+	return numOutliner;
+}
+
+/*--------------------------------------------------------*/
+/* chauvenet(int i) - function                            */
+/*      purpose: to identify the outliners                */
+/*--------------------------------------------------------*/
+double DataSet::chauvenet(int i){
+	double final = (Pts[i].gety() - meanY) / devtnY;
+
+	if (final < 0)
+		final *= -1;
+
+	return final;
+}
+
+/*--------------------------------------------------------*/
+/* operator== - helper                                    */
+/*      purpose: compares 2 DataSet class for equivalents */
+/*--------------------------------------------------------*/
+bool operator==(const DataSet& SetA, const DataSet& SetB){
+	bool good;
+
+	if(SetA.numDataPts == SetB.numDataPts){
+		good=true;
+		for(int j=0; j<SetA.numDataPts || good==false; j++){
+			if(SetA.Pts[j].getx() != SetB.Pts[j].getx() && SetA.Pts[j].gety() != SetB.Pts[j].gety())
+				good = false;
+		}
+	} else
+		good = false;
+
+	return good;
+}
+
+/*--------------------------------------------------------*/
+/* operator= - helper                                     */
+/*      purpose: deep copy                                */
+/*--------------------------------------------------------*/
+DataSet& DataSet::operator=(const DataSet& source) {
+	if (this != &source) {
+		if (Pts) delete [] Pts;
+		if (labelFile) delete [] labelFile;
+		copyClone(source);
+	}
+
+	return *this;
+}
+
+/*--------------------------------------------------------*/
+/* operator+ - helper                                     */
+/*      purpose: deep copy                                */
+/*--------------------------------------------------------*/
+DataSet operator+(const DataSet& left, const DataSet& right) {
+	DataSet LplusR;
+	int i,k;
+
+	LplusR.numDataPts = left.numDataPts + right.numDataPts;
+	LplusR.Pts = new DataPoint [LplusR.numDataPts];
+
+	//create new modifier for DataPoint
+	for (i=0; i<left.numDataPts; i++) {
+		LplusR.Pts[i].appendx(left.Pts[i].getx());
+		LplusR.Pts[i].appendy(left.Pts[i].gety());
+	}
+	for (k=0; k<right.numDataPts; k++) {
+		LplusR.Pts[i].appendx(right.Pts[k].getx());
+		LplusR.Pts[i].appendy(right.Pts[k].gety());
+		i++;
+	}
+
+	if(LplusR.numDataPts!=0){
+		//Call private functions that does the calculations
+		LplusR.slopeValue=LplusR.calc_slope();
+		LplusR.interceptValue=LplusR.calc_intercept();
+		LplusR.correlationValue=LplusR.calc_correlation();
+	} else if(LplusR.numDataPts==0){
+		//Set calculatedValue to 0, if there are no files
+		LplusR.slopeValue=0;
+		LplusR.interceptValue=0;
+		LplusR.correlationValue=0;
+	}
+
+	return LplusR;
+}
+
+/*--------------------------------------------------------*/
+/* operator<< - helper                                    */
+/*      purpose: insertion operator for slope,intercept,  */
+/*                               correlation and label values             */
+/*--------------------------------------------------------*/
+ostream& operator<<(ostream& OutDisplay, const DataSet& Values) {
+	OutDisplay << right << setw(9) << setprecision(2) << Values.slopeValue
+			   << setw(6) << right << fixed << setprecision(2) << Values.interceptValue
+			   << setw(10) << right << fixed << setprecision(2) << Values.correlationValue
+			   << setw(19) << Values.labelFile;
+
+	return OutDisplay;
+}
+
+//Public Defintions: Queries********************************************/
+/*--------------------------------------------------------*/
+/* point - function                                       */
+/*      purpose:query that returns data point i of        */
+/*          the data set. pt is outliner returns empty    */
+/*                      DataPoint.                        */
+/*--------------------------------------------------------*/
+DataPoint DataSet::point(int i) const{
+	DataPoint emptyDataPoint;
+
+	if(i < 0 || i >= numDataPts )
+		return emptyDataPoint;
+	else {
+		if(Pts[i].DisplayOutliner()==1)
+			return emptyDataPoint;
+		else
+			return Pts[i];
+	}
+}
+
+/*--------------------------------------------------------*/
+/* label - function                                       */
+/*      purpose:query that returns the label of the       */
+/*              data set.                                 */
+/*--------------------------------------------------------*/
+const char* DataSet::label() const{
+	return labelFile;
+}
+
+/*--------------------------------------------------------*/
+/* nPoint - function                                      */
+/*      purpose:query that returns the number of data     */
+/*              points in the data set.                   */
+/*--------------------------------------------------------*/
+int DataSet::nPoints() const{
+	return numDataPts;
+}
+
+/*--------------------------------------------------------*/
+/* slope - function                                       */
+/*      purpose:query that returns the slope of line from */
+/*              pts in data set; 0 if no pts.             */
+/*--------------------------------------------------------*/
+double DataSet::slope() const{
+	return slopeValue;
+}
+
+/*--------------------------------------------------------*/
+/* intercept - function                                   */
+/*      purpose:query that returns the intercept of line  */
+/*              from pts in data set; 0 if no pts.        */
+/*--------------------------------------------------------*/
+double DataSet::intercept() const{
+	return interceptValue;
+}
+
+/*--------------------------------------------------------*/
+/* correlation - function                                 */
+/*      purpose:query that returns the correlation of line*/
+/*              from pts in data set; 0 if no pts.        */
+/*--------------------------------------------------------*/
+double DataSet::correlation() const{
+	return correlationValue;
+}
+
+/*--------------------------------------------------------*/
+/* display() - function                                   */
+/*      purpose: outputs values in a data set.            */
+/*--------------------------------------------------------*/
+void DataSet::display() const{
+	cout << "Independent Value" << setw(17) << "Dependent Value" << endl;
+
+	for(int x=0; x<numDataPts; x++){
+		if (Pts[x].DisplayOutliner()==0)
+			cout << setw(17) << fixed << setfill(' ') << setprecision(2) << Pts[x].getx()
+			 << setw(17) << fixed << setfill(' ') << setprecision(2) << Pts[x].gety()
+			 << endl;
+		else
+			cout << "outliner"
+			     << setw(9) << fixed << setprecision(2)  << Pts[x].getx()
+			     << setw(17) << fixed << setprecision(2)  << Pts[x].gety()
+			     << endl;
+	}
+}

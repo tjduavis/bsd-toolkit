@@ -1,0 +1,956 @@
+From: <Saved by Microsoft Internet Explorer 5>
+Subject: Seneca | School of Computer Studies | Object-Oriented Programming I - C++
+Date: Wed, 21 Dec 2005 13:05:27 -0500
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----=_NextPart_000_0281_01C6062F.369FA6E0"
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.2670
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0281_01C6062F.369FA6E0
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/assignments/a4_p.html
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<?xml version=3D'1.0' encoding=3D'UTF-8'?><HTML lang=3Den-us=20
+xmlns=3D"http://www.w3.org/1999/xhtml"><HEAD><TITLE>Seneca | School of =
+Computer Studies | Object-Oriented Programming I - C++</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META http-equiv=3DPICS-Label=20
+content=3D'(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r =
+(cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen =
+true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true =
+r (SS~~000 1))'>
+<META content=3D"(c) Copyright Seneca College 2005" name=3DCopyright>
+<META=20
+content=3D"Welcome to the Bachelors Degree of Software Development =
+Program Web Site.  On this site you can find an intermediate course on =
+object-oriented programming in C++.  Designed by Chris Szalwinski."=20
+name=3DDescription>
+<META=20
+content=3D"This subject expands on introductory elements of C++ and =
+covers intermediate C features.  The emphasis throughout is to prepare =
+for the solution of large problems."=20
+name=3DAbstract>
+<META content=3Dchris.szalwinski@senecac.on.ca name=3DAuthor>
+<META content=3D"software development, object-oriented programming, =
+lecture notes"=20
+name=3DKeywords><LINK =
+href=3D"http://cs.senecac.on.ca/~btp300/pages/style.043.css"=20
+type=3Dtext/css rel=3Dstylesheet><LINK media=3Dscreen=20
+href=3D"http://cs.senecac.on.ca/~btp300/pages/styleSPrint.043.css" =
+type=3Dtext/css=20
+rel=3Dstylesheet><LINK media=3Dprint=20
+href=3D"http://cs.senecac.on.ca/~btp300/pages/stylePPrint.043.css" =
+type=3Dtext/css=20
+rel=3Dstylesheet>
+<META content=3D"MSHTML 6.00.2900.2802" name=3DGENERATOR></HEAD>
+<BODY>
+<TABLE cellSpacing=3D0 cellPadding=3D0><!-- Body Cell -->
+  <TBODY>
+  <TR height=3D600><!-- Content Area -->
+    <TD class=3Dtbody bgColor=3D#ffffff>
+      <TABLE cellPadding=3D10 width=3D"100%">
+        <TBODY>
+        <TR>
+          <TD vAlign=3Dtop bgColor=3D#ffffff><BR>
+            <CENTER><SPAN class=3Dtexth>Assignment 4<BR>Draft Version=20
+            </SPAN><BR><BR><SPAN class=3Dtexthead>Screen Class Using =
+Derived=20
+            Fields</SPAN> <BR><BR><SPAN class=3Dtexth>Due - Sunday =
+December 11 at=20
+            11:59pm<BR></SPAN></CENTER><BR><BR>
+            <P>As your fourth assignment this semester, you are to =
+create some=20
+            useful kinds of fields, to be used with the Screen class =
+from=20
+            assignment 3. </P><BR>
+            <P class=3Dsection>Learning Outcome</P>
+            <P>Upon successful completion of this assignment, you will =
+have=20
+            demonstrated the ability to create a multi-platform program =
+that=20
+            accepts input directly from the console with help and =
+validation=20
+            support.&nbsp; </P><BR>
+            <P class=3Dsection>Specifications</P>
+            <P>Derive the following classes from your <SPAN=20
+            class=3Dcode>Field</SPAN> class.&nbsp; Provide each class =
+with its own=20
+            version of the <SPAN class=3Dcode>Field* clone() =
+const</SPAN>=20
+            function:=20
+            <UL>
+              <LI><SPAN class=3Dcode>Label</SPAN> an uneditable field =
+that=20
+              displays a string.&nbsp; Upon instantiation, a <SPAN=20
+              class=3Dcode>Label</SPAN> object accepts values for 3 =
+parameters and=20
+              optionally a fourth parameter in the following order:=20
+              <UL>
+                <LI>an <SPAN class=3Dcode>int</SPAN> specifying the row =
+on which=20
+                the label is displayed;=20
+                <LI>an <SPAN class=3Dcode>int</SPAN> specifying the =
+column at=20
+                which the label starts to be displayed;=20
+                <LI>a <SPAN class=3Dcode>const char*</SPAN> holding the =
+address of=20
+                a null-terminated string that holds the initial data for =
+the=20
+                object;=20
+                <LI>optionally, an <SPAN class=3Dcode>int</SPAN> =
+specifying the=20
+                field length, which is the number of columns that the =
+label=20
+                occupies on the physical screen.&nbsp; If this argument =
+is=20
+                omitted or non-positive, then the field length is the =
+length of=20
+                the initial string. </LI></UL><BR>
+              <LI><SPAN class=3Dcode>SField</SPAN> an editable field =
+that displays=20
+              a string and lets the user edit the string.&nbsp; Upon=20
+              instantiation, an <SPAN class=3Dcode>SField</SPAN> object =
+accepts=20
+              values for 3 parameters and optionally a fourth parameter =
+in the=20
+              following order:=20
+              <UL>
+                <LI>an <SPAN class=3Dcode>int</SPAN> specifying the row =
+on which=20
+                the field is displayed;=20
+                <LI>an <SPAN class=3Dcode>int</SPAN> specifying the =
+column at=20
+                which the field starts to be displayed;=20
+                <LI>an <SPAN class=3Dcode>int</SPAN> specifying the =
+field length,=20
+                which is the number of columns that the field occupies =
+on the=20
+                physical screen.&nbsp;=20
+                <LI>optionally, a <SPAN class=3Dcode>const char*</SPAN> =
+holding=20
+                the address of a null-terminated string that holds the =
+initial=20
+                data for the object, which defaults to <SPAN=20
+                class=3Dcode>NULL</SPAN>; </LI></UL><BR>
+              <LI><SPAN class=3Dcode>HField</SPAN> an <SPAN=20
+              class=3Dcode>SField</SPAN> with a help facility.&nbsp; =
+Upon=20
+              instantiation, an <SPAN class=3Dcode>HField</SPAN> object =
+accepts=20
+              values for 3 parameters and optionally fourth and fifth =
+parameters=20
+              in the following order:=20
+              <UL>
+                <LI>an <SPAN class=3Dcode>int</SPAN> specifying the row =
+on which=20
+                the field is displayed;=20
+                <LI>an <SPAN class=3Dcode>int</SPAN> specifying the =
+column at=20
+                which the field starts to be displayed;=20
+                <LI>an <SPAN class=3Dcode>int</SPAN> specifying the =
+field length,=20
+                which is the number of columns that the field occupies =
+on the=20
+                physical screen.&nbsp;=20
+                <LI>optionally, a <SPAN class=3Dcode>const char*</SPAN> =
+holding=20
+                the address of a null-terminated string that holds the =
+initial=20
+                data for the object, which defaults to <SPAN=20
+                class=3Dcode>NULL</SPAN>;=20
+                <LI>optionally, the address of a help function <SPAN=20
+                class=3Dcode>void (*h)(void*)</SPAN> that receives a =
+generic=20
+                pointer to the data in the field and returns =
+nothing.&nbsp; The=20
+                address of this function defaults to <SPAN=20
+                class=3Dcode>NULL</SPAN>.&nbsp; </LI></UL><BR>Your class =
+includes a=20
+              derived version of <SPAN class=3Dcode>edit()</SPAN> that =
+traps the=20
+              <SPAN class=3Dcode>F1</SPAN> and <SPAN =
+class=3Dcode>ESCAPE</SPAN>=20
+              keys.&nbsp;=20
+              <P></P>
+              <P>If the user presses <SPAN class=3Dcode>F1</SPAN> and a =
+pointer to=20
+              the help function <SPAN class=3Dcode>h</SPAN> exists =
+(<SPAN=20
+              class=3Dcode>h</SPAN> is not <SPAN =
+class=3Dcode>NULL</SPAN>), the=20
+              object calls the help function.&nbsp; This function may =
+change the=20
+              data in the field, so you need to redisplay the field in =
+case this=20
+              function did change the data.&nbsp; If a pointer to the =
+help=20
+              function is <SPAN class=3Dcode>NULL</SPAN> (the function =
+does not=20
+              exist), the object stops editing and works just like an =
+<SPAN=20
+              class=3Dcode>SField</SPAN> object; that is, returns <SPAN=20
+              class=3Dcode>F1</SPAN> as the key pressed.&nbsp; Note that =
+a pointer=20
+              to a help function exists, pressing the <SPAN =
+class=3Dcode>F1</SPAN>=20
+              key does NOT terminate editing.&nbsp; </P>
+              <P>If the user presses the <SPAN =
+class=3Dcode>ESCAPE</SPAN> key, the=20
+              object restores the field's data as it existed upon entry =
+to the=20
+              <SPAN class=3Dcode>edit()</SPAN> function and returns =
+<SPAN=20
+              class=3Dcode>ESCAPE</SPAN> as the key pressed.&nbsp; </P>
+              <LI><SPAN class=3Dcode>VField</SPAN> an <SPAN=20
+              class=3Dcode>HField</SPAN> with validation.&nbsp; Upon=20
+              instantiation, a <SPAN class=3Dcode>VField</SPAN> object =
+accepts=20
+              values for 3 parameters and optionally 3 more parameters =
+in the=20
+              following order:=20
+              <UL>
+                <LI>an <SPAN class=3Dcode>int</SPAN> specifying the row =
+on which=20
+                the field is displayed;=20
+                <LI>an <SPAN class=3Dcode>int</SPAN> specifying the =
+column at=20
+                which the field starts to be displayed;=20
+                <LI>an <SPAN class=3Dcode>int</SPAN> specifying the =
+field length,=20
+                which is the number of columns that the field occupies =
+on the=20
+                physical screen.&nbsp;=20
+                <LI>optionally, a <SPAN class=3Dcode>const char*</SPAN> =
+holding=20
+                the address of a null-terminated string that holds the =
+initial=20
+                data for the object.&nbsp; The address of this string =
+defaults=20
+                to <SPAN class=3Dcode>NULL</SPAN>;=20
+                <LI>optionally, the address of a validation function =
+<SPAN=20
+                class=3Dcode>bool (*v)(char*)</SPAN> that receives a =
+pointer to=20
+                the data in the field and returns a boolean value: <SPAN =
+
+                class=3Dcode>true</SPAN> if the data is valid, <SPAN=20
+                class=3Dcode>false</SPAN> otherwise.&nbsp; The address =
+of this=20
+                function defaults to <SPAN class=3Dcode>NULL</SPAN>;=20
+                <LI>optionally, the address of a help function <SPAN=20
+                class=3Dcode>void (*h)(void*)</SPAN> that receives a =
+generic=20
+                pointer to the data in the field and returns =
+nothing.&nbsp; The=20
+                address of this function defaults to <SPAN=20
+                class=3Dcode>NULL</SPAN>. </LI></UL><BR>Your class =
+includes a=20
+              derived version of <SPAN class=3Dcode>edit()</SPAN> that =
+validates=20
+              that data in the field and traps the <SPAN=20
+              class=3Dcode>ESCAPE</SPAN> key.&nbsp;=20
+              <P></P>
+              <P>If a pointer to the validation function <SPAN=20
+              class=3Dcode>v</SPAN> exists (is not <SPAN =
+class=3Dcode>NULL</SPAN>),=20
+              the object calls the validation function.&nbsp; This =
+function may=20
+              change the data in the field, so you need to redisplay the =
+field=20
+              in case this function did change the data.&nbsp; If a =
+pointer to=20
+              the validation function does not exist (<SPAN =
+class=3Dcode>v</SPAN>=20
+              is <SPAN class=3Dcode>NULL</SPAN>), the object stops =
+editing and=20
+              works just like an <SPAN class=3Dcode>HField</SPAN> =
+object: that is,=20
+              returns the key pressed.&nbsp; Note that a validation =
+function=20
+              exists, the object will continue editing until the =
+function=20
+              returns <SPAN class=3Dcode>true</SPAN>.&nbsp; </P>
+              <P>If the user presses the <SPAN =
+class=3Dcode>ESCAPE</SPAN> key, the=20
+              object restores the field's original data as it existed =
+upon entry=20
+              to the <SPAN class=3Dcode>edit()</SPAN> function, does not =
+validate=20
+              the data and returns <SPAN class=3Dcode>ESCAPE</SPAN> as =
+the key=20
+              pressed.&nbsp; </P>
+              <P>(Note that if a help function is provided, the <SPAN=20
+              class=3Dcode>F1</SPAN> key is trapped by the base class =
+<SPAN=20
+              class=3Dcode>HField</SPAN>, so that the validation =
+function is not=20
+              when the key is pressed.)&nbsp; </P>
+              <LI><SPAN class=3Dcode>IVField</SPAN> a <SPAN=20
+              class=3Dcode>VField</SPAN> that accepts integer =
+data.&nbsp; This=20
+              class differs from a <SPAN class=3Dcode>VField</SPAN> in =
+that this=20
+              class accepts <SPAN class=3Dcode>int</SPAN> data rather =
+than <SPAN=20
+              class=3Dcode>char*</SPAN> data.&nbsp; Upon instantiation, =
+an <SPAN=20
+              class=3Dcode>IVField</SPAN> object accepts values for 3 =
+parameters=20
+              and optionally 3 more parameters in the following order:=20
+              <UL>
+                <LI>an <SPAN class=3Dcode>int</SPAN> specifying the row =
+on which=20
+                the field is displayed;=20
+                <LI>an <SPAN class=3Dcode>int</SPAN> specifying the =
+column at=20
+                which the field starts to be displayed;=20
+                <LI>an <SPAN class=3Dcode>int</SPAN> specifying the =
+field length,=20
+                which is the number of columns that the field occupies =
+on the=20
+                physical screen.&nbsp;=20
+                <LI>optionally, an <SPAN class=3Dcode>int</SPAN> holding =
+the=20
+                initial value of the data in the object.&nbsp; The =
+initial value=20
+                defaults to 0;=20
+                <LI>optionally, the address of a validation function =
+<SPAN=20
+                class=3Dcode>bool (*v)(int&amp;)</SPAN> that receives a =
+reference=20
+                to the data in the field and returns a boolean =
+value.&nbsp; The=20
+                address of this function defaults to <SPAN=20
+                class=3Dcode>NULL</SPAN>;=20
+                <LI>optionally, the address of a help function <SPAN=20
+                class=3Dcode>void (*h)(void*)</SPAN> that receives a =
+generic=20
+                pointer to the data in the field and returns =
+nothing.&nbsp; The=20
+                address of this function defaults to <SPAN=20
+                class=3Dcode>NULL</SPAN>. </LI></UL><BR>Note that the =
+validation=20
+              function accepts a reference to an <SPAN =
+class=3Dcode>int</SPAN>=20
+              while the help function accepts the address of the string=20
+              equivalent of the integer value.&nbsp; Your constructor =
+code=20
+              should do something sensible if the initial value does not =
+fit in=20
+              the specified field length, rather than crash or leave =
+garbage in=20
+              place.&nbsp;=20
+              <P></P>
+              <P>Your class includes=20
+              <UL>
+                <LI>a derived version of <SPAN class=3Dcode>void* =
+data()</SPAN>=20
+                for accessing the integer value for the field.&nbsp;=20
+                <LI>a derived version of <SPAN =
+class=3Dcode>edit()</SPAN> that=20
+                traps the <SPAN class=3Dcode>ESCAPE</SPAN> key and =
+validates the=20
+                data in the field.&nbsp;=20
+                <P></P>
+                <P>If the user presses <SPAN class=3Dcode>ESCAPE</SPAN>, =
+the=20
+                object restores the field's original value as it existed =
+at the=20
+                start of editing, does not validate the data and returns =
+<SPAN=20
+                class=3Dcode>ESCAPE</SPAN> as the key pressed.&nbsp; =
+</P>
+                <P>If the user attempts to exit the <SPAN=20
+                class=3Dcode>edit()</SPAN> function with a key other =
+than <SPAN=20
+                class=3Dcode>ESCAPE</SPAN>, the function converts the =
+edited=20
+                string to an <SPAN class=3Dcode>int</SPAN> data =
+type.&nbsp; If the=20
+                string contains non-numeric data, the object forces the =
+user to=20
+                continue editing the data.&nbsp; If the validation =
+function=20
+                <SPAN class=3Dcode>v</SPAN> exists (<SPAN =
+class=3Dcode>v</SPAN> is=20
+                not <SPAN class=3Dcode>NULL</SPAN>), the object calls =
+the=20
+                validation function passing the <SPAN =
+class=3Dcode>int</SPAN> data=20
+                type.&nbsp; This function may change the data in the =
+field and=20
+                so you need to redisplay the field in case this function =
+did=20
+                change the data.&nbsp; If a pointer to the validation =
+function=20
+                does not exist (<SPAN class=3Dcode>v</SPAN> is <SPAN=20
+                class=3Dcode>NULL</SPAN>), the object stops editing and =
+returns=20
+                the key pressed.&nbsp; Note that if a validation =
+function=20
+                exists, the object will continue editing until that =
+function=20
+                returns a <SPAN class=3Dcode>true</SPAN> value.&nbsp; =
+</P>
+                <LI>an assignment operator that takes an <SPAN=20
+                class=3Dcode>int</SPAN> as its right operand and stores =
+its value=20
+                in the field.=20
+                <LI>a conversion operator to an <SPAN =
+class=3Dcode>IVField</SPAN>=20
+                that returns the integer value stored in the =
+field.&nbsp; To=20
+                implement this cast operator use <SPAN =
+class=3Dcode>operator=20
+                int()</SPAN> (see the notes on conversion operators <A=20
+                =
+href=3D"http://cs.senecac.on.ca/~btp200/content/conve.html">here</A>).&nb=
+sp;=20
+                </LI></UL><BR>
+              <LI><SPAN class=3Dcode>DVField</SPAN> a <SPAN=20
+              class=3Dcode>VField</SPAN> that accepts floating-point =
+data.&nbsp;=20
+              This class differs from a <SPAN class=3Dcode>VField</SPAN> =
+in that=20
+              this class accepts <SPAN class=3Dcode>double</SPAN> data =
+rather than=20
+              <SPAN class=3Dcode>char*</SPAN> data.&nbsp; Upon =
+instantiation, a=20
+              <SPAN class=3Dcode>DVField</SPAN> object accepts values =
+for 3=20
+              parameters and optionally 4 more parameters in the =
+following=20
+              order:=20
+              <UL>
+                <LI>an <SPAN class=3Dcode>int</SPAN> specifying the row =
+on which=20
+                the field is displayed;=20
+                <LI>an <SPAN class=3Dcode>int</SPAN> specifying the =
+column at=20
+                which the field starts to be displayed;=20
+                <LI>an <SPAN class=3Dcode>int</SPAN> specifying the =
+field length,=20
+                which is the number of columns that the field occupies =
+on the=20
+                physical screen.&nbsp;=20
+                <LI>optionally, an <SPAN class=3Dcode>int</SPAN> holding =
+the=20
+                number of decimal places to display, which defaults to =
+2;=20
+                <LI>optionally, a <SPAN class=3Dcode>double</SPAN> =
+holding the=20
+                initial value of the data in the object.&nbsp; The =
+initial value=20
+                defaults to 0.0;=20
+                <LI>optionally, the address of a validation function =
+<SPAN=20
+                class=3Dcode>bool (*v)(double&amp;)</SPAN> that receives =
+a=20
+                reference to the data in the field and returns a boolean =
+
+                value.&nbsp; The address of this function defaults to =
+<SPAN=20
+                class=3Dcode>NULL</SPAN>;=20
+                <LI>optionally, the address of a help function <SPAN=20
+                class=3Dcode>void (*h)(void*)</SPAN> that receives a =
+generic=20
+                pointer to the data in the field and returns =
+nothing.&nbsp; The=20
+                address of this function defaults to <SPAN=20
+                class=3Dcode>NULL</SPAN>. </LI></UL><BR>Note that the =
+validation=20
+              function accepts a reference to a <SPAN =
+class=3Dcode>double</SPAN>=20
+              while the help function accepts the address of the string=20
+              equivalent of the integer value.&nbsp; Your constructor =
+code=20
+              should do something sensible if the initial value does not =
+fit in=20
+              the specified field length, rather than crash or leave =
+garbage in=20
+              place.&nbsp;=20
+              <P></P>
+              <P>Your class includes=20
+              <UL>
+                <LI>a derived version of <SPAN class=3Dcode>void* =
+data()</SPAN>=20
+                for accessing the floating-point value for the =
+field.&nbsp;=20
+                <LI>a derived version of <SPAN =
+class=3Dcode>edit()</SPAN> that=20
+                traps the <SPAN class=3Dcode>ESCAPE</SPAN> key and =
+validates the=20
+                data in the field.&nbsp;=20
+                <P></P>
+                <P>If the user presses <SPAN class=3Dcode>ESCAPE</SPAN>, =
+the=20
+                object restores the field's original value as it existed =
+at the=20
+                start of editing, does not validate the data and returns =
+<SPAN=20
+                class=3Dcode>ESCAPE</SPAN> as the key pressed.&nbsp; =
+</P>
+                <P>If the user attempts to exit the <SPAN=20
+                class=3Dcode>edit()</SPAN> function with a key other =
+than <SPAN=20
+                class=3Dcode>ESCAPE</SPAN>, the function converts the =
+edited=20
+                string to a <SPAN class=3Dcode>double</SPAN> data =
+type.&nbsp; If=20
+                the string contains non-numeric data, the object forces =
+the user=20
+                to continue editing the data.&nbsp; If the validation =
+function=20
+                <SPAN class=3Dcode>v</SPAN> exists (<SPAN =
+class=3Dcode>v</SPAN> is=20
+                not <SPAN class=3Dcode>NULL</SPAN>), the object calls =
+the=20
+                validation function passing the <SPAN =
+class=3Dcode>double</SPAN>=20
+                data type.&nbsp; This function may change the data in =
+the field=20
+                and so you need to redisplay the field in case this =
+function did=20
+                change the data.&nbsp; If a validation function does not =
+exist=20
+                (<SPAN class=3Dcode>v</SPAN> is <SPAN =
+class=3Dcode>NULL</SPAN>), the=20
+                object stops editing and returns the key pressed.&nbsp; =
+Note=20
+                that if a validation function does exist, the object =
+will=20
+                continue editing until that function returns a <SPAN=20
+                class=3Dcode>true</SPAN> value.&nbsp; </P>
+                <LI>an assignment operator that takes a <SPAN=20
+                class=3Dcode>double</SPAN> as its right operand and =
+stores its=20
+                value in the field.=20
+                <LI>a conversion operator to an <SPAN =
+class=3Dcode>DVField</SPAN>=20
+                that returns the floating-point value stored in the =
+field.&nbsp;=20
+                To implement this cast operator use <SPAN =
+class=3Dcode>operator=20
+                double()</SPAN> (see the notes on conversion operators =
+<A=20
+                =
+href=3D"http://cs.senecac.on.ca/~btp200/content/conve.html">here</A>).&nb=
+sp;=20
+                </LI></UL><BR>
+              <LI><SPAN class=3Dcode>MMIField</SPAN> an <SPAN=20
+              class=3Dcode>IVField</SPAN> that accepts integer data =
+within a=20
+              specified range.&nbsp; Upon instantiation, an <SPAN=20
+              class=3Dcode>MMIField</SPAN> object accepts values for 3 =
+parameters=20
+              and optionally 4 more parameters in the following order:=20
+              <UL>
+                <LI>an <SPAN class=3Dcode>int</SPAN> specifying the row =
+on which=20
+                the field is displayed;=20
+                <LI>an <SPAN class=3Dcode>int</SPAN> specifying the =
+column at=20
+                which the field starts to be displayed;=20
+                <LI>an <SPAN class=3Dcode>int</SPAN> specifying the =
+field length,=20
+                which is the number of columns that the field occupies =
+on the=20
+                physical screen.&nbsp;=20
+                <LI>optionally, an <SPAN class=3Dcode>int</SPAN> holding =
+the=20
+                initial value of the data in the object.&nbsp; The =
+initial value=20
+                defaults to 0;=20
+                <LI>optionally, an <SPAN class=3Dcode>int</SPAN> holding =
+the=20
+                minimum value of the data in the object.&nbsp; The =
+minimum value=20
+                defaults to 0;=20
+                <LI>optionally, an <SPAN class=3Dcode>int</SPAN> holding =
+the=20
+                maximum value of the data in the object.&nbsp; The =
+maximum value=20
+                defaults to 0;=20
+                <LI>optionally, the address of a help function <SPAN=20
+                class=3Dcode>void (*h)(void*)</SPAN> that receives a =
+generic=20
+                pointer to the data in the field and returns =
+nothing.&nbsp; The=20
+                address of this function defaults to <SPAN=20
+                class=3Dcode>NULL</SPAN>. </LI></UL><BR>Your constructor =
+code should=20
+              do something sensible if the initial value does not fit =
+within the=20
+              specified range, rather than crash or store an invalid=20
+              value.&nbsp;=20
+              <P></P>
+              <P>Your class includes=20
+              <UL>
+                <LI>a derived version of <SPAN =
+class=3Dcode>edit()</SPAN> that=20
+                traps the <SPAN class=3Dcode>ESCAPE</SPAN> key and =
+validates the=20
+                data in the field.&nbsp;=20
+                <P></P>
+                <P>If the user presses <SPAN class=3Dcode>ESCAPE</SPAN>, =
+the=20
+                object restores the field's original value as it existed =
+at the=20
+                start of editing, does not validate the data and returns =
+<SPAN=20
+                class=3Dcode>ESCAPE</SPAN> as the key pressed.&nbsp; =
+</P>
+                <P>If the user presses a key other than <SPAN=20
+                class=3Dcode>ESCPAE</SPAN> to exit editing, the object =
+checks that=20
+                the data is within the specified range.&nbsp; If within =
+the=20
+                range, the object stops editing and returns the key=20
+                pressed.&nbsp; If not within the specified range, the =
+object=20
+                continues editing.&nbsp; </P></LI></UL>
+              <LI><SPAN class=3Dcode>Box</SPAN> an uneditable, =
+display-only field=20
+              that draws a box around other fields.&nbsp; Upon =
+instantiation, a=20
+              <SPAN class=3Dcode>Box</SPAN> object accepts values for 4 =
+parameters=20
+              and optionally a fourth parameter in the following order:=20
+              <UL>
+                <LI>an <SPAN class=3Dcode>int</SPAN> specifying the row =
+on which=20
+                the label is displayed;=20
+                <LI>an <SPAN class=3Dcode>int</SPAN> specifying the =
+column at=20
+                which the label starts to be displayed;=20
+                <LI>an <SPAN class=3Dcode>int</SPAN> specifying the =
+width=20
+                dimension of the box;=20
+                <LI>an <SPAN class=3Dcode>int</SPAN> specifying the =
+height=20
+                dimension of the box;=20
+                <LI>optionally, a <SPAN class=3Dcode>const char*</SPAN> =
+holding=20
+                the 8 characters for drawing the box.&nbsp; The address =
+of this=20
+                string defaults to <SPAN class=3Dcode>NULL</SPAN>. =
+</LI></UL><BR>If=20
+              the address of the string is <SPAN =
+class=3Dcode>NULL</SPAN> or if=20
+              the string contains less than eight characters, the object =
+uses=20
+              the string <SPAN class=3Dcode>"+-+|+-+|</SPAN>.&nbsp; =
+During=20
+              drawing, the object only draws the edging and does not =
+touch the=20
+              interior of the box.&nbsp; The 8 characters are the =
+characters=20
+              used to draw the upper left corner, the upper border, the =
+upper=20
+              right corner, the right border, the lower right corner, =
+the lower=20
+              border, the lower left corner and the left border.&nbsp; =
+For=20
+              example, if the string contains <SPAN=20
+              class=3Dcode>"ABCDEFGH"</SPAN>, the box would like like: =
+<PRE>					ABBBBBBC
+					H      D
+					H      D
+					GFFFFFFE</PRE></LI></UL><BR><!--    OPTIONALLY YOU MAY ADD THE =
+FOLLOWING CLASS. This class is NOT required=0A=
+    for this assignment, but is provided for those who desire more of a=0A=
+    challenge.=0A=
+=0A=
+    region - a multi-line field. The region constructor is=0A=
+=0A=
+	    region(int row, int col, int width, int height,=0A=
+	     const char *s =3D "")=0A=
+=0A=
+	where "row" and "col" specify the upper left corner of the editing=0A=
+	region, "width" specifies the length of each line in the region,=0A=
+	"height" specifies how many lines are in the region, and "s" is=0A=
+	a string containing the initial data for the region, using newline=0A=
+	characters to separate diferent lines from each other.=0A=
+=0A=
+	The maximum length for each line is the same as the width of the=0A=
+	region. The up and down arrow keys only return from the edit()=0A=
+	function if they are pressed on the first and last lines,=0A=
+	respectively. Otherwise, they move between lines of the region.=0A=
+	After the region's edit() function is used, the subsequent use=0A=
+	of edit() starts with the cursor in the same place where it was=0A=
+	the last time edit() ended, unless the string has changed so that=0A=
+	positioning is impossible.=0A=
+=0A=
+	The data() function returns a pointer to an array containing a=0A=
+	string using newline characters to delimit the lines of the region.=0A=
+	The size of this array will be ((width + 1) * height) bytes big to=0A=
+	allow for the embedded newlines (the last line will have a null=0A=
+	byte rather than a newline terminating it).-->
+            <P></P>
+            <P>In creating these classes, you may go back to the <SPAN=20
+            class=3Dcode>Field</SPAN> class and add some protected =
+member=20
+            functions which provide copies of some of the private data =
+members,=20
+            if that makes it easier for you to create these =
+classes.&nbsp; But=20
+            your <SPAN class=3Dcode>Field</SPAN> class must still meet =
+the specs=20
+            of the previous assignment, and this assignment can be done =
+without=20
+            changing <SPAN class=3Dcode>Field</SPAN> at all. </P>
+            <P>Obviously, inheritance is important in implementing this=20
+            assignment, and some of the marks will be reserved for how=20
+            effectively you manage inheritance.&nbsp; Solutions that =
+have less=20
+            duplicated code will be considered better solutions.&nbsp; =
+</P>
+            <P>Save your design in the file named <SPAN=20
+            class=3Dcode>Screen.cpp</SPAN> and the associated header =
+information=20
+            in a file named <SPAN class=3Dcode>Screen.h</SPAN>. </P>
+            <P>You can find a copy of the program that tests your design =
+<A=20
+            =
+href=3D"http://cs.senecac.on.ca/~btp300/pages/assignments/a4test.cpp">her=
+e</A>.&nbsp;=20
+            </P><BR>
+            <P class=3Dsection>Submission Requirements</P>
+            <P>Test your classes in two of the following four =
+environments=20
+            <UL>
+              <LI>MS DOS Borland 5.5 - optional=20
+              <LI>MS DOS Visual Studio .net 2003 - optional=20
+              <LI>phobos AIX cc - required=20
+              <LI>matrix Linux gcc - optional </LI></UL>Compile and test =
+your=20
+            classes in each environment separately and capture a copies =
+of your=20
+            test screens in each environment.&nbsp;=20
+            <P></P>
+            <P>For submission purposes, your classes must compile, link =
+and run=20
+            without errors in each environment.&nbsp; Create screen =
+shots of=20
+            your displays in each environment.&nbsp; </P>
+            <P>Upload a copy of your header and implementation files for =
+your=20
+            library along with copies of the screen shots taken in each=20
+            environment.&nbsp; </P>
+            <P>Finally, place a copy of your executable in your phobos =
+home=20
+            directory and grant your instructor "others" permission to =
+run your=20
+            executable. </P>
+            <P class=3Dssection>Grading</P>
+            <P>This assignment is worth 6% of your final mark. </P>
+            <P>The base mark for a program with no apparent logic flaws =
+is=20
+            9/10.&nbsp; To earn more, your code must include innovative =
+elements=20
+            without violating the specs.&nbsp; If your code contains one =
+major=20
+            or more than one minor logic flaw, you will be asked to fix =
+it and=20
+            to resubmit your code for a 20% penalty.&nbsp; The late =
+penalty is=20
+            10%, so it is better to submit a working version late than =
+to submit=20
+            a flawed version on time.&nbsp; Very late assignments and=20
+            resubmissions will attract a further 10% penalty.&nbsp; </P>
+            <P>Regardless of how long it takes you to complete this =
+assignment,=20
+            you still need to submit a completed working version in =
+order to=20
+            pass this subject. =
+</P><BR><BR><BR></TD></TR></TBODY></TABLE></TD></TR><!-- Footer -->
+  <TR>
+    <TD class=3Dtbody>
+      <TABLE cellPadding=3D1 width=3D"90%" align=3Dcenter>
+        <TBODY>
+        <TR>
+          <TD class=3Dtext3 width=3D"50%">
+            <SCRIPT language=3Djavascript>=0A=
+						var lh =3D document.location.href;=0A=
+						document.write(lh)=0A=
+						</SCRIPT>
+            &nbsp;&nbsp; </TD>
+          <TD class=3Dtext3 align=3Dright width=3D"50%">
+            <SCRIPT language=3Djavascript>=0A=
+						var lm =3D document.lastModified.slice(0,-3);=0A=
+						document.write("Last Modified: " +lm)=0A=
+						</SCRIPT>
+            &nbsp;&nbsp; =
+</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></BODY></HTML>
+
+------=_NextPart_000_0281_01C6062F.369FA6E0
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/style.043.css
+
+BODY {
+	MARGIN-TOP: 0px; BACKGROUND: #ffffff; MARGIN-LEFT: 0px
+}
+IMG {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; VERTICAL-ALIGN: bottom; =
+BORDER-LEFT: 0px; BORDER-BOTTOM: 0px
+}
+P {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+TABLE {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: =
+0px
+}
+TD {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+UL {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+LI {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+PRE {
+	FONT-WEIGHT: bold; FONT-SIZE: small; BACKGROUND: #ffffe0; MARGIN-LEFT: =
+15px; COLOR: navy; FONT-FAMILY: "Courier New", serif
+}
+.tbody {
+	BACKGROUND: #ffffff; WIDTH: 700px
+}
+.text3 {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+.panel1 {
+	BACKGROUND: #aee7fc
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+.texth {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.quote {
+	FONT-SIZE: small; FONT-STYLE: italic; FONT-FAMILY: "Times New Roman", =
+serif
+}
+.textagend {
+	FONT-SIZE: small; COLOR: red; FONT-FAMILY: "Times New Roman", serif
+}
+.section {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; TEXT-TRANSFORM: uppercase; COLOR: =
+#4599b1; FONT-FAMILY: "Times New Roman", serif
+}
+.ssection {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.sssection {
+	FONT-WEIGHT: bold; FONT-SIZE: small; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.top {
+	VERTICAL-ALIGN: top
+}
+.tup {
+	VERTICAL-ALIGN: top; COLOR: blue
+}
+.defin {
+	FONT-WEIGHT: bold; FONT-SIZE: small; BACKGROUND: #ffffff; COLOR: =
+maroon; FONT-FAMILY: "Courier New", serif
+}
+.desc {
+	BACKGROUND: #ededfe; TEXT-ALIGN: center
+}
+.value {
+	BACKGROUND: #ffffc6; TEXT-ALIGN: center
+}
+.addre {
+	BACKGROUND: #aee7fc; TEXT-ALIGN: left
+}
+.addrec {
+	BACKGROUND: #aee7fc; TEXT-ALIGN: center
+}
+.oper {
+	COLOR: maroon; FONT-STYLE: italic
+}
+.code {
+	FONT-WEIGHT: bold; FONT-SIZE: small; VERTICAL-ALIGN: baseline; COLOR: =
+navy; FONT-FAMILY: "Courier New", serif
+}
+.high {
+	COLOR: maroon
+}
+.result {
+	BACKGROUND: #f7ffce
+}
+.error {
+	BACKGROUND: #ffe7c6
+}
+.white {
+	BACKGROUND: #ffffff
+}
+
+------=_NextPart_000_0281_01C6062F.369FA6E0
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/styleSPrint.043.css
+
+BODY {
+	BACKGROUND: #ffffff
+}
+A {
+	VERTICAL-ALIGN: middle; COLOR: #0000ff; TEXT-DECORATION: underline
+}
+A:hover {
+	BACKGROUND: #ededfe; COLOR: #0000ff
+}
+.text0 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text1 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text2 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text3 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text4 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text9 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+
+------=_NextPart_000_0281_01C6062F.369FA6E0
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/stylePPrint.043.css
+
+A {
+	VERTICAL-ALIGN: middle; TEXT-DECORATION: none
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+
+------=_NextPart_000_0281_01C6062F.369FA6E0--

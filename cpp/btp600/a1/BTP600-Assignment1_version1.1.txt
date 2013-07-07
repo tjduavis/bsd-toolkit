@@ -1,0 +1,114 @@
+/**
+ * Part 1 - Composite pattern (p. 163)
+ */
+#include <cstdlib>
+class Graphic {
+	public:
+		virtual void Draw() const = 0;
+		void Add(Graphic& graphicType) { }
+		void Remove(Graphic& graphicType) { }
+		Graphic* GetChild(int childNum) { return NULL; }
+};
+class Line : public Graphic {
+	public:
+		void Draw() { }
+};
+class Rectangle : public Graphic {
+	public:
+		void Draw() { }
+};
+class Text : public Graphic {
+	public:
+		void Draw() { }
+};
+class Picture : public Graphic {
+	public:
+		void Draw() { }
+		void Add(Graphic& graphicType) { }
+		void Remove(Graphic& graphicType) { }
+		Graphic* GetChild(int childNum) {
+			return NULL;
+		}		
+};
+
+/**
+ * Part 2 - Factory Method pattern (p. 107)
+ */
+public abstract class Application {	
+	public abstract void CreateDocument();
+	public void NewDocument() { }
+	public void OpenDocument() { }
+}
+public class MyApplication extends Application {
+	public void CreateDocument() { }
+}
+public abstract class Document {
+	public void Open() { }
+	public void Close() { }
+	public void Save() { }
+	public void Revert() { }
+}
+public class MyDocument {
+}
+
+
+''
+' Part 3 - Abstract Factory pattern (p. 87)
+'
+''
+Public Class Client
+    Dim wFactory As WidgetFactory
+    Dim windowType As Window
+    Dim scrollbartype As ScrollBar
+End Class
+
+Interface WidgetFactory
+    Function CreateScrollBar() As ScrollBar
+    Function CreateWindow() As Window
+End Interface
+
+Public Class MotifWidgetFacotry
+    Implements WidgetFactory
+    Function CreateScrollBar() As ScrollBar Implements WidgetFactory.CreateScrollBar
+        Dim scrollBar As Object
+        Return scrollBar
+    End Function
+    Function CreateWindow() As Window Implements WidgetFactory.CreateWindow
+        Dim window As Object
+        Return window
+    End Function
+End Class
+
+Public Class PMWidgetFacotry
+    Implements WidgetFactory
+    Function CreateScrollBar() As ScrollBar Implements WidgetFactory.CreateScrollBar
+        Dim scrollBar As Object
+        Return scrollBar
+    End Function
+    Function CreateWindow() As Window Implements WidgetFactory.CreateWindow
+        Dim window As Object
+        Return window
+    End Function
+End Class
+
+Public Class Window
+End Class
+
+Public Class PMWindow
+    Inherits Window
+End Class
+
+Public Class MotifWindow
+    Inherits Window
+End Class
+
+Public Class ScrollBar
+End Class
+
+Public Class PMScrollBar
+    Inherits ScrollBar
+End Class
+
+Public Class MotifScrollBar
+    Inherits ScrollBar
+End Class

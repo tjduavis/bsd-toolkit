@@ -1,0 +1,13 @@
+"a3test.cpp", line 593.38: 1540-0294 (S) An object or reference of type "DataSet" cannot be initialized with an rvalue of type "DataSet".
+"a3test.cpp", line 593.32: 1540-0218 (I) The call does not match any parameter list for "DataSet::DataSet".
+"DataSet.h", line 78.17: 1540-1283 (I) "DataSet::DataSet(DataSet &)" is not a viable candidate.
+"a3test.cpp", line 593.38: 1540-0295 (I) A parameter of type "DataSet &" cannot be initialized with an rvalue of type "DataSet".
+"a3test.cpp", line 593.32: 1540-1290 (I) An rvalue cannot be converted to a reference to a non-const type.
+"a3test.cpp", line 645.24: 1540-0218 (S) The call does not match any parameter list for "operator=".
+"DataSet.h", line 89.26: 1540-1283 (I) "DataSet::operator=(DataSet &)" is not a viable candidate.
+"a3test.cpp", line 645.34: 1540-0295 (I) A parameter of type "DataSet &" cannot be initialized with an rvalue of type "DataSet".
+"a3test.cpp", line 645.34: 1540-1290 (I) An rvalue cannot be converted to a reference to a non-const type.
+"a3test.cpp", line 705.24: 1540-0218 (S) The call does not match any parameter list for "operator=".
+"DataSet.h", line 89.26: 1540-1283 (I) "DataSet::operator=(DataSet &)" is not a viable candidate.
+"a3test.cpp", line 705.30: 1540-0295 (I) A parameter of type "DataSet &" cannot be initialized with an rvalue of type "DataSet".
+"a3test.cpp", line 705.30: 1540-1290 (I) An rvalue cannot be converted to a reference to a non-const type.

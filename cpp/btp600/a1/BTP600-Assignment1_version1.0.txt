@@ -1,0 +1,121 @@
+http://msdn2.microsoft.com/en-us/library/y4wf33f0(VS.80).aspx
+
+/**
+ * Part 1 - Composite pattern (p. 163)
+ */
+class Graphic() {
+	public:
+		virtual void Draw() const = 0;
+		virtual void Add(Graphic&) const = 0;
+		virtual void Remove(Graphic&) const = 0;
+		virtual Graphic& GetChild(int) const = 0;
+}
+
+class Line : public Graphic {
+	public:
+		virtual void Draw() { }
+}
+
+class Rectangle : public Graphic {
+	public:
+		virtual void Draw() { }
+}
+
+Class Text : public Graphic {
+	public:
+		virtual void Draw() { }
+}
+
+class Picture : public Graphic {
+	public:
+		virtual void Draw() { }
+		virtual void Add(Graphic& graphicType) { }
+		virtual void Remove(Graphic& graphicType) { }
+		virtual Graphic& GetChild(int childNum) { }		
+}
+
+/**
+ * Part 2 - Factory Method pattern (p. 107)
+ */
+public abstract class Application {
+	private Document docType;
+	
+	public abstract void CreateDocument() { }
+	public void NewDocument() { }
+	public void OpenDocument() { }
+}
+
+public class MyApplication extends Application {
+	public void NewDocument() { }
+}
+
+public abstract class Document {
+	public void Open() { }
+	public void Close() { }
+	public void Save() { }
+	public void Revert() { }
+}
+
+public class MyDocument() {
+}
+
+
+
+''
+' Part 3 - Abstract Factory pattern (p. 87)
+'
+''
+
+Class Client
+	WidgetFactory wFactory;
+	Window windowType;
+	ScrollBar scrollbartype;
+End Class
+
+Interface WidgetFactory
+	Function CreateScrollBar() As ScrollBar
+	End Function
+	Function CreateWindow() As Window
+	End Function
+End Interface
+
+Class MotifWidgetFacotry Implements WidgetFactory
+	Function CreateScrollBar() As ScrollBar
+		ScrollBar mScrollBar = new MotifScrollBar();
+		return mScrollBar;			 
+	End Function
+	virtual Window& CreateWindow() {
+		Window mWindow = new MotifWindow();
+		return mWindow;
+	}
+End Class
+
+class PMWidgetFacotry : public WidgetFactory {
+	public:
+		virtual ScrollBar& CreateScrollBar() {
+			ScrollBar pmScrollBar = new PMScrollBar();
+			return pmScrollBar;
+		}
+		virtual Window& CreateWindow() {
+			Window pmWindow = new PMWindow();
+			return pmWindow;
+		}
+}
+
+class Window {
+}
+
+class PMWindow : public Window {
+}
+
+class MotifWindow : public Window {
+}
+
+class ScrollBar {
+}
+
+class PMScrollBar : public ScrollBar {
+}
+
+class MotifScrollBar : public ScrollBar {
+}

@@ -1,0 +1,21 @@
+What is the runtime of the function?
+int isprime(int N){
+  int rc=(N<=2)?1:(N%2);
+  for(int i=3;i*i<=N;i+=2){
+    if(N%i==0)
+     rc=0;
+  }
+  return rc;
+}
+
+
+
+there is only 2 operations outside the loop and the dominate condition which determines how long it takes the function to run. 
+So I simply neglect the constant number of operations outside the loop and focus on finding the runtime of the loop which is the run time of the function 
+
+Now in the loop there is one constant operation if the condition is wrong and two if the condition is true , 
+so worst case we have two constant operation , which also can be neglected , now I can only focus on the loop itself , now for the loop counter,
+the difference between this counter and a normal counter is that in each iteration it gets added by two instead of one  , 
+which is still a linear growth with run time of O(N) , now the tricky part is the condition that is being checked to stop the loop which is the square of i .
+It means that the loop is that much closer to end. Now I look at it as if I was constant and N was being changed in each iteration of the loop and replaced with N Square.
+So based on my analogy the run time of the function will be  big o square of N

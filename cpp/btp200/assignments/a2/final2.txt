@@ -1,0 +1,1096 @@
+Script command is started on Thu Feb 17 19:39:07 EST 2005.$ whoami
+tjduavis
+$ cat /public/btp200/oath.txt
+
+Student Assignment Submission Form
+==================================
+I declare that the attached assignment is my own work in 
+accordance with Seneca Academic Policy.  No part of this 
+assignment has been copied manually or electronically 
+from any other source (including web sites) or 
+distributed to other students.
+
+
+Name                                          Student ID
+
+---------------------------------------------------------
+
+
+
+
+Signature
+
+
+------------------------------
+$ cat DataSet.h
+/***************************************************************************/
+/* Assignment 2 - v.1.01                                                   */
+/* DataSet.h                                                               */
+/*       Purpose: - to design, code and test a class for data set objects that */
+/*                          performs a linear regression analyses on those objects.    */
+/*                        - header file, for DataSet.cpp: including prototypes,        */
+/*              libraries and macros.                                      */
+/*            - upgrade version includes
+/*                                                                         */
+/*    Author: Timothy Duavis                                               */
+/*    Last Modified: Feb 15/05                                             */
+/***************************************************************************/
+
+//Library*******************************************************************/
+#include <new>
+#include <cmath>
+#include <cstring>
+#include<iostream>
+#include <iomanip>
+using namespace std;
+
+#define SQUARE 2                //exponent 2, for getting the square of numbers
+#define INCLUDED 1              //include all pts (even outliners) in calc
+#define EXCLUDED 2      //exclude outliners pts in calc
+
+//Class DataPoint***********************************************************/
+class DataPoint{
+        double abscissa;
+        double ordinate;
+        int outliner;
+
+        public:
+                //modifiers**********************************/
+                DataPoint();
+                int loadFromFile(FILE* fp);
+                int SetOutliner(int);
+                friend bool operator==(const DataPoint&, const DataPoint&);
+                //queries************************************/
+                double getx() const;
+                double gety() const;
+                int DisplayOutliner() const;
+};
+
+//Class DataSet*************************************************************/
+class DataSet{
+        int numDataPts;
+        char labelFile[40];
+        DataPoint* Pts;
+        int j;
+        double slopeValue;
+        double interceptValue;
+        double meanX, meanY;
+        double sumSqrsX, sumSqrsY;
+        double devtnX, devtnY;
+        double correlationValue;
+        double devRatio;
+        int numOutliner;
+
+        //modifiers**********************************/
+        double calc_slope();
+        double calc_intercept();
+        double calc_correlation();
+        double chauvenet(int);
+
+        public:
+                //modifiers**********************************/
+                DataSet();
+                ~DataSet();
+                bool loadFromFile(const char* filename);
+                void include();
+                void include(double tolerance);
+                friend bool operator==(const DataSet&, const DataSet&);
+
+                //queries************************************/
+                const char* label() const;
+                double slope() const;
+                double intercept() const;
+                double correlation() const;
+                int nPoints() const;
+                DataPoint point(int i) const;
+                bool outlier(int) const;
+                int outlier() const;
+                void display() const;
+};$ cat DataSet.co pp
+/***************************************************************************/
+/* Assignment 2 - v.1.01                                                   */
+/* DataSet.cpp                                                             */
+/*       Purpose: - to design, code and test a class for data set objects  */
+/*                  that performs a linear regression analyses on those    */
+/*                  objects.                                               */
+/*            - upgrade version includes outliners in analysis             */
+/*                                                                         */
+/*    Author: Timothy Duavis                                               */
+/*    Last Modified: Feb 15/05                                             */
+/***************************************************************************/
+
+//Library*******************************************************************/
+#include "DataSet.h"
+
+//**********************DataPoint Class Definitions*************************/
+//Public: Modifiers*********************************************************/
+/*--------------------------------------------------------*/
+/* DataPoint() - Constructor                              */
+/*      purpose: Initialize private variables             */
+/*--------------------------------------------------------*/
+DataPoint::DataPoint(){
+        abscissa = 0.00;
+        ordinate = 0.00;
+        outliner = 0;
+}
+
+/*--------------------------------------------------------*/
+/* loadFromFile - function                                */
+/*      Purpose:Reads the abscissa and ordinate from file */
+/*          pointed by fp. returns successful values read,*/
+/*          EOF if not. if readed values are incorrect,   */
+/*          abscissa and ordinate set to 0.               */
+/*--------------------------------------------------------*/
+int DataPoint::loadFromFile(FILE* fp){
+        int check;
+
+        if(fp!=NULL){
+                check=fscanf(fp,"%lf %lf",&abscissa, &ordinate);
+                if(check!=2 && check!=-1){
+                        abscissa = 0;
+                        ordinate = 0;
+                }
+        }
+        else
+                check=EOF;
+        return check;
+}
+
+/*--------------------------------------------------------*/
+/* SetOutliner(int i) - Modifier                          */
+/*      purpose: sets outliner value to be included (0) or*/
+/*                       excluded (1).                    */
+/*--------------------------------------------------------*/
+int DataPoint::SetOutliner(int i){
+        switch(i){
+                case INCLUDED:
+                        outliner = 0;
+                        break;
+                case EXCLUDED:
+                        outliner = 1;
+                        break;
+        }
+        return outliner;
+}
+
+/*--------------------------------------------------------*/
+/* == - Operator function                                 */
+/*      purpose: if 2 instance of class are equal return  */
+/*               true otherwise false.                    */
+/*--------------------------------------------------------*/
+bool operator==(const DataPoint& PtA, const DataPoint& PtB){
+        bool equal = false;
+        if (PtA.abscissa == PtB.abscissa && PtA.ordinate == PtB.ordinate)
+                equal = true;
+        return equal;
+}
+
+//Public: Queries***********************************************************/
+/*--------------------------------------------------------*/
+/* DisplayOutliner - Querie                               */
+/*      purpose: displays outliner value                  */
+/*--------------------------------------------------------*/
+int DataPoint::DisplayOutliner() const{
+        return outliner;
+}
+
+/*--------------------------------------------------------*/
+/* getx - function                                        */
+/*      purpose:Query that returns the abscissa.          */
+/*--------------------------------------------------------*/
+double DataPoint::getx() const{
+        return abscissa;
+}
+
+/*--------------------------------------------------------*/
+/* gety - function                                        */
+/*      Purpose:Query that returns the ordinate.          */
+/*--------------------------------------------------------*/
+double DataPoint::gety() const{
+        return ordinate;
+}
+
+//**********************DataSet Class Definitions***************************/
+//Private Definitions: Modifiers********************************************/
+/*--------------------------------------------------------*/
+/* calc_slope - function                                  */
+/*      purpose:Calculates slope and returns double to    */
+/*          private DataSet Class.                        */
+/*--------------------------------------------------------*/
+double DataSet::calc_slope(){
+        int excluded=0;
+        double numerator=0, denominator=0;
+        meanX=0;
+        meanY=0;
+
+        for (j=0; j<numDataPts; j++){
+                //outliner excluded
+                if(Pts[j].DisplayOutliner()==0){
+                        meanX += Pts[j].getx();
+                        meanY += Pts[j].gety();
+                }
+                else{
+                        //number of excluded points
+                        ++excluded;
+                }
+        }
+        meanX /= (numDataPts - excluded);
+        meanY /= (numDataPts - excluded);
+        for (j=0; j<numDataPts; j++){
+                //outliner excluded
+                if(Pts[j].DisplayOutliner()==0){
+                        numerator += (Pts[j].getx() - meanX)*(Pts[j].gety()-meanY);
+                        denominator += pow((Pts[j].getx()-meanX),SQUARE);
+                }
+        }
+        if(denominator==0)
+                slopeValue=0;
+        else
+                slopeValue = numerator / denominator;
+        return slopeValue;
+}
+
+/*--------------------------------------------------------*/
+/* calc_intercept - function                              */
+/*      Purpose:Calculates intercept and returns double to*/
+/*          private DataSet Class.                        */
+/*--------------------------------------------------------*/
+double DataSet::calc_intercept(){
+        return ( interceptValue = meanY - (slope() * meanX) );
+}
+
+/*--------------------------------------------------------*/
+/* calc_correlation - function                            */
+/*      Purpose:Calculates correlation and returns double */
+/*          to private DataSet Class.                     */
+/*--------------------------------------------------------*/
+double DataSet::calc_correlation(){
+        int excluded=0;
+        double rootedX, rootedY;
+        double numerator=0, denominator=0;
+        sumSqrsX=0;
+        sumSqrsY=0;
+
+        for (j=0; j<numDataPts; j++){
+                //outliner excluded
+                if(Pts[j].DisplayOutliner()==0){
+                        sumSqrsX += pow(Pts[j].getx(),SQUARE);
+                        sumSqrsY += pow(Pts[j].gety(),SQUARE);
+                }
+                else{
+                        //number of excluded points
+                        excluded++;
+                }
+        }
+        rootedX = (sumSqrsX / (numDataPts-excluded)) - pow(meanX,SQUARE);
+        rootedY = (sumSqrsY / (numDataPts-excluded)) - pow(meanY,SQUARE);
+
+        devtnX = sqrt(rootedX);
+        devtnY = sqrt(rootedY);
+
+        //reset excluded
+        excluded=0;
+        for (j=0; j<numDataPts; j++){
+                //outliner excluded
+                if(Pts[j].DisplayOutliner()==0)
+                        numerator += Pts[j].getx()*Pts[j].gety();
+                else{
+                        //number of excluded points
+                        ++excluded;
+                }
+        }
+
+        numerator /= (numDataPts - excluded);
+        numerator -= (meanX*meanY);
+
+        correlationValue = numerator / (devtnX*devtnY);
+        return correlationValue;
+}
+//Public Definitions: Modifiers*********************************************/
+/*--------------------------------------------------------*/
+/* DataSet() - Constructor                                */
+/*      purpose: Initialize private variables             */
+/*--------------------------------------------------------*/
+DataSet::DataSet(){
+        numDataPts = 0;
+        labelFile[0] = '\0';
+        Pts = NULL;
+        j = 0;
+        slopeValue = 0.0;
+        interceptValue = 0.0;
+        meanX = 0.0;
+        meanY = 0.0;
+        sumSqrsX = 0.0;
+        sumSqrsY = 0.0;
+        devtnX = 0.0;
+        devtnY = 0.0;
+        correlationValue = 0.0;
+        devRatio = 0.0;
+        numOutliner = 0;
+}
+
+/*--------------------------------------------------------*/
+/* ~DataSet() - Deconstructor                             */
+/*      purpose: deallocates dynamic memory Pts           */
+/*--------------------------------------------------------*/
+DataSet::~DataSet(){
+        delete [] Pts;
+}
+
+/*--------------------------------------------------------*/
+/* loadFromFile - function                                */
+/*      Purpose:opens null-terminated from user, and makes*/
+/*              a copy. file contains data points in set, */
+/*              copies data points (one abscissa and      */
+/*              ordinate)                                 */
+/*--------------------------------------------------------*/
+bool DataSet::loadFromFile(const char* filename){
+        bool success = false;
+        int numLines = 0, quit=0, check;
+        FILE* DataFile = NULL;
+
+        //Private variables initialized
+        Pts = NULL;
+        numDataPts = 0;
+
+        strcpy(labelFile,filename);
+
+        DataFile = fopen(filename,"r");
+        if (DataFile != NULL){
+                //Reads Num. of Lines in file for class array
+                do{
+                        check=fgetc(DataFile);
+                        if(check=='\n')
+                                numLines+=1;
+                }while(check!=EOF);
+                //Adds 1,since EOF considering end of sentence as new line
+                numLines+=1;
+                //reset file to read from begginning
+                rewind(DataFile);
+
+                //Creates Instance for DataPoint with numLines amount of space
+                Pts = new DataPoint [numLines];
+                //number of lines Read successfully
+                for(int i=0; quit==0; i++){
+                        int goodValue = Pts[i].loadFromFile(DataFile);
+                        if(goodValue==EOF)
+                                quit=1;
+                        else if(goodValue==2){
+                                goodValue/=2;
+                                numDataPts+=goodValue;
+                        }
+                }
+
+                if(numDataPts!=0){
+                        //Call private functions that does the calculations
+                        slopeValue=calc_slope();
+                        interceptValue=calc_intercept();
+                        correlationValue=calc_correlation();
+                        success = true;
+                }
+                else if(numDataPts==0){
+                        //Set calculatedValue to 0, if there are no files
+                        slopeValue=0;
+                        interceptValue=0;
+                        correlationValue=0;
+                }
+                //Close file
+                fclose(DataFile);
+        }
+        return success;
+}
+
+/*--------------------------------------------------------*/
+/* include() - function                                   */
+/*      purpose: sets outliner mask for all pts to be     */
+/*           included in calc                             */
+/*--------------------------------------------------------*/
+void DataSet::include(){
+        for(j=0; j<numDataPts; j++)
+                Pts[j].SetOutliner(INCLUDED);
+        slopeValue=calc_slope();
+        interceptValue=calc_intercept();
+        correlationValue=calc_correlation();
+}
+
+/*--------------------------------------------------------*/
+/* include(double) - function                             */
+/*      purpose: sets outliner mask for pts to be excluded*/
+/*               in calc.                                 */
+/*--------------------------------------------------------*/
+void DataSet::include(double tolerance){
+        for(j=0; j<numDataPts; j++){
+                devRatio = chauvenet(j);
+                if (devRatio > tolerance){
+                        Pts[j].SetOutliner(EXCLUDED);
+                        ++numOutliner;
+                }
+        }
+        slopeValue=calc_slope();
+        interceptValue=calc_intercept();
+        correlationValue=calc_correlation();
+}
+
+/*--------------------------------------------------------*/
+/* outliner(int) - function                               */
+/*      purpose: true if pt is outliner, otherwise falser */
+/*--------------------------------------------------------*/
+bool DataSet::outlier(int xy) const{
+        bool good=false;
+        if(xy < 0 || xy >= numDataPts)
+                good = true;
+        else if (Pts[xy].DisplayOutliner()==1)
+                good=true;
+        return good;
+}
+
+/*--------------------------------------------------------*/
+/* outliner() - function                                  */
+/*      purpose: returns number of outliners              */
+/*--------------------------------------------------------*/
+int DataSet::outlier() const{
+        return numOutliner;
+}
+
+/*--------------------------------------------------------*/
+/* chauvenet(int i) - function                            */
+/*      purpose: to identify the outliners                */
+/*--------------------------------------------------------*/
+double DataSet::chauvenet(int i){
+        double final = (Pts[i].gety() - meanY) / devtnY;
+        if (final < 0)
+                final *= -1;
+        return final;
+}
+
+/*--------------------------------------------------------*/
+/* operator== - helper                                    */
+/*      purpose: compares 2 DataSet class for equivalents */
+/*--------------------------------------------------------*/
+bool operator==(const DataSet& SetA, const DataSet& SetB){
+        bool good;
+        if(SetA.numDataPts == SetB.numDataPts){
+                good=true;
+                for(int j=0; j<SetA.numDataPts || good==false; j++){
+                        if(SetA.Pts[j].getx() != SetB.Pts[j].getx() && SetA.Pts[j].gety() != SetB.Pts[j].gety())
+                                good = false;
+                }
+        }
+        else
+                good = false;
+        return good;
+}
+
+//Public Defintions: Queries********************************************/
+/*--------------------------------------------------------*/
+/* point - function                                       */
+/*      purpose:query that returns data point i of        */
+/*          the data set. pt is outliner returns empty    */
+/*                      DataPoint.                        */
+/*--------------------------------------------------------*/
+DataPoint DataSet::point(int i) const{
+        DataPoint emptyDataPoint;
+        if(i < 0 || i >= numDataPts )
+                return emptyDataPoint;
+        else{
+                if(Pts[i].DisplayOutliner()==1)
+                        return emptyDataPoint;
+                else
+                        return Pts[i];
+        }
+}
+
+/*--------------------------------------------------------*/
+/* label - function                                       */
+/*      purpose:query that returns the label of the       */
+/*              data set.                                 */
+/*--------------------------------------------------------*/
+const char* DataSet::label() const{
+        return labelFile;
+}
+
+/*--------------------------------------------------------*/
+/* nPoint - function                                      */
+/*      purpose:query that returns the number of data     */
+/*              points in the data set.                   */
+/*--------------------------------------------------------*/
+int DataSet::nPoints() const{
+        return numDataPts;
+}
+
+/*--------------------------------------------------------*/
+/* slope - function                                       */
+/*      purpose:query that returns the slope of line from */
+/*              pts in data set; 0 if no pts.             */
+/*--------------------------------------------------------*/
+double DataSet::slope() const{
+        return slopeValue;
+}
+
+/*--------------------------------------------------------*/
+/* intercept - function                                   */
+/*      purpose:query that returns the intercept of line  */
+/*              from pts in data set; 0 if no pts.        */
+/*--------------------------------------------------------*/
+double DataSet::intercept() const{
+        return interceptValue;
+}
+
+/*--------------------------------------------------------*/
+/* correlation - function                                 */
+/*      purpose:query that returns the correlation of line*/
+/*              from pts in data set; 0 if no pts.        */
+/*--------------------------------------------------------*/
+double DataSet::correlation() const{
+        return correlationValue;
+}
+
+/*--------------------------------------------------------*/
+/* display() - function                                   */
+/*      purpose: outputs values in a data set.            */
+/*--------------------------------------------------------*/
+void DataSet::display() const{
+        cout << "Independent Value" << setw(17) << "Dependent Value" << endl;
+        for(int x=0; x<numDataPts; x++){
+                if (Pts[x].DisplayOutliner()==0)
+                        cout << setw(17) << fixed << setfill(' ') << setprecision(2) << Pts[x].getx()
+                         << setw(17) << fixed << setfill(' ') << setprecision(2) << Pts[x].gety()
+                         << endl;
+                else
+                        cout << "outliner"
+                             << setw(9) << fixed << setprecision(2)  << Pts[x].getx()
+                             << setw(17) << fixed << setprecision(2)  << Pts[x].gety()
+                             << endl;
+        }
+}
+$ c++ a1t  2test1.cpp DataSet.cpp -o a2test1
+a2test1.cpp:
+"DataSet.h", line 9.2: 1540-0804 (W) The characters "/*" are detected in a comment.
+DataSet.cpp:
+"DataSet.h", line 9.2: 1540-0804 (W) The characters "/*" are detected in a comment.
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_ostream<char,std::char_traits<char> >& std::operator<<<std::char_traits<char> >(std::basic_ostream<char,std::char_traits<char> >&,const char*)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_ostream<char,std::char_traits<char> >& std::operator<<<char,std::char_traits<char>,int>(std::basic_ostream<char,std::char_traits<char> >&,const std::_Smanip<int>&)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_ostream<char,std::char_traits<char> >::sentry::sentry(std::basic_ostream<char,std::char_traits<char> >&)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_ostream<char,std::char_traits<char> >::sentry::operator bool() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::ios_base::width() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::ios_base::flags() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::char_traits<char>::eof()
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_ios<char,std::char_traits<char> >::rdbuf() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_ios<char,std::char_traits<char> >::fill() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_streambuf<char,std::char_traits<char> >::sputc(char)
+ld: 0711-224 WARNING: Duplicate symbol: .std::char_traits<char>::eq_int_type(const int&,const int&)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_ios<char,std::char_traits<char> >::setstate(int,bool)
+ld: 0711-224 WARNING: Duplicate symbol: .std::ios_base::width(int)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_ostream<char,std::char_traits<char> >::sentry::~sentry()
+ld: 0711-224 WARNING: Duplicate symbol: .std::char_traits<char>::length(const char*)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_streambuf<char,std::char_traits<char> >::sputn(const char*,int)
+ld: 0711-224 WARNING: Duplicate symbol: .std::ios_base::getloc() const
+ld: 0711-224 WARNING: Duplicate symbol: .const std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >& std::use_facet<std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > >(const std::locale&)
+ld: 0711-224 WARNING: Duplicate symbol: .std::locale::~locale()
+ld: 0711-224 WARNING: Duplicate symbol: .std::ostreambuf_iterator<char,std::char_traits<char> >::ostreambuf_iterator(std::basic_streambuf<char,std::char_traits<char> >*)
+ld: 0711-224 WARNING: Duplicate symbol: .std::ostreambuf_iterator<char,std::char_traits<char> >::failed() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::locale::id::operator unsigned long()
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::_Getcat(const std::locale::facet**)
+ld: 0711-224 WARNING: Duplicate symbol: .std::_Tidyfac<std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > >::_Save(std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >*)
+ld: 0711-224 WARNING: Duplicate symbol: .std::bad_cast::bad_cast(const char*)
+ld: 0711-224 WARNING: Duplicate symbol: .strlenFPCc
+ld: 0711-224 WARNING: Duplicate symbol: .std::locale::facet::_Decref()
+ld: 0711-224 WARNING: Duplicate symbol: .std::locale::locale(const std::locale&)
+ld: 0711-224 WARNING: Duplicate symbol: .std::ios_base::rdstate() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_ios<char,std::char_traits<char> >::clear(int,bool)
+ld: 0711-224 WARNING: Duplicate symbol: .std::ios_base::good() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_ios<char,std::char_traits<char> >::tie() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_ostream<char,std::char_traits<char> >::flush()
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_ostream<char,std::char_traits<char> >::osfx()
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_streambuf<char,std::char_traits<char> >::pptr() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_streambuf<char,std::char_traits<char> >::epptr() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_streambuf<char,std::char_traits<char> >::_Pninc()
+ld: 0711-224 WARNING: Duplicate symbol: .std::char_traits<char>::to_int_type(const char&)
+ld: 0711-224 WARNING: Duplicate symbol: .std::bad_cast::~bad_cast()
+ld: 0711-224 WARNING: Duplicate symbol: .std::exception::exception(const char*)
+ld: 0711-224 WARNING: Duplicate symbol: .std::locale::facet::_Incref()
+ld: 0711-224 WARNING: Duplicate symbol: .std::ios_base::fail() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_streambuf<char,std::char_traits<char> >::pubsync()
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::num_put(unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .std::locale::id::id(unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .std::_Tidyfac<std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > >::_Tidy()
+ld: 0711-224 WARNING: Duplicate symbol: .std::exception::~exception()
+ld: 0711-224 WARNING: Duplicate symbol: .std::locale::facet::facet(unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::_Init(const std::_Locinfo&)
+ld: 0711-224 WARNING: Duplicate symbol: .std::locale::facet::~facet()
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::~num_put()
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::do_put(std::ostreambuf_iterator<char,std::char_traits<char> >,std::ios_base&,char,const void*) const
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::do_put(std::ostreambuf_iterator<char,std::char_traits<char> >,std::ios_base&,char,long double) const
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::do_put(std::ostreambuf_iterator<char,std::char_traits<char> >,std::ios_base&,char,double) const
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::do_put(std::ostreambuf_iterator<char,std::char_traits<char> >,std::ios_base&,char,unsigned long) const
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::do_put(std::ostreambuf_iterator<char,std::char_traits<char> >,std::ios_base&,char,long) const
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::do_put(std::ostreambuf_iterator<char,std::char_traits<char> >,std::ios_base&,char,bool) const
+ld: 0711-224 WARNING: Duplicate symbol: .std::exception::what() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::exception::_Doraise() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::bad_cast::_Doraise() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::exception::exception(const std::exception&)
+ld: 0711-224 WARNING: Duplicate symbol: .const std::numpunct<char>& std::use_facet<std::numpunct<char> >(const std::locale&)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::basic_string()
+ld: 0711-224 WARNING: Duplicate symbol: .char std::_Widen<char>(char,char*)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::append(unsigned long,char)
+ld: 0711-224 WARNING: Duplicate symbol: .std::numpunct<char>::truename() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::operator=(const std::basic_string<char,std::char_traits<char>,std::allocator<char> >&)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::~basic_string()
+ld: 0711-224 WARNING: Duplicate symbol: .std::numpunct<char>::falsename() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::size() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::_Rep(std::ostreambuf_iterator<char,std::char_traits<char> >,char,unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::c_str() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::_Put(std::ostreambuf_iterator<char,std::char_traits<char> >,const char*,unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .std::allocator<char>::allocator()
+ld: 0711-224 WARNING: Duplicate symbol: .std::_String_val<char,std::allocator<char> >::_String_val(std::allocator<char>)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::_Tidy(bool)
+ld: 0711-224 WARNING: Duplicate symbol: .std::allocator<char>::allocator(const std::allocator<char>&)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::assign(const std::basic_string<char,std::char_traits<char>,std::allocator<char> >&)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::assign(const std::basic_string<char,std::char_traits<char>,std::allocator<char> >&,unsigned long,unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::_Nullstr()
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::_Grow(unsigned long,bool)
+ld: 0711-224 WARNING: Duplicate symbol: .std::char_traits<char>::assign(char*,unsigned long,char)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::_Eos(unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .memsetFPviUl
+ld: 0711-224 WARNING: Duplicate symbol: .std::char_traits<char>::assign(char&,const char&)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::erase(unsigned long,unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::_Refcnt(const char*)
+ld: 0711-224 WARNING: Duplicate symbol: .bool std::operator==<char,char>(const std::allocator<char>&,const std::allocator<char>&)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::capacity() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::char_traits<char>::copy(char*,const char*,unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .memcpyFPvPCvUl
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::_Freeze()
+ld: 0711-224 WARNING: Duplicate symbol: .std::char_traits<char>::move(char*,const char*,unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .memmoveFPvPCvUl
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::max_size() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::_Copy(unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .std::allocator<char>::max_size() const
+ld: 0711-224 WARNING: Duplicate symbol: .char* std::allocator<char>::allocate<void>(unsigned long,const void*)
+ld: 0711-224 WARNING: Duplicate symbol: .std::allocator<char>::deallocate(char*,unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::_Ifmt(char*,char,int)
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::_Iput(std::ostreambuf_iterator<char,std::char_traits<char> >,std::ios_base&,char,char*,unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .std::ios_base::precision() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::_Ffmt(char*,char,int)
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::_Fput(std::ostreambuf_iterator<char,std::char_traits<char> >,std::ios_base&,char,const char*,unsigned long,unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::_Putc(std::ostreambuf_iterator<char,std::char_traits<char> >,const char*,unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .memchrFPCviUl
+ld: 0711-224 WARNING: Duplicate symbol: .std::numpunct<char>::decimal_point() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::numpunct<char>::grouping() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::numpunct<char>::thousands_sep() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::ostreambuf_iterator<char,std::char_traits<char> >::operator*()
+ld: 0711-224 WARNING: Duplicate symbol: .std::ostreambuf_iterator<char,std::char_traits<char> >::operator=(char)
+ld: 0711-224 WARNING: Duplicate symbol: .std::ostreambuf_iterator<char,std::char_traits<char> >::operator++()
+ld: 0711-224 WARNING: Duplicate symbol: .char* std::_Allocate<char>(unsigned long,char*)
+ld: 0711-224 WARNING: Duplicate symbol: .std::numpunct<char>::_Getcat(const std::locale::facet**)
+ld: 0711-224 WARNING: Duplicate symbol: .std::_Tidyfac<std::numpunct<char> >::_Save(std::numpunct<char>*)
+ld: 0711-224 WARNING: Duplicate symbol: .std::numpunct<char>::numpunct(unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .std::_Tidyfac<std::numpunct<char> >::_Tidy()
+ld: 0711-224 WARNING: Duplicate symbol: .std::numpunct<char>::_Init(const std::_Locinfo&)
+ld: 0711-224 WARNING: Duplicate symbol: .std::_Locinfo::_Getlconv() const
+ld: 0711-224 WARNING: Duplicate symbol: .char* std::_Maklocstr<char>(const char*,char*)
+ld: 0711-224 WARNING: Duplicate symbol: .std::_Locinfo::_Getfalse() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::_Locinfo::_Gettrue() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::numpunct<char>::~numpunct()
+ld: 0711-224 WARNING: Duplicate symbol: .std::numpunct<char>::do_decimal_point() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::numpunct<char>::do_thousands_sep() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::numpunct<char>::do_grouping() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::numpunct<char>::do_falsename() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::numpunct<char>::do_truename() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::basic_string(const char*)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::assign(const char*)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::assign(const char*,unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::_Inside(const char*)
+ld: 0711-224 WARNING: Duplicate symbol: std::basic_ostream<char,std::char_traits<char> >& std::__fsm_tab____ls<std::char_traits<char> >(std::basic_ostream<char,std::char_traits<char> >&,const char*)
+ld: 0711-224 WARNING: Duplicate symbol: std::locale::facet::~facet()
+ld: 0711-224 WARNING: Duplicate symbol: std::exception::~exception()
+ld: 0711-224 WARNING: Duplicate symbol: std::exception::what() const
+ld: 0711-224 WARNING: Duplicate symbol: std::exception::_Doraise() const
+ld: 0711-224 WARNING: Duplicate symbol: std::bad_cast::~bad_cast()
+ld: 0711-224 WARNING: Duplicate symbol: std::bad_cast::_Doraise() const
+ld: 0711-224 WARNING: Duplicate symbol: std::numpunct<char>::~numpunct()
+ld: 0711-224 WARNING: Duplicate symbol: std::numpunct<char>::do_decimal_point() const
+ld: 0711-224 WARNING: Duplicate symbol: std::numpunct<char>::do_thousands_sep() const
+ld: 0711-224 WARNING: Duplicate symbol: std::numpunct<char>::do_grouping() const
+ld: 0711-224 WARNING: Duplicate symbol: std::numpunct<char>::do_falsename() const
+ld: 0711-224 WARNING: Duplicate symbol: std::numpunct<char>::do_truename() const
+ld: 0711-224 WARNING: Duplicate symbol: std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::~num_put()
+ld: 0711-224 WARNING: Duplicate symbol: std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::do_put(std::ostreambuf_iterator<char,std::char_traits<char> >,std::ios_base&,char,const void*) const
+ld: 0711-224 WARNING: Duplicate symbol: std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::do_put(std::ostreambuf_iterator<char,std::char_traits<char> >,std::ios_base&,char,long double) const
+ld: 0711-224 WARNING: Duplicate symbol: std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::do_put(std::ostreambuf_iterator<char,std::char_traits<char> >,std::ios_base&,char,double) const
+ld: 0711-224 WARNING: Duplicate symbol: std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::do_put(std::ostreambuf_iterator<char,std::char_traits<char> >,std::ios_base&,char,unsigned long) const
+ld: 0711-224 WARNING: Duplicate symbol: std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::do_put(std::ostreambuf_iterator<char,std::char_traits<char> >,std::ios_base&,char,long) const
+ld: 0711-224 WARNING: Duplicate symbol: std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::do_put(std::ostreambuf_iterator<char,std::char_traits<char> >,std::ios_base&,char,bool) const
+ld: 0711-224 WARNING: Duplicate symbol: std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::id
+ld: 0711-224 WARNING: Duplicate symbol: const std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >& std::_Psave__use_facet<std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > >(const std::locale&)__2
+ld: 0711-224 WARNING: Duplicate symbol: const std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >& std::__3__use_facet<std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > >(const std::locale&)
+ld: 0711-224 WARNING: Duplicate symbol: std::_Tidyfac<std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > >::_Facsav
+ld: 0711-224 WARNING: Duplicate symbol: std::numpunct<char>::id
+ld: 0711-224 WARNING: Duplicate symbol: const std::numpunct<char>& std::_Psave__use_facet<std::numpunct<char> >(const std::locale&)__2
+ld: 0711-224 WARNING: Duplicate symbol: const std::numpunct<char>& std::__3__use_facet<std::numpunct<char> >(const std::locale&)
+ld: 0711-224 WARNING: Duplicate symbol: std::basic_string<char,std::char_traits<char>,std::allocator<char> >::npos
+ld: 0711-224 WARNING: Duplicate symbol: std::_Tidyfac<std::numpunct<char> >::_Facsav
+ld: 0711-345 Use the -bloadmap or -bnoquiet option to obtain more information.
+$ a2test1
+DataPoint Tests passed!
+DataSet Tests passed!
+
+Your DatSet module has passed 143 of 143 tests
+
+Congratulations!!!   Your DataSet module is ready for submission
+
+$ c++ outliners.cpp DataSet.cpp -o outliners
+c++: 1501-228 input file outliners.cpp not found
+"DataSet.h", line 9.2: 1540-0804 (W) The characters "/*" are detected in a comment.
+$ c++ outliner.cpp DataSet.cpp -o outliner
+outliner.cpp:
+"DataSet.h", line 9.2: 1540-0804 (W) The characters "/*" are detected in a comment.
+DataSet.cpp:
+"DataSet.h", line 9.2: 1540-0804 (W) The characters "/*" are detected in a comment.
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_ostream<char,std::char_traits<char> >& std::operator<<<std::char_traits<char> >(std::basic_ostream<char,std::char_traits<char> >&,const char*)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_ostream<char,std::char_traits<char> >& std::endl<char,std::char_traits<char> >(std::basic_ostream<char,std::char_traits<char> >&)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_ostream<char,std::char_traits<char> >::operator<<(std::basic_ostream<char,std::char_traits<char> >&(*)(std::basic_ostream<char,std::char_traits<char> >&))
+ld: 0711-224 WARNING: Duplicate symbol: .std::ios_base::fail() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_ios<char,std::char_traits<char> >::clear(int,bool)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_ostream<char,std::char_traits<char> >::operator<<(double)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_ostream<char,std::char_traits<char> >& std::operator<<<char,std::char_traits<char>,int>(std::basic_ostream<char,std::char_traits<char> >&,const std::_Smanip<int>&)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_ostream<char,std::char_traits<char> >::operator<<(std::ios_base&(*)(std::ios_base&))
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_ios<char,std::char_traits<char> >::widen(char) const
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_ostream<char,std::char_traits<char> >::put(char)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_ostream<char,std::char_traits<char> >::flush()
+ld: 0711-224 WARNING: Duplicate symbol: .std::char_traits<char>::length(const char*)
+ld: 0711-224 WARNING: Duplicate symbol: .std::ios_base::width() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_ostream<char,std::char_traits<char> >::sentry::sentry(std::basic_ostream<char,std::char_traits<char> >&)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_ostream<char,std::char_traits<char> >::sentry::operator bool() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::ios_base::flags() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::char_traits<char>::eof()
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_ios<char,std::char_traits<char> >::rdbuf() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_ios<char,std::char_traits<char> >::fill() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_streambuf<char,std::char_traits<char> >::sputc(char)
+ld: 0711-224 WARNING: Duplicate symbol: .std::char_traits<char>::eq_int_type(const int&,const int&)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_streambuf<char,std::char_traits<char> >::sputn(const char*,int)
+ld: 0711-224 WARNING: Duplicate symbol: .std::ios_base::width(int)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_ios<char,std::char_traits<char> >::setstate(int,bool)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_ostream<char,std::char_traits<char> >::sentry::~sentry()
+ld: 0711-224 WARNING: Duplicate symbol: .std::ios_base::getloc() const
+ld: 0711-224 WARNING: Duplicate symbol: .const std::ctype<char>& std::use_facet<std::ctype<char> >(const std::locale&)
+ld: 0711-224 WARNING: Duplicate symbol: .std::locale::~locale()
+ld: 0711-224 WARNING: Duplicate symbol: .std::ios_base::rdstate() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::ios_base::setf(int,int)
+ld: 0711-224 WARNING: Duplicate symbol: .const std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >& std::use_facet<std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > >(const std::locale&)
+ld: 0711-224 WARNING: Duplicate symbol: .std::ostreambuf_iterator<char,std::char_traits<char> >::ostreambuf_iterator(std::basic_streambuf<char,std::char_traits<char> >*)
+ld: 0711-224 WARNING: Duplicate symbol: .std::ostreambuf_iterator<char,std::char_traits<char> >::failed() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::put(std::ostreambuf_iterator<char,std::char_traits<char> >,std::ios_base&,char,double) const
+ld: 0711-224 WARNING: Duplicate symbol: .std::locale::id::operator unsigned long()
+ld: 0711-224 WARNING: Duplicate symbol: .std::bad_cast::bad_cast(const char*)
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::_Getcat(const std::locale::facet**)
+ld: 0711-224 WARNING: Duplicate symbol: .std::_Tidyfac<std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > >::_Save(std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >*)
+ld: 0711-224 WARNING: Duplicate symbol: .std::ctype<char>::_Getcat(const std::locale::facet**)
+ld: 0711-224 WARNING: Duplicate symbol: .std::_Tidyfac<std::ctype<char> >::_Save(std::ctype<char>*)
+ld: 0711-224 WARNING: Duplicate symbol: .strlenFPCc
+ld: 0711-224 WARNING: Duplicate symbol: .std::locale::facet::_Decref()
+ld: 0711-224 WARNING: Duplicate symbol: .std::locale::locale(const std::locale&)
+ld: 0711-224 WARNING: Duplicate symbol: .std::ctype<char>::widen(char) const
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_streambuf<char,std::char_traits<char> >::pubsync()
+ld: 0711-224 WARNING: Duplicate symbol: .std::ios_base::good() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_ios<char,std::char_traits<char> >::tie() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_ostream<char,std::char_traits<char> >::osfx()
+ld: 0711-224 WARNING: Duplicate symbol: .std::char_traits<char>::to_int_type(const char&)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_streambuf<char,std::char_traits<char> >::pptr() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_streambuf<char,std::char_traits<char> >::epptr() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_streambuf<char,std::char_traits<char> >::_Pninc()
+ld: 0711-224 WARNING: Duplicate symbol: .std::bad_cast::~bad_cast()
+ld: 0711-224 WARNING: Duplicate symbol: .std::exception::exception(const char*)
+ld: 0711-224 WARNING: Duplicate symbol: .std::locale::facet::_Incref()
+ld: 0711-224 WARNING: Duplicate symbol: .std::ctype<char>::ctype(const short*,bool,unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::num_put(unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .std::locale::id::id(unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .std::_Tidyfac<std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > >::_Tidy()
+ld: 0711-224 WARNING: Duplicate symbol: .std::_Tidyfac<std::ctype<char> >::_Tidy()
+ld: 0711-224 WARNING: Duplicate symbol: .std::exception::~exception()
+ld: 0711-224 WARNING: Duplicate symbol: .std::ctype_base::ctype_base(unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .std::ctype<char>::_Init(const std::_Locinfo&)
+ld: 0711-224 WARNING: Duplicate symbol: .std::locale::facet::facet(unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::_Init(const std::_Locinfo&)
+ld: 0711-224 WARNING: Duplicate symbol: .std::_Locinfo::_Getctype() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::locale::facet::~facet()
+ld: 0711-224 WARNING: Duplicate symbol: .std::ctype_base::~ctype_base()
+ld: 0711-224 WARNING: Duplicate symbol: .std::ctype<char>::~ctype()
+ld: 0711-224 WARNING: Duplicate symbol: .std::ctype<char>::do_tolower(char*,const char*) const
+ld: 0711-224 WARNING: Duplicate symbol: .std::ctype<char>::do_tolower(char) const
+ld: 0711-224 WARNING: Duplicate symbol: .std::ctype<char>::do_toupper(char*,const char*) const
+ld: 0711-224 WARNING: Duplicate symbol: .std::ctype<char>::do_toupper(char) const
+ld: 0711-224 WARNING: Duplicate symbol: .std::ctype<char>::do_widen(const char*,const char*,char*) const
+ld: 0711-224 WARNING: Duplicate symbol: .std::ctype<char>::do_widen(char) const
+ld: 0711-224 WARNING: Duplicate symbol: .std::ctype<char>::do_narrow(const char*,const char*,char,char*) const
+ld: 0711-224 WARNING: Duplicate symbol: .std::ctype<char>::do_narrow(char,char) const
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::~num_put()
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::do_put(std::ostreambuf_iterator<char,std::char_traits<char> >,std::ios_base&,char,const void*) const
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::do_put(std::ostreambuf_iterator<char,std::char_traits<char> >,std::ios_base&,char,long double) const
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::do_put(std::ostreambuf_iterator<char,std::char_traits<char> >,std::ios_base&,char,double) const
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::do_put(std::ostreambuf_iterator<char,std::char_traits<char> >,std::ios_base&,char,unsigned long) const
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::do_put(std::ostreambuf_iterator<char,std::char_traits<char> >,std::ios_base&,char,long) const
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::do_put(std::ostreambuf_iterator<char,std::char_traits<char> >,std::ios_base&,char,bool) const
+ld: 0711-224 WARNING: Duplicate symbol: .std::exception::what() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::exception::_Doraise() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::bad_cast::_Doraise() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::exception::exception(const std::exception&)
+ld: 0711-224 WARNING: Duplicate symbol: .memcpyFPvPCvUl
+ld: 0711-224 WARNING: Duplicate symbol: .const std::numpunct<char>& std::use_facet<std::numpunct<char> >(const std::locale&)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::basic_string()
+ld: 0711-224 WARNING: Duplicate symbol: .char std::_Widen<char>(char,char*)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::append(unsigned long,char)
+ld: 0711-224 WARNING: Duplicate symbol: .std::numpunct<char>::truename() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::operator=(const std::basic_string<char,std::char_traits<char>,std::allocator<char> >&)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::~basic_string()
+ld: 0711-224 WARNING: Duplicate symbol: .std::numpunct<char>::falsename() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::size() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::_Rep(std::ostreambuf_iterator<char,std::char_traits<char> >,char,unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::c_str() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::_Put(std::ostreambuf_iterator<char,std::char_traits<char> >,const char*,unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .std::allocator<char>::allocator()
+ld: 0711-224 WARNING: Duplicate symbol: .std::_String_val<char,std::allocator<char> >::_String_val(std::allocator<char>)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::_Tidy(bool)
+ld: 0711-224 WARNING: Duplicate symbol: .std::allocator<char>::allocator(const std::allocator<char>&)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::assign(const std::basic_string<char,std::char_traits<char>,std::allocator<char> >&)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::assign(const std::basic_string<char,std::char_traits<char>,std::allocator<char> >&,unsigned long,unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::_Nullstr()
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::_Grow(unsigned long,bool)
+ld: 0711-224 WARNING: Duplicate symbol: .std::char_traits<char>::assign(char*,unsigned long,char)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::_Eos(unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .memsetFPviUl
+ld: 0711-224 WARNING: Duplicate symbol: .std::char_traits<char>::assign(char&,const char&)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::erase(unsigned long,unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::_Refcnt(const char*)
+ld: 0711-224 WARNING: Duplicate symbol: .bool std::operator==<char,char>(const std::allocator<char>&,const std::allocator<char>&)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::capacity() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::char_traits<char>::copy(char*,const char*,unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::_Freeze()
+ld: 0711-224 WARNING: Duplicate symbol: .std::char_traits<char>::move(char*,const char*,unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .memmoveFPvPCvUl
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::max_size() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::_Copy(unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .std::allocator<char>::max_size() const
+ld: 0711-224 WARNING: Duplicate symbol: .char* std::allocator<char>::allocate<void>(unsigned long,const void*)
+ld: 0711-224 WARNING: Duplicate symbol: .std::allocator<char>::deallocate(char*,unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::_Ifmt(char*,char,int)
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::_Iput(std::ostreambuf_iterator<char,std::char_traits<char> >,std::ios_base&,char,char*,unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .std::ios_base::precision() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::_Ffmt(char*,char,int)
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::_Fput(std::ostreambuf_iterator<char,std::char_traits<char> >,std::ios_base&,char,const char*,unsigned long,unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::_Putc(std::ostreambuf_iterator<char,std::char_traits<char> >,const char*,unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .memchrFPCviUl
+ld: 0711-224 WARNING: Duplicate symbol: .std::numpunct<char>::decimal_point() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::numpunct<char>::grouping() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::numpunct<char>::thousands_sep() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::ostreambuf_iterator<char,std::char_traits<char> >::operator*()
+ld: 0711-224 WARNING: Duplicate symbol: .std::ostreambuf_iterator<char,std::char_traits<char> >::operator=(char)
+ld: 0711-224 WARNING: Duplicate symbol: .std::ostreambuf_iterator<char,std::char_traits<char> >::operator++()
+ld: 0711-224 WARNING: Duplicate symbol: .char* std::_Allocate<char>(unsigned long,char*)
+ld: 0711-224 WARNING: Duplicate symbol: .std::numpunct<char>::_Getcat(const std::locale::facet**)
+ld: 0711-224 WARNING: Duplicate symbol: .std::_Tidyfac<std::numpunct<char> >::_Save(std::numpunct<char>*)
+ld: 0711-224 WARNING: Duplicate symbol: .std::numpunct<char>::numpunct(unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .std::_Tidyfac<std::numpunct<char> >::_Tidy()
+ld: 0711-224 WARNING: Duplicate symbol: .std::numpunct<char>::_Init(const std::_Locinfo&)
+ld: 0711-224 WARNING: Duplicate symbol: .std::_Locinfo::_Getlconv() const
+ld: 0711-224 WARNING: Duplicate symbol: .char* std::_Maklocstr<char>(const char*,char*)
+ld: 0711-224 WARNING: Duplicate symbol: .std::_Locinfo::_Getfalse() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::_Locinfo::_Gettrue() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::numpunct<char>::~numpunct()
+ld: 0711-224 WARNING: Duplicate symbol: .std::numpunct<char>::do_decimal_point() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::numpunct<char>::do_thousands_sep() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::numpunct<char>::do_grouping() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::numpunct<char>::do_falsename() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::numpunct<char>::do_truename() const
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::basic_string(const char*)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::assign(const char*)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::assign(const char*,unsigned long)
+ld: 0711-224 WARNING: Duplicate symbol: .std::basic_string<char,std::char_traits<char>,std::allocator<char> >::_Inside(const char*)
+ld: 0711-224 WARNING: Duplicate symbol: std::ctype_base::~ctype_base()
+ld: 0711-224 WARNING: Duplicate symbol: std::locale::facet::~facet()
+ld: 0711-224 WARNING: Duplicate symbol: std::exception::~exception()
+ld: 0711-224 WARNING: Duplicate symbol: std::exception::what() const
+ld: 0711-224 WARNING: Duplicate symbol: std::exception::_Doraise() const
+ld: 0711-224 WARNING: Duplicate symbol: std::bad_cast::~bad_cast()
+ld: 0711-224 WARNING: Duplicate symbol: std::bad_cast::_Doraise() const
+ld: 0711-224 WARNING: Duplicate symbol: std::numpunct<char>::~numpunct()
+ld: 0711-224 WARNING: Duplicate symbol: std::numpunct<char>::do_decimal_point() const
+ld: 0711-224 WARNING: Duplicate symbol: std::numpunct<char>::do_thousands_sep() const
+ld: 0711-224 WARNING: Duplicate symbol: std::numpunct<char>::do_grouping() const
+ld: 0711-224 WARNING: Duplicate symbol: std::numpunct<char>::do_falsename() const
+ld: 0711-224 WARNING: Duplicate symbol: std::numpunct<char>::do_truename() const
+ld: 0711-224 WARNING: Duplicate symbol: std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::~num_put()
+ld: 0711-224 WARNING: Duplicate symbol: std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::do_put(std::ostreambuf_iterator<char,std::char_traits<char> >,std::ios_base&,char,const void*) const
+ld: 0711-224 WARNING: Duplicate symbol: std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::do_put(std::ostreambuf_iterator<char,std::char_traits<char> >,std::ios_base&,char,long double) const
+ld: 0711-224 WARNING: Duplicate symbol: std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::do_put(std::ostreambuf_iterator<char,std::char_traits<char> >,std::ios_base&,char,double) const
+ld: 0711-224 WARNING: Duplicate symbol: std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::do_put(std::ostreambuf_iterator<char,std::char_traits<char> >,std::ios_base&,char,unsigned long) const
+ld: 0711-224 WARNING: Duplicate symbol: std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::do_put(std::ostreambuf_iterator<char,std::char_traits<char> >,std::ios_base&,char,long) const
+ld: 0711-224 WARNING: Duplicate symbol: std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::do_put(std::ostreambuf_iterator<char,std::char_traits<char> >,std::ios_base&,char,bool) const
+ld: 0711-224 WARNING: Duplicate symbol: std::ctype<char>::~ctype()
+ld: 0711-224 WARNING: Duplicate symbol: std::ctype<char>::do_tolower(char*,const char*) const
+ld: 0711-224 WARNING: Duplicate symbol: std::ctype<char>::do_tolower(char) const
+ld: 0711-224 WARNING: Duplicate symbol: std::ctype<char>::do_toupper(char*,const char*) const
+ld: 0711-224 WARNING: Duplicate symbol: std::ctype<char>::do_toupper(char) const
+ld: 0711-224 WARNING: Duplicate symbol: std::ctype<char>::do_widen(const char*,const char*,char*) const
+ld: 0711-224 WARNING: Duplicate symbol: std::ctype<char>::do_widen(char) const
+ld: 0711-224 WARNING: Duplicate symbol: std::ctype<char>::do_narrow(const char*,const char*,char,char*) const
+ld: 0711-224 WARNING: Duplicate symbol: std::ctype<char>::do_narrow(char,char) const
+ld: 0711-224 WARNING: Duplicate symbol: std::basic_ostream<char,std::char_traits<char> >& std::endl<char,std::char_traits<char> >(std::basic_ostream<char,std::char_traits<char> >&)
+ld: 0711-224 WARNING: Duplicate symbol: std::basic_ostream<char,std::char_traits<char> >& std::__fsm_tab____ls<std::char_traits<char> >(std::basic_ostream<char,std::char_traits<char> >&,const char*)
+ld: 0711-224 WARNING: Duplicate symbol: std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >::id
+ld: 0711-224 WARNING: Duplicate symbol: const std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >& std::_Psave__use_facet<std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > >(const std::locale&)__2
+ld: 0711-224 WARNING: Duplicate symbol: const std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > >& std::__3__use_facet<std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > >(const std::locale&)
+ld: 0711-224 WARNING: Duplicate symbol: std::_Tidyfac<std::num_put<char,std::ostreambuf_iterator<char,std::char_traits<char> > > >::_Facsav
+ld: 0711-224 WARNING: Duplicate symbol: const std::ctype<char>& std::_Psave__use_facet<std::ctype<char> >(const std::locale&)__2
+ld: 0711-224 WARNING: Duplicate symbol: const std::ctype<char>& std::__3__use_facet<std::ctype<char> >(const std::locale&)
+ld: 0711-224 WARNING: Duplicate symbol: std::_Tidyfac<std::ctype<char> >::_Facsav
+ld: 0711-224 WARNING: Duplicate symbol: std::numpunct<char>::id
+ld: 0711-224 WARNING: Duplicate symbol: const std::numpunct<char>& std::_Psave__use_facet<std::numpunct<char> >(const std::locale&)__2
+ld: 0711-224 WARNING: Duplicate symbol: const std::numpunct<char>& std::__3__use_facet<std::numpunct<char> >(const std::locale&)
+ld: 0711-224 WARNING: Duplicate symbol: std::basic_string<char,std::char_traits<char>,std::allocator<char> >::npos
+ld: 0711-224 WARNING: Duplicate symbol: std::_Tidyfac<std::numpunct<char> >::_Facsav
+ld: 0711-345 Use the -bloadmap or -bnoquiet option to obtain more information.
+$ outliners 
+Regression Analysis (x on y)
+============================
+
+Choose one of the following options:
+1 Load a data set from file
+2 Exclude outlier points in a data set
+3 Include outlier points in the calculations
+4 Display the values for a data set
+5 Compare two data sets
+6 Display statistics for all data sets
+0 Quit
+Your selection : 1
+Enter filename : paleo.dat
+
+Choose one of the following options:
+1 Load a data set from file
+2 Exclude outlier points in a data set
+3 Include outlier points in the calculations
+4 Display the values for a data set
+5 Compare two data sets
+6 Display statistics for all data sets
+0 Quit
+Your selection : 1
+Enter filename : stopDistance.dat
+
+Choose one of the following options:
+1 Load a data set from file
+2 Exclude outlier points in a data set
+3 Include outlier points in the calculations
+4 Display the values for a data set
+5 Compare two data sets
+6 Display statistics for all data sets
+0 Quit
+Your selection : 6
+Filename                 Slope Intercept Correlation
+paleo.dat                 0.64      2.51      0.88
+stopDistance.dat          3.08    -50.69      0.44
+
+Choose one of the following options:
+1 Load a data set from file
+2 Exclude outlier points in a data set
+3 Include outlier points in the calculations
+4 Display the values for a data set
+5 Compare two data sets
+6 Display statistics for all data sets
+0 Quit
+Your selection : 2
+Enter filename : stopDistance.dat
+Positive tolerance : 1.0
+
+Choose one of the following options:
+1 Load a data set from file
+2 Exclude outlier points in a data set
+3 Include outlier points in the calculations
+4 Display the values for a data set
+5 Compare two data sets
+6 Display statistics for all data sets
+0 Quit
+Your selection : 6
+Filename                 Slope Intercept Correlation
+paleo.dat                 0.64      2.51      0.88
+stopDistance.dat          0.26     26.94      0.91
+
+Choose one of the following options:
+1 Load a data set from file
+2 Exclude outlier points in a data set
+3 Include outlier points in the calculations
+4 Display the values for a data set
+5 Compare two data sets
+6 Display statistics for all data sets
+0 Quit
+Your selection : 5
+Enter first filename  : paleo.dat
+Enter second filename : stopDistance.dat
+Data Sets Do Not Match
+
+Choose one of the following options:
+1 Load a data set from file
+2 Exclude outlier points in a data set
+3 Include outlier points in the calculations
+4 Display the values for a data set
+5 Compare two data sets
+6 Display statistics for all data sets
+0 Quit
+Your selection : 4
+Enter filename to be displayed : paleo.dat
+Independent Value  Dependent Value
+             5.10             3.46
+             4.60             6.53
+            12.98            14.15
+             7.90             5.32
+            12.83            12.96
+            16.41            13.08
+             6.60             6.84
+            10.00             9.12
+             8.08            10.77
+            15.67             9.25
+             4.53             4.11
+             6.44             6.94
+            21.53            14.64
+            12.82             9.36
+            22.27            17.56
+             4.93             6.21
+            16.35            15.02
+            13.41             8.51
+
+Choose one of the following options:
+1 Load a data set from file
+2 Exclude outlier points in a data set
+3 Include outlier points in the calculations
+4 Display the values for a data set
+5 Compare two data sets
+6 Display statistics for all data sets
+0 Quit
+Your selection : 3
+Enter filename : stopDistance.dat
+
+Choose one of the following options:
+1 Load a data set from file
+2 Exclude outlier points in a data set
+3 Include outlier points in the calculations
+4 Display the values for a data set
+5 Compare two data sets
+6 Display statistics for all data sets
+0 Quit
+Your selection : 6
+Filename                 Slope Intercept Correlation
+paleo.dat                 0.64      2.51      0.88
+stopDistance.dat          3.08    -50.69      0.44
+
+Choose one of the following options:
+1 Load a data set from file
+2 Exclude outlier points in a data set
+3 Include outlier points in the calculations
+4 Display the values for a data set
+5 Compare two data sets
+6 Display statistics for all data sets
+0 Quit
+Your selection : 0
+
+Have a Nice Day!
+$ exit
+
+Script command is complete on Thu Feb 17 19:42:18 EST 2005.

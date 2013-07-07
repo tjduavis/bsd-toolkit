@@ -1,0 +1,16 @@
+Q3: Bonus Question  (2 marks)
+
+What is the runtime of the function?
+int isprime(int N){
+  int rc=(N<=2)?1:(N%2);
+  for(int i=3;i*i<=N;i+=2){
+    if(N%i==0)
+     rc=0;
+  }
+  return rc;
+}
+
+
+The run time of this function is O (N). Even tho the i*i <= N constraints growth of the loop. The loop still increments grows at a a linear growth. If you would graph this, the line would start at a higher y axis and have a steeper slope.
+
+

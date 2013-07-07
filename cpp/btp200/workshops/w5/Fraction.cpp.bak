@@ -1,0 +1,86 @@
+/************************************************/
+/* Workshop5                                    */
+/* Fraction.cpp                                 */
+/*    Purpose: - fraction calculator            */
+/*    Author: Timothy Duavis                    */
+/************************************************/
+
+//Modifiers*********************************************/
+
+/*                                                     */
+/* Constructor                                         */ 
+/*      purpose: initialize numerator and denominator  */
+/*               to zero.                              */
+/*                                                     */
+Fraction::Fraction(){
+	numerator = 0;
+	denominator = 1;
+}
+
+/*                                                     */
+/* UserInput()                                         */
+/*      purpose: Inputs values for numerator and       */
+/*               denominator in class Fraction         */
+/*                                                     */   
+void Fraction::UserInput(){
+	bool ok=true;
+	do{
+		cout << "Enter numerator : ";
+		cin >> numerator;
+		if(cin.fail()){
+			cin.clear();
+			cin.ignore(IGNORE_CHAR, '\n');
+			ok = false;
+		}               
+	}while(!ok);
+	do{
+		cout << "Enter denominator : ";
+		cin >> denominator;
+	}while(!validate());
+}
+
+/*                                                     */
+int Fraction::operator*(Fraction& Rhs){
+	denominator = denominator * Rhs.denominator;
+}
+
+/*                                                     */
+/* operator==(Fraction& Lhs, Fraction& Rhs)            */ 
+/*      purpose: compares two instances of class       */
+/*               Fraction for equavalency              */
+/*                                                     */ 
+bool operator==(Fraction& Lhs, Fraction& Rhs){
+	if(Lhs.numerator==Rhs.numerator && Lhs.denominator==Rhs.denominator)
+		return true;
+	else
+		return false;
+}
+
+//Queries***********************************************/
+
+/*                                                     */ 
+/* Display()                                           */
+/*      purpose: outputs numerator and denominator in  */
+/*               simplified format.                    */
+/*                                                     */
+void Fraction::Display() const{
+	cout << numerator << "/" << denominator;
+}
+
+/*******************Global Functions********************
+//Modifiers*********************************************/
+
+/*                                                     */
+/* operator+(Fraction& Rhs)                            */ 
+/*      purpose: adds numerator and denominator        */  
+/*                                                     */  
+int Fraction::operator+(Fraction& Rhs){
+	numerator = numerator + Rhs.numerator;
+	denominator = denominator + Rhs.denominator;
+}
+
+/* 
+int Fraction::operator-(Fraction& Lhs){
+	numerator = numerator - Rhs.numerator;
+	denominator = denominator - Rhs.denominator;
+}       

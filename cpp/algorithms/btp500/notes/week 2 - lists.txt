@@ -1,0 +1,39 @@
+List - a sequence of values
+
+Two methods in storing lists:
+	- array
+	- linked list
+		nodes - every node contains x amount of data
+		pointer - identifies next node
+
+storage? - how many storage do you need to store your data?
+
+when is it better to use a linked list vs. array?
+
+
+Templates Tips: keep everything in the header file
+
+
+ex. of simple linked list, using a template
+
+
+template <class T>;
+struct Node{
+	T date_;
+	Node<T> *next_;
+};
+
+template <class T>
+class LList{
+	Node<T>* start_;
+	public:
+		LList();
+		void Insert(const T& data);
+		void Append(const T& data);
+		void Print() const;
+		~LList();
+			
+};
+
+
+path: /home/leung/btp500

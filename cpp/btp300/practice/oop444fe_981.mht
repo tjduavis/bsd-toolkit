@@ -1,0 +1,247 @@
+From: <Saved by Microsoft Internet Explorer 5>
+Subject: 
+Date: Wed, 21 Dec 2005 12:57:20 -0500
+MIME-Version: 1.0
+Content-Type: text/html;
+	charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/tests/oop444fe.981
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.2670
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Dwindows-1252">
+<META content=3D"MSHTML 6.00.2900.2802" name=3DGENERATOR></HEAD>
+<BODY><PRE>        Final Examination                                    =
+Spring 1998
+
+
+
+        Answer all questions in the examination booklet(s) supplied. Use
+        the C++ language for all answers that require  programming.  You
+        may use one 8.5" by 11" crib sheet and up to two textbooks  (the
+        pre-printed notes count as one book). There is  a  total  of  40
+        marks, 10 per question.
+
+        1. Determine the exact output of  the  following  program.  Show
+           your rough work if you expect ANY part marks. The alphabet is
+           ABCDEFGHIJKLMNOPQRSTUVWXYZ, 'A' is 65 and 'a' is 97.
+
+            #include &lt;iostream.h&gt;
+            template &lt;class t&gt;
+            class cl {
+                t x;
+              public:
+                cl(t y, t (*foo)(t)) { x =3D foo(y); }
+                t well() const { return x; }
+            };
+            class bother {
+                char c1;
+                char c2;
+              public:
+                bother() { c1 =3D c2 =3D 'x'; }
+                bother(char s[]) { c1 =3D s[1]; c2 =3D s[0]; }
+                char what() { return c1; }
+                char then() { return c2; }
+            };
+            bother pain(bother a)
+            {
+                char str[3];
+                str[0] =3D a.what() - 3;
+                str[1] =3D a.then() - 5;
+                cout &lt;&lt; "pain\n";
+                return bother(str);
+            }
+            bother sorrow(bother a)
+            {
+                char str[3];
+                str[0] =3D a.then() + 3;
+                str[1] =3D a.what() + 3;
+                cout &lt;&lt; "sorrow\n";
+                return bother(str);
+            }
+            int main()
+            {
+                // Hint: compiler will cast the strings to bothers:
+                cl&lt;bother&gt; one("this", pain), two("some", sorrow);
+                cout &lt;&lt; one.well().what() &lt;&lt; =
+two.well().then()=20
+                     &lt;&lt; one.well().then() &lt;&lt; =
+two.well().what() &lt;&lt; '\n';
+                return 0;
+            }
+
+
+
+
+        OOP444                                          OOP Using C++ II
+        Final Examination                                    Spring 1998
+
+
+
+        2. Determine the exact output of the following program:
+
+            #include &lt;iostream.h&gt;
+            #include &lt;string.h&gt;
+            class t {
+                char st[41];
+              public:
+                t() { strcpy(st, "Another"); }
+                t(char str[]) { strcpy(st, str); }
+                virtual void sh(ostream &amp;os) const { os &lt;&lt; st; =
+}
+            };
+            ostream &amp;operator&lt;&lt;(ostream &amp;os, const t =
+&amp;x) {
+                x.sh(os);
+                return os;
+            }
+            struct n {
+                char c;
+                n *p;
+            };
+            class s {
+                n *b;
+              public:
+                s(char str[]) { b =3D NULL;
+                              int i =3D 0;
+                              while (str[i]) {
+                                  n *t =3D new n; // assume this =
+succeeds
+                                  t-&gt;c =3D str[i++] ^ i;
+                                  t-&gt;p =3D b;
+                                  b =3D t;
+                              }
+                            }
+                ~s() { n *t =3D b;=20
+                       while (t) { b =3D t-&gt;p; delete t; t =3D b; }
+                     }
+                void sh(ostream &amp;os) const { n *t =3D b;
+                                             while (t) {
+                                                 os &lt;&lt; t-&gt;c;
+                                                 t =3D t-&gt;p;
+                                             }
+                                           }
+            };
+            class together: public t, public s {
+              public:
+                together(char s1[], char s2[]) : t(s1), s(s2) {}
+                void sh(ostream &amp;os) const { s::sh(os); t::sh(os); }
+            };
+            int main() {=20
+                together tog(" goes on", "tiejh");
+                cout &lt;&lt; tog &lt;&lt; '\n';
+                return 0;
+            }
+
+
+
+
+        OOP444                                          OOP Using C++ II
+        Final Examination                                    Spring 1998
+
+
+
+        3.  Write the template for a  class  named  file&lt;RECORD&gt;,  =
+where
+            RECORD can be replaced by any data type of which copies  can
+            be made, and for which there is a  default  constructor  (or
+            else no constructors at all). The purpose of a  =
+file&lt;RECORD&gt;
+            is to perform read/write access of a  fixed-length  file  of
+            records, where RECORD is the type of  data  stored  in  each
+            record of the file.
+
+            When instantiated a file&lt;RECORD&gt; must be supplied  the =
+ name
+            of a file to open. If the file already exists, it should  be
+            used, and if it doesn't, it should be created. (Also, assume
+            ios::binary must be specified in  order  to  perform  binary
+            file access).
+
+            There are the following member functions:
+
+                read(unsigned long recnum) - which returns RECORD number
+                   "recnum", where record number 0 is the  first  record
+                   in the file. If there is no such record on file, then
+                   a default RECORD is returned.
+
+                write(unsigned long recnum, RECORD  x)  -  which  writes
+                   record "x" to the file as record number "recnum".
+
+                size() - which returns the number of  records  currently
+                   in the file (an unsigned long value).
+
+            For example, if we had a class
+
+                class stuff {
+                    char s[41];
+                    double x;
+                  public:
+                    stuff(char str[] =3D "", double a =3D 0.0) {
+                        strcpy(s, str); x =3D a;               }
+                    const char *name() const { return s; }
+                    double amount() const { return x; }
+                };
+
+            then
+
+                file&lt;stuff&gt; f("test.dat");
+                stuff r("This is a test", 4.5), q;
+                f.write(f.size(), r);
+                q =3D f.read(0);
+
+            would cause the contents of r to be written to the end of  a
+            file named "test.dat", which hopefully contains  records  of
+            type stuff, and would then fill q with the contents  of  the
+            1st record in the file.
+
+            Hint: in the template, derive the class from fstream.
+
+
+
+        OOP444                                          OOP Using C++ II
+        Final Examination                                    Spring 1998
+
+
+
+        4.  Code a class named chopper, whose purpose  is  chop  leading
+            and trailing bits off of  an  unsigned  int  value.  When  a
+            chopper is instantiated, two  numbers  may  be  passed:  the
+            number of leading bits to remove, and the number of trailing
+            bits to remove. If omitted, the default number  of  bits  to
+            remove from either end is 0.
+
+            When an unsigned int value is "sent" to a chopper, using the
+            &lt;&lt; operator with a chopper on the left and the value =
+on  the
+            right, the result is an unsigned int with the remaining bits
+            in the low order positions of the  result,  with  leading  0
+            bits to fill it up. For example:
+
+                chopper chop((sizeof(int) * 8) - 7, 3);
+                unsigned int x =3D 179;       // 0...010110011 in binary
+                unsigned int y =3D chop &lt;&lt; x; // 0...000000110 in =
+binary
+                cout &lt;&lt; y;
+
+            would output 6, after discarding all but the last 7  leading
+            bits, and 3 trailing bits:
+
+                sizeof(int)*8-7   3
+                        |         |
+                  -----------    ---
+                  000...000010110011
+                             ----
+                               |
+                          what is left (6)
+
+            Hint: shift to the left, shift to the right....
+
+
+
+
+
+
+</PRE></BODY></HTML>
