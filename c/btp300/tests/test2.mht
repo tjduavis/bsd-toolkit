@@ -1,0 +1,534 @@
+From: <Saved by Microsoft Internet Explorer 5>
+Subject: Seneca | School of Computer Studies | Object-Oriented Programming I - C++
+Date: Wed, 21 Dec 2005 12:51:12 -0500
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----=_NextPart_000_025D_01C6062D.38B181D0"
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.2670
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_025D_01C6062D.38B181D0
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/tests/btp300t2.053.html
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<?xml version=3D'1.0' encoding=3D'UTF-8'?><HTML><HEAD><TITLE>Seneca | =
+School of Computer Studies | Object-Oriented Programming I - C++</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META http-equiv=3DPICS-Label=20
+content=3D'(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r =
+(cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen =
+true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true =
+r (SS~~000 1))'>
+<META content=3D"(c) Copyright Seneca College 2005" name=3DCopyright>
+<META=20
+content=3D"Welcome to the Bachelors Degree of Software Development =
+Program Web Site.  On this site you can find an intermediate course on =
+object-oriented programming in C++.  Designed by Chris Szalwinski."=20
+name=3DDescription>
+<META=20
+content=3D"This subject expands on introductory elements of C++ and =
+covers intermediate C features.  The emphasis throughout is to prepare =
+for the solution of large problems."=20
+name=3DAbstract>
+<META content=3Dchris.szalwinski@senecac.on.ca name=3DAuthor>
+<META content=3D"software development, object-oriented programming, =
+lecture notes"=20
+name=3DKeywords><LINK =
+href=3D"http://cs.senecac.on.ca/~btp300/pages/style.043.css"=20
+type=3Dtext/css rel=3Dstylesheet><LINK media=3Dscreen=20
+href=3D"http://cs.senecac.on.ca/~btp300/pages/styleSPrint.043.css" =
+type=3Dtext/css=20
+rel=3Dstylesheet><LINK media=3Dprint=20
+href=3D"http://cs.senecac.on.ca/~btp300/pages/stylePPrint.043.css" =
+type=3Dtext/css=20
+rel=3Dstylesheet>
+<META content=3D"MSHTML 6.00.2900.2802" name=3DGENERATOR></HEAD>
+<BODY><SPAN lang=3Den-us xmlns=3D"http://www.w3.org/1999/xhtml">
+<P><SPAN>
+<P>
+<TABLE cellSpacing=3D0 cellPadding=3D0><!-- Body Cell -->
+  <TBODY>
+  <TR height=3D600><!-- Content Area -->
+    <TD class=3Dtbody bgColor=3D#ffffff>
+      <TABLE cellPadding=3D10 width=3D"100%">
+        <TBODY>
+        <TR>
+          <TD vAlign=3Dtop bgColor=3D#ffffff>
+            <P class=3Dtexthead align=3Dcenter>Test 2 - Nov 28 2005 </P>
+            <P>Name _______________________________________ Student =
+Number=20
+            _______________________ </P>
+            <P class=3Dsection>Notes:</P>
+            <P>
+            <UL>
+              <LI>This test has 3 pages and lasts two full periods=20
+              <LI>This test is out of 20 marks and is worth 15% of your =
+final=20
+              grade=20
+              <LI>There are 2 questions in this paper - attempt both of =
+them=20
+              <LI>Answer all questions in the exam booklet provided=20
+              <LI>Hand in this test paper with your answer booklet=20
+              <LI>You may use your copy of the lecture notes, the =
+subject notes=20
+              and one textbook=20
+              <LI>You may use a non-programmable, non-messaging =
+calculator=20
+              <LI>You may use a paper foreign-language dictionary =
+</LI></UL>
+            <P></P><BR><BR><BR>
+            <P class=3Dsection>Question 1 - Word Problem - (10 =
+marks):</P>
+            <P>Design and code an abstract class named <SPAN=20
+            class=3Dcode>Expression</SPAN> from which you will derive =
+classes that=20
+            represent various kinds of mathematical expressions, which =
+consist=20
+            of terms with constant coefficients.&nbsp; Any class derived =
+from=20
+            this base class includes at least the following member =
+functions:=20
+            <UL>
+              <LI><SPAN class=3Dcode>void display(ostream&amp; os) =
+const</SPAN>=20
+              receives a reference to an <SPAN =
+class=3Dcode>ostream</SPAN> object=20
+              and inserts the expression into the <SPAN=20
+              class=3Dcode>ostream</SPAN> object;=20
+              <LI><SPAN class=3Dcode>int nTerms() const</SPAN> returns =
+the number=20
+              of terms in the expression;=20
+              <LI><SPAN class=3Dcode>double operator()(double x)</SPAN> =
+receives a=20
+              floating-point value and returns the result of the =
+expression when=20
+              evaluated for that particular value;=20
+              <LI><SPAN class=3Dcode>double&amp; operator[](int =
+i)</SPAN> receives=20
+              an integer index and returns a reference to the constant=20
+              coefficient of the term associated with that index;=20
+              <LI><SPAN class=3Dcode>double operator[](int i) =
+const</SPAN>=20
+              receives an integer index and returns a copy of the =
+constant=20
+              coefficient of the term associated with the index =
+received;=20
+            </LI></UL>In your design define a helper function that =
+overloads the=20
+            insertion operator (<SPAN class=3Dcode>&lt;&lt;</SPAN>) =
+calls your=20
+            <SPAN class=3Dcode>display</SPAN> function on an <SPAN=20
+            class=3Dcode>ostream</SPAN> and returns a reference to the =
+<SPAN=20
+            class=3Dcode>ostream</SPAN>, so that a simple call to the =
+insertion=20
+            operation will display any expression on the specified <SPAN =
+
+            class=3Dcode>ostream</SPAN> object.&nbsp;=20
+            <P></P>
+            <P>Derive from your abstract class, a class named <SPAN=20
+            class=3Dcode>UPolynomial</SPAN> that holds information for a =
+
+            univariate polynomial expression.&nbsp; A univariate =
+polynomial is a=20
+            polynomial expression in a single variable.&nbsp; For =
+example,=20
+            <TABLE width=3D"45%">
+              <TBODY>
+              <TR>
+                <TD><PRE> 3 x^4 + 4.5 x^3 + 6 x^2 + 9 x + =
+14</PRE></TD></TR></TBODY></TABLE><SPAN=20
+            class=3Dcode>x</SPAN> denotes the variable and <SPAN=20
+            class=3Dcode>^</SPAN> denotes "to the power of".&nbsp; A =
+univariate=20
+            polynomial expression may contain any number of terms.&nbsp; =
+Each=20
+            term is the product of its own coefficient and the value of =
+the=20
+            variable raised to the power associated with that =
+term.&nbsp; The=20
+            last term in the expression is the last term's coefficient=20
+            multiplied by the variable raised to the power of 0 (that =
+is, the=20
+            coefficient itself - for example, <SPAN =
+class=3Dcode>14</SPAN>).&nbsp;=20
+            The next to last term is the coefficient for the next to =
+last term=20
+            multiplied by the variable raised to the power of 1 (that =
+is, the=20
+            coefficient multiplied by the variable - for example, <SPAN=20
+            class=3Dcode>9 x</SPAN>).&nbsp; The term before the next to =
+last term=20
+            is the coeffcient for that term multiplied by the variable =
+raised to=20
+            the power of 2 (that is, the coefficient multiplied by the =
+variable=20
+            squared - for example, <SPAN class=3Dcode>6 =
+x^2</SPAN>).&nbsp; And, so=20
+            on.&nbsp; </P>
+            <P>Upon instantiation, a <SPAN =
+class=3Dcode>UPolynomial</SPAN> object=20
+            takes, optionally, but in the following order, an integer =
+holding=20
+            the number of terms in the expression and an array of =
+floating point=20
+            values holding the coefficients for the terms in the=20
+            expression.&nbsp; The first coefficient in the array is the=20
+            coefficient associated with the term that raises the =
+variable to the=20
+            highest power.&nbsp; The second coefficient in the array is =
+the=20
+            coefficient associated with the term that raises the =
+variable to the=20
+            highest power less one.&nbsp; And, so on.&nbsp; The array =
+for the=20
+            above example would be {3, 4.5, 6, 9, 14}.&nbsp; If no array =
+is=20
+            supplied, the object sets all of the coefficients to =
+0.&nbsp; If the=20
+            number of terms is not supplied, the object assumes that =
+there are=20
+            no terms.&nbsp; </P>
+            <P>Since your design requires dynamic allocation, your class =
+
+            includes a copy constructor, assignment operator and=20
+            destructor.&nbsp; You should also design your class to =
+handle=20
+            invalid index values supplied to the two subscripting=20
+            operators.&nbsp; </P>
+            <P>Your <SPAN class=3Dcode>display</SPAN> function displays =
+the=20
+            expression in the form shown below, where the number of =
+decimal=20
+            places and the field width for each term are specified as=20
+            unmodifiable variables.&nbsp; The example below uses one =
+decimal=20
+            place and a width of 4.&nbsp; </P>
+            <P>Your design also include a helper function that overloads =
+the=20
+            addition operator for two <SPAN =
+class=3Dcode>UPolynomial</SPAN>=20
+            objects.&nbsp; The objects do not necessarily have to have =
+the same=20
+            number of terms.&nbsp; </P>
+            <P>Finally, derive from your <SPAN =
+class=3Dcode>UPolynomial</SPAN>=20
+            class, a class named <SPAN class=3Dcode>UQuadratic</SPAN> =
+that holds=20
+            information for a quadratic expression.&nbsp; Upon =
+instantiaion, a=20
+            <SPAN class=3Dcode>UQuadratic</SPAN> object receives three=20
+            floating-point values holding the three coefficients of a =
+quadratic=20
+            expression.&nbsp; [Technical Hint: use <SPAN=20
+            class=3Dcode>UPolynomial::operator[](1)</SPAN> to access the =
+second=20
+            coefficient from within the constructor.&nbsp;] </P>
+            <P>Place your design in a header file named <SPAN=20
+            class=3Dcode>Expression.h</SPAN> and an associated =
+implementation file=20
+            named <SPAN class=3Dcode>Expression.cpp</SPAN>.&nbsp; =
+Include a guard=20
+            in your header file to avoid duplicate class =
+declarations.&nbsp;=20
+</P>
+            <P>When used with the following program, your design =
+produces output=20
+            something like:=20
+            <TABLE width=3D"95%">
+              <TBODY>
+              <TR>
+                <TD width=3D"50%"><PRE> #include &lt;iostream&gt;
+ #include &lt;iomanip&gt;
+ using namespace std;
+ #include "Expression.h"
+
+ int main() {
+     UPolynomial p(2), r;
+     UQuadratic q(3.3, 4.0, 1.5);
+
+     p[0] =3D 2.5;
+     p[1] =3D 4.0;
+     cout &lt;&lt; "p:       " &lt;&lt; p &lt;&lt; endl;
+     cout &lt;&lt; "q:       " &lt;&lt; q &lt;&lt; endl;
+     cout &lt;&lt; "r =3D p+q: " &lt;&lt; (r =3D p + q) &lt;&lt; =
+endl;&nbsp;
+     cout &lt;&lt; "r(1.5) =3D " &lt;&lt; r(1.5) &lt;&lt; endl;
+
+     return 0;
+ }</PRE></TD>
+                <TD width=3D"50%"><PRE class=3Dresult>
+
+
+
+
+
+
+
+
+
+
+ p:        2.5 x^1 +  4.0
+ q:        3.3 x^2 +  4.0 x^1 +  1.5
+ r =3D p+q:  3.3 x^2 +  6.5 x^1 +  5.5&nbsp;
+ r(1.5) =3D 22.7
+
+
+ =
+</PRE></TD></TR></TBODY></TABLE></P><BR><BR><BR><BR><BR><BR><BR><BR><BR><=
+BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+            <P class=3Dsection>Question 2 - Walkthrough - (10 =
+marks):</P>
+            <P>What is the exact output of the following program?&nbsp; =
+Show=20
+            your rough work to avoid deductions.=20
+            <TABLE width=3D"45%">
+              <TBODY>
+              <TR>
+                <TD><PRE> #include &lt;iostream&gt;
+ using namespace std;
+
+ template&lt;class STREAM&gt;
+ class Bsd {
+     STREAM course;
+     static int courses;
+ public:
+     Bsd(char* name, char t, int (*g)(char*, int)) : course(name, t, g) =
+{
+         cout &lt;&lt; *this; courses++; }
+     void go() { course.go(); }
+     bool operator!() { return !course; }
+     ~Bsd() { cout &lt;&lt; --courses &lt;&lt; endl; }
+     friend ostream&amp; operator&lt;&lt;(ostream&amp; os, =
+Bsd&lt;STREAM&gt;&amp; s) {
+         os &lt;&lt; courses &lt;&lt; ' '; s.course.display(os); return =
+os; }
+ };
+ template&lt;class STREAM&gt;
+ int Bsd&lt;STREAM&gt;::courses =3D 0;
+
+ class Bt {
+     char code[4];
+     char last;
+     int (*f)(char*, int);
+ public:
+     Bt(char* name, char t, int (*g)(char*, int)) : last(t) {
+         strcpy(code, name); f =3D g; }
+     virtual int d() { return -1; }
+     operator bool() { return *code =3D=3D last; } // casts object to =
+bool
+     void go() { if(*this) atLast(); else ++*code; }
+     void atLast() { code[2] =3D '.'; }
+     int c(int start) {return f(code, start);}
+     const char* name() const { return code; }
+     virtual void display(ostream&amp; os) {
+         os &lt;&lt; name() &lt;&lt; " Level " &lt;&lt; d() &lt;&lt; =
+(*this ? " Done" : "") &lt;&lt; endl; }&nbsp;
+ };
+ class Btp : public Bt {
+ public:
+     Btp(char* name, char t, int (*g)(char*, int)) : Bt(name, t, g) { }
+     int d() { return c(0); }
+ };
+ class Btd : public Bt {
+ public:
+     Btd(char* name, char t, int (*g)(char*, int)) : Bt(name, t, g) { }
+     int d() { return c(1); }
+ };
+
+ int level(char* cow, int i) { return *cow - '0' - i; }
+
+ int main () {
+     Bsd&lt;Btp&gt; boo("100", '5', level);
+     Bsd&lt;Btd&gt; zoo("210", '4', level);
+     do {boo.go(); cout &lt;&lt; boo;
+         zoo.go(); cout &lt;&lt; zoo;
+     } while(!boo || !zoo);
+     return 0;
+ =
+}</PRE></TD></TR></TBODY></TABLE></P></TD></TR></TBODY></TABLE></TD></TR>=
+<!-- Footer --><!--tr>=0A=
+		<td class=3D"tbody">=0A=
+			<table cellpadding=3D"1" width=3D"90%" align=3D"center">=0A=
+				<tr>=0A=
+					<td width=3D"50%" class=3D"text3">=0A=
+						&nbsp;&nbsp;=0A=
+					</td>=0A=
+					<td width=3D"50%" align=3D"right" class=3D"text3">=0A=
+						&nbsp;&nbsp;=0A=
+					</td>=0A=
+				</tr>=0A=
+			</table>=0A=
+		</td>=0A=
+	</tr--></TBODY></TABLE></SPAN></SPAN></P></BODY></HTML>
+
+------=_NextPart_000_025D_01C6062D.38B181D0
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/style.043.css
+
+BODY {
+	MARGIN-TOP: 0px; BACKGROUND: #ffffff; MARGIN-LEFT: 0px
+}
+IMG {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; VERTICAL-ALIGN: bottom; =
+BORDER-LEFT: 0px; BORDER-BOTTOM: 0px
+}
+P {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+TABLE {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: =
+0px
+}
+TD {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+UL {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+LI {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+PRE {
+	FONT-WEIGHT: bold; FONT-SIZE: small; BACKGROUND: #ffffe0; MARGIN-LEFT: =
+15px; COLOR: navy; FONT-FAMILY: "Courier New", serif
+}
+.tbody {
+	BACKGROUND: #ffffff; WIDTH: 700px
+}
+.text3 {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+.panel1 {
+	BACKGROUND: #aee7fc
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+.texth {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.quote {
+	FONT-SIZE: small; FONT-STYLE: italic; FONT-FAMILY: "Times New Roman", =
+serif
+}
+.textagend {
+	FONT-SIZE: small; COLOR: red; FONT-FAMILY: "Times New Roman", serif
+}
+.section {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; TEXT-TRANSFORM: uppercase; COLOR: =
+#4599b1; FONT-FAMILY: "Times New Roman", serif
+}
+.ssection {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.sssection {
+	FONT-WEIGHT: bold; FONT-SIZE: small; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.top {
+	VERTICAL-ALIGN: top
+}
+.tup {
+	VERTICAL-ALIGN: top; COLOR: blue
+}
+.defin {
+	FONT-WEIGHT: bold; FONT-SIZE: small; BACKGROUND: #ffffff; COLOR: =
+maroon; FONT-FAMILY: "Courier New", serif
+}
+.desc {
+	BACKGROUND: #ededfe; TEXT-ALIGN: center
+}
+.value {
+	BACKGROUND: #ffffc6; TEXT-ALIGN: center
+}
+.addre {
+	BACKGROUND: #aee7fc; TEXT-ALIGN: left
+}
+.addrec {
+	BACKGROUND: #aee7fc; TEXT-ALIGN: center
+}
+.oper {
+	COLOR: maroon; FONT-STYLE: italic
+}
+.code {
+	FONT-WEIGHT: bold; FONT-SIZE: small; VERTICAL-ALIGN: baseline; COLOR: =
+navy; FONT-FAMILY: "Courier New", serif
+}
+.high {
+	COLOR: maroon
+}
+.result {
+	BACKGROUND: #f7ffce
+}
+.error {
+	BACKGROUND: #ffe7c6
+}
+.white {
+	BACKGROUND: #ffffff
+}
+
+------=_NextPart_000_025D_01C6062D.38B181D0
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/styleSPrint.043.css
+
+BODY {
+	BACKGROUND: #ffffff
+}
+A {
+	VERTICAL-ALIGN: middle; COLOR: #0000ff; TEXT-DECORATION: underline
+}
+A:hover {
+	BACKGROUND: #ededfe; COLOR: #0000ff
+}
+.text0 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text1 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text2 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text3 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text4 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text9 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+
+------=_NextPart_000_025D_01C6062D.38B181D0
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/stylePPrint.043.css
+
+A {
+	VERTICAL-ALIGN: middle; TEXT-DECORATION: none
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+
+------=_NextPart_000_025D_01C6062D.38B181D0--

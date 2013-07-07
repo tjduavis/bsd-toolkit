@@ -1,0 +1,19 @@
+|1| 0|1|<html>
+|1| 2|1|<head>
+|1| 4|1|<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+|1| 4|0|<title>
+|2| 0|1|</title>
+|2| 4|1|<style type="text/css">
+|2| 6|1|body          {color:black;background:white;font-weight:normal;font-size:10pt;font-family:Tahoma,Verdana,Helvetica,Arial;font-style:normal;text-decoration:none;margin:0;padding:0;border:0;}
+|2| 6|1|span          {font-size:10pt;font-family:Tahoma,Verdana,Helvetica,Arial;font-style:normal;color:#777777;text-decoration:none;}
+|2| 6|1|h1            {font-size:12pt;font-family:Tahoma,Verdana,Helvetica,Arial;font-style:normal;color:#777777;text-decoration:none;font-weight:bold;}
+|2| 6|1|.title        {font-size:12pt;font-family:Tahoma,Verdana,Helvetica,Arial;font-style:normal;color:#777777;text-decoration:none;font-weight:bold;}
+|2| 6|1|a:link        {color: black;text-decoration: none;}
+|2| 6|1|a:visited     {color: black;text-decoration: none;}
+|2| 6|1|a:hover       {color: black;text-decoration: none;}
+|2| 6|1|a:active      {color: black;text-decoration: none;}
+|2| 6|1|a:link img    {border-style:none;color:white;}
+|2| 6|1|a:visited img {border-style:none;color:white;}
+|2| 6|1|a img         {color:black}
+|2| 4|1|</style>
+|2| 2|1|</head>

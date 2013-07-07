@@ -1,0 +1,391 @@
+From: <Saved by Microsoft Internet Explorer 5>
+Subject: Seneca | School of Computer Studies | Object-Oriented Programming I - C++
+Date: Wed, 21 Dec 2005 12:48:00 -0500
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----=_NextPart_000_0230_01C6062C.C673BFC0"
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.2670
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0230_01C6062C.C673BFC0
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/workshops/w8_p.html
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<?xml version=3D'1.0' encoding=3D'UTF-8'?><HTML lang=3Den-us=20
+xmlns=3D"http://www.w3.org/1999/xhtml"><HEAD><TITLE>Seneca | School of =
+Computer Studies | Object-Oriented Programming I - C++</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META http-equiv=3DPICS-Label=20
+content=3D'(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r =
+(cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen =
+true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true =
+r (SS~~000 1))'>
+<META content=3D"(c) Copyright Seneca College 2005" name=3DCopyright>
+<META=20
+content=3D"Welcome to the Bachelors Degree of Software Development =
+Program Web Site.  On this site you can find an intermediate course on =
+object-oriented programming in C++.  Designed by Chris Szalwinski."=20
+name=3DDescription>
+<META=20
+content=3D"This subject expands on introductory elements of C++ and =
+covers intermediate C features.  The emphasis throughout is to prepare =
+for the solution of large problems."=20
+name=3DAbstract>
+<META content=3Dchris.szalwinski@senecac.on.ca name=3DAuthor>
+<META content=3D"software development, object-oriented programming, =
+lecture notes"=20
+name=3DKeywords><LINK =
+href=3D"http://cs.senecac.on.ca/~btp300/pages/style.043.css"=20
+type=3Dtext/css rel=3Dstylesheet><LINK media=3Dscreen=20
+href=3D"http://cs.senecac.on.ca/~btp300/pages/styleSPrint.043.css" =
+type=3Dtext/css=20
+rel=3Dstylesheet><LINK media=3Dprint=20
+href=3D"http://cs.senecac.on.ca/~btp300/pages/stylePPrint.043.css" =
+type=3Dtext/css=20
+rel=3Dstylesheet>
+<META content=3D"MSHTML 6.00.2900.2802" name=3DGENERATOR></HEAD>
+<BODY>
+<TABLE cellSpacing=3D0 cellPadding=3D0><!-- Body Cell -->
+  <TBODY>
+  <TR height=3D600><!-- Content Area -->
+    <TD class=3Dtbody bgColor=3D#ffffff>
+      <TABLE cellPadding=3D10 width=3D"100%">
+        <TBODY>
+        <TR>
+          <TD vAlign=3Dtop bgColor=3D#ffffff><BR>
+            <CENTER><SPAN class=3Dtexth>Module H - Polymorphism</SPAN>=20
+            <BR><BR><SPAN class=3Dtexthead>Templates</SPAN> =
+<BR><BR><SPAN=20
+            class=3Dtextagend>Workshop 8</SPAN> </CENTER><BR><BR>
+            <P>In this workshop, you are to design and code a template =
+for array=20
+            classes. </P><BR>
+            <P class=3Dsection>Learning Outcome</P>
+            <P>Upon successful completion of this workshop, you will be =
+able=20
+            <UL>
+              <LI>to abstract common elements from similar classes to =
+create=20
+              class templates </LI></UL>
+            <P></P><BR>
+            <P class=3Dsection>Specifications</P>
+            <P>Design and code a template named <SPAN =
+class=3Dcode>Array</SPAN>=20
+            for array classes.&nbsp; The classes manage 1-dimensional=20
+            contiguously stored lists of objects of type <SPAN=20
+            class=3Dcode>E</SPAN>, which may include C-style string =
+objects.&nbsp;=20
+            By default, the objects are of type <SPAN=20
+            class=3Dcode>double</SPAN>.&nbsp; Upon instantiation, an =
+array object=20
+            receives the number of type <SPAN class=3Dcode>E</SPAN> =
+objects in the=20
+            array and dynamically allocates space for that number of=20
+            elements.&nbsp; Your design includes a copy constructor, =
+assignment=20
+            operator and a destructor.&nbsp; Your design also includes =
+the=20
+            following member functions:=20
+            <UL>
+              <LI><SPAN class=3Dcode>unsigned int size() const </SPAN>- =
+an inline=20
+              query that returns the number of elements in the =
+array.&nbsp;=20
+              <LI><SPAN class=3Dcode>E&amp; operator[](int i)</SPAN> - =
+an inline=20
+              subscript operator that returns a reference to element =
+<SPAN=20
+              class=3Dcode>i</SPAN>, where the first element in the =
+array is at=20
+              index <SPAN class=3Dcode>0</SPAN>.&nbsp; If the value of =
+<SPAN=20
+              class=3Dcode>i</SPAN> is outside array bounds, your =
+operator returns=20
+              a reference to a dummy element of type <SPAN=20
+              class=3Dcode>E</SPAN>.&nbsp; </LI></UL>Finally, design and =
+code the=20
+            template for a helper function named <SPAN =
+class=3Dcode>sort</SPAN>=20
+            that sorts the elements in an array object.&nbsp; Your =
+function=20
+            receives a reference to an array object and sorts the =
+elements in=20
+            ascending order.&nbsp; You can find a bubble sort algorithm =
+<A=20
+            =
+href=3D"http://cs.senecac.on.ca/~btp100/content/sorts.html#sor">here</A>.=
+&nbsp;=20
+
+            <P></P>
+            <P>Code your template for the assignment operator and =
+outside the=20
+            class declaration.&nbsp; You will need to specialize your =
+template=20
+            for C-style string objects.&nbsp; </P>
+            <P>Place your templates in a header file named <SPAN=20
+            class=3Dcode>Array.h</SPAN>, include all necessary header =
+files and=20
+            include a guard to prevent multiple definitions of any class =
+
+            generated by your template.&nbsp; </P>
+            <P>The following program when used with your template yields =
+the=20
+            results shown on the right=20
+            <TABLE width=3D"95%">
+              <TBODY>
+              <TR>
+                <TD width=3D"50%"><PRE> #include &lt;iostream&gt;
+ using namespace std;
+ #include "Array.h"
+
+ int main ( ) {
+    Array&lt;int&gt; x(3);
+    for (int i =3D 0; i &lt; 3; i++)
+        x[i] =3D 9 - i;
+    x[-1] =3D 9;
+    sort(x);
+    for (int i =3D 0; i &lt; 6; i++)
+        cout &lt;&lt; x[i] &lt;&lt; endl;
+
+    Array&lt;&gt; y(2);
+    y[0] =3D 1.1;
+    y[1] =3D 2.1;
+    for (int i =3D 0; i &lt; 2; i++)
+        cout &lt;&lt; y[i] &lt;&lt; endl;
+
+    Array&lt;char *&gt; z(3), w(1);
+    z[0] =3D "one";
+    z[1] =3D "two";
+    z[2] =3D "three";
+    z[3] =3D "???";
+    for (int i =3D 0; i &lt; 4; i++)
+        cout &lt;&lt; z[i] &lt;&lt; endl;
+    w =3D z;
+    sort(w);
+    for (int i =3D 0; i &lt; 4; i++)
+        cout &lt;&lt; w[i] &lt;&lt; endl;
+    return 0;
+ }</PRE></TD>
+                <TD width=3D"50%"><PRE class=3Dresult>
+
+
+
+
+
+
+
+ 7
+ 8
+ 9
+ 9
+ 9
+ 9
+
+
+
+ 1.1
+ 2.1
+
+
+
+
+ one
+ two
+ three
+ ???
+
+ one
+ three
+ two
+ =
+???</PRE></TD></TR></TBODY></TABLE></P><BR><BR><BR></TD></TR></TBODY></TA=
+BLE></TD></TR><!-- Footer -->
+  <TR>
+    <TD class=3Dtbody>
+      <TABLE cellPadding=3D1 width=3D"90%" align=3Dcenter>
+        <TBODY>
+        <TR>
+          <TD class=3Dtext3 width=3D"50%">
+            <SCRIPT language=3Djavascript>=0A=
+						var lh =3D document.location.href;=0A=
+						document.write(lh)=0A=
+						</SCRIPT>
+            &nbsp;&nbsp; </TD>
+          <TD class=3Dtext3 align=3Dright width=3D"50%">
+            <SCRIPT language=3Djavascript>=0A=
+						var lm =3D document.lastModified.slice(0,-3);=0A=
+						document.write("Last Modified: " +lm)=0A=
+						</SCRIPT>
+            &nbsp;&nbsp; =
+</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></BODY></HTML>
+
+------=_NextPart_000_0230_01C6062C.C673BFC0
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/style.043.css
+
+BODY {
+	MARGIN-TOP: 0px; BACKGROUND: #ffffff; MARGIN-LEFT: 0px
+}
+IMG {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; VERTICAL-ALIGN: bottom; =
+BORDER-LEFT: 0px; BORDER-BOTTOM: 0px
+}
+P {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+TABLE {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: =
+0px
+}
+TD {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+UL {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+LI {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+PRE {
+	FONT-WEIGHT: bold; FONT-SIZE: small; BACKGROUND: #ffffe0; MARGIN-LEFT: =
+15px; COLOR: navy; FONT-FAMILY: "Courier New", serif
+}
+.tbody {
+	BACKGROUND: #ffffff; WIDTH: 700px
+}
+.text3 {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+.panel1 {
+	BACKGROUND: #aee7fc
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+.texth {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.quote {
+	FONT-SIZE: small; FONT-STYLE: italic; FONT-FAMILY: "Times New Roman", =
+serif
+}
+.textagend {
+	FONT-SIZE: small; COLOR: red; FONT-FAMILY: "Times New Roman", serif
+}
+.section {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; TEXT-TRANSFORM: uppercase; COLOR: =
+#4599b1; FONT-FAMILY: "Times New Roman", serif
+}
+.ssection {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.sssection {
+	FONT-WEIGHT: bold; FONT-SIZE: small; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.top {
+	VERTICAL-ALIGN: top
+}
+.tup {
+	VERTICAL-ALIGN: top; COLOR: blue
+}
+.defin {
+	FONT-WEIGHT: bold; FONT-SIZE: small; BACKGROUND: #ffffff; COLOR: =
+maroon; FONT-FAMILY: "Courier New", serif
+}
+.desc {
+	BACKGROUND: #ededfe; TEXT-ALIGN: center
+}
+.value {
+	BACKGROUND: #ffffc6; TEXT-ALIGN: center
+}
+.addre {
+	BACKGROUND: #aee7fc; TEXT-ALIGN: left
+}
+.addrec {
+	BACKGROUND: #aee7fc; TEXT-ALIGN: center
+}
+.oper {
+	COLOR: maroon; FONT-STYLE: italic
+}
+.code {
+	FONT-WEIGHT: bold; FONT-SIZE: small; VERTICAL-ALIGN: baseline; COLOR: =
+navy; FONT-FAMILY: "Courier New", serif
+}
+.high {
+	COLOR: maroon
+}
+.result {
+	BACKGROUND: #f7ffce
+}
+.error {
+	BACKGROUND: #ffe7c6
+}
+.white {
+	BACKGROUND: #ffffff
+}
+
+------=_NextPart_000_0230_01C6062C.C673BFC0
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/styleSPrint.043.css
+
+BODY {
+	BACKGROUND: #ffffff
+}
+A {
+	VERTICAL-ALIGN: middle; COLOR: #0000ff; TEXT-DECORATION: underline
+}
+A:hover {
+	BACKGROUND: #ededfe; COLOR: #0000ff
+}
+.text0 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text1 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text2 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text3 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text4 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text9 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+
+------=_NextPart_000_0230_01C6062C.C673BFC0
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/stylePPrint.043.css
+
+A {
+	VERTICAL-ALIGN: middle; TEXT-DECORATION: none
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+
+------=_NextPart_000_0230_01C6062C.C673BFC0--

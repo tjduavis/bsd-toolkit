@@ -1,0 +1,13 @@
+main()
+{
+ long long barcode;
+ long long chk;
+	
+ printf("Enter your UPC digit:");
+ scanf("%lf",&barcode);
+		
+  chk=int(barcode%10);
+  printf("%d",chk);	
+  /*if(chk==9)*/
+}
+  

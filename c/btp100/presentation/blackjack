@@ -1,0 +1,16 @@
+/* Presentation 
+*  Black Jack
+*
+*       Function - Shuffle Validation
+*  Team Programmers: Aaron, TJ, Duncan          Last Modified: Nov 24,04
+*/
+
+#define DECK 52
+
+int main(void)
+{
+	int checker[DECK];
+
+
+
+

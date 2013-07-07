@@ -1,0 +1,250 @@
+From: <Saved by Microsoft Internet Explorer 5>
+Subject: 
+Date: Wed, 21 Dec 2005 12:57:15 -0500
+MIME-Version: 1.0
+Content-Type: text/html;
+	charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/tests/oop444fe.993
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.2670
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Dwindows-1252">
+<META content=3D"MSHTML 6.00.2900.2802" name=3DGENERATOR></HEAD>
+<BODY><PRE>	OOP444 --------------------------------------------- Page 1 =
+of 4
+
+
+
+	Answer all questions in the exam booklet(s)  supplied.  You  may
+	use two text books (Seneca Subject Notes count as  a  book)  and
+	one 8.5" x 11" crib sheet. There is a  total  of  40  marks,  10
+	marks per question.
+
+	1. Determine the exact output of the following program,  SHOWING
+	   YOUR ROUGH WORK.
+
+	    // ABCDEFGHIJKLMNOPQRSTUVWXYZ, A is 65, a is 97
+	    #include &lt;iostream.h&gt;
+	    #include &lt;string.h&gt;
+
+	    typedef const char *(*func)(char *);
+
+	    const char *f1(char *s)
+	    {   char *rc =3D s;
+		while (*s) {
+		    if ('A' &lt;=3D *s &amp;&amp; *s &lt;=3D 'Z')
+			*s +=3D ('b' - 'A');
+		    s++;
+		}
+		return rc;
+	    }
+
+	    class one {
+		func f;
+		char s[31];
+	      public:
+		one(const char *str, func fu=3Df1) {
+		    strcpy(s, str);
+		    f =3D fu;
+		}
+		friend ostream &amp;operator&lt;&lt;(ostream &amp;, one &amp;);
+	    };
+
+	    ostream &amp;operator&lt;&lt;(ostream &amp;os, one &amp;x)=20
+	    {   return os &lt;&lt; x.f(x.s); }
+
+	    const char *f2(char *s)
+	    {
+		static char str[61];
+		int i, j;
+		for (i =3D j =3D 0; s[i]; i++, j+=3D2)
+		    str[j + 1] =3D str[j] =3D s[i];
+		return str;
+	    }
+
+	    int main() {
+		one uno("ReDiMg");
+		one dos("Double", f2);
+		cout &lt;&lt; uno &lt;&lt; ' ' &lt;&lt; dos &lt;&lt; '\n';
+		return 0;
+	    }
+
+
+	OOP Using C++II -------------------- Fall 1999 Final Examination
+	OOP444 --------------------------------------------- Page 2 of 4
+
+
+
+	2. Determine the exact output of the following program,  SHOWING
+	   YOUR ROUGH WORK.
+
+	    #include &lt;iostream.h&gt;
+	    #include &lt;string.h&gt;
+	    #include &lt;stdio.h&gt;
+
+	    class twoa {
+		int n;
+	      public:
+		twoa(int num =3D 0) { n =3D num; }
+		int value() { return n + 1; }
+	    };
+
+	    class twob {
+		char s[31];
+	      public:
+		twob(const char *str=3D"now") {=20
+		    int i =3D 0, j =3D 0;
+		    while(str[i]) i++;
+		    while (--i &gt;=3D 0)
+			s[j++] =3D str[i];
+		    s[j] =3D '\0';
+		}
+		const char *out() { return s; }
+	    };
+
+	    const char *what(int n) {
+		static char s[31];
+		twoa x(n);
+		sprintf(s, "&gt;%d&lt;", x.value());
+		return s;
+	    }
+
+	    class twoc: public twoa, public twob {
+	      public:
+		twoc(int n): twoa(n), twob(what(n)) {}
+	    };
+
+	    ostream &amp;operator&lt;&lt;(ostream &amp;os, twob x)
+	    {
+		return os &lt;&lt; x.out();
+	    }
+
+	    int main()
+	    {
+		twoa w, x(123);
+		cout &lt;&lt; w.value() &lt;&lt; ", " &lt;&lt; x.value() &lt;&lt; =
+'\n';
+		twob y, z("red");
+		twoc xx(123);
+		cout &lt;&lt; y &lt;&lt; z &lt;&lt; xx &lt;&lt; '\n';
+		return 0;
+	    }
+
+
+	OOP Using C++II -------------------- Fall 1999 Final Examination
+	OOP444 --------------------------------------------- Page 3 of 4
+
+
+
+	3. A sales file stores data for all items sold by a company.  It
+	   has the following record layout (note: not  all  the  details
+	   are known) -
+	     bytes 0-7: product ID stored as a null-terminated string.
+	     bytes 8-40: unknown
+	     byte 41: status byte (see below)
+	     bytes 42-45: quantity sold, stored as an integer
+	     bytes 46-53: cost factor, stored as a double (see below)
+	     bytes 54-61: wholesale unit cost in $, stored as a double
+	     byte 62-79: unknown
+	   The status byte's low-order three  bits  have  the  following
+	   meaning:
+	      bit 0 (lowest order bit):
+		 1 means that the wholesale cost  was  charged  and  the
+		   next two bits are to be ignored.
+		 0 means that other than the wholesale cost was  charged
+		   - see the next two bits for details.
+	      bit 1:
+		 1 means that "regular retail price"  was  charged  (70%
+		   more than the wholesale cost) and  the  next  bit  is
+		   ingored.
+		 0 means  that  other  than  regular  retail  price  was
+		   charged: consult the next bit for details.
+	      bit 2:
+		 1 means  that  the  price  which  was  charged  is  the
+		   wholesale cost multiplied by the cost factor.
+		 0 means  that  the  price  which  was  charged  is  the
+		   wholesale cost plus the cost factor.
+	   Note that you should not assume that the other bits have  any
+	   particular value -  they  may  have  an  influence  over  the
+	   "unknown" pieces of data. For example,  the  following  table
+	   shows some sample data clarifying how to determine the actual
+	   selling price:
+	      status byte    cost factor   wholesale cost   actual price
+	       0 (*)             25.0            13.00          38.00
+	       1 (or, say, 7)    25.0            12.95          12.95
+	       2 (or, say, 6)    25.0            10.00          17.00
+	       4 (or, say, 36)    1.5            10.00          15.00
+	   (*) or, say, 8 or any value with the low order 3 bits all 0
+
+	   Write a function
+		double sales(const char *id, fstream &amp;f)
+	   which is passed a string containing a product ID and  a  file
+	   stream which is already opened for binary read  access.  This
+	   function returns the total  sales  (dollars/cents)  for  that
+	   particular product as stored in  the  file.  Note  that  this
+	   function should not assume that the file is positioned at any
+	   particular place, and  that  it  doesn't  matter  where  this
+	   function leaves the file's reading position.
+
+	   Hint: You'll have to read through the entire file, record  by
+	   record, looking for product ID matches. Use the  status  byte
+	   to determine how much was actually charged.
+
+
+	OOP Using C++II -------------------- Fall 1999 Final Examination
+	OOP444 --------------------------------------------- Page 4 of 4
+
+
+
+	4. Create a template for a class
+
+		queue&lt;TYPE&gt;
+
+	   which stores any number of items of type TYPE, where TYPE  is
+	   any data type which can be constructed without having to pass
+	   any parameters, and which can  be  copied  through  parameter
+	   passing and by using =3D.
+
+	   A queue has the member functions
+
+		int add(TYPE)
+
+	   which adds an item to the queue (returning 1  if  successful,
+	   and 0 if there is no more memory left),
+
+		int isempty()
+
+	   which returns a true value if the queue is empty or  a  false
+	   value if there are any items stored in the queue, and
+
+		TYPE remove()
+
+	   which removes and returns the item  which  has  been  in  the
+	   queue the longest. (If the queue is  empty,  then  a  default
+	   instance of TYPE is returned).
+
+	   Note that since a queue will  have  to  dynamically  allocate
+	   memory to itself, you will need to code a copy constructor, =3D
+	   operator and destructor for your solution to be complete.
+
+	   For example,
+
+		queue&lt;int&gt; x;
+		x.add(5);
+		x.add(10);
+		x.add(15);
+		cout &lt;&lt; x.remove() &lt;&lt; ", ";
+		x.add(2);
+		cout &lt;&lt; x.remove() &lt;&lt; '\n';
+
+	   would display=20
+
+		5, 10
+
+	   Hint: write something similar to a  linked  list,  only  much
+	   simpler.
+
+</PRE></BODY></HTML>

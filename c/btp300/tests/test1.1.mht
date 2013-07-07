@@ -1,0 +1,425 @@
+From: <Saved by Microsoft Internet Explorer 5>
+Subject: Seneca | School of Computer Studies | Object-Oriented Programming I - C++
+Date: Wed, 21 Dec 2005 12:50:23 -0500
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----=_NextPart_000_0254_01C6062D.1BEFE780"
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.2670
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0254_01C6062D.1BEFE780
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/tests/btp300mu.053.html
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<?xml version=3D'1.0' encoding=3D'UTF-8'?><HTML><HEAD><TITLE>Seneca | =
+School of Computer Studies | Object-Oriented Programming I - C++</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META http-equiv=3DPICS-Label=20
+content=3D'(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r =
+(cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen =
+true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true =
+r (SS~~000 1))'>
+<META content=3D"(c) Copyright Seneca College 2005" name=3DCopyright>
+<META=20
+content=3D"Welcome to the Bachelors Degree of Software Development =
+Program Web Site.  On this site you can find an intermediate course on =
+object-oriented programming in C++.  Designed by Chris Szalwinski."=20
+name=3DDescription>
+<META=20
+content=3D"This subject expands on introductory elements of C++ and =
+covers intermediate C features.  The emphasis throughout is to prepare =
+for the solution of large problems."=20
+name=3DAbstract>
+<META content=3Dchris.szalwinski@senecac.on.ca name=3DAuthor>
+<META content=3D"software development, object-oriented programming, =
+lecture notes"=20
+name=3DKeywords><LINK =
+href=3D"http://cs.senecac.on.ca/~btp300/pages/style.043.css"=20
+type=3Dtext/css rel=3Dstylesheet><LINK media=3Dscreen=20
+href=3D"http://cs.senecac.on.ca/~btp300/pages/styleSPrint.043.css" =
+type=3Dtext/css=20
+rel=3Dstylesheet><LINK media=3Dprint=20
+href=3D"http://cs.senecac.on.ca/~btp300/pages/stylePPrint.043.css" =
+type=3Dtext/css=20
+rel=3Dstylesheet>
+<META content=3D"MSHTML 6.00.2900.2802" name=3DGENERATOR></HEAD>
+<BODY><SPAN lang=3Den-us xmlns=3D"http://www.w3.org/1999/xhtml">
+<P><SPAN>
+<P>
+<TABLE cellSpacing=3D0 cellPadding=3D0><!-- Body Cell -->
+  <TBODY>
+  <TR height=3D600><!-- Content Area -->
+    <TD class=3Dtbody bgColor=3D#ffffff>
+      <TABLE cellPadding=3D10 width=3D"100%">
+        <TBODY>
+        <TR>
+          <TD vAlign=3Dtop bgColor=3D#ffffff>
+            <P class=3Dtexthead align=3Dcenter>Make Up Test - Nov 7 2005 =
+</P>
+            <P>Name _______________________________________ Student =
+Number=20
+            _______________________ </P>
+            <P class=3Dsection>Notes:</P>
+            <P>
+            <UL>
+              <LI>This test has 2 pages and lasts two full periods=20
+              <LI>This test is out of 20 marks and is worth 15% of your =
+final=20
+              grade=20
+              <LI>There are 2 questions in this paper - attempt both of =
+them=20
+              <LI>Answer all questions in the exam booklet provided=20
+              <LI>Hand in this test paper with your answer booklet=20
+              <LI>You may use your copy of the lecture notes, the =
+subject notes=20
+              and one textbook=20
+              <LI>You may use a non-programmable, non-messaging =
+calculator=20
+              <LI>You may use a paper foreign-language dictionary =
+</LI></UL>
+            <P></P>
+            <P class=3Dsection>Question 1 - Word Problem - (10 =
+marks):</P>
+            <P>Write a function that exchanges the data in two different =
+memory=20
+            locations if the data values meet a specified =
+condition.&nbsp; The=20
+            data values share the same type.&nbsp; A separate function, =
+which is=20
+            defined elsewhere, describes the condition that the data =
+values must=20
+            satisfy.&nbsp; You do not need to code that other =
+function.&nbsp;=20
+            The header for your <SPAN class=3Dcode>exchange</SPAN> =
+function looks=20
+            something like=20
+            <TABLE width=3D"45%">
+              <TBODY>
+              <TR>
+                <TD><PRE> int exchange(void *a, void *b, int n, int =
+(*f)(void *, void *))</PRE></TD></TR></TBODY></TABLE><SPAN=20
+            class=3Dcode>a</SPAN> holds the address of the first data =
+value, <SPAN=20
+            class=3Dcode>b</SPAN> holds the address of the second data =
+value, and=20
+            <SPAN class=3Dcode>n</SPAN> holds the number of bytes in =
+each data=20
+            value.&nbsp; <SPAN class=3Dcode>f</SPAN> points to the =
+function that=20
+            compares the data values pointed to by <SPAN =
+class=3Dcode>a</SPAN> and=20
+            <SPAN class=3Dcode>b</SPAN>.&nbsp; This comparator function =
+<SPAN=20
+            class=3Dcode>f</SPAN> holds generic pointers to the data =
+values in the=20
+            order supplied to your function.&nbsp; If the data values =
+meet the=20
+            specified condition, your function exchanges them and =
+returns <SPAN=20
+            class=3Dcode>true</SPAN>.&nbsp; If the data values do not =
+meet the=20
+            specified condition, your function does nothing and returns =
+<SPAN=20
+            class=3Dcode>false</SPAN>.&nbsp; </P>
+            <P>The following program when used with your <SPAN=20
+            class=3Dcode>exchange</SPAN> function yields the results =
+shown on the=20
+            right=20
+            <TABLE width=3D"95%">
+              <TBODY>
+              <TR>
+                <TD width=3D"50%"><PRE> #include &lt;stdio.h&gt;
+ int ig(int *a, int *b) { return *a &gt; *b; }
+ int dl(double *a, double *b) { return *a &lt; *b; }
+
+ int main(void) {
+     int b, x =3D 4, y =3D 3;
+     double v =3D 1.7, w =3D 2.3;
+
+     b =3D exchange(&amp;x, &amp;y, sizeof(int),    (int (*)(void *, =
+void *))ig);
+     printf("%d %d %d\n", b, x, y);
+     b =3D exchange(&amp;v, &amp;w, sizeof(double), (int (*)(void *, =
+void *))dl);&nbsp;
+     printf("%d %3.1lf %3.1lf\n", b, v, w);
+     b =3D exchange(&amp;v, &amp;w, sizeof(double), (int (*)(void *, =
+void *))dl);
+     printf("%d %3.1lf %3.1lf\n", b, v, w);
+
+     return 0;
+ } </PRE></TD>
+                <TD width=3D"50%"><PRE class=3Dresult>
+
+
+
+
+
+
+
+
+ 1 3 4
+
+ 1 2.3 1.7
+
+ 0 2.3 1.7&nbsp;
+
+
+ </PRE></TD></TR></TBODY></TABLE>The expression <SPAN=20
+            class=3Dcode>(int (*)(void *, void *))</SPAN> in the three =
+calls to=20
+            your <SPAN class=3Dcode>exchange</SPAN> function casts the =
+pointer=20
+            parameters in the comparator functions to the generic =
+pointers=20
+            expected by your <SPAN class=3Dcode>exchange</SPAN> =
+function. </P>
+            <P>[Hint: when the data values meet the specified condition, =
+swap=20
+            the data pointed to by <SPAN class=3Dcode>a</SPAN> and <SPAN =
+
+            class=3Dcode>b</SPAN> one byte at a time.] </P>
+            <P class=3Dsection>Question 2 - Walkthrough - (10 =
+marks):</P>
+            <P>What is the exact output of the following program?&nbsp; =
+Show=20
+            your rough work to avoid deductions.=20
+            <TABLE width=3D"45%">
+              <TBODY>
+              <TR>
+                <TD><PRE> #include &lt;stdio.h&gt;
+ #define MOVE_LEFT(x,y,z)  (((x) &amp; (y)) &gt;&gt; (z))
+ #define MOVE_RIGHT(x,y,z) (((x) &amp; (y)) &lt;&lt; (z))&nbsp;
+
+ typedef union {
+     unsigned short n;
+     struct {
+         unsigned a:3;
+         unsigned b:5;
+         unsigned c:5;
+         unsigned d:3;
+     } in;
+     struct {
+         unsigned a:5;
+         unsigned b:3;
+         unsigned c:3;
+         unsigned d:5;
+     } out;
+ } combo;
+ unsigned short enc(unsigned short n) {
+     unsigned short a, b, c, d;
+     a =3D MOVE_LEFT (n, 0xE000, 5);
+     b =3D MOVE_LEFT (n, 0x1F00, 8);
+     c =3D MOVE_RIGHT(n, 0x00F8, 8);
+     d =3D MOVE_RIGHT(n, 0x0007, 5);
+     return a | b | c | d;
+ }
+ unsigned short dec(unsigned short n) {
+     combo in, out;
+     in.n =3D n;
+     out.in.a =3D in.out.b;
+     out.in.b =3D in.out.d;
+     out.in.c =3D in.out.a;
+     out.in.d =3D in.out.c;
+     return out.n;
+ }
+ int main() {
+     unsigned short a =3D 0x56CE;
+     short b =3D 0xA932;
+     printf("%x:%hu\n", a, a);
+     a =3D enc(a);
+     printf("%x:%hu\n", a, a);
+     a =3D dec(a);
+     printf("%x:%hu\n", a, a);
+     printf("%x:%hd\n", b, b);
+     b =3D enc(b);
+     printf("%x:%hd\n", b, b);
+     b =3D dec(b);
+     printf("%x:%hd\n", b, b);
+     return 0;
+ =
+}</PRE></TD></TR></TBODY></TABLE></P></TD></TR></TBODY></TABLE></TD></TR>=
+<!-- Footer --><!--tr>=0A=
+		<td class=3D"tbody">=0A=
+			<table cellpadding=3D"1" width=3D"90%" align=3D"center">=0A=
+				<tr>=0A=
+					<td width=3D"50%" class=3D"text3">=0A=
+						&nbsp;&nbsp;=0A=
+					</td>=0A=
+					<td width=3D"50%" align=3D"right" class=3D"text3">=0A=
+						&nbsp;&nbsp;=0A=
+					</td>=0A=
+				</tr>=0A=
+			</table>=0A=
+		</td>=0A=
+	</tr--></TBODY></TABLE></SPAN></SPAN></P></BODY></HTML>
+
+------=_NextPart_000_0254_01C6062D.1BEFE780
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/style.043.css
+
+BODY {
+	MARGIN-TOP: 0px; BACKGROUND: #ffffff; MARGIN-LEFT: 0px
+}
+IMG {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; VERTICAL-ALIGN: bottom; =
+BORDER-LEFT: 0px; BORDER-BOTTOM: 0px
+}
+P {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+TABLE {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: =
+0px
+}
+TD {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+UL {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+LI {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+PRE {
+	FONT-WEIGHT: bold; FONT-SIZE: small; BACKGROUND: #ffffe0; MARGIN-LEFT: =
+15px; COLOR: navy; FONT-FAMILY: "Courier New", serif
+}
+.tbody {
+	BACKGROUND: #ffffff; WIDTH: 700px
+}
+.text3 {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+.panel1 {
+	BACKGROUND: #aee7fc
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+.texth {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.quote {
+	FONT-SIZE: small; FONT-STYLE: italic; FONT-FAMILY: "Times New Roman", =
+serif
+}
+.textagend {
+	FONT-SIZE: small; COLOR: red; FONT-FAMILY: "Times New Roman", serif
+}
+.section {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; TEXT-TRANSFORM: uppercase; COLOR: =
+#4599b1; FONT-FAMILY: "Times New Roman", serif
+}
+.ssection {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.sssection {
+	FONT-WEIGHT: bold; FONT-SIZE: small; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.top {
+	VERTICAL-ALIGN: top
+}
+.tup {
+	VERTICAL-ALIGN: top; COLOR: blue
+}
+.defin {
+	FONT-WEIGHT: bold; FONT-SIZE: small; BACKGROUND: #ffffff; COLOR: =
+maroon; FONT-FAMILY: "Courier New", serif
+}
+.desc {
+	BACKGROUND: #ededfe; TEXT-ALIGN: center
+}
+.value {
+	BACKGROUND: #ffffc6; TEXT-ALIGN: center
+}
+.addre {
+	BACKGROUND: #aee7fc; TEXT-ALIGN: left
+}
+.addrec {
+	BACKGROUND: #aee7fc; TEXT-ALIGN: center
+}
+.oper {
+	COLOR: maroon; FONT-STYLE: italic
+}
+.code {
+	FONT-WEIGHT: bold; FONT-SIZE: small; VERTICAL-ALIGN: baseline; COLOR: =
+navy; FONT-FAMILY: "Courier New", serif
+}
+.high {
+	COLOR: maroon
+}
+.result {
+	BACKGROUND: #f7ffce
+}
+.error {
+	BACKGROUND: #ffe7c6
+}
+.white {
+	BACKGROUND: #ffffff
+}
+
+------=_NextPart_000_0254_01C6062D.1BEFE780
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/styleSPrint.043.css
+
+BODY {
+	BACKGROUND: #ffffff
+}
+A {
+	VERTICAL-ALIGN: middle; COLOR: #0000ff; TEXT-DECORATION: underline
+}
+A:hover {
+	BACKGROUND: #ededfe; COLOR: #0000ff
+}
+.text0 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text1 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text2 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text3 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text4 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text9 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+
+------=_NextPart_000_0254_01C6062D.1BEFE780
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/stylePPrint.043.css
+
+A {
+	VERTICAL-ALIGN: middle; TEXT-DECORATION: none
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+
+------=_NextPart_000_0254_01C6062D.1BEFE780--

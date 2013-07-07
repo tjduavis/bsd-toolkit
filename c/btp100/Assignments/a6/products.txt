@@ -1,0 +1,5 @@
+58496813048;Bounty;B;1.25
+60383708870;Swiss Muesli;N;4.29
+9780596001087;The Cathedral & The Bazaar;G;24.95
+60383653293;Natural Spring Water;P;0.77
+773552001015;Globe and Mail;N;1.00

@@ -1,0 +1,32 @@
+Script command is started on Mon Sep 27 22:59:23 EDT 2004.$ whoami
+tjduavis
+$ cat /public/btp100/a oath.txt
+
+Student Assignment Submission Form
+==================================
+I declare that the attached assignment is my own work in 
+accordance with Seneca Academic Policy.  No part of this 
+assignment has been copied manually or electronically 
+from any other source (including web sites) or 
+distributed to other students.
+
+
+Name                                          Student ID
+
+---------------------------------------------------------
+
+
+
+
+Signature
+
+
+------------------------------
+$ cc barcode.c
+$ a.out
+Enter your UPC digit:067800001019
+Valid UPC!
+
+$ exit
+
+Script command is complete on Mon Sep 27 23:00:35 EDT 2004.

@@ -1,0 +1,424 @@
+From: <Saved by Microsoft Internet Explorer 5>
+Subject: Seneca | School of Computer Studies | Object-Oriented Programming I - C++
+Date: Wed, 21 Dec 2005 12:48:23 -0500
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----=_NextPart_000_0239_01C6062C.D4645270"
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.2670
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0239_01C6062C.D4645270
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/workshops/w9_p.html
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<?xml version=3D'1.0' encoding=3D'UTF-8'?><HTML lang=3Den-us=20
+xmlns=3D"http://www.w3.org/1999/xhtml"><HEAD><TITLE>Seneca | School of =
+Computer Studies | Object-Oriented Programming I - C++</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META http-equiv=3DPICS-Label=20
+content=3D'(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r =
+(cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen =
+true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true =
+r (SS~~000 1))'>
+<META content=3D"(c) Copyright Seneca College 2005" name=3DCopyright>
+<META=20
+content=3D"Welcome to the Bachelors Degree of Software Development =
+Program Web Site.  On this site you can find an intermediate course on =
+object-oriented programming in C++.  Designed by Chris Szalwinski."=20
+name=3DDescription>
+<META=20
+content=3D"This subject expands on introductory elements of C++ and =
+covers intermediate C features.  The emphasis throughout is to prepare =
+for the solution of large problems."=20
+name=3DAbstract>
+<META content=3Dchris.szalwinski@senecac.on.ca name=3DAuthor>
+<META content=3D"software development, object-oriented programming, =
+lecture notes"=20
+name=3DKeywords><LINK =
+href=3D"http://cs.senecac.on.ca/~btp300/pages/style.043.css"=20
+type=3Dtext/css rel=3Dstylesheet><LINK media=3Dscreen=20
+href=3D"http://cs.senecac.on.ca/~btp300/pages/styleSPrint.043.css" =
+type=3Dtext/css=20
+rel=3Dstylesheet><LINK media=3Dprint=20
+href=3D"http://cs.senecac.on.ca/~btp300/pages/stylePPrint.043.css" =
+type=3Dtext/css=20
+rel=3Dstylesheet>
+<META content=3D"MSHTML 6.00.2900.2802" name=3DGENERATOR></HEAD>
+<BODY>
+<TABLE cellSpacing=3D0 cellPadding=3D0><!-- Body Cell -->
+  <TBODY>
+  <TR height=3D600><!-- Content Area -->
+    <TD class=3Dtbody bgColor=3D#ffffff>
+      <TABLE cellPadding=3D10 width=3D"100%">
+        <TBODY>
+        <TR>
+          <TD vAlign=3Dtop bgColor=3D#ffffff><BR>
+            <CENTER><SPAN class=3Dtexth>Module I - Inheritance</SPAN>=20
+            <BR><BR><SPAN class=3Dtexthead>Abstract Base Classes</SPAN>=20
+            <BR><BR><SPAN class=3Dtextagend>Workshop 9</SPAN> =
+</CENTER><BR><BR>
+            <P>In this workshop, you are to design a class hierarchy for =
+
+            determining and displaying the centroid of any polygonal=20
+            shape.&nbsp; </P><BR>
+            <P class=3Dsection>Learning Outcome</P>
+            <P>Upon successful completion of this workshop, you will be =
+able=20
+            <UL>
+              <LI>to abstract common elements from similar classes to =
+create=20
+              inheritance hierarchies of classes, as appropriate =
+</LI></UL>
+            <P></P><BR>
+            <P class=3Dsection>Specifications</P>
+            <P>Design and code an abstract base class named <SPAN=20
+            class=3Dcode>Showable</SPAN> for displaying objects on an =
+<SPAN=20
+            class=3Dcode>ostream</SPAN>.&nbsp; Your class includes=20
+            <UL>
+              <LI>a pure virtual function named <SPAN =
+class=3Dcode>ostream&amp;=20
+              display(ostream&amp; os) const</SPAN> that receives a =
+reference to=20
+              an <SPAN class=3Dcode>ostream</SPAN> object and returns a =
+reference=20
+              to the same <SPAN class=3Dcode>ostream</SPAN> object; and=20
+              <LI>an insertion operator that calls the most derived =
+version of=20
+              <SPAN class=3Dcode>display</SPAN>. </LI></UL>Derive from =
+<SPAN=20
+            class=3Dcode>Showable</SPAN> a class named <SPAN=20
+            class=3Dcode>Point</SPAN> that holds the coordinates of a =
+single point=20
+            in space.&nbsp; Upon instantiation, a <SPAN =
+class=3Dcode>Point</SPAN>=20
+            object receives optionally the x and y coordinates of the=20
+            point.&nbsp; Your class includes a definition of <SPAN=20
+            class=3Dcode>ostream&amp; display(ostream&amp; os)</SPAN> =
+that inserts=20
+            the coordinates of the point into the output stream <SPAN=20
+            class=3Dcode>os</SPAN> in the format <SPAN=20
+            class=3Dcode>(x,y)</SPAN>.&nbsp; Your design also includes =
+two=20
+            non-member helper functions:=20
+            <UL>
+              <LI>an addition operator that receives references to two=20
+              unmodifiable <SPAN class=3Dcode>Point</SPAN> objects and =
+returns a=20
+              <SPAN class=3Dcode>Point</SPAN> object that holds the =
+result of=20
+              adding the coordinates of the two objects;=20
+              <LI>a division operator that receives a reference to an=20
+              unmodifiable <SPAN class=3Dcode>Point</SPAN> object and an =
+integer=20
+              and returns a <SPAN class=3Dcode>Point</SPAN> object that =
+holds the=20
+              result of dividing the coordinates of the object by the =
+integer=20
+              value. </LI></UL>Derive from <SPAN =
+class=3Dcode>Showable</SPAN> a=20
+            second abstract base class named <SPAN =
+class=3Dcode>Shape</SPAN> that=20
+            holds the name of some geometric shape.&nbsp; The =
+constructor for=20
+            this class accepts a null-terminated C-style string holding =
+the name=20
+            of the shape.&nbsp; You may assume that the name held =
+occupies no=20
+            more than 30 characters.&nbsp; Your design includes=20
+            <UL>
+              <LI>a definition of <SPAN =
+class=3Dcode>display(ostream&amp;=20
+              os)</SPAN> that inserts the name into the output stream =
+<SPAN=20
+              class=3Dcode>os</SPAN>; and=20
+              <LI>a pure virtual function that returns the location of =
+the=20
+              centroid of the shape object. </LI></UL>Finally, derive =
+from <SPAN=20
+            class=3Dcode>Shape</SPAN> a class named <SPAN=20
+            class=3Dcode>Polygon</SPAN> that holds information =
+describing a=20
+            polygon.&nbsp; Upon instantiation, a <SPAN =
+class=3Dcode>Polygon</SPAN>=20
+            object receives its name in a null-terminated C-style string =
+and the=20
+            number of vertices.&nbsp; The object allocates memory to =
+hold the=20
+            coordinates for the specified number of vertices.&nbsp; =
+Since your=20
+            design involves dynamic memory allocation, your class =
+includes an=20
+            assignment operator, a copy constructor and a =
+destructor.&nbsp;=20
+            <P></P>
+            <P>Your class includes the following member functions:=20
+            <UL>
+              <LI><SPAN class=3Dcode>Point&amp; operator()(int i)</SPAN> =
+- a call=20
+              operator that receives an integer and returns a reference =
+to the=20
+              <SPAN class=3Dcode>Point</SPAN> object that holds the =
+coordinates=20
+              for the vertex associated with the index receved.&nbsp;=20
+              <LI><SPAN class=3Dcode>ostream&amp; display(ostream&amp; =
+os)=20
+              const</SPAN> - a query that inserts the name of the =
+polygon object=20
+              and the location of its centroid into the output stream =
+<SPAN=20
+              class=3Dcode>os</SPAN>;=20
+              <LI><SPAN class=3Dcode>Point centroid() const</SPAN> - a =
+query that=20
+              returns a <SPAN class=3Dcode>Point</SPAN> object that =
+holds the=20
+              coordinates of the centroid of the polygon.&nbsp; The =
+formula for=20
+              the coordinates of a centroid is the sum of the =
+coordinates of the=20
+              vertices of the polygon divided by the number of =
+vertices.&nbsp;=20
+              </LI></UL>Place your declarations in a header file named =
+<SPAN=20
+            class=3Dcode>Polygon.h</SPAN> and include a guard to prevent =
+multiple=20
+            definitions of any class generated by your =
+declarations.&nbsp;=20
+            <P></P>
+            <P>The following program when used with your template yields =
+the=20
+            results shown on the right=20
+            <TABLE width=3D"95%">
+              <TBODY>
+              <TR>
+                <TD width=3D"50%"><PRE> #include &lt;iostream&gt;
+ using namespace std;
+ #include "Polygon.h"
+
+ int main() {
+    Polygon rect("Rectangle", 4);
+    rect(0) =3D Point(1, 1);
+    rect(1) =3D Point(2, 1);
+    rect(2) =3D Point(2, 4);
+    rect(3) =3D Point(1, 4);
+
+    cout &lt;&lt; rect &lt;&lt; endl;
+
+    return 0;
+ }</PRE></TD>
+                <TD width=3D"50%"><PRE class=3Dresult>
+
+
+
+
+
+
+
+
+
+
+  Rectangle Centroid (1.5,2.5)
+
+
+  </PRE></TD></TR></TBODY></TABLE>As a challenge, add to ypur <SPAN=20
+            class=3Dcode>Shape</SPAN> class an equality operator that =
+compares two=20
+            shapes and returns a <SPAN class=3Dcode>bool</SPAN> =
+value.&nbsp;=20
+            Define the operator in your <SPAN =
+class=3Dcode>Polygon</SPAN> class to=20
+            return <SPAN class=3Dcode>true</SPAN> if all of the vertices =
+of the=20
+            two polygon objects are the same, <SPAN =
+class=3Dcode>false</SPAN>=20
+            otherwise.&nbsp; =
+</P><BR><BR><BR></TD></TR></TBODY></TABLE></TD></TR><!-- Footer -->
+  <TR>
+    <TD class=3Dtbody>
+      <TABLE cellPadding=3D1 width=3D"90%" align=3Dcenter>
+        <TBODY>
+        <TR>
+          <TD class=3Dtext3 width=3D"50%">
+            <SCRIPT language=3Djavascript>=0A=
+						var lh =3D document.location.href;=0A=
+						document.write(lh)=0A=
+						</SCRIPT>
+            &nbsp;&nbsp; </TD>
+          <TD class=3Dtext3 align=3Dright width=3D"50%">
+            <SCRIPT language=3Djavascript>=0A=
+						var lm =3D document.lastModified.slice(0,-3);=0A=
+						document.write("Last Modified: " +lm)=0A=
+						</SCRIPT>
+            &nbsp;&nbsp; =
+</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></BODY></HTML>
+
+------=_NextPart_000_0239_01C6062C.D4645270
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/style.043.css
+
+BODY {
+	MARGIN-TOP: 0px; BACKGROUND: #ffffff; MARGIN-LEFT: 0px
+}
+IMG {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; VERTICAL-ALIGN: bottom; =
+BORDER-LEFT: 0px; BORDER-BOTTOM: 0px
+}
+P {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+TABLE {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: =
+0px
+}
+TD {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+UL {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+LI {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+PRE {
+	FONT-WEIGHT: bold; FONT-SIZE: small; BACKGROUND: #ffffe0; MARGIN-LEFT: =
+15px; COLOR: navy; FONT-FAMILY: "Courier New", serif
+}
+.tbody {
+	BACKGROUND: #ffffff; WIDTH: 700px
+}
+.text3 {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+.panel1 {
+	BACKGROUND: #aee7fc
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+.texth {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.quote {
+	FONT-SIZE: small; FONT-STYLE: italic; FONT-FAMILY: "Times New Roman", =
+serif
+}
+.textagend {
+	FONT-SIZE: small; COLOR: red; FONT-FAMILY: "Times New Roman", serif
+}
+.section {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; TEXT-TRANSFORM: uppercase; COLOR: =
+#4599b1; FONT-FAMILY: "Times New Roman", serif
+}
+.ssection {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.sssection {
+	FONT-WEIGHT: bold; FONT-SIZE: small; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.top {
+	VERTICAL-ALIGN: top
+}
+.tup {
+	VERTICAL-ALIGN: top; COLOR: blue
+}
+.defin {
+	FONT-WEIGHT: bold; FONT-SIZE: small; BACKGROUND: #ffffff; COLOR: =
+maroon; FONT-FAMILY: "Courier New", serif
+}
+.desc {
+	BACKGROUND: #ededfe; TEXT-ALIGN: center
+}
+.value {
+	BACKGROUND: #ffffc6; TEXT-ALIGN: center
+}
+.addre {
+	BACKGROUND: #aee7fc; TEXT-ALIGN: left
+}
+.addrec {
+	BACKGROUND: #aee7fc; TEXT-ALIGN: center
+}
+.oper {
+	COLOR: maroon; FONT-STYLE: italic
+}
+.code {
+	FONT-WEIGHT: bold; FONT-SIZE: small; VERTICAL-ALIGN: baseline; COLOR: =
+navy; FONT-FAMILY: "Courier New", serif
+}
+.high {
+	COLOR: maroon
+}
+.result {
+	BACKGROUND: #f7ffce
+}
+.error {
+	BACKGROUND: #ffe7c6
+}
+.white {
+	BACKGROUND: #ffffff
+}
+
+------=_NextPart_000_0239_01C6062C.D4645270
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/styleSPrint.043.css
+
+BODY {
+	BACKGROUND: #ffffff
+}
+A {
+	VERTICAL-ALIGN: middle; COLOR: #0000ff; TEXT-DECORATION: underline
+}
+A:hover {
+	BACKGROUND: #ededfe; COLOR: #0000ff
+}
+.text0 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text1 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text2 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text3 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text4 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text9 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+
+------=_NextPart_000_0239_01C6062C.D4645270
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/stylePPrint.043.css
+
+A {
+	VERTICAL-ALIGN: middle; TEXT-DECORATION: none
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+
+------=_NextPart_000_0239_01C6062C.D4645270--

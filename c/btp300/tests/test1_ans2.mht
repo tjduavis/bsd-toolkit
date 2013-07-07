@@ -1,0 +1,91 @@
+From: <Saved by Microsoft Internet Explorer 5>
+Subject: 
+Date: Wed, 21 Dec 2005 12:51:01 -0500
+MIME-Version: 1.0
+Content-Type: text/html;
+	charset="Windows-1252"
+Content-Transfer-Encoding: 7bit
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/tests/solutions/btp300mu.q2.053.c.solution
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.2670
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1252">
+<META content="MSHTML 6.00.2900.2802" name=GENERATOR></HEAD>
+<BODY><PRE>/* Make Up Test - Walkthrough
+ * BTP300
+ * Nov 7 2005
+ * btp300mu.q2.053.c.solution
+ */
+
+#include &lt;stdio.h&gt;
+#define MOVE_LEFT(x, y, z)  (((x) &amp; (y)) &gt;&gt; (z))
+#define MOVE_RIGHT(x, y, z) (((x) &amp; (y)) &lt;&lt; (z))
+
+typedef union {
+    unsigned short n;
+    struct {
+        unsigned a:3;
+        unsigned b:5;
+        unsigned c:5;
+        unsigned d:3;
+    } in;
+    struct {
+        unsigned a:5;
+        unsigned b:3;
+        unsigned c:3;
+        unsigned d:5;
+    } out;
+} combo;
+
+unsigned short enc(unsigned short n) {
+    unsigned short a, b, c, d;
+
+    a = MOVE_LEFT (n, 0xE000, 5);
+    b = MOVE_LEFT (n, 0x1F00, 8);
+    c = MOVE_RIGHT(n, 0x00F8, 8);
+    d = MOVE_RIGHT(n, 0x0007, 5);
+
+    return a | b | c | d;
+}
+
+unsigned short dec(unsigned short n) {
+    combo in, out;
+    in.n = n;
+    out.in.a = in.out.b;
+    out.in.b = in.out.d;
+    out.in.c = in.out.a;
+    out.in.d = in.out.c;
+    return out.n;
+}
+
+int main() {
+    unsigned short a = 0x56CE;
+    short b = 0xA932;
+
+    printf("%x:%hu\n", a, a);
+    a = enc(a);
+    printf("%x:%hu\n", a, a);
+    a = dec(a);
+    printf("%x:%hu\n", a, a);
+    printf("%x:%hd\n", b, b);
+    b = enc(b);
+    printf("%x:%hd\n", b, b);
+    b = dec(b);
+    printf("%x:%hd\n", b, b);
+
+    return 0;
+}
+
+Output:
+
+56ce:22222
+cad6:51926
+56ce:22222
+a932:-22222 or 43314
+3549:13641
+a932:-22222 or 43314
+
+
+
+</PRE></BODY></HTML>

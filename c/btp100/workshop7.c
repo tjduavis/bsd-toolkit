@@ -1,0 +1,190 @@
+/*
+*  Workshop 7 - Assets
+*  Packaged Groceries
+*  packaged.c
+*
+*  Nov 11/04
+*  Programmer: Timothy Duavis
+*/
+
+#include <stdio.h>
+#define MAX 100
+
+int validation(int chk,long long choice,char endChk,float price[],int quantity[],int x);
+int loading(long long barcode[],float price[],int quantity[],int x);
+void sort(long long barcode[],float price[],int quantity[], int x);
+void bufferClear(void);
+
+int main(void)
+{
+/*array types*/
+	long long barcode[MAX];
+	float price[MAX];
+	int quantity[MAX];
+	float value[MAX];
+
+/*local variables*/
+	int x=0;
+	int j;
+	int exit=0;
+	float total=0;
+
+	printf("Packaged Goods Organizer\n");
+	printf("========================\n");
+	while(exit!=1)
+	{
+		exit=loading(barcode,price,quantity,x);
+		value[x]=price[x]*quantity[x];
+		x++;
+	}
+	x=x-1;
+	sort(barcode,price,quantity,x);
+
+	for(j=0; j<x; j++)
+	{
+		total+=value[j];
+	}
+
+	/*displays output*/
+	printf("\n");
+	printf("\t\t\tGoods In Stock\n");
+	printf("\t\t\t==============\n");
+	printf("Barcode\t\tPrice\tQuantity\tValue\n");
+	printf("---------------------------------------------\n");
+	for(j=0; j<x; j++)
+	{
+		printf("%10lld\t%-10.2f%-10d\t%-60.2f\n",barcode[j],price[j],quantity[j],value[j]);
+	}
+	printf("\t\t\t\t\t-----\n");
+	printf("Total value goods in stock\t\t%-2.2f\n",total);
+
+	return 0;
+}
+
+/*
+*  Workshop 7 - Assets
+*  buffer Clear function
+*       clears input buffer.
+*/
+
+void bufferClear(void)
+{
+	while(getchar()!='\n')
+		;/*null statement*/
+}
+
+/*
+*  Workshop 7 - Assets
+*  validation function
+*       robust user input validation.
+*/
+
+int validation(int chk,long long choice,char endChk,float price[],int quantity[],int x)
+{
+	int flag=0;
+
+	/*trailing character detected*/
+	if(endChk!='\n')
+	{
+		printf("\t** Trailing characters encountered.  Try again. **\n");
+		bufferClear();
+	}
+	else if(choice<0)
+		printf("\t** Must be non-negative.  Try again. **\n");
+	else if(price[x]<0)
+		printf("\t** Must be non-negative.  Try again. **\n");
+	else if(quantity[x]<0)
+		printf("\t** Must be non-negative.  Try again. **\n");
+	else if(chk==2)
+		flag=1;
+
+	return flag;
+}
+
+/*
+*  Workshop 7 - Assets
+*  loading function
+*       loads users input for price and quantity
+*       in parrallel array with barcode.
+*/
+
+int loading(long long barcode[],float price[],int quantity[],int x)
+{
+	long long choice;
+	int chk,exit=0;
+	int flag=0;
+	char endChk;
+
+
+	while(flag!=1)
+	{
+		printf("Barcode\t\t:\t");
+		chk=scanf("%lld%c",&choice,&endChk);
+		flag=validation(chk,choice,endChk,price,quantity,x);
+	}
+
+	flag=0;
+	chk=0;
+
+	if(choice==0)
+		exit=1;
+	else
+	{
+		barcode[x]=choice;
+		while(flag!=1)
+		{
+			printf("Price\t\t:\t");
+			chk=scanf("%f%c",&price[x],&endChk);
+			flag=validation(chk,choice,endChk,price,quantity,x);
+		}
+
+		flag=0;
+		chk=0;
+
+		while(flag!=1)
+		{
+			printf("Quantity\t:\t");
+			chk=scanf("%d%c",&quantity[x],&endChk);
+			flag=validation(chk,choice,endChk,price,quantity,x);
+		}
+	}
+
+	return exit;
+}
+
+/*
+*  Workshop 7 - Assets
+*  sort function
+*       sorts barcode from ascending order.
+*/
+
+void sort(long long barcode[],float price[],int quantity[], int x)
+{
+	int i,j;
+	long holder;
+
+	for(j=0; j<x; j++)
+	{
+		for(i=j+1; i<x; i++)
+		{
+			if(barcode[j]>barcode[i])
+			{
+				/*swap*/
+				holder=barcode[j];
+				barcode[j]=barcode[i];
+				barcode[i]=holder;
+
+				/*swap*/
+				holder=price[j];
+				price[j]=price[i];
+				price[i]=holder;
+
+				/*swap*/
+				holder=quantity[j];
+				quantity[j]=quantity[i];
+				quantity[i]=holder;
+			}
+		}
+	}
+}
+

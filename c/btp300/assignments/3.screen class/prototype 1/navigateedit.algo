@@ -1,0 +1,31 @@
+		
+		//printf("%d",lastNode);
+		/*if (nav == ENTER || nav == TAB || nav == DOWN || nav) {
+			currentNode = currentNode->goNext();
+			i++;
+			if ( !(currentNode) ) {
+				if (nav == ENTER) {
+					keepgoing = false;
+				} else {
+					currentNode = initNode;
+				}
+			}
+			
+			if ( nav == ENTER ) queExit = true;
+		} else if (nav == UP) {
+			currentNode = currentNode->goPrev();
+			if ( !(currentNode) ) 
+				currentNode = lastNode;
+			i--;
+		} else if (nav == 0) {
+			currentNode = currentNode->goNext();
+			if ( !(currentNode) ) {
+				if (queExit) {
+					keepgoing = false;
+					nav = ENTER;
+				}else
+					currentNode = initNode;
+			} else
+				queExit = false;
+		} 
+	*/

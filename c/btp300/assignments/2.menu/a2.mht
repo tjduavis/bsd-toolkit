@@ -1,0 +1,835 @@
+From: <Saved by Microsoft Internet Explorer 5>
+Subject: Seneca | School of Computer Studies | Object-Oriented Programming I - C++
+Date: Wed, 21 Dec 2005 13:04:58 -0500
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----=_NextPart_000_026F_01C6062F.2503BF70"
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.2670
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_026F_01C6062F.2503BF70
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/assignments/a2_p.html
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<?xml version=3D'1.0' encoding=3D'UTF-8'?><HTML lang=3Den-us=20
+xmlns=3D"http://www.w3.org/1999/xhtml"><HEAD><TITLE>Seneca | School of =
+Computer Studies | Object-Oriented Programming I - C++</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META http-equiv=3DPICS-Label=20
+content=3D'(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r =
+(cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen =
+true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true =
+r (SS~~000 1))'>
+<META content=3D"(c) Copyright Seneca College 2005" name=3DCopyright>
+<META=20
+content=3D"Welcome to the Bachelors Degree of Software Development =
+Program Web Site.  On this site you can find an intermediate course on =
+object-oriented programming in C++.  Designed by Chris Szalwinski."=20
+name=3DDescription>
+<META=20
+content=3D"This subject expands on introductory elements of C++ and =
+covers intermediate C features.  The emphasis throughout is to prepare =
+for the solution of large problems."=20
+name=3DAbstract>
+<META content=3Dchris.szalwinski@senecac.on.ca name=3DAuthor>
+<META content=3D"software development, object-oriented programming, =
+lecture notes"=20
+name=3DKeywords><LINK =
+href=3D"http://cs.senecac.on.ca/~btp300/pages/style.043.css"=20
+type=3Dtext/css rel=3Dstylesheet><LINK media=3Dscreen=20
+href=3D"http://cs.senecac.on.ca/~btp300/pages/styleSPrint.043.css" =
+type=3Dtext/css=20
+rel=3Dstylesheet><LINK media=3Dprint=20
+href=3D"http://cs.senecac.on.ca/~btp300/pages/stylePPrint.043.css" =
+type=3Dtext/css=20
+rel=3Dstylesheet>
+<META content=3D"MSHTML 6.00.2900.2802" name=3DGENERATOR></HEAD>
+<BODY>
+<TABLE cellSpacing=3D0 cellPadding=3D0><!-- Body Cell -->
+  <TBODY>
+  <TR height=3D600><!-- Content Area -->
+    <TD class=3Dtbody bgColor=3D#ffffff>
+      <TABLE cellPadding=3D10 width=3D"100%">
+        <TBODY>
+        <TR>
+          <TD vAlign=3Dtop bgColor=3D#ffffff><BR>
+            <CENTER><SPAN class=3Dtexth>Assignment 2<BR>Version 1.0=20
+            </SPAN><BR><BR><SPAN class=3Dtexthead>Menu Driven Line =
+Editor</SPAN>=20
+            <BR><BR><SPAN class=3Dtexth>Due - Sunday October 23 at=20
+            11:59pm<BR></SPAN></CENTER><BR><BR>
+            <P>As your second assignment this semester, you are to =
+expand your=20
+            library of functions for direct terminal input and output to =
+include=20
+            menu driven line editing. </P><BR>
+            <P class=3Dsection>Learning Outcome</P>
+            <P>Upon successful completion of this assignment, you will =
+have=20
+            demonstrated the abilities to=20
+            <UL>
+              <LI>to analyze functional descriptions of modules that =
+require the=20
+              use of such technologies as direct console input/output =
+and design=20
+              and create the C code that implements those =
+specifications,=20
+              <LI>to create multi-platform programs which require =
+customized=20
+              code for different platforms, and=20
+              <LI>to apply a combination of on-line documentation =
+review,=20
+              research and experimentation to discover how previously =
+unstudied=20
+              library functions and objects work.&nbsp; </LI></UL>
+            <P></P><BR>
+            <P class=3Dsection>Specifications</P>
+            <P>For this assignment, you are to design and to add the =
+following=20
+            three functions to your direct terminal library:=20
+            <UL>
+              <LI><SPAN class=3Dcode>void dtioDisplay(const char *s, int =
+row, int=20
+              column, int length)</SPAN> outputs the null-terminated =
+string=20
+              pointed to by <SPAN class=3Dcode>s</SPAN>, on the screen =
+starting at=20
+              row <SPAN class=3Dcode>row</SPAN> and column <SPAN=20
+              class=3Dcode>column</SPAN>, for a length of <SPAN=20
+              class=3Dcode>length</SPAN> characters.&nbsp; As with <SPAN =
+
+              class=3Dcode>dtioCursor()</SPAN>, the row value 0 refers =
+to the top=20
+              row, and the column value 0 refers to the leftmost =
+column.&nbsp;=20
+              If the string is longer than <SPAN =
+class=3Dcode>length</SPAN>, this=20
+              function only display the first <SPAN =
+class=3Dcode>length</SPAN>=20
+              characters.&nbsp; If the string is shorter than <SPAN=20
+              class=3Dcode>length</SPAN>, this function displays the =
+entire=20
+              string, followed by enough trailing spaces to fill out a =
+field of=20
+              <SPAN class=3Dcode>length</SPAN> characters.&nbsp; =
+However, if <SPAN=20
+              class=3Dcode>length</SPAN> is 0 or less, then this =
+function displays=20
+              the entire string with no trailing spaces.&nbsp; After =
+displaying=20
+              <SPAN class=3Dcode>s</SPAN>, this function positions the =
+cursor is=20
+              positioned after the last character displayed including =
+any=20
+              trailing spaces.&nbsp; This function does not flush the =
+output=20
+              buffer.&nbsp; The results are undefined if the string does =
+not fit=20
+              on the screen.=20
+              <LI>
+              <P><SPAN class=3Dcode>int dtioEdit(char *s, int row, int =
+col, int=20
+              len, int *ppos)</SPAN> controls full screen editing of the =
+
+              null-terminated string pointed to by <SPAN=20
+              class=3Dcode>s</SPAN>.&nbsp; The parameter <SPAN=20
+              class=3Dcode>row</SPAN> identifies the starting row on the =
+screen (O=20
+              is the top row), while <SPAN class=3Dcode>column</SPAN> =
+identifies=20
+              the starting column on the screen (0 is the left-most=20
+              column).&nbsp; The parameter <SPAN class=3Dcode>len</SPAN> =
+specifies=20
+              the length of the editable field, as well as the maximum =
+length=20
+              for the string <SPAN class=3Dcode>s</SPAN>.&nbsp; The last =
+
+              parameter, <SPAN class=3Dcode>ppos</SPAN>, is a pointer to =
+an <SPAN=20
+              class=3Dcode>int</SPAN> variable that contains the index =
+within the=20
+              string where the cursor should initially be placed.&nbsp; =
+At=20
+              termination, this function passes back to the calling =
+function the=20
+              index of where the cursor is through this same <SPAN=20
+              class=3Dcode>int</SPAN> variable.&nbsp; However, if <SPAN=20
+              class=3Dcode>ppos</SPAN> is <SPAN =
+class=3Dcode>NULL</SPAN>, this=20
+              function initially places the cursor on the first =
+character of the=20
+              string, and does not send the cursor position back to the =
+calling=20
+              function at termination. </P>
+              <P>This function does not allow the cursor to move before =
+the=20
+              start of the field or more than one position past the last =
+
+              character in the string.&nbsp; If the field ends at the =
+right edge=20
+              of the screen, this function does not allow the cursor =
+past the=20
+              edge of the screen. </P>
+              <P>The user terminates editing by pressing ENTER, TAB, =
+ESCAPE, UP,=20
+              DOWN, PGUP, PGDN or any of the function keys F(1) to =
+F(12).&nbsp;=20
+              (You may extend this to include other keys, if you =
+wish).&nbsp; If=20
+              the user presses ESCAPE, this function aborts the editing =
+and=20
+              reverts the string to the string originally passed to the=20
+              function. </P>
+              <P>This function returns an <SPAN class=3Dcode>int</SPAN>=20
+              identifying the key pressed to exit.&nbsp; This function =
+uses the=20
+              same key codes as <SPAN class=3Dcode>dtioGetchar()</SPAN> =
+above.=20
+</P>
+              <P>This function takes no action (other than perhaps =
+beeping) if=20
+              the user tries to enter too many characters (if, for =
+example, the=20
+              string is full in insert mode, or the cursor is positioned =
+after=20
+              the last character of a full string in overstrike mode). =
+</P>
+              <P>The function handles the following special keys:=20
+              <UL>
+                <LI>LEFT - move left one character, if possible.=20
+                <LI>RIGHT - move right one character, if possible.=20
+                <LI>HOME - go to the beginning of the string.=20
+                <LI>END - go to the end of the data in the string, i.e. =
+just=20
+                past the last character in the string.&nbsp; If the last =
+
+                character is at the edge of the screen, go to that =
+character.=20
+                <LI>INSERT - toggle Insert/Overstrike mode (the default =
+is=20
+                Insert). In Insert mode, this function inserts printable =
+
+                characters into the string at the current cursor =
+position,=20
+                moving the remainder of the string to the right to make=20
+                room.&nbsp; In Overstrike mode, this function overwrites =
+the=20
+                existing characters (if any) with printable =
+characters.&nbsp; If=20
+                the cursor is past the end of the string, this function =
+appends=20
+                printable characters to the string as long as the string =
+isn't=20
+                full regardless of the mode.&nbsp; The cursor advances =
+as this=20
+                function adds the printable characters to the string =
+(regardless=20
+                of the mode).=20
+                <LI>DEL - discards the character at the current cursor =
+position=20
+                and moves all characters to the right one position to =
+the left.=20
+                <LI>BACKSPACE - moves the rest of the field (including =
+the=20
+                cursor) one position to the left, if possible, =
+discarding the=20
+                previous character. </LI></UL>This function places any =
+normal=20
+              printable key into the string according to the rules laid =
+out in=20
+              the INSERT key section above.&nbsp; (The keys from the =
+space=20
+              character to the tilde character in the ASCII table are =
+the=20
+              "printable" keys.)=20
+              <P></P>
+              <P><SPAN class=3Dcode>dtioEdit()</SPAN> always displays =
+blanks in=20
+              any the part of the field that is not occupied by the=20
+              string.&nbsp; UNDER NO CIRCMUSTANCES DOES THE FUNCTION =
+CHANGE ANY=20
+              POSITION ON THE SCREEN OUTSIDE THE FIELD.&nbsp; For =
+example, this=20
+              function does not display status information (such as =
+"INS" or=20
+              "OVR") elsewhere on the screen, since this will limit the=20
+              programmer's ability to design screen layouts. </P>
+              <P>Like most C library functions, <SPAN=20
+              class=3Dcode>dtioEdit()</SPAN> may assume that it is the =
+calling=20
+              program's reponsibility to ensure that the string array is =
+large=20
+              enough to handle the specified number of characters, and =
+that the=20
+              starting screen position provides enough room (on the =
+screen) for=20
+              the field, etc. </P>
+              <P>In order to be able to revert to the original string, =
+this=20
+              function needs to allocate memory at run time.&nbsp; =
+Research the=20
+              functions named <SPAN class=3Dcode>malloc()</SPAN> and =
+<SPAN=20
+              class=3Dcode>free()</SPAN> in the C standard library and =
+use them to=20
+              allocate and deallocate memory for the original string =
+received.=20
+              </P>
+              <LI>
+              <P><SPAN class=3Dcode>int dtioMenu(const char *s[], int =
+count, int=20
+              row, int column, const char *box)</SPAN> displays a menu =
+of=20
+              choices, contained in the array of <SPAN =
+class=3Dcode>count</SPAN>=20
+              strings <SPAN class=3Dcode>s</SPAN>, inside a box formed =
+by the=20
+              characters in the character array <SPAN =
+class=3Dcode>box</SPAN>,=20
+              where <SPAN class=3Dcode>box[0]</SPAN> is the character to =
+use for=20
+              the upper left corner, <SPAN class=3Dcode>box[1]</SPAN> is =
+the=20
+              character to use for the non-corner positions of the top =
+row,=20
+              <SPAN class=3Dcode>box[2]</SPAN> is the character to use =
+for the=20
+              upper right corner, <SPAN class=3Dcode>box[3]</SPAN> is =
+the=20
+              character to use for the non-corner positions of the right =
+side,=20
+              and so on, clockwise around the box. However, <SPAN=20
+              class=3Dcode>box</SPAN> may be <SPAN =
+class=3Dcode>NULL</SPAN>, in=20
+              which case <SPAN class=3Dcode>{ '+', '-', '+', '|', '+', =
+'-', '+',=20
+              '|' }</SPAN> should be the eight characters used to form =
+the box.=20
+              </P>
+              <P>The upper left corner of the box's frame should appear =
+at the=20
+              specified row and column of the screen (where row 0 is the =
+top=20
+              row, and column 0 is the leftmost column). A column of =
+spaces=20
+              appears between the left border and the menu items - this =
+column=20
+              will be used to contain a moving <SPAN =
+class=3Dcode>&gt;</SPAN>=20
+              character to point at the current menu choice. Otherwise, =
+the box=20
+              is just big enough to contain the menu choices themselves. =
+</P>
+              <P>For example, if we had the following array of pointers =
+to=20
+              string literals and the following character array=20
+              <TABLE width=3D"45%">
+                <TBODY>
+                <TR>
+                  <TD><BR><PRE> char *choices[] =3D { "Add", "Change", =
+"Delete", "", "Quit" },
+      box[] =3D { '_', '_', '_', '|', '+', '-', '+', '|' =
+};</PRE><BR></TD></TR></TBODY></TABLE>then=20
+              <SPAN class=3Dcode>dtioMenu(choices, 5, 0, 0, box)</SPAN> =
+would pop=20
+              up=20
+              <TABLE width=3D"45%">
+                <TBODY>
+                <TR>
+                  <TD><BR><PRE class=3Dresult> _________
+ |&gt;Add   |
+ | Change|
+ | Delete|
+ |       |
+ | Quit  |
+ +-------+&nbsp;</PRE><BR></TD></TR></TBODY></TABLE>at the upper=20
+              left corner of the screen. </P>
+              <P>Note how the box is just wide enough to contain the =
+longest=20
+              menu choice (along with the leading column of spaces), and =
+how the=20
+              shorter menu choices are displayed with enough trailing =
+spaces to=20
+              line up the right side of the box. Also, the <SPAN=20
+              class=3Dcode>&gt;</SPAN> character in the leading column =
+of spaces=20
+              initially points to the first item. </P>
+              <P>The user may press the arrow keys to move the <SPAN=20
+              class=3Dcode>&gt;</SPAN> up and down, if possible. =
+However, if a=20
+              particular menu choice is the empty string (such as the =
+one=20
+              between <SPAN class=3Dcode>Delete</SPAN> and <SPAN=20
+              class=3Dcode>Quit</SPAN> in the example above), then the =
+<SPAN=20
+              class=3Dcode>&gt;</SPAN> skips over it. </P>
+              <P>The user can dismiss this pop-up menu one of two ways: =
+by=20
+              pressing ESCAPE, in which case the function returns -1, or =
+by=20
+              pressing the ENTER, in which case the function returns the =
+index,=20
+              in <SPAN class=3Dcode>choices</SPAN>, of the item at which =
+the <SPAN=20
+              class=3Dcode>&gt;</SPAN> was pointing when the user =
+pressed ENTER.=20
+              (In the example above, this will therefore be one of 0, 1, =
+2 or=20
+              4). </P>
+              <P>In either case, when the menu is dismissed, it is =
+removed from=20
+              the screen, and the original contents of the screen are =
+restored=20
+              to the region in which the menu had been displayed. For =
+help on=20
+              how to accomplish this, see below.&nbsp; Note that the =
+position of=20
+              the cursor after the menu disappears is not specified, and =
+so that=20
+              a program that pops up a menu should reposition the cursor =
+after=20
+              calling this function. </P>
+              <P>As with <SPAN class=3Dcode>dtioEdit()</SPAN>, it is not =
+this=20
+              function's responsibility to ensure that its parameters =
+make=20
+              sense, although adding some robustness certainly wouldn't =
+be a bad=20
+              idea. </P>
+              <P>In order to restore the screen after a pop-up menu has =
+been=20
+              displayed with the <SPAN class=3Dcode>dtioMenu()</SPAN> =
+function,=20
+              you'll need to know what was on the screen at the time the =
+menu=20
+              was drawn.&nbsp; There are two ways to accomplish this: =
+either=20
+              store a copy of everything that gets written to the screen =
+as you=20
+              are writing it (except in <SPAN =
+class=3Dcode>dtioMenu()</SPAN> of=20
+              course), so that <SPAN class=3Dcode>dtioMenu()</SPAN> can =
+redraw the=20
+              screen from this copy, or else read, directly from the =
+screen,=20
+              what is on the screen, storing it for later re-display, =
+just=20
+              before you pop up the menu.&nbsp; </P>
+              <P>The latter is an easier approach, since only <SPAN=20
+              class=3Dcode>dtioMenu()</SPAN> needs to do any of the =
+work, but=20
+              requires the ability to read what is currently on the=20
+              screen.&nbsp; Fortunately, all the required environments =
+provide=20
+              this capability. </P>
+              <P>In the Borland compiler, the function=20
+              <TABLE width=3D"45%">
+                <TBODY>
+                <TR>
+                  <TD><BR><PRE> gettext(x1, y1, x2, y2, =
+buffer)&nbsp;</PRE><BR></TD></TR></TBODY></TABLE>reads=20
+              what is on the screen in the rectangle from coordinates =
+(x1,y1) to=20
+              (x2,y2). (Keep in mind that Borland uses (x,y) =
+coordinates, where=20
+              x is a column number, y is a row number and (1,1) is the =
+upper=20
+              left corner).&nbsp; The last parameter is an array of =
+3-byte=20
+              elements that is as long as there are characters in the=20
+              rectangle.&nbsp; (Each screen position actually stores a =
+char and=20
+              a short: the character displayed, and its display=20
+              attribute).&nbsp; Similarly=20
+              <TABLE width=3D"45%">
+                <TBODY>
+                <TR>
+                  <TD><BR><PRE> puttext(x1, y1, x2, y2, =
+buffer)&nbsp;</PRE><BR></TD></TR></TBODY></TABLE>copies=20
+              data from the buffer onto the screen. </P>
+              <P>In Visual C++, the functions <SPAN=20
+              class=3Dcode>ReadConsoleOutput(HANDLE, PCHAR_INFO, COOR, =
+COOR,=20
+              SMALL_RECT*)</SPAN> and <SPAN=20
+              class=3Dcode>WriteConsoleOutput(HANDLE, PCHAR_INFO, COOR, =
+COOR,=20
+              SMALL_RECT*)</SPAN> perform similarly, where:=20
+              <UL>
+                <LI><SPAN class=3Dcode>HANDLE</SPAN> is a handle to the =
+standard=20
+                output device,=20
+                <LI><SPAN class=3Dcode>PCHAR_INFO</SPAN> is a pointer to =
+a=20
+                dynamically allocated array that holds the character =
+data for=20
+                (width + 1) * (depth + 1) elements, where each element =
+is of=20
+                type <SPAN class=3Dcode>CHAR_INFO</SPAN>,=20
+                <LI>the first <SPAN class=3Dcode>COOR</SPAN> is a struct =
+that=20
+                holds the buffer size, where the member <SPAN=20
+                class=3Dcode>X</SPAN> is the width + 1 and the member =
+<SPAN=20
+                class=3Dcode>Y</SPAN> is the depth + 1,=20
+                <LI>the second <SPAN class=3Dcode>COOR</SPAN> is a =
+struct that=20
+                holds the buffer location, where the member <SPAN=20
+                class=3Dcode>X</SPAN> is the column location and the =
+member <SPAN=20
+                class=3Dcode>Y</SPAN> is the row location,=20
+                <LI><SPAN class=3Dcode>SMALL_RECT</SPAN> is a struct =
+that holds=20
+                the coordinates of the rectangle that bounds the area in =
+
+                question, where the members <SPAN =
+class=3Dcode>Top</SPAN>, <SPAN=20
+                class=3Dcode>Left</SPAN>, <SPAN =
+class=3Dcode>Bottom</SPAN> and <SPAN=20
+                class=3Dcode>Right</SPAN> hold the bounding coordinates. =
+
+              </LI></UL>.&nbsp; For example, for an area that covers the =
+
+              rectangle defined by=20
+              <TABLE width=3D"45%">
+                <TBODY>
+                <TR>
+                  <TD><BR><PRE> SMALL_RECT rect;
+ rect.Top =3D row;
+ rect.Left =3D column;
+ rect.Bottom =3D row + depth;
+ rect.Right =3D column + width;</PRE><BR></TD></TR></TBODY></TABLE>the=20
+              buffer size is=20
+              <TABLE width=3D"45%">
+                <TBODY>
+                <TR>
+                  <TD><BR><PRE> COOR bufferSize;
+ bufferSize.Y =3D depth + 1;
+ bufferSize.X =3D width + 1;</PRE><BR></TD></TR></TBODY></TABLE>and=20
+              the buffer's starting location is=20
+              <TABLE width=3D"45%">
+                <TBODY>
+                <TR>
+                  <TD><BR><PRE> COOR bufferStart;
+ bufferStart.Y =3D 0;
+ bufferStart.X =3D 0;</PRE><BR></TD></TR></TBODY></TABLE>In curses,=20
+              <TABLE width=3D"45%">
+                <TBODY>
+                <TR>
+                  <TD><BR><PRE> mvinch(row, =
+col)&nbsp;</PRE><BR></TD></TR></TBODY></TABLE>returns=20
+              a <SPAN class=3Dcode>chtype</SPAN> (char plus display =
+attribute) for=20
+              position (row,col) of the screen, using the curses =
+coordinate=20
+              system where the screen looks like a 2-D array.&nbsp; Note =
+that=20
+              <SPAN class=3Dcode>mvinch()</SPAN> also moves the cursor. =
+You could=20
+              easily create an array of <SPAN =
+class=3Dcode>chtype</SPAN>s, and=20
+              loop through a rectangle of the screen copying each screen =
+
+              position into the array.&nbsp; Then, just as easily, you =
+could=20
+              write those values back to the screen by moving the cursor =
+(with=20
+              <SPAN class=3Dcode>move()</SPAN>) and writing each =
+character (with=20
+              <SPAN class=3Dcode>addch()</SPAN>).&nbsp; Note that <SPAN=20
+              class=3Dcode>addch()</SPAN> can receive <SPAN=20
+              class=3Dcode>chtype</SPAN> values just as well as it =
+receives <SPAN=20
+              class=3Dcode>char</SPAN> values.&nbsp; In other words, you =
+can use=20
+              <SPAN class=3Dcode>mvinch()</SPAN> <SPAN =
+class=3Dcode>move()</SPAN>=20
+              and <SPAN class=3Dcode>addch()</SPAN> to do almost exactly =
+what=20
+              Borland's <SPAN class=3Dcode>gettext()</SPAN> and <SPAN=20
+              class=3Dcode>puttext()</SPAN> do.&nbsp; </LI></UL>Add your =
+design to=20
+            the implementation file named <SPAN =
+class=3Dcode>dtio.c</SPAN> and the=20
+            associated header information in the header file named <SPAN =
+
+            class=3Dcode>dtio.h</SPAN>.=20
+            <P></P>
+            <P>A copy of a program that uses your library is <A=20
+            =
+href=3D"http://cs.senecac.on.ca/~btp300/pages/assignments/a2test.c">here<=
+/A>=20
+            (<SPAN class=3Dcode>a2test.c</SPAN>).&nbsp; The final result =
+from a=20
+            sample run of this program using your functions looks =
+something=20
+            like:=20
+            <TABLE width=3D"45%">
+              <TBODY>
+              <TR>
+                <TD><BR><PRE class=3Dresult> =
+0123456789012345678901234567890123456789012345678901234567890123456789012=
+3456789
+ 1Perform the following instructions in turn
+ 2
+ 3  Press Right Arrow Twice, Down Arrow Twice, Insert Once
+ 4  Using Arrow and ASCII keys, change "jkl" to "JKL"
+ 5  Press Home, A, End, Left Arrow, Z, Enter
+ 6  Press Insert, Home, a, End, Left Arrow, z, Escape
+ 7  Press Insert, C, End, Backspace 4 times, Insert, 1, 2, Enter
+ 8  Press End, Backspace Twice, 1, 2, 3, Enter
+ 9  Press Delete Twice, 7, 8, 9, Enter
+ 0  Press Down Arrow twice, Up Arrow once, Enter
+ 1  Press Down Arrow once, Escape
+ 2  Press Down Arrow 3 times, Enter
+ 3
+ 4    AbcdefghiJKLmnopqrstuvwxyZ                                       =
+AbCdefg12J&nbsp;
+ 5    abcdefghiJKLmnopqrstuvwxyz
+ 6    AbCdefghiJKLmnopqrstuv12
+ 7    AbCdef7892JKLmnopqrstuv12
+ 8
+ 9  If no errors, prepare screen shot (include top row of numbers) ...
+ 0  Press any key to exit!
+ 1
+ 2
+ 3
+ 4</PRE><BR></TD></TR></TBODY></TABLE></P><BR>
+            <P class=3Dsection>Submission Requirements</P>
+            <P>Test your functions in the following four command-line=20
+            environments=20
+            <UL>
+              <LI>Local PC: MS DOS Borland 5.5=20
+              <LI>Local PC: MS DOS Visual Studio .net 2003=20
+              <LI>phobos: AIX cc=20
+              <LI>matrix: Linux gcc </LI></UL>Compile and test your =
+functions in=20
+            each environment separately.&nbsp;=20
+            <P></P>
+            <P>For submission purposes, your functions must compile, =
+link and=20
+            run without errors in each environment.&nbsp; At most, you =
+should=20
+            only need to modify one or two lines of <SPAN=20
+            class=3Dcode>dtio.h</SPAN> in switching from one environment =
+to=20
+            another.&nbsp; Capture a screen shot of the display of your =
+test=20
+            program in each environment.&nbsp; </P>
+            <P>Prepare a typescript that includes a copy of your header =
+and=20
+            implementation files along with a compilation on =
+phobos.&nbsp;=20
+            Upload this typescript along with copies of the screen shots =
+from=20
+            each environment.&nbsp; </P>
+            <P class=3Dssection>Grading</P>
+            <P>This assignment is worth 6% of your final mark. </P>
+            <P>The base mark for a program with no apparent logic flaws =
+is=20
+            9/10.&nbsp; To earn more, your code must include innovative =
+elements=20
+            without violating the specs.&nbsp; If your code contains one =
+major=20
+            or more than one minor logic flaw, you will be asked to fix =
+it and=20
+            to resubmit your code for a 20% penalty.&nbsp; The late =
+penalty is=20
+            10%, so it is better to submit a working version late than =
+to submit=20
+            a flawed version on time.&nbsp; Very late assignments and=20
+            resubmissions will attract a further 10% penalty.&nbsp; </P>
+            <P>Regardless of how long it takes you to complete this =
+assignment,=20
+            you still need to submit a completed working version in =
+order to=20
+            pass this subject. =
+</P><BR><BR><BR></TD></TR></TBODY></TABLE></TD></TR><!-- Footer -->
+  <TR>
+    <TD class=3Dtbody>
+      <TABLE cellPadding=3D1 width=3D"90%" align=3Dcenter>
+        <TBODY>
+        <TR>
+          <TD class=3Dtext3 width=3D"50%">
+            <SCRIPT language=3Djavascript>=0A=
+						var lh =3D document.location.href;=0A=
+						document.write(lh)=0A=
+						</SCRIPT>
+            &nbsp;&nbsp; </TD>
+          <TD class=3Dtext3 align=3Dright width=3D"50%">
+            <SCRIPT language=3Djavascript>=0A=
+						var lm =3D document.lastModified.slice(0,-3);=0A=
+						document.write("Last Modified: " +lm)=0A=
+						</SCRIPT>
+            &nbsp;&nbsp; =
+</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></BODY></HTML>
+
+------=_NextPart_000_026F_01C6062F.2503BF70
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/style.043.css
+
+BODY {
+	MARGIN-TOP: 0px; BACKGROUND: #ffffff; MARGIN-LEFT: 0px
+}
+IMG {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; VERTICAL-ALIGN: bottom; =
+BORDER-LEFT: 0px; BORDER-BOTTOM: 0px
+}
+P {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+TABLE {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: =
+0px
+}
+TD {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+UL {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+LI {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+PRE {
+	FONT-WEIGHT: bold; FONT-SIZE: small; BACKGROUND: #ffffe0; MARGIN-LEFT: =
+15px; COLOR: navy; FONT-FAMILY: "Courier New", serif
+}
+.tbody {
+	BACKGROUND: #ffffff; WIDTH: 700px
+}
+.text3 {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+.panel1 {
+	BACKGROUND: #aee7fc
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+.texth {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.quote {
+	FONT-SIZE: small; FONT-STYLE: italic; FONT-FAMILY: "Times New Roman", =
+serif
+}
+.textagend {
+	FONT-SIZE: small; COLOR: red; FONT-FAMILY: "Times New Roman", serif
+}
+.section {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; TEXT-TRANSFORM: uppercase; COLOR: =
+#4599b1; FONT-FAMILY: "Times New Roman", serif
+}
+.ssection {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.sssection {
+	FONT-WEIGHT: bold; FONT-SIZE: small; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.top {
+	VERTICAL-ALIGN: top
+}
+.tup {
+	VERTICAL-ALIGN: top; COLOR: blue
+}
+.defin {
+	FONT-WEIGHT: bold; FONT-SIZE: small; BACKGROUND: #ffffff; COLOR: =
+maroon; FONT-FAMILY: "Courier New", serif
+}
+.desc {
+	BACKGROUND: #ededfe; TEXT-ALIGN: center
+}
+.value {
+	BACKGROUND: #ffffc6; TEXT-ALIGN: center
+}
+.addre {
+	BACKGROUND: #aee7fc; TEXT-ALIGN: left
+}
+.addrec {
+	BACKGROUND: #aee7fc; TEXT-ALIGN: center
+}
+.oper {
+	COLOR: maroon; FONT-STYLE: italic
+}
+.code {
+	FONT-WEIGHT: bold; FONT-SIZE: small; VERTICAL-ALIGN: baseline; COLOR: =
+navy; FONT-FAMILY: "Courier New", serif
+}
+.high {
+	COLOR: maroon
+}
+.result {
+	BACKGROUND: #f7ffce
+}
+.error {
+	BACKGROUND: #ffe7c6
+}
+.white {
+	BACKGROUND: #ffffff
+}
+
+------=_NextPart_000_026F_01C6062F.2503BF70
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/styleSPrint.043.css
+
+BODY {
+	BACKGROUND: #ffffff
+}
+A {
+	VERTICAL-ALIGN: middle; COLOR: #0000ff; TEXT-DECORATION: underline
+}
+A:hover {
+	BACKGROUND: #ededfe; COLOR: #0000ff
+}
+.text0 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text1 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text2 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text3 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text4 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text9 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+
+------=_NextPart_000_026F_01C6062F.2503BF70
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/stylePPrint.043.css
+
+A {
+	VERTICAL-ALIGN: middle; TEXT-DECORATION: none
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+
+------=_NextPart_000_026F_01C6062F.2503BF70--

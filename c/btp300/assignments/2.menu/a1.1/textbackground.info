@@ -1,0 +1,5 @@
+	#if   PLATFORM == BOR
+		textbackground(4);
+		textcolor(15);
+	#elif 	PLATFORM == NET
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | BACKGROUND_RED );

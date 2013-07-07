@@ -1,0 +1,87 @@
+From: <Saved by Microsoft Internet Explorer 5>
+Subject: 
+Date: Wed, 21 Dec 2005 12:51:25 -0500
+MIME-Version: 1.0
+Content-Type: text/html;
+	charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/tests/solutions/btp300t2.q1.053.h.solution
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.2670
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Dwindows-1252">
+<META content=3D"MSHTML 6.00.2900.2802" name=3DGENERATOR></HEAD>
+<BODY><PRE>// BTP300 Test 2 Word Problem Solution
+// Expression.h
+// BTP300
+// Dec 5 2005
+
+#ifndef _EXPRESSION_H  // guard against duplication
+#define _EXPRESSION_H
+#include &lt;iostream&gt;
+using namespace std;
+const int WIDTH  =3D 4;  // unmodifiable field width
+const int PLACES =3D 1;  // unmodifiable decimal places
+
+class Expression { // abstract base class - at least one pure
+                   // virtual function - no instance variables
+public:
+Expression() {}
+    virtual double operator()(double) const =3D 0;
+    virtual double&amp; operator[](int i) =3D 0;      // creates an =
+lvalue
+    virtual double operator[](int i) const =3D 0; // separate rvalue
+    virtual void display(ostream&amp; os) const =3D 0;
+    virtual int nTerms() const =3D 0;
+};
+// helper but not a friend, receives a reference to an Expression
+ostream&amp; operator&lt;&lt;(ostream&amp; os, const Expression&amp; e);
+
+class UPolynomial : public Expression { // base class not virtual
+    int terms;
+    double* coefficient; // don't use coefficient[]
+    double junk;         // need junk to avoid dangling reference
+public:
+    UPolynomial(int n =3D 0, double* c =3D NULL); // default parameter =
+values
+    UPolynomial(const UPolynomial&amp; p) {  // copy constructor
+        coefficient =3D NULL;  // set to NULL in order to use =3D =
+operator
+        *this =3D p;           // call =3D operator
+    }
+    // destructor - check for NULL
+    virtual ~UPolynomial() { if(coefficient) delete [] coefficient; }
+    UPolynomial&amp; operator=3D(const UPolynomial&amp; p);
+    // subscripting operator for lvalues
+    double&amp; operator[](int i) { // check both limits on i
+        // return reference to an instance variable
+        // do not use local variable - dangling reference
+        // there is no * on coefficient[i] or junk
+        return i &gt;=3D 0 &amp;&amp; i &lt; terms ? coefficient[i] : =
+junk;
+    }
+    // subscripting operator for rvalues
+    double operator[](int i) const { // check both limits on i
+        // return a copy of coefficient or 0
+        return i &gt;=3D 0 &amp;&amp; i &lt; terms ? coefficient[i] : 0;
+    }
+    int nTerms() const { return terms; }
+    void display(ostream&amp; os) const;
+    double operator()(double x) const;
+};
+// helper addition operator - not a friend
+UPolynomial operator+(const UPolynomial&amp; e, const UPolynomial&amp; =
+f);
+
+class UQuadratic : public UPolynomial {
+public:
+    UQuadratic(double a, double b, double c) : UPolynomial(3) {
+        operator[](0) =3D a;
+        operator[](1) =3D b;
+        operator[](2) =3D c;
+    }
+};
+
+#endif /* _EXPRESSION_H */  // end of guard</PRE></BODY></HTML>

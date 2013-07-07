@@ -1,0 +1,326 @@
+From: <Saved by Microsoft Internet Explorer 5>
+Subject: 
+Date: Wed, 21 Dec 2005 12:57:37 -0500
+MIME-Version: 1.0
+Content-Type: text/html;
+	charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/tests/oop444fe.953
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.2670
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Dwindows-1252">
+<META content=3D"MSHTML 6.00.2900.2802" name=3DGENERATOR></HEAD>
+<BODY><PRE>    OOP444 ---------------------------------- Object Oriented =
+Programming II
+
+
+    Answer all questions in the examination booklet(s) supplied. Use the =
+C++
+    language for the questions that require programming.  You  may  use  =
+two
+    textbooks,  an  8.5"x11"  crib  sheet  and  a  calculator  as  =
+reference
+    material. There is a total of 40 marks.
+
+    1. [8 marks] Determine the exact output of the following program:
+
+            #include &lt;iostream.h&gt;
+
+            class a {
+                int x;
+                int y;
+
+              public:
+                a() { x =3D y =3D 0; }
+                a(int n) { x =3D n; y =3D 0; }
+                a(double);
+                double todbl() { return x + (y * (x &lt; 0 ? -0.01 : =
+0.01)); }
+                friend ostream&amp; operator&lt;&lt;(ostream&amp;, a);
+            };
+
+            a::a(double n)
+            {
+                int sign =3D 1;
+                if (n &lt; 0) {
+                    n =3D -n;
+                    sign =3D -1;
+                }
+                x =3D int(n);=20
+                y =3D int((n - x)*100 + 0.5);
+                x *=3D sign;
+            }
+
+            a operator+(a a1, a a2)
+            {
+                return a(a1.todbl() + a2.todbl());
+            }
+
+            ostream&amp; operator&lt;&lt;(ostream &amp;os, a a1)
+            {
+                os &lt;&lt; a1.x &lt;&lt; '.' &lt;&lt; ((a1.y&lt;10) ? =
+"0" : "") &lt;&lt; a1.y;
+                return os;
+            }
+
+            main()
+            {
+                a x, y(5), z(-56.789);
+
+                cout &lt;&lt; x &lt;&lt; "..." &lt;&lt; y &lt;&lt; =
+"..."&lt;&lt; z &lt;&lt; endl;
+                x =3D y + z;
+                y =3D x + 60;
+                cout &lt;&lt; x &lt;&lt; ", " &lt;&lt; y &lt;&lt; ", " =
+&lt;&lt; z &lt;&lt; endl;
+                return 0;
+            }
+
+
+    Final Examination -------------------------------------------- Fall =
+1995
+    OOP444 ---------------------------------- Object Oriented =
+Programming II
+
+
+    2. [17 marks] Write the code to implement a class called a Title,  =
+which
+        is used to store and output a  title  that  will  be  centered  =
+when
+        output.   A   Title   has   the   following   (publicly   =
+available)
+        characteristics:
+
+        - when an instance of a Title is created, an output width (int)  =
+and
+          a character string may be specified (in  that  order).  The  =
+width
+          indicates the desired width, in characters, for the output =
+device.
+          The character string contains  the  data  that  will  be  =
+centered
+          within that width when the Title is output.
+
+          The character string may be omitted, in which case  the  Title =
+ is
+          initialized with an empty string. Both the width  and  the  =
+string
+          may be omitted, in which case a width of 80 is assumed.
+
+        - a member function, init(), which takes a  character  string  =
+as  a
+          parameter. The string  contains  the  data  to  be  centered,  =
+and
+          replaces any string that was  given  either  when  the  Title  =
+was
+          created or in a previous call of  init().  This  function  has =
+ no
+          return value.
+
+        - another version of the  init()  member  function,  that  takes =
+ an
+          output width (int) as a parameter. This output width overrides =
+the
+          width specified at creation time or in a previous call of =
+init().
+
+        - a third version of init(), that takes both a width and a =
+string as
+          parameters, and  combines  what  both  of  the  other  two  =
+init()
+          versions do. (Note that this third init() can be, but doesn't =
+have
+          to be,  implemented  as  part  of  the  second  version,  =
+using  a
+          carefully chosen default parameter).
+
+        - an operator, &lt;&lt;, that  takes  a  reference  to  an  =
+ostream  (from
+          &lt;iostream.h&gt;) as a left parameter, and a constant =
+reference  to  a
+          Title as a right parameter. The string  currently  stored  in  =
+the
+          Title (given either at creation time, or by the  init()  =
+function)
+          is sent to the ostream, with as many leading spaces  as  =
+necessary
+          to ensure that the string is centered within the  width.  (If  =
+the
+          string is longer than the  width,  the  entire  string  is  =
+output
+          without any leading spaces.) A newline  is  sent  to  the  =
+ostream
+          after the string. The operator returns a reference to the  =
+ostream
+          passed as a parameter.
+
+        The string that is part of the Title should not be  subject  to  =
+any
+        arbitrary length limitations, which means you'll have to =
+dynamically
+        allocate (and deallocate) enough memory to  hold  the  copy  of  =
+the
+        string.
+
+        HINT: have two private member data  elements:  a  int  to  hold  =
+the
+        width, and a character pointer for the string. Allocate  memory  =
+for
+        the string in the constructor (and deallocate it in the =
+destructor).
+        Also, whenever a new string is given (using init()), deallocate  =
+the
+        old memory, and reallocate new memory.
+
+
+
+
+    Final Examination -------------------------------------------- Fall =
+1995
+    OOP444 ---------------------------------- Object Oriented =
+Programming II
+
+
+        As an example of how the Title works, the following code:
+
+          Title x(1, "123456789012345678901234567890");
+          cout &lt;&lt; x;
+          x.init(20, "This is a test");
+          cout &lt;&lt; x;
+          x.init(30);
+          cout &lt;&lt; x;
+          x.init("this is too easy");
+          cout &lt;&lt; Title(30, "For a Final Exam") &lt;&lt; x;
+
+        would display:
+
+          123456789012345678901234567890
+             This is a test
+                  This is a test
+                 For a Final Exam
+                 this is too easy
+
+        (where the first 123... starts at the left edge of the screen).
+
+
+
+
+
+
+
+
+
+
+    3. [5 marks] Write the code to implement a class called a  TITLE,  =
+which
+        is derived from a  Title  (see  the  previous  question)  and  =
+works
+        exactly like a Title, except that TITLEs are output in  upper  =
+case,
+        regardless of the case of the text given to the TITLE.
+
+        Note that you can get this question correct without  even  =
+answering
+        the previous question, since this  question  can  be  answered  =
+just
+        using the publicly available features of the previous question.  =
+If,
+        however, you use "protected" (or otherwise "undocumented")  =
+features
+        of your solution to the  previous  question,  your  marks  for  =
+this
+        question might  be  influenced  by  your  marks  from  the  =
+previous
+        question.
+
+        HINTS: You may use the toupper() function in &lt;ctype.h&gt; (if =
+you  know
+        how it works) or simply use the fact the  the  ASCII  code  of  =
+each
+        upper case letter is 32 less than the ASCII code of its  lower  =
+case
+        equivalent. It is easiest to convert the data to upper case  on  =
+its
+        way in to the TITLE, rather than on its way  out  (because  that =
+ is
+        when you  have  access  to  the  data,  unless  you  made  the  =
+data
+        "protected" in the previous question).
+
+
+
+
+
+
+    Final Examination -------------------------------------------- Fall =
+1995
+    OOP444 ---------------------------------- Object Oriented =
+Programming II
+
+
+    4. [10 marks] Determine the exact output of the following program:
+
+            // Hint if you lack an ASCII table: 'A' is 65, 'B' is 66, =
+etc.
+            #include &lt;stdio.h&gt;
+            #include &lt;string.h&gt;
+            #define TV 1
+            #define RADIO 2
+            #define MAGAZINE 4
+            #define NEWSPAPER 8
+            #define BILLBOARD 16
+            #define TSHIRT 32
+            #define OTHER 64
+
+            class ad_client {
+                char name[41];
+                char types;
+              public:
+                ad_client(char s[], char c) {strcpy(name, s); types =3D =
+c;}
+                void print();
+            };
+            void ad_client::print()
+            {   printf("Client: %s wants to use:\n", name);
+                if (types) {
+                    for (int i =3D 1; i &lt;=3D OTHER; i &lt;&lt;=3D 1) =
+{
+                        if (i &amp; types) {
+                            if (i =3D=3D TV)
+                                printf("---&gt;Television =
+Commercials\n");
+                            else if (i =3D=3D RADIO)
+                                printf("---&gt;Radio Spots\n");
+                            else if (i =3D=3D MAGAZINE)
+                                printf("---&gt;Magazine Ads\n");
+                            else if (i =3D=3D NEWSPAPER)
+                                printf("---&gt;Newspaper Ads\n");
+                            else if (i =3D=3D BILLBOARD)
+                                printf("---&gt;Billboards\n");
+                            else if (i =3D=3D TSHIRT)
+                                printf("---&gt;T-Shirt Sales\n");
+                            else if (i =3D=3D OTHER)
+                                printf("---&gt;Alternative Methods\n");
+                        }
+                    }
+                }
+                else
+                    printf("---&gt;Word of Mouth!???\n");
+            }
+            int main()
+            {   ad_client a("Coke", 'O'), // uppercase O, not zero!
+                          b("CFNY", 'P'),=20
+                          c("Rick's Cafe", '\0');
+                a.print();
+                b.print();
+                c.print();
+                return 0;
+            }
+
+
+    Final Examination -------------------------------------------- Fall =
+1995
+</PRE></BODY></HTML>

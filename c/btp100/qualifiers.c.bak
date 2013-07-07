@@ -1,0 +1,5 @@
+main()
+{
+	double count = 10;
+		printf("this is an example of a long double: %f\n\n",count);
+}

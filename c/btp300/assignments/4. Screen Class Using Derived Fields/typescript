@@ -1,0 +1,863 @@
+Script command is started on Fri Dec 16 01:30:18 EST 2005.$ whoami
+tjduavis
+$ cat Field.h
+/*******************************************************************************
+ * Assignment 4 Draft Version                                                  *
+ * FILE           : Field.h                                                    * 
+ * Author         : Timothy Duavis                                             *
+ * Last Modified  : December 15, 2005                                          *
+ * Description    : An object-oriented wrapper, for Direct Terminal Library    *
+ *                  This wrapper will be the foundation for typical data       *
+ *                  programs, which contains a Field and Screen.               *
+ *                  *This program is powered by Chris' dtio                    *
+ * Upgrade(s)     : New derieved fields with usefull characteristics.          *
+ * Specs created  : Chris S. - Seneca College                                  * 
+ *******************************************************************************/
+ 
+#include <cstdio>
+#include <cstring>
+#include <new>
+using namespace std;
+extern "C" {
+        #include "dtio.h"
+}
+
+#define BOXBORDER 8
+
+// helper function for various Derived Fields.
+// validates a field containing strings only have numerical
+// attributes. flag 'flPt' differentiates between floating
+// point attributes. vs integer attributes.
+// 
+bool numericStr(char* str,bool flPt) {
+        bool success = true;
+        for (int j = 0; j < strlen(str); j++) {
+                switch(str[j]) {
+                        case '0':
+                        case '1':
+                        case '2':
+                        case '3':
+                        case '4':
+                        case '5':
+                        case '6':
+                        case '7':
+                        case '8':
+                        case '9':
+                        case '-':
+                        case ' ':
+                                break;
+                        case '.':
+                                if (flPt)
+                                        success = true;
+                                else
+                                        success = false;
+                                break;
+                        default:
+                                j = strlen(str);
+                                success = false;
+                        }
+                }
+        return success;
+}
+
+// Field class, represents either a label
+// or an editable string.
+//
+class Field {
+        int row;
+        int column;
+        int width;
+        char* str;
+        bool toEdit;
+        int index;
+        
+        void initField(const Field& src) {
+                initField(src.row,src.column,src.width,src.str);
+                index = src.index;
+                toEdit = src.toEdit;
+        }
+        void initField(int rChk,int cChk, int wChk, const char* sChk) {
+                int i = 0;
+                if (rChk > dtioRows()) row = dtioRows() - 1;
+                else if (rChk > 0)     row = rChk;
+                else                   row = 0;
+                
+                if (cChk > dtioColumns())  column = dtioColumns() - 1;
+                else if (cChk > 0)         column = cChk;
+                else                       column = 0;
+        
+                if (cChk + wChk > dtioColumns()) 
+                        width = dtioColumns() - column;
+                else
+                        width = wChk;
+                str = new char[width+1];
+                if (sChk) {
+                        for (i = 0; i < width; i++)
+                                str[i] = sChk[i];
+                        str[i] = '\0';
+                } else {
+                        str[i] = '\0';
+                }
+        }               
+        public:
+        Field() : str(NULL), toEdit(true) { row = column = width = index = 0; }
+        Field(const Field& src) {
+                initField(src);
+        }
+        Field(int r, int c, int w, const char* s = NULL, bool e = true) {
+                initField(r,c,w,s);
+                index = 0;
+                toEdit = e;
+        }       
+        ~Field() { if (str) delete [] str; }
+        Field& operator=(const Field& rhs) {
+                if (this != &rhs) {
+                        if (str) delete [] str;
+                        initField(rhs);
+                }
+                return *this;   
+        }
+        virtual void display() {
+                dtioDisplay(str,row,column,width);
+        }
+        virtual int edit() {
+                int exit = 0;
+                dtioCursor(row,index);
+                if (toEdit) {
+                        exit = dtioEdit(str, row, column, width, &index);
+                } else if (str[0] != '\0') {
+                        dtioDisplay(str, row, column, width);
+                }
+                return exit;
+        }
+        virtual bool editable() const {
+                bool editField = false;
+                if (toEdit) { editField = true; }
+                return editField;
+        }
+        virtual void* data() { return str; }
+        virtual Field* clone() const {
+                Field* temp = new Field(row, column, width, str, toEdit);
+                return  temp ? temp : NULL;
+        }
+};
+
+// An uneditable, display-only field, that draws
+// a box around other fields.
+//
+class Box : public Field {
+        int rowBox;
+        int colBox;
+        int widthBox;
+        int heightBox;
+        char borderBox[BOXBORDER];
+        
+        public:
+        Box(int rowB, int colB, int widthB, int heightB, const char* border = NULL)
+        : Field(rowB, colB, widthBox, NULL, false) {
+                rowBox = rowB;
+                colBox = colB;
+                widthBox = widthB;
+                heightBox = heightB;
+                if (!border || strlen(border) < BOXBORDER)
+                        strcpy(borderBox,"+-+|+-+|");
+                else
+                        strcpy(borderBox,border);
+        }
+        Field* clone() const {
+                Field* temp = new Box(*this);
+                return temp ? temp : NULL;
+        }
+        void display() {
+                //left top corner, first character      
+                dtioCursor(rowBox,colBox++);
+                dtioPutchar(borderBox[0]);
+                //top bar, second character
+                for (int j = 1; j < widthBox; j++) {
+                        dtioPutchar(borderBox[1]);
+                        dtioCursor(rowBox,colBox++);
+                }
+                //right top corner, third character
+                dtioPutchar(borderBox[2]);
+                dtioCursor(++rowBox,--colBox);
+                //right bar, fourth character
+                for (int j = 1; j < heightBox; j++) {
+                        dtioPutchar(borderBox[3]);
+                        dtioCursor(rowBox++,colBox);
+                }
+                //right bottom corner, fifth character
+                dtioPutchar(borderBox[4]);
+                dtioCursor(--rowBox,--colBox);
+                
+                //bottom bar, sixth character
+                for (int j = 1; j < widthBox; j++) {
+                        dtioPutchar(borderBox[5]);
+                        dtioCursor(rowBox,colBox--);
+                }
+                //left bottom corner, seventh character
+                dtioPutchar(borderBox[6]);
+                dtioCursor(--rowBox,++colBox);
+                //left bar, eighth character
+                for (int j = 1; j < heightBox; j++) {
+                        dtioPutchar(borderBox[7]);
+                        dtioCursor(rowBox--,colBox);
+                }
+        }
+};
+
+// An undeditable field that displays a string,
+// representing the title of other fields.
+//
+class Label : public Field {
+        public:
+        Label(int rL, int cL, const char* iniD, int lL = 0)
+        : Field(rL,cL,lL <= 0 ? strlen(iniD) : lL,iniD,false) { }
+        Field* clone() const {
+                Field* temp = new Label(*this);
+                return  temp ? temp : NULL;
+        }
+};
+
+// An editable field that displays a string
+// and lets the user edit the string.
+//
+class SField : public Field {
+        public:
+        SField(int rSF, int cSF, int lSF, const char* iniD = NULL)
+        : Field(rSF,cSF,lSF,iniD,true) { }
+        virtual Field* clone() const {
+                Field* temp = new SField(*this);
+                return  temp ? temp : NULL;
+        }
+};
+
+// A SField, with help facility.
+//
+class HField : public SField {
+        void (*h)(void*); 
+        
+        public:
+        HField(int rHF, int cHF, int lHF, const char* iniD = NULL, void (*iniH)(void*) = NULL )
+        : SField(rHF,cHF,lHF,iniD) { h = *iniH; }
+        virtual Field* clone() const {
+                Field* temp = new HField(*this);
+                return temp ? temp : NULL;
+        }
+        virtual int edit() {
+                bool finish = false;
+                char* tempStr = NULL;
+                int result;
+
+                tempStr = new char[strlen((char *)Field::data())+1];
+                strcpy(tempStr,(char *)Field::data());
+                
+                Field::display();               
+                do {
+                        result = Field::edit();
+                        if (result == ESCAPE) {
+                                strcpy((char *)Field::data(),tempStr);
+                                finish = true;
+                        } else if (h) {
+                                if (result == F(1)) {
+                                        h(Field::data());
+                                        Field::display();
+                                } else {
+                                        finish = true;
+                                        strcpy((char *)Field::data(),tempStr);
+                                }
+                        } else
+                                finish = true;
+                                
+                } while(!finish);
+                if (tempStr) delete [] tempStr;
+                                
+                return result;
+        }
+};
+
+// A HField, with validation.
+//
+class VField : public HField {
+        bool (*v)(char*);
+        void (*h)(void*);
+        
+        public:
+        VField(int rVF, int cVF, int lVF, const char* iniD = NULL, bool (*iniV)(char*) = NULL, void (*iniH)(void*) = NULL)
+        : HField(rVF,cVF,lVF,iniD,iniH) {
+                h = *iniH;
+                v = *iniV;
+        }
+        virtual Field* clone() const {
+                Field* temp = new VField(*this);
+                return  temp ? temp : NULL;
+        }
+        virtual int edit() {
+                bool finish = false;
+                char* tempStr = NULL;
+                int result;
+                
+                tempStr = new char[strlen((char *)Field::data())+1];
+                strcpy(tempStr,(char *)Field::data());  
+                
+                Field::display();       
+                do {
+                        result = Field::edit();
+                        if (!v) {
+                                finish = true;
+                        } else if (result == ESCAPE) {
+                                strcpy((char *)Field::data(),tempStr);
+                                Field::display();
+                                finish = true;
+                        } else if (result == F(1) && h) {
+                                h(Field::data());
+                                Field::display();
+                        } else {
+                                finish = v((char *)Field::data());
+                                Field::display();
+                        }
+                } while (!finish);
+                if (tempStr) delete [] tempStr;
+                
+                return result;
+        }
+};
+
+// A VField that accepts integer data.
+//
+class IVField : public VField {
+        int initIVal;
+        bool (*v)(int&);
+        void (*h)(void*);
+        
+        protected:
+        int *initVL() { return &initIVal; }
+        void initVL(int x) { initIVal = x; }
+        
+        public:
+        IVField(int rIVF, int cIVF, int lIVF, int initVL = 0, bool (*iniV)(int&) = NULL, void (*iniH)(void*) = NULL)
+        : VField(rIVF,cIVF,lIVF,"                            ",NULL,iniH) {
+                initIVal = initVL;
+                h = *iniH;
+                v = *iniV;
+        }               
+        virtual Field* clone() const {
+                Field* temp = new IVField(*this);
+                return  temp ? temp : NULL;
+        }
+        virtual int edit() {
+                char* tempStr = NULL;
+                char* checkStr = NULL;
+                int result = 0;
+                bool finish = false;
+                bool nonNumTest = true;
+
+                //copy initial data to temp
+                tempStr = new char[strlen((char *)Field::data())+1];
+                strcpy(tempStr,(char *)Field::data());
+                
+                Field::display();       
+                do {
+                        result = Field::edit();
+                        if (result == ESCAPE) {
+                                finish = true;
+                                strcpy((char *)Field::data(),tempStr);
+                                Field::display();
+                        }
+                        if (result == F(1) && h) {
+                                h(Field::data());
+                                Field::display();
+                        } else {
+                                //copy edited data to checkStr
+                                if (checkStr) delete [] checkStr;
+                                checkStr = new char[strlen((char *)Field::data())+1];
+                                strcpy(checkStr,(char *)Field::data());                         
+
+                                //check for non-numeric characters except for '-'
+                                nonNumTest = numericStr(checkStr,false);
+                                if (v) {
+                                        if (nonNumTest) {
+                                                sscanf((char *)Field::data(),"%d",&initIVal); //convert string into int datatype
+                                                finish = v(initIVal);
+                                                Field::display();
+                                        }
+                                } else {
+                                        if (nonNumTest) finish = true;
+                                }
+                                nonNumTest = true;
+                        } 
+                } while (!finish);
+                if (tempStr) delete [] tempStr;
+                if (checkStr) delete [] checkStr;
+                return result;
+        }
+        void operator=(int rhs) {
+                initIVal = rhs;
+                sprintf((char *)Field::data(),"%d", initIVal);  //load string
+        }
+        operator int() const {
+                return initIVal;
+        }
+        friend bool numericStr(char* str,bool flPt);
+};
+
+// A IVField, that accepts integer data only within
+// a specified range.
+//
+class MMIField : public IVField {
+        int minVal;
+        int maxVal;
+        void (*h)(void*);
+        
+        public:
+        MMIField(int rMMI, int cMMI, int lMMI, int iniMMIVl = 0, int minVl = 0, int maxVl = 0, void (*iniH)(void*) = NULL)
+        : IVField(rMMI,cMMI,lMMI,iniMMIVl,NULL,iniH) {
+                minVal = minVl;
+                maxVal = maxVl;
+                h = *iniH;
+        }
+        int edit() {
+                char* tempStr = NULL;
+                int result = 0;
+                bool finish = false;
+
+                //copy initial data to temp
+                tempStr = new char[strlen((char *)Field::data())+1];
+                strcpy(tempStr,(char *)Field::data());
+                
+                Field::display();       
+                do {
+                        result = Field::edit();
+                        if (result == ESCAPE) {
+                                finish = true;
+                                strcpy((char *)Field::data(),tempStr);
+                        } else if(result == F(1) && h) {
+                                int temp;
+                                h((void *)&temp);
+                                sprintf((char *)Field::data(),"%d",temp);
+                                IVField::initVL(temp);  
+                        } else if (numericStr((char *)Field::data(),false)) {
+                                //checks if data is in specified range
+                                sscanf((char *)Field::data(),"%d",(int *)IVField::initVL()); //convert string into int datatype
+                                if ((int)IVField::initVL() >= minVal || (int)IVField::initVL() <= maxVal) {
+                                        finish = true;
+                                }
+                        }
+                } while (!finish);
+                if (tempStr) delete [] tempStr;
+                return result;
+        }
+        Field* clone() const {
+                Field* temp = new MMIField(*this);
+                return  temp ? temp : NULL;
+        }
+        friend bool numericStr(char* str,bool flPt);
+};
+                
+// A VField that accepts floating point values.
+//
+class DVField : public VField {
+        int decDV;
+        double initDVal;
+        bool (*v)(double&);
+        void (*h)(void*);
+        
+        public:
+        DVField(int rDV, int cDV, int lDV, int dDV = 2, double initDL = 0.0, bool (*iniV)(double&) = NULL, void (*iniH)(void*) = NULL)
+        : VField(rDV,cDV,lDV,"                            ",NULL,iniH) {
+                decDV = dDV;
+                initDVal = initDL;
+                h = *iniH;
+                v = *iniV;
+        }               
+        virtual Field* clone() const {
+                Field* temp = new DVField(*this);
+                return  temp ? temp : NULL;
+        }
+        virtual int edit() {
+                char* tempStr = NULL;
+                char* checkStr = NULL;          
+                int result = 0;
+                bool finish = false;
+                bool nonNumTest = true;
+
+                //copy initial data to temp
+                tempStr = new char[strlen((char *)Field::data())+1];
+                strcpy(tempStr,(char *)Field::data());
+                
+                Field::display();       
+                do {
+                        result = Field::edit();
+                        if (result == ESCAPE) {
+                                finish = true;
+                                strcpy((char *)Field::data(),tempStr);
+                        }
+                        if (result == F(1) && h) {
+                                h(Field::data());
+                                Field::display();
+                        } else {
+                                //copy edited data to checkStr
+                                if (checkStr) delete [] checkStr;
+                                checkStr = new char[strlen((char *)Field::data())+1];
+                                strcpy(checkStr,(char *)Field::data());
+                                                                
+                                //check for non-numeric characters except for '-' and '.'
+                                nonNumTest = numericStr(checkStr,true);
+                                if (v) {
+                                        if (nonNumTest) {
+                                                sscanf((char *)Field::data(),"%lf",&initDVal); //convert string into double datatype
+                                                finish = v(initDVal);
+                                                sprintf((char *)Field::data(),"%lf", initDVal,decDV);
+                                                Field::display();
+                                        }       
+                                } else {
+                                        if (nonNumTest) finish = true;
+                                }
+                                nonNumTest = true; //reset
+                        }
+                } while (!finish);
+                if (tempStr) delete [] tempStr;
+                if (checkStr) delete [] checkStr;
+                return result;
+        }
+        void operator=(double rhs) {
+                initDVal = rhs;
+                sprintf((char *)Field::data(),"%.2lf", initDVal,decDV); //load string
+        }
+        operator double() const {
+                return initDVal;
+        }
+        friend bool numericStr(char* str,bool flPt);
+};$ cat Screen.h
+/*******************************************************************************
+ * Assignment 4 Draft Version                                                  *
+ * Screen Class Using Derived Fields                                           *
+ * File           : Field.h                                                    * 
+ * Author         : Timothy Duavis                                             *
+ * Last Modified  : December 15, 2005                                          *
+ * Description    : An object-oriented wrapper, for Direct Terminal Library    *
+ *                  This wrapper will be the foundation for typical data       *
+ *                  programs, which contains a Field and Screen.               *
+ *                  *This program is powered by Chris' dtio                    *
+ * Upgrade(s)     : New derieved fields with usefull characteristics.          *
+ * Specs created  : Chris S. - Seneca College                                  * 
+ *******************************************************************************/
+
+#include "Field.h"
+
+// A Field Node, for Screen to allocate
+// for every occurence of Field that is created
+// using a link list data structure.
+//
+class fieldNode {
+        Field* data;
+    fieldNode* next;
+    fieldNode* prev;
+        
+    public:
+    fieldNode(const fieldNode& cpy) {
+            next = cpy.next;
+            prev = cpy.prev;
+            data = cpy.data->clone();
+    }
+    fieldNode(Field* d, fieldNode* n, fieldNode* p) : data(d), next(n), prev(p) { }
+    fieldNode* goNext() { return next; }
+    fieldNode* goPrev() { return prev; }
+    Field* getData() { return data; }
+    void setNext(fieldNode* n) { next = n; }
+    void setPrev(fieldNode* p) { prev = p; }
+    fieldNode& operator=(const fieldNode& rhs) {
+            if (this != &rhs) {
+                    next = rhs.next;
+                    prev = rhs.prev;
+                    data = rhs.data->clone();
+            }
+            return *this;
+    }
+};
+
+// Represents a field on a screen layout
+//
+class Screen {
+        int famt;
+        fieldNode* currentNode;
+        fieldNode* initNode;
+        fieldNode* lastNode;
+        
+        void initScreen(const Screen& src) {
+                fieldNode* tempNode = src.initNode;
+                currentNode = NULL;
+                initNode = NULL;
+                famt = src.famt;
+                while (tempNode) {
+                        fieldNode* link = new fieldNode(tempNode->getData()->clone(),NULL,currentNode);
+                        appendLast(link);
+                        tempNode = tempNode->goNext();
+                }
+        }
+        void appendLast(fieldNode* lk) {
+                if (initNode) {
+                        currentNode->setNext(lk);
+                } else {
+                        initNode = lk;
+                }
+                currentNode = lastNode = lk;
+        }
+        int NavigateEdit(int *,bool);
+        
+        public:
+        Screen() : currentNode(NULL), initNode(NULL), lastNode(NULL) { famt = 0; };
+        Screen(const Screen& src) { initScreen(src); }
+        ~Screen() {
+                while(currentNode = initNode) {
+                        initNode = currentNode->goNext();
+                        delete currentNode;
+                }
+        }
+        
+        Screen& operator+=(const Field& rhs) {
+                Field* tempData = rhs.clone();
+                fieldNode* link = new fieldNode(tempData,NULL,currentNode);
+        
+                appendLast(link);
+                famt++;
+        
+                return *this;
+        }
+        Screen& operator=(const Screen& rhs) { if (this != &rhs) { initScreen(rhs); } return *this; }
+
+        int add(int r, int c, int w) {
+                Field* tempData = new Field(r,c,w);
+                fieldNode* link = new fieldNode(tempData,NULL,currentNode);
+        
+                appendLast(link);
+                famt++;
+                return famt;
+        }
+        int add(int r, int c, int w, const char* s) {
+                Field* tempData = new Field(r,c,w,s);
+                fieldNode* link = new fieldNode(tempData,NULL,currentNode);
+        
+                appendLast(link);
+                famt++;
+                return famt;
+        }
+        int add(int r, int c, int w, const char* s, bool e) {
+                Field* tempData = new Field(r,c,w,s,e);
+                fieldNode* link = new fieldNode(tempData,NULL,currentNode);
+        
+                appendLast(link);
+                famt++;
+                return famt;
+        }
+        void display() {
+                fieldNode* tempData = initNode;
+                if (tempData = tempData->goNext()) {
+                        for (tempData = initNode; tempData; tempData = tempData->goNext()) {
+                                tempData->getData()->display();
+                        }
+                } else {
+                        tempData = initNode;
+                        tempData->getData()->display();
+                }
+        }
+        void display(bool clear) {
+                if (clear) { dtioClear(); }
+                        display();
+        }
+        int edit() {
+                static int empty = 0;
+                return NavigateEdit(&empty,false);
+        }
+        int edit(bool clear) {
+                if (clear) { dtioClear(); }
+                return edit();
+        }
+        int edit(int *pfield) {
+                return NavigateEdit(pfield,true);
+        }
+        int edit(int *pfield, bool clear) {
+                if (clear) { dtioClear(); }
+                return edit(pfield);
+        }
+        Field* getField(int i) {
+                int j;
+                currentNode = initNode;
+                for (j = 0; j < i && currentNode; j++)
+                        currentNode = currentNode->goNext();
+                if (j != i) { currentNode = initNode; }
+        
+                return currentNode->getData();
+        }
+        int remove(int);
+};$ cat Screen.cpp
+/******************************************************************************* 
+ * Assignment 4 Draft Version                                                  *
+ * Screen Class Using Derived Fields                                           *
+ * FILE           : Screen.cpp                                                 * 
+ * Author         : Timothy Duavis                                             *
+ * Last Modified  : December 15, 2005                                          *
+ * Description    : An object-oriented wrapper, for Direct Terminal Library    *
+ *                  This wrapper will be the foundation for typical data       *
+ *                  programs, which contains a Field and Screen.               *
+ *                  *This program is powered by Chris' dtio                    *
+ * Upgrade(s)     : New derieved fields with usefull characteristics.          *
+ * Specs created  : Chris S. - Seneca College                                  * 
+ *******************************************************************************/
+
+#include "Screen.h"
+
+// controls the navigation for edit
+// pointer to 'i' specifies the field number while,
+// flag queField specifies if caller has requested a que
+// for a field to be edited.
+//
+int Screen::NavigateEdit(int* i,bool queField) {
+        int fieldNum = *i;
+        int nav = 0;
+        bool keepgoing = true;
+        static bool selectUP = false;
+        static bool nonNavKeys = false;
+        bool selectEnter = false;
+        bool uniq_select = false;
+        
+        if (queField && !fieldNum) { 
+                currentNode = initNode;
+        } else if (!queField) {
+                currentNode = initNode;
+        }
+        
+        while (keepgoing) {
+                nav = currentNode->getData()->edit();
+                if (nav) {
+                        uniq_select = true;
+                        if (queField) keepgoing = false;
+                        if (nav == ENTER || nav == TAB || nav == DOWN) {
+                                selectUP = false;
+                                nonNavKeys = false;
+                                currentNode = currentNode->goNext();
+                                fieldNum++;
+                                if (!currentNode) {
+                                        currentNode = initNode;
+                                        fieldNum = 0;
+                                }                       
+                                if (nav == ENTER)
+                                        selectEnter = true;
+                                else
+                                        selectEnter = false;
+                        } else if (nav == UP) {
+                                selectEnter = false;
+                                selectUP = true;
+                                nonNavKeys = false;
+                                currentNode = currentNode->goPrev();
+                                fieldNum--;
+                                if (!currentNode) {
+                                        currentNode = lastNode;
+                                        fieldNum = famt - 1;
+                                }                               
+                        } else {
+                                nonNavKeys = true;
+                                if (nav == ESCAPE) 
+                                        keepgoing = false;
+                        }
+                } else if (!nonNavKeys) {
+                        uniq_select = false;
+                        if (selectUP) {
+                                fieldNum - 1 <= 0 ? fieldNum = famt - 1 : fieldNum--;
+                                currentNode = initNode;
+                                for (int j = 0; j < fieldNum; j++)
+                                        currentNode = currentNode->goNext();
+                        } else {
+                                if (fieldNum + 1 == famt) {
+                                        fieldNum = 0;
+                                        if (selectEnter) keepgoing = false;
+                                } else {
+                                        fieldNum++;
+                                }
+                                currentNode = initNode;
+                                for (int j = 0; j < fieldNum; j++)
+                                        currentNode = currentNode->goNext();
+                        }
+                } else {
+                        uniq_select = false;
+                        currentNode = initNode;
+                        for (int j = 0; j < fieldNum; j++)
+                                currentNode = currentNode->goNext();
+                        nonNavKeys = false;
+                }
+                if (selectEnter && fieldNum >= famt - 1) {
+                        keepgoing = false;
+                } else if (!nonNavKeys) {
+                        keepgoing = true;
+                }
+        }
+        if (queField) { *i = fieldNum; }
+        return nav;
+}
+
+// removes field specified by param 'i',
+// and moves everything to the beginning by one.
+//
+int Screen::remove(int i) {
+        if (i >= 0) {
+                int j;
+                currentNode = initNode;
+                for (j = 0; j < i && currentNode; j++) {
+                        currentNode = currentNode->goNext();
+                }
+                if (j == i) {
+                        fieldNode* tempNode = currentNode;
+                        fieldNode* replace = currentNode->goNext();
+                        if (!replace) {
+                                replace = tempNode->goPrev();
+                        }
+                        currentNode = currentNode->goPrev(); 
+                        if (!currentNode) { 
+                                currentNode = initNode;
+                        }
+                        currentNode->setNext(replace);
+                        delete tempNode;
+                        for (fieldNode* setLast = initNode; setLast; setLast = setLast->goNext()) {
+                                lastNode = setLast;
+                        }
+                        famt-=j;
+                }
+        }
+        return famt;
+}$ c++ a -lcruses     urses a4test.cpp dtio    dtio    Screen.cpp a _dtio.o -o a4
+a4test.cpp:
+"Field.h", line 154.29: 1540-1102 (W) "widthBox" might be used before it is set.
+Screen.cpp:
+"Field.h", line 154.29: 1540-1102 (W) "widthBox" might be used before it is set.
+ld: 0711-224 WARNING: Duplicate symbol: .numericStr(char*,bool)
+ld: 0711-224 WARNING: Duplicate symbol: .strlenFPCc
+ld: 0711-224 WARNING: Duplicate symbol: .fieldNode::goNext()
+ld: 0711-224 WARNING: Duplicate symbol: .fieldNode::getData()
+ld: 0711-224 WARNING: Duplicate symbol: .fieldNode::setNext(fieldNode*)
+ld: 0711-345 Use the -bloadmap or -bnoquiet option to obtain more information.
+$ a4
+=[?7h[?1l(B=[m(B[H[2J
+ /--------------------------------------------------------\ Box added
+ |[56C| SField Label
+ | SFields:[25Cstring[16C| SField empty
+ |[56C| SField added
+ | HFields:[25Cpress F1[14C| HField Label
+ |[56C| HField added
+ | VFields:[25Cbig   delete me[7C| F1 added
+ |[56C| VField Label
+ | IVFields:[46C| VField added
+ |[56C| big added
+ |[56C| delete me
+ | MMIFields:[45C| IVFields Label
+ |[56C| IVField added
+ |[56C| 999999 added
+ | DVFields:[46C| help added
+ | +----------------------------------------------------+ | MMIField added
+ | |[52C| | 0-100 added
+ | +----------------------------------------------------+ | F1 picks
+ \--------------------------------------------------------/ DVFields added
+[14Dmust be added
+[13Dpi added
+[8DBox added
+[60DPress any key to continue ...[22Cready to test edit[24D[45D                             [4;15Hhello[17Castring[6D string[6D[6;15HHi[20C[18;5HUse the arrow keys to move between fields[6;37H[8;15H1abc[18CBIG   elete me [9Dlete me [8Dete me [7Dte me [6De me  me me e  e[10;15H1     99999[18;5H                                         [10;27H0[13;15H1     1[16;15H0.0[19C3.141593[24;10HPress any key to continue ...[36C=[K[21D[6C= operator tested[23D[45D                             [4;20H[19C[6;17H[20C[8;19H[18C[6C[10;16H[10C 5[13;16H[6C[18;5HShall I pick a number (y/n)? y[13;21H2[16;15H-0.50[20C[18;5HEnter 5 3.14159265            [24;10HPress any key to continue ...[16C[45D                             [4;20H[29B>[?7h$ exit
+
+Script command is complete on Fri Dec 16 01:33:02 EST 2005.

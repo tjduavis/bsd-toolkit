@@ -1,0 +1,114 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>test</title>
+    <style type="text/css">
+      body          {color:black;background:white;font-weight:normal;font-size:10pt;font-family:Tahoma,Verdana,Helvetica,Arial;font-style:normal;text-decoration:none;margin:0;padding:0;border:0;}
+      span          {font-size:10pt;font-family:Tahoma,Verdana,Helvetica,Arial;font-style:normal;color:#777777;text-decoration:none;}
+      h1            {font-size:12pt;font-family:Tahoma,Verdana,Helvetica,Arial;font-style:normal;color:#777777;text-decoration:none;font-weight:bold;}
+      .title        {font-size:12pt;font-family:Tahoma,Verdana,Helvetica,Arial;font-style:normal;color:#777777;text-decoration:none;font-weight:bold;}
+      a:link        {color: black;text-decoration: none;}
+      a:visited     {color: black;text-decoration: none;}
+      a:hover       {color: black;text-decoration: none;}
+      a:active      {color: black;text-decoration: none;}
+      a:link img    {border-style:none;color:white;}
+      a:visited img {border-style:none;color:white;}
+      a img         {color:black}
+    </style>
+  </head>
+  <body>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr align="center">
+        <td></td>
+        <td>
+          <table width="780" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+              <td>
+                <table width="780" border="0" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td><img src="./pictures/embl_a.gif" alt="TITLE PICTURE" /></td>
+                    <td valign="middle" align="right"></td>
+                  </tr>
+                </tr>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <table width="780" border="0" cellpadding="0" cellspacing="0">
+                  <tr align="center" valign="middle">
+                    <td width="120" height="25" background="./pictures/menu_b_a.gif"><a href="test1.html"><span style="color:white;">Back to Main</span></a></td>
+                    <td width="120" height="25" background="./pictures/menu_b_b.gif"><a href="a.html"><span style="color:white;">a</span></a></td>
+                    <td width="120" height="25" background="./pictures/menu_b_c.gif"><a href="b.html"><span style="color:white;">b</span></a></td>
+                    <td width="120" height="25" background="./pictures/menu_b_c.gif"><a href="c.html"><span style="color:white;">c</span></a></td>
+                    <td width="120" height="25" background="./pictures/menu_b_b.gif"></td>
+                    <td width="120" height="25" background="./pictures/menu_b_b.gif"></td>
+                    <td width="60"  height="25" background="./pictures/menu_d.gif"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td background="./pictures/bg_b_a.gif">
+                <table width="780" border="0" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td width="100" height="220"></td>
+                    <td width="200" height="220">
+                      <table width="200" border="0" cellpadding="0" cellspacing="0">
+                        <tr><td height="20" /></tr>
+                        <tr>
+                          <td height="180"></td>
+                          </tr>
+                        <tr><td height="20" /></tr>
+                      </table>
+                    </td>
+                    <td width="300" height="220"></td>
+                    <td width="160" height="220"></td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">
+                      <table width="300" border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                          <td width="20"></td>
+                          <td width="260">
+                            <span>
+                              This Web Page is Created with <br />
+                              BTP200 Simple HTML Creator V0.1<br />
+                              Developed by SenecaRT<br />
+                              Timothy Duavis and Ryan Wang
+                            </span>
+                          </td>
+                          <td width="20"></td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td width="300" height="80"></td>
+                    <td width="160" height="80"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr height="10"><td></td></tr>
+            <tr>
+              <td width="780">
+                <table width="780" border="0" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td width="145" align="left" valign="top">
+                        <span class="title">test<br /><br /></span>
+                        <span>test</span>
+                    </td>
+                    <td width="10" background="./pictures/line.gif"></td>
+                    <td width="625"align="left" valign="top">
+                      <span>
+                      </span>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td></td>
+      </tr>
+    </table>
+  </body>
+</html>

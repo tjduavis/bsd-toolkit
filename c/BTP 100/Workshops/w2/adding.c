@@ -1,0 +1,33 @@
+ /* Working with Doubles - Adding Doubles
+ *  BTP100 - Workshop 2
+ *  Week 2
+ *  adding.c
+ *
+ *  sample data: 123.00 => 123.09
+ */
+
+ main() {
+
+     double price, gst, pst, total, decimal;
+     int non_dec;
+
+     printf("Enter the price : ");
+     scanf("%lf", &price);
+
+     gst = 0.08 * price;
+     pst = 0.07 * price;
+     total = (price + gst +  pst);
+     decimal = total - 0.001;
+     /*n_dec = total;
+     decimal = .2(total - non_dec);*/
+
+     printf("Price : $%7.2lf\n", price);
+     printf("GST   : $%7.2lf\n", gst);
+     printf("PST   : $%7.2lf\n", pst);
+     printf("decimal: %lf\n",decimal);
+     if(decimal<0.01 && decimal>0.004)
+	printf("Total : $%7.2lf\n", total-.01);
+     else        
+	printf("Total : d  $%7.2lf\n",total);
+     return 0;
+ }

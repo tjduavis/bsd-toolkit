@@ -1,0 +1,267 @@
+From: <Saved by Microsoft Internet Explorer 5>
+Subject: 
+Date: Wed, 21 Dec 2005 12:57:09 -0500
+MIME-Version: 1.0
+Content-Type: text/html;
+	charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/tests/oop344fe.023
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.2670
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Dwindows-1252">
+<META content=3D"MSHTML 6.00.2900.2802" name=3DGENERATOR></HEAD>
+<BODY><PRE>        OOP344 --------------------------------------------- =
+Page 1 of 4
+
+
+
+        1. Determine the exact output of the following program, showing
+           your rough work.
+
+                #include &lt;iostream&gt;
+                using namespace std;
+
+                typedef void (*filter)(ostream &amp;, const void *);
+
+                class filtered {
+                    filter phil;       =20
+                    void *data;
+                  public:
+                    filtered(filter f, void *d) { phil =3D f; data =3D =
+d; }
+                    void output(ostream &amp;os) const { phil(os, data); =
+}
+                };
+
+                class scrambled {
+                  public:
+                    virtual scrambled &amp;operator&lt;&lt;(unsigned =
+int) =3D 0;
+                };
+
+                ostream &amp;operator&lt;&lt;(ostream &amp;os, const =
+filtered &amp;x) {
+                    x.output(os);
+                    return os;
+                }
+
+                void pmud(ostream &amp;os, const void *x) {
+                    unsigned int n =3D *(unsigned int *)x;
+                    while (n) {
+                        int n1 =3D n &amp; 15;
+                        os &lt;&lt; char((n1 &lt; 10 ? '0' : ('a' - 10)) =
++ n1);
+                        n &gt;&gt;=3D 4;
+                    }
+                }
+
+                class whazzit: public scrambled, public filtered {
+                    unsigned int n;
+                  public:
+                    whazzit(unsigned int num):filtered(pmud, &amp;n)
+                    {   *this &lt;&lt; num; } // NOT bit shift or =
+ostream &lt;&lt;
+                    scrambled &amp;operator&lt;&lt;(unsigned int num) {
+                        unsigned int temp =3D (num &lt;&lt; 12) &amp; =
+0xffff;
+                        num &gt;&gt;=3D 4;
+                        n =3D num | temp;=20
+                        return *this;
+                    }
+                };
+
+                int main() {
+                    whazzit x(0xFACE); // a hex number
+                    cout &lt;&lt; "Internet " &lt;&lt; x &lt;&lt; '\n';
+                    return 0;
+                }
+
+
+        OOP II Using C++ ------------------- Fall 2002 Final Examination
+        OOP344 --------------------------------------------- Page 2 of 4
+
+
+
+        2. Determine the exact output of the following program, showing
+           your rough work.
+
+                #include &lt;iostream&gt;
+                using namespace std;
+
+                template &lt;class type&gt;
+
+                class branch {
+                    branch *one;
+                    branch *two;
+                    type three;
+                  public:
+                    branch(type n) { three =3D n; one =3D two =3D NULL; =
+}
+                    ~branch() { if (one) delete one;
+                                if (two) delete two;
+                                cout &lt;&lt; "deleted " &lt;&lt; three =
+&lt;&lt; '\n';
+                              }
+                    void operator+=3D(type n) {
+                        if (n &gt; three)
+                            if (two)
+                                *two +=3D n;
+                            else
+                                two =3D new branch(n);
+                        else
+                            if (one)
+                                *one +=3D n;
+                            else
+                                one =3D new branch(n);
+                    }
+                    friend ostream &amp;operator&lt;&lt;(ostream =
+&amp;os, branch &amp;b) {
+                        if (b.one)
+                            os &lt;&lt; *b.one;
+                        os &lt;&lt; b.three &lt;&lt; ' ';
+                        if (b.two)
+                            os &lt;&lt; *b.two;
+                        return os;
+                    }
+                };
+
+                int main()
+                {
+                        branch&lt;double&gt; x(3.4);
+
+                        x +=3D 5.6;
+                        x +=3D 4;
+                        x +=3D 0.1;
+                        x +=3D 100.3;
+                        x +=3D 2.14;
+
+                        cout &lt;&lt; x &lt;&lt; '\n';
+                        return 0;
+                }
+
+
+        OOP II Using C++ ------------------- Fall 2002 Final Examination
+        OOP344 --------------------------------------------- Page 3 of 4
+
+
+
+        3. Suppose a single binary file contains different sorts of
+           data, such as image, video and sound data, each in separate
+           sections, where each section starts with an eight byte
+           header: a four character code, specifying the kind of data
+           being stored, followed by a four-byte unsigned binary number,
+           specifying how many bytes follow in this section. After that
+           many more bytes, either another section begins, or the file
+           ends. It is assumed that each section code is unique,
+           appearing in no more than one section header in any given
+           file.
+
+           Write a class, called a section, which reads section data
+           from a file into memory so that it can be used.
+
+           A section has the following public member functions:
+
+             bool get(const char *code, ifstream &amp;file) - this =
+function
+                reads the section with code 'code' (a 4-character-long
+                string) from 'file' (which is already opened for binary
+                read access) into memory, returning true if successful
+                and false if not.
+
+             const void *data() - returns the starting address of a
+                memory-based copy of the data (not including the 8-byte
+                header) contained in the section. If no section data has
+                been loaded (e.g. the last attempt to read a section
+                failed), then NULL is returned.
+
+             unsigned int size() - returns the size, in bytes, of the
+                section data (not including the 8-byte header), or zero
+                if no section data has been loaded.
+
+           Notes: 1. Because you'll need to dynamically allocate memory
+           to store the data, you'll need the usual copy constructor,
+           destructor and =3D operator for a complete answer.
+
+           2. Since get() can be called over and over again, it needs to
+           "undo" the results of any previous get().
+
+           3. Because a section can contain any data, including data
+           that may match a section code, the only way to locate a
+           section is to go through the file, section-by-section,
+           skipping over non-matching sections, until a match is found
+           or the end of the file is reached.
+
+
+
+
+
+
+
+
+
+
+
+        OOP II Using C++ ------------------- Fall 2002 Final Examination
+        OOP344 --------------------------------------------- Page 4 of 4
+
+
+        4. [Read the previous question for a description of what a
+           "section" of a file is. You may assume, in answering this
+           question, that the section class as described in question 3
+           has been correctly coded. Thus, you can receive full marks
+           for this question with an answer that uses the section class,
+           even if you don't answer question 3 at all. You may also
+           answer this question without using the section class, but
+           frankly, by writing duplicate code you run the risk of
+           duplicating errors, thereby losing marks for the same mistake
+           twice.]
+
+           Write the template for a function
+
+            bool readsection(ifstream &amp;file, ??? &amp;x, const char =
+*code)
+
+           where ??? represents some data type whose memory is
+           contiguous (i.e. all togther in one block) and for which the
+           sizeof operator correctly reports the number of bytes stored
+           by that type of data.
+
+           This function looks, in the already opened binary file passed
+           in 'file', for a section with a four-character-long code
+           matching the 'code' parameter, and loads it into the variable
+           referred to by 'x', as long as the size of the section
+           matches the size of 'x'. If the section cannot be loaded into
+           'x' (e.g. because it is the wrong size or it cannot be
+           found), a false value is returned and 'x' is not touched.
+           Otherwise, a true value is returned.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE></BODY></HTML>

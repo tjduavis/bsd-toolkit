@@ -1,0 +1,122 @@
+From: <Saved by Microsoft Internet Explorer 5>
+Subject: 
+Date: Wed, 21 Dec 2005 12:51:38 -0500
+MIME-Version: 1.0
+Content-Type: text/html;
+	charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/tests/solutions/btp300t2.q1.053.cpp.solution
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.2670
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Dwindows-1252">
+<META content=3D"MSHTML 6.00.2900.2802" name=3DGENERATOR></HEAD>
+<BODY><PRE>// BTP300 Test 2 Word Problem Solution
+// Expression.cpp
+// BTP300
+// Dec 5 2005
+
+#include &lt;iomanip&gt;   // for setw(WIDTH), setprecision(PLACES)
+#include &lt;iostream&gt;
+using namespace std;
+#include "Expression.h"
+
+// insertion operator for all Expressions - helper function=20
+// receiving a reference will call the most derived version
+// of display(os)
+// returning a reference allows for cascading
+ostream&amp; operator&lt;&lt;(ostream&amp; os, const Expression&amp; e) =
+{
+    e.display(os);
+    return os;
+}
+
+// Constructor (0, 1, 2 arguments)
+// use coefficient =3D NULL for trivial cases
+UPolynomial::UPolynomial(int n, double* c) : terms(n) {
+    coefficient =3D NULL;
+    if(terms) {
+        try {
+            coefficient =3D new double[n];
+            if(c) {
+                for (int i =3D 0; i &lt; n; i++)
+                    coefficient[i] =3D c[i];
+            } else {
+                for (int i =3D 0; i &lt; n; i++)
+                    coefficient[i] =3D 0;
+            }
+        } catch(bad_alloc)
+            terms =3D 0;
+    }
+}
+
+// Assignment Operator
+UPolynomial&amp; UPolynomial::operator=3D(const UPolynomial&amp; p) {
+    if(this !=3D &amp;p) { // check for self-assignment
+        if(coefficient) {  // delete only if NULL
+            delete [] coefficient;
+            coefficient =3D NULL;
+        }
+        if(p.terms) {
+            try {
+                coefficient =3D new double[p.terms];
+                for(int i =3D 0; i &lt; p.terms; i++)
+                    coefficient[i] =3D p.coefficient[i];
+                terms =3D p.terms;
+            } catch(bad_alloc)
+                terms =3D 0;
+        } else
+            terms =3D 0;
+    }
+    return *this;
+}
+
+// Function call operator evaluates the polynomial
+double UPolynomial::operator()(double x) const {
+    double y =3D 0, factor =3D x;
+    if (terms) { // avoid out-of-range next statement
+        y =3D coefficient[terms - 1];
+        for (int i =3D 1; i &lt; terms; i++) {
+            y +=3D coefficient[terms - i - 1] * x;
+            x *=3D factor;
+        }
+    }
+    return y;
+}
+
+// Display inserts the polynomial into os stream
+void UPolynomial::display(ostream&amp; os) const {
+    if (terms) {  // only if it has some terms
+        os &lt;&lt; fixed &lt;&lt; setprecision(PLACES);
+        for(int i =3D terms - 1; i &gt;=3D 1; i--)
+            os &lt;&lt; setw(WIDTH) &lt;&lt; coefficient[terms - i - 1] =
+&lt;&lt; " x^" &lt;&lt; i &lt;&lt; " + ";
+        os &lt;&lt; setw(WIDTH) &lt;&lt; coefficient[terms - 1];
+    }
+}
+
+// Addition Operator - not a member function (does not change the
+// current object) - returns a copy of a new polynomial (does not
+// return a reference
+UPolynomial operator+(const UPolynomial&amp; e, const UPolynomial&amp; =
+f) {
+    UPolynomial p;
+    if(e.nTerms() &gt; f.nTerms()) { // start with larger number of =
+terms
+        p =3D e; // initialize p
+        for(int i =3D e.nTerms() - 1, j =3D f.nTerms() - 1; j &gt;=3D 0; =
+i--, j--)
+            p[i] +=3D f[j];  // need [](int) const for f since =
+unmodifiable
+    } else {
+        p =3D f; // initialize p
+        for(int i =3D f.nTerms() - 1, j =3D e.nTerms() - 1; j &gt;=3D 0; =
+i--, j--)
+            p[i] +=3D e[j];  // need [](int) const for e since =
+unmodifiable
+    }
+    return p;
+}
+</PRE></BODY></HTML>

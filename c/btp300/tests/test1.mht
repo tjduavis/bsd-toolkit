@@ -1,0 +1,386 @@
+From: <Saved by Microsoft Internet Explorer 5>
+Subject: Seneca | School of Computer Studies | Object-Oriented Programming I - C++
+Date: Wed, 21 Dec 2005 12:50:12 -0500
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----=_NextPart_000_024B_01C6062D.151A54E0"
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.2670
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_024B_01C6062D.151A54E0
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/tests/btp300t1.053.html
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<?xml version=3D'1.0' encoding=3D'UTF-8'?><HTML><HEAD><TITLE>Seneca | =
+School of Computer Studies | Object-Oriented Programming I - C++</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META http-equiv=3DPICS-Label=20
+content=3D'(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r =
+(cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen =
+true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true =
+r (SS~~000 1))'>
+<META content=3D"(c) Copyright Seneca College 2005" name=3DCopyright>
+<META=20
+content=3D"Welcome to the Bachelors Degree of Software Development =
+Program Web Site.  On this site you can find an intermediate course on =
+object-oriented programming in C++.  Designed by Chris Szalwinski."=20
+name=3DDescription>
+<META=20
+content=3D"This subject expands on introductory elements of C++ and =
+covers intermediate C features.  The emphasis throughout is to prepare =
+for the solution of large problems."=20
+name=3DAbstract>
+<META content=3Dchris.szalwinski@senecac.on.ca name=3DAuthor>
+<META content=3D"software development, object-oriented programming, =
+lecture notes"=20
+name=3DKeywords><LINK =
+href=3D"http://cs.senecac.on.ca/~btp300/pages/style.043.css"=20
+type=3Dtext/css rel=3Dstylesheet><LINK media=3Dscreen=20
+href=3D"http://cs.senecac.on.ca/~btp300/pages/styleSPrint.043.css" =
+type=3Dtext/css=20
+rel=3Dstylesheet><LINK media=3Dprint=20
+href=3D"http://cs.senecac.on.ca/~btp300/pages/stylePPrint.043.css" =
+type=3Dtext/css=20
+rel=3Dstylesheet>
+<META content=3D"MSHTML 6.00.2900.2802" name=3DGENERATOR></HEAD>
+<BODY><SPAN lang=3Den-us xmlns=3D"http://www.w3.org/1999/xhtml">
+<P><SPAN>
+<P>
+<TABLE cellSpacing=3D0 cellPadding=3D0><!-- Body Cell -->
+  <TBODY>
+  <TR height=3D600><!-- Content Area -->
+    <TD class=3Dtbody bgColor=3D#ffffff>
+      <TABLE cellPadding=3D10 width=3D"100%">
+        <TBODY>
+        <TR>
+          <TD vAlign=3Dtop bgColor=3D#ffffff>
+            <P class=3Dtexthead align=3Dcenter>Test 1 - Oct 17 2005 </P>
+            <P>Name _______________________________________ Student =
+Number=20
+            _______________________ </P>
+            <P class=3Dsection>Notes:</P>
+            <P>
+            <UL>
+              <LI>This test has 2 pages and lasts two full periods=20
+              <LI>This test is out of 20 marks and is worth 15% of your =
+final=20
+              grade=20
+              <LI>There are 2 questions in this paper - attempt both of =
+them=20
+              <LI>Answer all questions in the exam booklet provided=20
+              <LI>Hand in this test paper with your answer booklet=20
+              <LI>You may use your copy of the lecture notes, the =
+subject notes,=20
+              one textbook and one study sheet both sides=20
+              <LI>You may use a non-programmable, non-messaging =
+calculator=20
+              <LI>You may use a paper foreign-language dictionary =
+</LI></UL>
+            <P></P>
+            <P class=3Dsection>Question 1 - Word Problem - (10 =
+marks):</P>
+            <P>In game programming, objects that go into a rendering =
+pipeline=20
+            are usually defined in their own local coordinate =
+system.&nbsp; When=20
+            you insert a model into a 3-dimensional scene, your software =
+must=20
+            convert the model's vertices, which are defined in local=20
+            coordinates, into the scene's coordinate system.&nbsp; The =
+scene's=20
+            coordinate system is called world coordinates.&nbsp; =
+Converting into=20
+            world coordinates involves rotations. amongst other=20
+            transformations.&nbsp; That is, your software must rotate =
+the model=20
+            defined in local coordinates into place in world =
+coordinates.&nbsp;=20
+            The matrix for rotating the objects vertices into world =
+coordinates=20
+            is a 4 by 4 matrix that is constructed by multiplying three =
+4 by 4=20
+            matrices by one another: a matrix describing the rotation =
+about the=20
+            x axis, a matrix describing the rotation about the y axis =
+and a=20
+            matrix describing the rotation about the z axis.&nbsp; </P>
+            <P>Design and code a function named <SPAN=20
+            class=3Dcode>matrixMultiply</SPAN> that receives the =
+addresses of=20
+            three 4 by 4 <SPAN class=3Dcode>float</SPAN> arrays and =
+places in the=20
+            first array the result of a multiplication of the second =
+(left-hand)=20
+            array by the third (right-hand) array.&nbsp; Note that the =
+element=20
+            in the i-th row and j-th column of the resultant array is =
+equal to=20
+            the product of the i-th row of the left-hand array and the =
+j-th=20
+            column of the right-hand array.&nbsp; That is,=20
+            <TABLE width=3D"45%">
+              <TBODY>
+              <TR>
+                <TD><PRE> ... ... ... ...     ... ... ... ...     ... =
+...  e  ...
+
+ ... ... ... ...     ... ... ... ...     ... ...  f  ...
+                  =3D                   *
+ ... ...  x  ...      a   b   c   d      ... ...  g  ...
+
+ ... ... ... ...     ... ... ... ...     ... ...  h  ...&nbsp;
+
+ Resultant Array  =3D  Left-Hand Array  *  Right-Hand Array&nbsp;
+
+          where x =3D a * e + b * f + c * g + d * =
+h</PRE></TD></TR></TBODY></TABLE>For=20
+            a small bonus, re-write your function in pointer notation so =
+as to=20
+            improve the efficiency of the multiplication.&nbsp; </P>
+            <P class=3Dsection>Question 2 - Walkthrough - (10 =
+marks):</P>
+            <P>What is the exact output of the following program?&nbsp; =
+Show=20
+            your rough work to avoid deductions.=20
+            <TABLE width=3D"45%">
+              <TBODY>
+              <TR>
+                <TD><PRE> #include &lt;stdio.h&gt;
+ #define  MAXBYTES 2
+ #define  MAX      9
+ #define  ON(x)    b(a,(x),on)
+ int get(unsigned char *c, int bit){
+	int rc;
+	unsigned char mask =3D (unsigned char)1;
+	mask &lt;&lt;=3D bit;
+	rc =3D *c &amp; mask;
+	printf("%4d %4d %4d get\n", bit, mask, rc);
+	return (rc) ? 1 : 0;
+ }
+ int on(unsigned char *c, int bit){
+	unsigned char mask =3D (unsigned char)1;
+	mask &lt;&lt;=3D bit;
+	*c =3D *c | mask;
+	printf("%4d %4d %4d on\n", bit, mask, *c);
+	return 1;
+ }
+ void print(unsigned char *c){
+	int total =3D 0, x =3D 0;
+	while (x &lt; MAX - 1) {
+		if(!(*c &amp; 1)) {
+			if ((total++ % 3) =3D=3D 0) putchar('\n');
+			printf("%4d ", x);
+		}
+		*c &gt;&gt;=3D 1;
+		if ((x &amp; 7) =3D=3D 7) c++;
+		x++;
+	}
+ }
+ int b(unsigned char *sp, int val, int (*what)(unsigned char*, =
+int)){&nbsp;
+	int byte, bit;
+	byte =3D val &gt;&gt; 3;
+	bit  =3D val &amp; ~(byte &lt;&lt; 3);
+	return what(sp + byte, bit);
+ }
+ int main(void){
+	int k, x =3D 2;
+	unsigned char a[MAXBYTES] =3D {'\03', 0};
+	while(x + 1 &lt; MAX){
+		k =3D x;
+		while(x * k &lt; MAX){ ON(x * k); k++; }
+		while(x + 1 &lt; MAX &amp;&amp; b(a, ++x, get));
+	}
+	for (k =3D 0; k &lt; MAXBYTES; k++) {
+		if (k % 3 =3D=3D 0) putchar('\n');
+		printf("%4u ", a[k]);
+	}
+	print(a);
+	return 0;
+ =
+}</PRE></TD></TR></TBODY></TABLE></P></TD></TR></TBODY></TABLE></TD></TR>=
+<!-- Footer --><!--tr>=0A=
+		<td class=3D"tbody">=0A=
+			<table cellpadding=3D"1" width=3D"90%" align=3D"center">=0A=
+				<tr>=0A=
+					<td width=3D"50%" class=3D"text3">=0A=
+						&nbsp;&nbsp;=0A=
+					</td>=0A=
+					<td width=3D"50%" align=3D"right" class=3D"text3">=0A=
+						&nbsp;&nbsp;=0A=
+					</td>=0A=
+				</tr>=0A=
+			</table>=0A=
+		</td>=0A=
+	</tr--></TBODY></TABLE></SPAN></SPAN></P></BODY></HTML>
+
+------=_NextPart_000_024B_01C6062D.151A54E0
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/style.043.css
+
+BODY {
+	MARGIN-TOP: 0px; BACKGROUND: #ffffff; MARGIN-LEFT: 0px
+}
+IMG {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; VERTICAL-ALIGN: bottom; =
+BORDER-LEFT: 0px; BORDER-BOTTOM: 0px
+}
+P {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+TABLE {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: =
+0px
+}
+TD {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+UL {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+LI {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+PRE {
+	FONT-WEIGHT: bold; FONT-SIZE: small; BACKGROUND: #ffffe0; MARGIN-LEFT: =
+15px; COLOR: navy; FONT-FAMILY: "Courier New", serif
+}
+.tbody {
+	BACKGROUND: #ffffff; WIDTH: 700px
+}
+.text3 {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+.panel1 {
+	BACKGROUND: #aee7fc
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+.texth {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.quote {
+	FONT-SIZE: small; FONT-STYLE: italic; FONT-FAMILY: "Times New Roman", =
+serif
+}
+.textagend {
+	FONT-SIZE: small; COLOR: red; FONT-FAMILY: "Times New Roman", serif
+}
+.section {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; TEXT-TRANSFORM: uppercase; COLOR: =
+#4599b1; FONT-FAMILY: "Times New Roman", serif
+}
+.ssection {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.sssection {
+	FONT-WEIGHT: bold; FONT-SIZE: small; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.top {
+	VERTICAL-ALIGN: top
+}
+.tup {
+	VERTICAL-ALIGN: top; COLOR: blue
+}
+.defin {
+	FONT-WEIGHT: bold; FONT-SIZE: small; BACKGROUND: #ffffff; COLOR: =
+maroon; FONT-FAMILY: "Courier New", serif
+}
+.desc {
+	BACKGROUND: #ededfe; TEXT-ALIGN: center
+}
+.value {
+	BACKGROUND: #ffffc6; TEXT-ALIGN: center
+}
+.addre {
+	BACKGROUND: #aee7fc; TEXT-ALIGN: left
+}
+.addrec {
+	BACKGROUND: #aee7fc; TEXT-ALIGN: center
+}
+.oper {
+	COLOR: maroon; FONT-STYLE: italic
+}
+.code {
+	FONT-WEIGHT: bold; FONT-SIZE: small; VERTICAL-ALIGN: baseline; COLOR: =
+navy; FONT-FAMILY: "Courier New", serif
+}
+.high {
+	COLOR: maroon
+}
+.result {
+	BACKGROUND: #f7ffce
+}
+.error {
+	BACKGROUND: #ffe7c6
+}
+.white {
+	BACKGROUND: #ffffff
+}
+
+------=_NextPart_000_024B_01C6062D.151A54E0
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/styleSPrint.043.css
+
+BODY {
+	BACKGROUND: #ffffff
+}
+A {
+	VERTICAL-ALIGN: middle; COLOR: #0000ff; TEXT-DECORATION: underline
+}
+A:hover {
+	BACKGROUND: #ededfe; COLOR: #0000ff
+}
+.text0 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text1 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text2 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text3 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text4 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text9 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+
+------=_NextPart_000_024B_01C6062D.151A54E0
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/stylePPrint.043.css
+
+A {
+	VERTICAL-ALIGN: middle; TEXT-DECORATION: none
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+
+------=_NextPart_000_024B_01C6062D.151A54E0--

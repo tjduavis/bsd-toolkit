@@ -1,0 +1,281 @@
+From: <Saved by Microsoft Internet Explorer 5>
+Subject: 
+Date: Wed, 21 Dec 2005 12:57:26 -0500
+MIME-Version: 1.0
+Content-Type: text/html;
+	charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/tests/oop444fe.973
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.2670
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Dwindows-1252">
+<META content=3D"MSHTML 6.00.2900.2802" name=3DGENERATOR></HEAD>
+<BODY><PRE>    OOP444 =
+--------------------------------------------------------Fall 1997
+
+    Answer all questions in the examination booklets provided.  There  =
+is  a
+    total of 40 marks (10 marks per question).
+
+    1. Determine the exact output of the following program. You'll  need =
+ to
+       know the alphabet (ABCDEFGHIJKLMNOPQRSTUVWXYZ) and the fact that =
+A is
+       65, B is 66, etc. As always, show  your  rough  work  in  a  =
+readable
+       fashion if you expect any part marks.
+
+            #include &lt;iostream.h&gt;
+
+            class a {
+               char ch;
+              public:
+               a(char ch1, int n) { ch =3D ch1 ^ n; }
+               virtual void out() { cout &lt;&lt; ch; }
+            };
+
+            class b: virtual public a {
+               char ch;
+              public:
+               b(char s[]): a(s[1], 3) { ch =3D s[0] + 1; }
+               void out() { a::out(); cout &lt;&lt; ch; }
+            };
+
+            class c: virtual public a {
+               char ch;
+              public:
+               c(char s[]): a(s[0], 2) { ch =3D s[2] - 1; }
+               void out() { a::out(); cout &lt;&lt; ch; }
+            };
+
+            class d: public b, public c {
+              public:
+               d(char s[]):a(s[1], 1), b(s), c(s) {}
+               void out() { b::out(); c::out(); }
+            };
+
+            int main()
+            {
+                    b x("DSCD"); =20
+                    c y("FBBD");
+                    d z("NFZX");
+                    x.out();=20
+                    y.out();=20
+                    z.out();
+                    cout &lt;&lt; "\nLook it up after the exam\n";
+                    return 0;
+            }
+
+
+
+
+
+
+
+
+
+    OOP Using C++ II ------------------------------------- Final =
+Examination
+    OOP444 --------------------------------------------------------Fall =
+1997
+
+    2. Another "Determine the exact output of the following program".
+
+            #include &lt;iostream.h&gt;
+            class ab {
+              public:
+                virtual void evaluate() =3D 0;
+                virtual ostream &amp;show(ostream &amp;) =3D 0;
+                virtual double factor() =3D 0;
+            };
+            typedef int (*intfunc)(int, ab &amp;);
+            typedef double (*dblfunc)(double, ab &amp;);
+            ostream &amp;operator&lt;&lt;(ostream &amp;os, ab &amp;x) { =
+os &lt;&lt; "=3D=3D=3D&gt;";
+                                                      x.show(os);
+                                                      return os &lt;&lt; =
+endl; }
+            class d1: public ab {
+                intfunc f;
+                int i;
+              public:
+                d1(intfunc func, int in)   { f =3D func; i =3D in; }
+                void evaluate()            { i =3D f(i, *this); }
+                ostream &amp;show(ostream &amp;os) { return os &lt;&lt; =
+'[' &lt;&lt; i &lt;&lt; ']'; }
+                double factor()            { return 0.1; }
+            };
+            class d2: public ab {
+                dblfunc f;
+                double d;
+                double e;
+              public:
+                d2(dblfunc func, double db1, double db2)
+                                           { f =3D func; d =3D db1; e =
+=3D db2; }
+                void evaluate()            { d =3D f(d, *this); }
+                ostream &amp;show(ostream &amp;os) { return =
+os&lt;&lt;'['&lt;&lt;d&lt;&lt;','&lt;&lt;e&lt;&lt;']'; }
+                double factor()            { return e; }
+            };
+            int f1(int n, ab &amp;c)       { return (int)(n * c.factor() =
++ 0.5); }
+            double f2(double n, ab &amp;c) { return n * c.factor(); }
+            double f3(double n, ab &amp;c) { return (c.factor()=3D=3D0) =
+? 0.0:
+                                                             =
+(n/c.factor()); }
+            int main() {
+                int i;
+                ab *data[4];
+                for (i =3D 0; i &lt; 4; i++) { // In your answer, assume =
+that
+                    if (i % 2)            // there will be enough memory
+                        data[i] =3D new d1(f1, 60 + i*20);
+                    else
+                        data[i] =3D new d2((i =3D=3D 2 ? f2 : f3), 3.5 + =
+i, 2);
+                    cout &lt;&lt; *data[i];
+                }
+                cout &lt;&lt; "--------" &lt;&lt; endl;
+                for (i =3D 0; i &lt; 4; i++) {
+                    data[i]-&gt;evaluate();
+                    cout &lt;&lt; "Position " &lt;&lt; i &lt;&lt; ": " =
+&lt;&lt; *data[i];
+                    delete data[i];
+                }
+                return 0;
+            }
+
+    OOP Using C++ II ------------------------------------- Final =
+Examination
+    OOP444 --------------------------------------------------------Fall =
+1997
+
+    3. Write a class named dblarray, which stores an array of  doubles.  =
+The
+       constructor for a dblarray is passed an unsigned int, containing  =
+the
+       number of elements desired. If that  number  of  elements  cannot =
+ be
+       allocated, The message
+
+          Allocation of XXX element array failed
+
+       (where XXX is the requested  number  of  elements)  is  displayed =
+ on
+       standard output (but note that the program continues =
+executingeven if
+       this happens).
+
+       There is a member function
+
+          double &amp;element(unsigned int i)
+
+       which returns element number i (where number 0 is the first  =
+element)
+       of the array. However, if i is an invalid element (either  =
+because  i
+       exceeds the size  of  the  array,  or  because  no  memory  could =
+ be
+       allocated for the array), then the message
+
+           Index XXX out of bounds
+
+       (where XXX is the invalid element number) is  displayed  on  =
+standard
+       output, and a reference to a safe location is returned. Note that =
+the
+       calling function can not assume  that  this  safe  location  =
+contains
+       anything but garbage - its purpose is simply to prevent  the  =
+calling
+       program from crashing when it uses an invalid index.
+
+       For example:
+
+            dblarray d(3);
+            for (int i =3D 0; i &lt; 5; i++)
+                    d.element(i) =3D 5.5 + i;
+
+       would make d store three doubles, where element 0 is 5.5,  =
+element  1
+       is 6.5 and element 2 is 7.5. Also this code would output
+
+            Index 3 out of bounds
+            Index 4 out of bounds
+
+       Hint: Dynamically allocate just enough space for the array.  Be  =
+sure
+       to check whether this suceeded or not. Also,  have  an  extra  =
+double
+       variable as a member, so that you can return it in  the  case  of =
+ an
+       invalid array index.
+
+
+
+
+
+
+
+
+
+
+
+
+
+    OOP Using C++ II ------------------------------------- Final =
+Examination
+    OOP444 --------------------------------------------------------Fall =
+1997
+
+    4. Make a template for a class named array&lt;something&gt; which  =
+works  just
+       like the class dblarray in the previous question, except that it =
+will
+       be an array of "somethings" instead of double, where "something"  =
+may
+       be any data type which has a default constructor, and  which  can =
+ be
+       assigned a value of the same type using the =3D operator.
+
+       For example, array&lt;double&gt; would be the  same,  except  in  =
+name,  as
+       dblarray,  and  array&lt;int&gt;  would  be  an  array   of   =
+ints,   while
+       array&lt;llist&gt; would be an array of "llists" (assuming that  =
+the  class
+       llist has been declared, and that it has a default  constructor,  =
+and
+       that the =3D operator works properly for it).
+
+       Hint: Just take your answer to  the  previous  question  and  =
+make  a
+       template out of it, replacing "double" with something  more  =
+generic.
+       Don't forget to make function templates for functions  not  coded =
+ in
+       the class template itself.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE></BODY></HTML>

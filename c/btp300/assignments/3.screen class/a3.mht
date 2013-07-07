@@ -1,0 +1,729 @@
+From: <Saved by Microsoft Internet Explorer 5>
+Subject: Seneca | School of Computer Studies | Object-Oriented Programming I - C++
+Date: Wed, 21 Dec 2005 13:05:12 -0500
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----=_NextPart_000_0278_01C6062F.2D879E50"
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.2670
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0278_01C6062F.2D879E50
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/assignments/a3_p.html
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<?xml version=3D'1.0' encoding=3D'UTF-8'?><HTML lang=3Den-us=20
+xmlns=3D"http://www.w3.org/1999/xhtml"><HEAD><TITLE>Seneca | School of =
+Computer Studies | Object-Oriented Programming I - C++</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META http-equiv=3DPICS-Label=20
+content=3D'(PICS-1.1 "http://www.icra.org/ratingsv02.html" l gen true r =
+(cz 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen =
+true r (n 0 s 0 v 0 l 0) "http://www.classify.org/safesurf/" l gen true =
+r (SS~~000 1))'>
+<META content=3D"(c) Copyright Seneca College 2005" name=3DCopyright>
+<META=20
+content=3D"Welcome to the Bachelors Degree of Software Development =
+Program Web Site.  On this site you can find an intermediate course on =
+object-oriented programming in C++.  Designed by Chris Szalwinski."=20
+name=3DDescription>
+<META=20
+content=3D"This subject expands on introductory elements of C++ and =
+covers intermediate C features.  The emphasis throughout is to prepare =
+for the solution of large problems."=20
+name=3DAbstract>
+<META content=3Dchris.szalwinski@senecac.on.ca name=3DAuthor>
+<META content=3D"software development, object-oriented programming, =
+lecture notes"=20
+name=3DKeywords><LINK =
+href=3D"http://cs.senecac.on.ca/~btp300/pages/style.043.css"=20
+type=3Dtext/css rel=3Dstylesheet><LINK media=3Dscreen=20
+href=3D"http://cs.senecac.on.ca/~btp300/pages/styleSPrint.043.css" =
+type=3Dtext/css=20
+rel=3Dstylesheet><LINK media=3Dprint=20
+href=3D"http://cs.senecac.on.ca/~btp300/pages/stylePPrint.043.css" =
+type=3Dtext/css=20
+rel=3Dstylesheet>
+<META content=3D"MSHTML 6.00.2900.2802" name=3DGENERATOR></HEAD>
+<BODY>
+<TABLE cellSpacing=3D0 cellPadding=3D0><!-- Body Cell -->
+  <TBODY>
+  <TR height=3D600><!-- Content Area -->
+    <TD class=3Dtbody bgColor=3D#ffffff>
+      <TABLE cellPadding=3D10 width=3D"100%">
+        <TBODY>
+        <TR>
+          <TD vAlign=3Dtop bgColor=3D#ffffff><BR>
+            <CENTER><SPAN class=3Dtexth>Assignment 3<BR>Draft Version=20
+            </SPAN><BR><BR><SPAN class=3Dtexthead>Screen Class</SPAN>=20
+            <BR><BR><SPAN class=3Dtexth>Due - Sunday November 14 at=20
+            11:59pm<BR></SPAN></CENTER><BR><BR>
+            <P>As your third assignment this semester, you are to create =
+an=20
+            object-oriented wrapper for your Direct Terminal =
+Library.&nbsp; This=20
+            wrapper will facilitate development of typical full-screen =
+data=20
+            entry programs.&nbsp; If you haven't completed assignment 2, =
+you may=20
+            use the object versions of the library developed by your =
+instructor,=20
+            which you can download from <A=20
+            =
+href=3D"http://cs.senecac.on.ca/~btp300/pages/assignments/dtio.html">here=
+</A>.=20
+            </P><BR>
+            <P class=3Dsection>Learning Outcome</P>
+            <P>Upon successful completion of this assignment, you will =
+have=20
+            demonstrated the abilities=20
+            <UL>
+              <LI>to analyze functional descriptions of modules that =
+require the=20
+              use of such technologies as direct console input/output =
+and design=20
+              and create the C code that implements those =
+specifications,=20
+              <LI>to design and to code data structures that effectively =
+use the=20
+              memory available at run-time, and=20
+              <LI>to create multi-platform programs that require =
+customized code=20
+              for different platforms. </LI></UL>
+            <P></P><BR>
+            <P class=3Dsection>Specifications</P>
+            <P>You are to design and to code two classes named <SPAN=20
+            class=3Dcode>Field</SPAN> and <SPAN =
+class=3Dcode>Screen</SPAN> that=20
+            respectively represent a field on a screen and a full screen =
+
+            layout.&nbsp; Instantiating objects of either class does not =
+cause=20
+            the objects to appear - there are member functions =
+specifically=20
+            designed to do that.&nbsp; </P>
+            <P class=3Dssection>Field Class</P>
+            <P>Your <SPAN class=3Dcode>Field</SPAN> class represents =
+either a=20
+            label or an editable character string.&nbsp; This class is a =
+base=20
+            class from which you will derive other classes in assignment =
+
+            4.&nbsp; </P>
+            <P>Upon instantiation, a <SPAN class=3Dcode>Field</SPAN> =
+object=20
+            receives between three and five values, in the following =
+order:=20
+            <UL>
+              <LI>required:=20
+              <UL>
+                <LI>an <SPAN class=3Dcode>int</SPAN> holding the row =
+number on=20
+                which the field is positioned,=20
+                <LI>an <SPAN class=3Dcode>int</SPAN> holding the column =
+number at=20
+                which the field begins,=20
+                <LI>an <SPAN class=3Dcode>int</SPAN> holding the width =
+of the=20
+                field, </LI></UL>
+              <LI>optional:=20
+              <UL>
+                <LI>a <SPAN class=3Dcode>char</SPAN> string holding the =
+initial=20
+                value of the field, and=20
+                <LI>a <SPAN class=3Dcode>bool</SPAN> holding the =
+editability flag=20
+                for the field: <SPAN class=3Dcode>true</SPAN> for =
+editable, <SPAN=20
+                class=3Dcode>false</SPAN> for not editable. =
+</LI></UL></LI></UL>If the=20
+            calling function specifies only the first three parameters, =
+your=20
+            <SPAN class=3Dcode>Field</SPAN> object holds an empty string =
+and is=20
+            editable.&nbsp; If the calling function specifies only the =
+first=20
+            four parameters, your object is editable.&nbsp; If the =
+calling=20
+            function specifies invalid coordinates, your object uses the =
+closest=20
+            on-screen coordinates to those specified.&nbsp; If the width =
+is too=20
+            long for the field to fit on a screen, your object reduces =
+the width=20
+            so that the contracted field does fit on the screen.&nbsp; =
+If the=20
+            initial value occupies more than the field width, your =
+object uses=20
+            only as many characters of the initial value as will fit =
+within the=20
+            specified width.=20
+            <P></P>
+            <P>Your <SPAN class=3Dcode>Field</SPAN> class has the =
+following public=20
+            member functions, all of which are <SPAN =
+class=3Dcode>virtual</SPAN>:=20
+            <UL>
+              <LI><SPAN class=3Dcode>void display()</SPAN> - causes the =
+field to=20
+              be displayed.&nbsp; On systems where terminal output is =
+buffered,=20
+              your function does not flush the screen buffer.&nbsp; If =
+the=20
+              field's current value is shorter than the field width, =
+your=20
+              function fills the right end of the field with trailing=20
+              spaces.&nbsp; (Such trailing spaces are however not part =
+of the=20
+              data of the field itself).=20
+              <LI><SPAN class=3Dcode>int edit()</SPAN> displays the =
+field and then=20
+              lets the user edit the field.&nbsp; Your function returns =
+the key=20
+              code used to terminate editing.&nbsp; The first time a =
+caller=20
+              calls your function, it positions the cursor at the =
+beginning of=20
+              the field.&nbsp; Subsequently every time that the caller =
+calls=20
+              your function, your function starts the cursor where it =
+left off=20
+              at the end of the previous call, unless the string is now =
+too=20
+              small, in which case your function positions the cursor =
+just past=20
+              the end of the string.&nbsp; <BR>Where the field is not =
+editable,=20
+              your function simply displays the field and returns 0 =
+without=20
+              waiting for any user input.=20
+              <LI><SPAN class=3Dcode>bool editable() const</SPAN> =
+returns <SPAN=20
+              class=3Dcode>true</SPAN> if the field is editable, <SPAN=20
+              class=3Dcode>false</SPAN> if it is display-only.=20
+              <LI><SPAN class=3Dcode>void *data()</SPAN> returns the =
+address of=20
+              the string currently stored by the field.&nbsp; In derived =
+classes=20
+              this may be the address of some other type of data being =
+edited.=20
+              <LI><SPAN class=3Dcode>Field *clone() const</SPAN> =
+dynamically=20
+              allocates a separate instance of a <SPAN =
+class=3Dcode>Field</SPAN>,=20
+              making the object a copy of the current object, and =
+returns the=20
+              address of the copy.&nbsp; If your function cannot make a =
+copy,=20
+              your function returns <SPAN =
+class=3Dcode>NULL</SPAN>.&nbsp; It is=20
+              the calling function's responsibility to deallocate the =
+memory for=20
+              this copy. <BR>This function will enable your code to make =
+a copy=20
+              of an instance of a derived class without relying upon the =
+copy=20
+              constructors. </LI></UL>Since your <SPAN =
+class=3Dcode>Field</SPAN>=20
+            class requires dynamic memory allocation for efficient=20
+            implementation, your class includes a copy constructor, an=20
+            assignment operator and a virtual destructor.=20
+            <P></P>
+            <P class=3Dssection>Screen Class</P>
+            <P>Your <SPAN class=3Dcode>Screen</SPAN> class manages up to =
+50 fields=20
+            (although if you can remove this limit, you are more than =
+welcomed=20
+            to do so; see the bonus section below).&nbsp; Your class =
+keeps its=20
+            fields in the order in which they have been added to the=20
+            screen.&nbsp; Your class numbers the fields accordingly: the =
+field=20
+            that was added first is field number 0, the field that was =
+added=20
+            next is field number 1 and so on.&nbsp; </P>
+            <P>Your <SPAN class=3Dcode>Screen</SPAN> class has the =
+following=20
+            public member functions:=20
+            <UL>
+              <LI><SPAN class=3Dcode>int add(int, int, int)</SPAN>, =
+<BR><SPAN=20
+              class=3Dcode>int add(int, int, int, const char *)</SPAN> =
+and=20
+              <BR><SPAN class=3Dcode>int add(int, int, int, const char =
+*,=20
+              bool)</SPAN> <BR>add a field to the screen.&nbsp; Each =
+function=20
+              constructs the field using the data supplied.&nbsp; Each =
+function=20
+              returns the number of fields in the screen after having =
+added the=20
+              new field, or 0 if your function could not add the field =
+for some=20
+              reason.=20
+              <LI><SPAN class=3Dcode>int add(const field &amp;f)</SPAN> =
+adds a=20
+              copy of <SPAN class=3Dcode>f</SPAN> to the screen and =
+returns the=20
+              number of fields in the screen after having added the new =
+field,=20
+              or 0 if your function could not add the field for some =
+reason.=20
+              <LI><SPAN class=3Dcode>void display()</SPAN> and <BR><SPAN =
+
+              class=3Dcode>void display(bool clear)</SPAN> <BR>display =
+all of the=20
+              fields managed by the screen in the same order that they =
+have been=20
+              added to the screen.&nbsp; If <SPAN =
+class=3Dcode>clear</SPAN> is=20
+              specified and <SPAN class=3Dcode>true</SPAN>, your =
+function clears=20
+              the screen before displaying the fields in the screen, =
+otherwise=20
+              your function displays the fields without altering any =
+other part=20
+              of the screen.&nbsp; On systems that buffer terminal =
+output, your=20
+              function does not flush the output buffer.=20
+              <LI><SPAN class=3Dcode>int edit()</SPAN>, <BR><SPAN =
+class=3Dcode>int=20
+              edit(bool clear)</SPAN>, <BR><SPAN class=3Dcode>int =
+edit(int=20
+              *pfield)</SPAN> and <BR><SPAN class=3Dcode>int edit(int =
+*pfield,=20
+              bool clear)</SPAN> <BR>display all of the fields in the =
+screen=20
+              (after clearing it if <SPAN class=3Dcode>clear</SPAN> is =
+specified=20
+              and <SPAN class=3Dcode>true</SPAN>).&nbsp; Your functions =
+let the=20
+              user edit the editable fields, starting at field number =
+<SPAN=20
+              class=3Dcode>*pfield</SPAN> if the calling function =
+specifies <SPAN=20
+              class=3Dcode>pfield</SPAN> and <SPAN =
+class=3Dcode>pfield</SPAN> is not=20
+              <SPAN class=3Dcode>NULL</SPAN>.&nbsp; If the calling =
+function does=20
+              not specify <SPAN class=3Dcode>pfield</SPAN> or specifies =
+<SPAN=20
+              class=3Dcode>pfield</SPAN> as <SPAN =
+class=3Dcode>NULL</SPAN>, your=20
+              functions let the user edit the editable fields, starting =
+at field=20
+              number 0.&nbsp; <BR>The user can move between editable =
+fields with=20
+              any of the following keys:=20
+              <UL>
+                <LI>Down arrow - moves to the next editable field,=20
+                <LI>Up arrow - moves to the previous editable field,=20
+                <LI>Tab - works just like Down Arrow, and=20
+                <LI>Enter - moves to the next editable field, except =
+when=20
+                pressed in the last editable field of the screen, in =
+which case=20
+                causes your function to return control to its caller.=20
+              </LI></UL>Here "next" and "previous" refer to the order in =
+which=20
+              the fields have been added to the screen.&nbsp; There is a =
+
+              wrap-around effect, so the the next field after the last =
+editable=20
+              field is the first editable field, and the previous =
+editable field=20
+              before the first editable field is the last editable =
+field.=20
+              <BR>All other keys that terminate a <SPAN =
+class=3Dcode>Field</SPAN>=20
+              object's <SPAN class=3Dcode>edit()</SPAN> function =
+terminate your=20
+              function as well, setting <SPAN =
+class=3Dcode>*pfield</SPAN> to the=20
+              number of the field from which the user exited.&nbsp; Your =
+
+              function returns the key code returned by the <SPAN=20
+              class=3Dcode>Field</SPAN> object's <SPAN =
+class=3Dcode>edit()</SPAN>=20
+              function. <BR>If the calling function specifies <SPAN=20
+              class=3Dcode>pfield</SPAN> as <SPAN =
+class=3Dcode>NULL</SPAN> or does=20
+              not specify <SPAN class=3Dcode>pfield</SPAN>, your =
+function starts=20
+              editing at the first editable field, the first time the =
+calling=20
+              function calls your function and resumes at the field last =
+exited=20
+              upon subsequent calls. <BR>If <SPAN =
+class=3Dcode>pfield</SPAN>=20
+              points to an <SPAN class=3Dcode>int</SPAN> that is not the =
+number of=20
+              an editable field, your function starts editing at the =
+next=20
+              editable field (where "next" is defined above). <BR>If =
+there are=20
+              no editable fields in the screen object, your functions =
+return 0=20
+              after displaying all of the fields.=20
+              <LI><SPAN class=3Dcode>Field *getField(int i)</SPAN> =
+returns the=20
+              address of field number <SPAN class=3Dcode>i</SPAN> or =
+<SPAN=20
+              class=3Dcode>NULL</SPAN> if <SPAN class=3Dcode>i</SPAN> is =
+not a field=20
+              number.=20
+              <LI><SPAN class=3Dcode>int remove(int i)</SPAN> removes =
+field number=20
+              <SPAN class=3Dcode>i</SPAN> from the list of fields being =
+managed by=20
+              your screen object, and returns the number of fields =
+remaining on=20
+              the screen.&nbsp; If <SPAN class=3Dcode>i</SPAN> is not a =
+field=20
+              number, your function does nothing and returns the current =
+field=20
+              count. <BR>Note that removing a field renumbers the =
+remaining=20
+              fields in the screen. </LI></UL>Your <SPAN =
+class=3Dcode>Screen</SPAN>=20
+            class also has a <SPAN class=3Dcode>+=3D</SPAN> operator =
+that takes a=20
+            <SPAN class=3Dcode>Field</SPAN> object as its right operand, =
+adds the=20
+            <SPAN class=3Dcode>Field</SPAN> object to the current <SPAN=20
+            class=3Dcode>Screen</SPAN> object and returns a reference to =
+the=20
+            current <SPAN class=3Dcode>Screen</SPAN> object.=20
+            <P></P>
+            <P>Recall that, as noted above, creating a screen, adding a =
+field to=20
+            a screen, or removing a field from a screen causes no =
+immediate=20
+            visual effect.&nbsp; It is only when the calling function =
+calls the=20
+            <SPAN class=3Dcode>display()</SPAN> or <SPAN =
+class=3Dcode>edit()</SPAN>=20
+            functions on your object that the user sees any change. </P>
+            <P>In adding a field, your <SPAN class=3Dcode>Screen</SPAN> =
+class=20
+            makes a copy of the field using the <SPAN =
+class=3Dcode>clone()</SPAN>=20
+            function.&nbsp; Since this function involves dynamic memory=20
+            allocation, your <SPAN class=3Dcode>Screen</SPAN> class =
+includes an=20
+            appropriate copy constructor, assignment operator and =
+virtual=20
+            destructor.&nbsp; </P>
+            <P class=3Dssection>Your Program</P>
+            <P>Add your <SPAN class=3Dcode>Field</SPAN> and <SPAN=20
+            class=3Dcode>Screen</SPAN> class declarations to a header =
+file named=20
+            <SPAN class=3Dcode>Screen.h</SPAN> and your implementation =
+to a source=20
+            file named <SPAN class=3Dcode>Screen.cpp</SPAN>.&nbsp; =
+Including your=20
+            <SPAN class=3Dcode>Screen.h</SPAN> header file should also =
+make the=20
+            Direct Terminal Library functions available. </P>
+            <P>A copy of a program that uses your library is <A=20
+            =
+href=3D"http://cs.senecac.on.ca/~btp300/pages/assignments/a3test.cpp">her=
+e</A>=20
+            (<SPAN class=3Dcode>a3test.cpp</SPAN>).&nbsp; The final =
+result from a=20
+            sample run of this program using your classes looks =
+something like:=20
+            <TABLE width=3D"45%">
+              <TBODY>
+              <TR>
+                <TD><BR><PRE class=3Dresult> Upper Left Corner
+
+                                                           Should be an =
+H here-&gt;H
+                     Last Test                                           =
+Field 2^&nbsp;
+                                                        1 constructed
+      URL:      www.hahaha.com                          2 constructed
+                                                        3 constructed
+                                                        4 constructed
+      IP Addr:  123.123.123.3                           5 constructed
+                                                        6 constructed
+           Edit this : It is a Test Screen              7 constructed
+                                                        8 constructed
+                                                        9 constructed
+      Hi!          BTP300 should be gone                cloning tested
+                                                        editable() =
+tested
+      e.g. 123.123.123.2                                non-editable =
+tested
+                                                        Field Tests =
+Completed
+      Done ? y
+                                                        three fields =
+displayed
+      Prepare a screen shot if the results look ok      screen copied
+                                                        last field =
+altered
+                                                        remove &amp; =
+edit tested
+                                                        Screen Tests =
+Completed
+ Prompt : Press any key to continue =
+...</PRE><BR></TD></TR></TBODY></TABLE>Follow=20
+            the instructions at the prompt exactly to obtain the results =
+shown=20
+            here.</P>
+            <P class=3Dssection>Enhancements</P>
+            <P>To exceed the specifications, you may do one of the =
+following:=20
+            <UL>
+              <LI>remove the 50 fields restriction on the screen class - =
+
+              consider using a circular doubly linked list; or=20
+              <LI>write a simple text editor that uses your screen class =
+and the=20
+              menu function from your Direct Terminal Library. =
+</LI></UL>
+            <P></P><BR>
+            <P class=3Dsection>Submission Requirements</P>
+            <P>Test your class design in the following four command-line =
+
+            environments=20
+            <UL>
+              <LI>Local PC: MS DOS Borland 5.5=20
+              <LI>Local PC: MS DOS Visual Studio .net 2003=20
+              <LI>phobos: AIX c++=20
+              <LI>matrix: Linux g++ </LI></UL>Compile and test your =
+design in each=20
+            environment separately.&nbsp;=20
+            <P></P>
+            <P>For submission purposes, your solution must compile, link =
+and run=20
+            without errors in each environment.&nbsp; Capture a screen =
+shot of=20
+            the display of your test program in each environment.&nbsp; =
+</P>
+            <P>Prepare a typescript that includes a copy of your header =
+and=20
+            implementation files along with a compilation on =
+phobos.&nbsp;=20
+            Upload this typescript along with copies of the screen shots =
+from=20
+            each environment.&nbsp; </P>
+            <P>Finally, place a copy of your executable in your phobos =
+home=20
+            directory and grant your instructor "others" permission to =
+run your=20
+            executable. </P>
+            <P class=3Dssection>Grading</P>
+            <P>This assignment is worth 6% of your final mark. </P>
+            <P>The base mark for a program with no apparent logic flaws =
+is=20
+            9/10.&nbsp; To earn more, your code must include innovative =
+elements=20
+            without violating the specs and must use your own <SPAN=20
+            class=3Dcode>dtio</SPAN> library.&nbsp; If your code =
+contains one=20
+            major or more than one minor logic flaw, you will be asked =
+to fix it=20
+            and to resubmit your code for a 20% penalty.&nbsp; The late =
+penalty=20
+            is 10%, so it is better to submit a working version late =
+than to=20
+            submit a flawed version on time.&nbsp; Very late assignments =
+and=20
+            resubmissions will attract a further 10% penalty.&nbsp; </P>
+            <P>Regardless of how long it takes you to complete this =
+assignment,=20
+            you still need to submit a completed working version in =
+order to=20
+            pass this subject. =
+</P><BR><BR><BR></TD></TR></TBODY></TABLE></TD></TR><!-- Footer -->
+  <TR>
+    <TD class=3Dtbody>
+      <TABLE cellPadding=3D1 width=3D"90%" align=3Dcenter>
+        <TBODY>
+        <TR>
+          <TD class=3Dtext3 width=3D"50%">
+            <SCRIPT language=3Djavascript>=0A=
+						var lh =3D document.location.href;=0A=
+						document.write(lh)=0A=
+						</SCRIPT>
+            &nbsp;&nbsp; </TD>
+          <TD class=3Dtext3 align=3Dright width=3D"50%">
+            <SCRIPT language=3Djavascript>=0A=
+						var lm =3D document.lastModified.slice(0,-3);=0A=
+						document.write("Last Modified: " +lm)=0A=
+						</SCRIPT>
+            &nbsp;&nbsp; =
+</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></BODY></HTML>
+
+------=_NextPart_000_0278_01C6062F.2D879E50
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/style.043.css
+
+BODY {
+	MARGIN-TOP: 0px; BACKGROUND: #ffffff; MARGIN-LEFT: 0px
+}
+IMG {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; VERTICAL-ALIGN: bottom; =
+BORDER-LEFT: 0px; BORDER-BOTTOM: 0px
+}
+P {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+TABLE {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: =
+0px
+}
+TD {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+UL {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+LI {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+PRE {
+	FONT-WEIGHT: bold; FONT-SIZE: small; BACKGROUND: #ffffe0; MARGIN-LEFT: =
+15px; COLOR: navy; FONT-FAMILY: "Courier New", serif
+}
+.tbody {
+	BACKGROUND: #ffffff; WIDTH: 700px
+}
+.text3 {
+	FONT-SIZE: small; FONT-FAMILY: "Times New Roman", serif
+}
+.panel1 {
+	BACKGROUND: #aee7fc
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+.texth {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.quote {
+	FONT-SIZE: small; FONT-STYLE: italic; FONT-FAMILY: "Times New Roman", =
+serif
+}
+.textagend {
+	FONT-SIZE: small; COLOR: red; FONT-FAMILY: "Times New Roman", serif
+}
+.section {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; TEXT-TRANSFORM: uppercase; COLOR: =
+#4599b1; FONT-FAMILY: "Times New Roman", serif
+}
+.ssection {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.sssection {
+	FONT-WEIGHT: bold; FONT-SIZE: small; COLOR: #4599b1; FONT-FAMILY: =
+"Times New Roman", serif
+}
+.top {
+	VERTICAL-ALIGN: top
+}
+.tup {
+	VERTICAL-ALIGN: top; COLOR: blue
+}
+.defin {
+	FONT-WEIGHT: bold; FONT-SIZE: small; BACKGROUND: #ffffff; COLOR: =
+maroon; FONT-FAMILY: "Courier New", serif
+}
+.desc {
+	BACKGROUND: #ededfe; TEXT-ALIGN: center
+}
+.value {
+	BACKGROUND: #ffffc6; TEXT-ALIGN: center
+}
+.addre {
+	BACKGROUND: #aee7fc; TEXT-ALIGN: left
+}
+.addrec {
+	BACKGROUND: #aee7fc; TEXT-ALIGN: center
+}
+.oper {
+	COLOR: maroon; FONT-STYLE: italic
+}
+.code {
+	FONT-WEIGHT: bold; FONT-SIZE: small; VERTICAL-ALIGN: baseline; COLOR: =
+navy; FONT-FAMILY: "Courier New", serif
+}
+.high {
+	COLOR: maroon
+}
+.result {
+	BACKGROUND: #f7ffce
+}
+.error {
+	BACKGROUND: #ffe7c6
+}
+.white {
+	BACKGROUND: #ffffff
+}
+
+------=_NextPart_000_0278_01C6062F.2D879E50
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/styleSPrint.043.css
+
+BODY {
+	BACKGROUND: #ffffff
+}
+A {
+	VERTICAL-ALIGN: middle; COLOR: #0000ff; TEXT-DECORATION: underline
+}
+A:hover {
+	BACKGROUND: #ededfe; COLOR: #0000ff
+}
+.text0 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text1 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text2 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text3 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text4 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.text9 {
+	FONT-FAMILY: "Times New Roman", serif
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+
+------=_NextPart_000_0278_01C6062F.2D879E50
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://cs.senecac.on.ca/~btp300/pages/stylePPrint.043.css
+
+A {
+	VERTICAL-ALIGN: middle; TEXT-DECORATION: none
+}
+.texthead {
+	FONT-WEIGHT: bold; FONT-SIZE: x-large; COLOR: red; FONT-FAMILY: "Times =
+New Roman", serif
+}
+
+------=_NextPart_000_0278_01C6062F.2D879E50--

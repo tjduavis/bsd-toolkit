@@ -1,0 +1,13 @@
+#include<stdio.h>
+
+int main(void)
+{
+	char a='A',b='B';
+
+	if(a<b)
+		printf("A goes before B\n");
+	else
+		printf("char has no value effect\n");
+
+	return 0;
+}

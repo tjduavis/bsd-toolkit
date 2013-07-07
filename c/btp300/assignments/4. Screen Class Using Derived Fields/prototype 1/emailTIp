@@ -1,0 +1,10 @@
+To convert a string to an int check to see if there are any non-digit character other than '-'
+and if not then use atoi(stringEntered)
+or sscanf(stringEntered, "%d", &myInt);
+Store the converted int value in the derived class.
+If the user presses Escape leave the original int value
+in place.
+ 
+Chris
+BTW, you'll need to load the string at the start.  For this try
+ sprintf(stringEntered,"%d", myInt) 

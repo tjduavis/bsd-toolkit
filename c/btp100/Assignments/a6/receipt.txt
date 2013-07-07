@@ -1,0 +1,18 @@
+Your Friendly BTP100 Superstore Receipt
+=======================================
+	Barcode Tax	Price
+         Bounty B	      1.25
+   Swiss Muesli N	      4.29
+The Cathedral & T G	     24.95
+Natural Spring Wa P	      0.77
+ Globe and Mail N	      1.00
+         Bounty B	      1.25
+         Bounty B	      1.25
+         Bounty B	     -1.25
+
+PST @	8%	$	      0.26
+GST @	7%	$	      1.93
+Total		$	     35.70
+
+Thank You for Shopping at BTP100
+Have a Nice Day!

@@ -1,0 +1,725 @@
+Script command is started on Fri Oct 29 16:03:14 EDT 2004.$ whoami
+tjduavis
+$ cat /public/btp100/oath.txt
+
+Student Assignment Submission Form
+==================================
+I declare that the attached assignment is my own work in 
+accordance with Seneca Academic Policy.  No part of this 
+assignment has been copied manually or electronically 
+from any other source (including web sites) or 
+distributed to other students.
+
+
+Name                                          Student ID
+
+---------------------------------------------------------
+
+
+
+
+Signature
+
+
+------------------------------
+$ cat tjduavis3.c
+/*****************************************************
+*  BTP100a
+*  Ontario Personal Income Tax Return
+*  with Functions and Robust Validation -version 1.01
+*
+*  Programmer: Timothy Duavis
+*          ID: 019-261-049
+*
+*  Description:
+*       Calculates the data for an Ontario taxpayer
+*       on their Income Tax Return.
+*       Program uses, if/else statements for special
+*       conditions and restrictions.
+*
+*       The Upgrade to this program is added function
+*       modules.
+*
+*  Due Date:
+*       Oct,25 2004 -at 11:59pm
+*  Last Modified:
+*       Oct,29 2004 -at 3
+*
+******************************************************/
+
+/*******Defined preprocessor*******/
+#include<stdio.h>
+#include"tjduavis3.h"
+
+int main(void)
+{
+        /*******Variables*******/
+        /*---User Data---*/
+        double Inc_14;               /*Employment Income/Total Income*/
+        double CPP_16;               /*CPP Contributions*/
+        double EI_18;                /*EPP Premiums*/
+        double Inc_Tax_Ddct_22;      /*Income Tax Deducted*/
+        double Stk_Opt_41;           /*Stock Options*/
+        double Un_Dues44;            /*Union Dues*/
+        int Nod;                     /*Number of Dependents*/
+
+        /*---Federal---*/
+        double F_rate;
+        double F_base,F_Tbase;         /*Federal Base and Tax on Base*/
+        double CPP_Ovrp, EI_Ovrp;
+
+        /*---Ontario---*/
+        double O_rate;
+        double O_base, O_Tbase;        /*Ontario Base and Tax on Base*/
+
+        /*---Other---*/
+        double chkvalue;               /*value to be checked in InputValid function*/
+        int count;
+        int x_menu;
+        double exit;
+
+        do
+        {
+                /*reset values*/
+                x_menu=0;
+                count=0;
+                CPP_Ovrp=0;
+                EI_Ovrp=0;
+
+                /*******Welcome*******/
+                printf("\nWelcome to the BTP100 Income Tax Return Calculator\n");
+                printf("==================================================\n\n");
+                printf("Please enter the T4 slip infomation:\n");
+
+                /*******User Data Input*******/
+                /***With Validations***/
+
+                printf("\tEmployment Income -\t\tbox 14\t:");
+                chkvalue=Inc_14;
+                Inc_14=InputValid(chkvalue, count, Inc_14, CPP_16, EI_18,x_menu);
+
+                printf("\tCPP Contributions -\t\tbox 16\t:");
+                chkvalue=CPP_16;
+                count=1;
+                CPP_16=InputValid(chkvalue, count, Inc_14, CPP_16, EI_18,x_menu);
+
+                printf("\tEmployee's EI premiums -\tbox 18\t:");
+                chkvalue=EI_18;
+                count=2;
+                EI_18=InputValid(chkvalue, count, Inc_14, CPP_16, EI_18,x_menu);
+
+                printf("\tIncome Tax Deducted -\t\tbox 22\t:");
+                chkvalue=Inc_Tax_Ddct_22;
+                count=3;
+                Inc_Tax_Ddct_22=InputValid(chkvalue, count, Inc_14, CPP_16, EI_18,x_menu);
+
+                printf("\tStock Options and Shares -\tbox 41\t:");
+                chkvalue=Stk_Opt_41;
+                count=0;
+                Stk_Opt_41=InputValid(chkvalue, count, Inc_14, CPP_16, EI_18,x_menu);
+
+                printf("\tProfessional/Union Dues -\tbox 44\t:");
+                chkvalue=Un_Dues44;
+                count=0;
+                Un_Dues44=InputValid(chkvalue, count, Inc_14, CPP_16, EI_18,x_menu);
+
+                printf("\n");
+
+                printf("Number of Dependents -\t\t\t------\t:");
+                chkvalue=Nod;
+                count=4;
+                Nod=InputValid(chkvalue, count, Inc_14, CPP_16, EI_18,x_menu);
+
+                /*******Conditions*******/
+                Fed_Conditions(Inc_14, &F_rate, &F_base, &F_Tbase);
+
+                Ont_Conditions(Inc_14, &O_rate, &O_base, &O_Tbase);
+
+                CPP_EI_Restrictions(&CPP_Ovrp, &CPP_16, &EI_Ovrp, &EI_18);
+
+                /******Final Calculations and Statements******/
+                results(&Inc_14, &CPP_16, &EI_18, &Inc_Tax_Ddct_22, &Stk_Opt_41, &Un_Dues44, &Nod, &F_rate, &F_base, &F_Tbase, &O_rate, &O_base, &O_Tbase, &EI_Ovrp, &CPP_Ovrp);
+
+                printf("\n\n\n");
+                printf("Continue with another return (y or n) ?");
+                x_menu=1;
+                exit=InputValid(chkvalue,count, Inc_14, CPP_16, EI_18,x_menu);
+
+        }while(exit!=1);
+
+        printf("\n");
+        printf("Have a Nice Day!\n");
+
+        return 0;
+}
+
+/******Function Definitions******/
+/*
+* Input Validation
+*       Takes user input values, and tests each cases
+*       inorder to meet program standards.
+*       Function outputs a double value, and inputs double
+*       and int values.
+*
+*/
+double InputValid(double value,int count,double Inc_14,double CPP_16,double EI_18, int x_menu)
+{
+        int flag=0;                    /*flag to end do-while loop*/
+        int valid;                     /*output variable for scanf*/
+        char endChk;                   /*to detect any trailing characters*/
+        char choice;                    /*choice to exit or restart program*/
+        double value_holder=0;
+
+        value_holder=value;
+
+        /*do-while loops exit only correct input is entered*/
+        do
+        {       /*This condition is for the end do-while loop for entire program*/
+                if(x_menu==1)
+                {
+
+                        scanf("%c",&choice);
+                        switch(choice)
+                        {
+                                case 'y':
+                                        value_holder=0;
+                                        flag=1;
+                                        break;
+                                case 'n':
+                                        value_holder=1;
+                                        flag=1;
+                                        break;
+                                default:
+                                        printf("** Invalid character.    Try again ** ?");
+                                        bufferClear();
+                                        break;
+                        }
+                }
+                /*This condition is for user-input variables*/
+                else
+                {
+
+                        valid=scanf("%lf%c",&value_holder,&endChk);
+
+                if(valid==0)
+                {
+                        printf("\t** Insufficient input.\n");
+                        printf("\t\t  Try again. **:");
+                        bufferClear();
+                }
+
+                /*trailing character detected*/
+                else if(endChk!='\n')
+                {
+                        printf("\t** Trailing characters encountered.\n");
+                        printf("\t\t  Try again. **:");
+                        bufferClear();
+                }
+
+                else if(valid==2)
+                {
+                        /*each case has different restrictions for different variable count*/
+                        switch(count)
+                        {
+                                case 0:
+                                        if(value_holder<0)
+                                        {
+                                                printf("\t** Value must be >= 0.00.\n");
+                                                printf("\t\t  Try again. **:");
+                                        }
+                                        else
+                                                flag=1;
+                                        break;
+                                case 1:
+                                        if(value_holder<0 || value_holder>Inc_14)
+                                        {
+                                                printf("\t** CPP must be non-negative and less than income.\n");
+                                                printf("\t\tTry again. **:");
+                                        }
+                                        else
+                                                flag=1;
+                                        break;
+                                case 2:
+                                        if(value_holder<0 || value_holder>Inc_14 && value_holder>CPP_16)
+                                        {
+                                                printf("\t** EI must be non-negative, less than income and CPP.\n");
+                                                printf("\t\tTry again. **:");
+                                        }
+                                        else
+                                                flag=1;
+                                        break;
+                                case 3:
+                                        if(value_holder<0 || value_holder>Inc_14 && value_holder>EI_18 && value_holder>CPP_16)
+                                        {
+                                                printf("\t** Tax deducted must be non-negative and less than income,CPP and EI.\n");
+                                                printf("\t\tTry again. **:");
+                                        }
+                                        else
+                                                flag=1;
+                                        break;
+                                case 4:
+                                        if(value_holder<0 || value_holder>50)
+                                        {
+                                                printf("\t** Dependents must be non-negative and less than 50.\n");
+                                                printf("\t\tTry again. **:");
+                                        }
+                                        else
+                                                flag=1;
+                                        break;
+                        }
+                }
+        }
+
+ }while(flag!=1);
+
+ return value_holder;
+}
+
+/*
+* Fed_Conditions
+*       Takes Income value, and uses this value to compare
+*       different ranges inorder for rate, base, and tbase
+*       values, for Federal calculations, to be set.
+*       Function inputs double values and returns a double
+*       value.
+*/
+void Fed_Conditions(double Inc_14, double *rate, double *base, double *Tbase)
+{
+
+        /*---Federal Rates---*/
+        if(Inc_14>=0 && Inc_14<=F_LIMIT1)
+        {
+                *rate=F_RATE1;
+                *base=F_BASE1;
+                *Tbase=F_TBASE1;
+        }
+
+        else if(Inc_14<=F_LIMIT2)
+        {
+                *rate=F_RATE2;
+                *base=F_BASE2;
+                *Tbase=F_TBASE2;
+        }
+
+        else if(Inc_14<=F_LIMIT3)
+        {
+                *rate=F_RATE3;
+                *base=F_BASE3;
+                *Tbase=F_TBASE3;
+        }
+
+        else /*if(Inc_14>F_LIMIT3)*/
+        {
+                *rate=F_RATE4;
+                *base=F_BASE4;
+                *Tbase=F_TBASE4;
+        }
+
+}
+
+/*
+* Ont_Conditions
+*       Takes Income value, and uses this value to compare
+*       different ranges inorder for rate, base, and tbase
+*       values, for Ontario calculations, to be set.
+*       Function inputs double values and returns a double
+*       value.
+*/
+void Ont_Conditions(double Inc_14, double *rate, double *base, double *Tbase)
+{
+        /*---Ontario Rates---*/
+        if(Inc_14>=0 && Inc_14<=O_LIMIT1)
+        {
+                *rate=O_RATE1;
+                *base=O_BASE1;
+                *Tbase=O_TBASE1;
+        }
+
+        else if(Inc_14<=O_LIMIT2)
+        {
+                *rate=O_RATE2;
+                *base=O_BASE2;
+                *Tbase=O_TBASE2;
+        }
+
+        else if(Inc_14>O_LIMIT2)
+        {
+                *rate=O_RATE3;
+                *base=O_BASE3;
+                *Tbase=O_TBASE3;
+        }
+}
+
+/*
+* CPP_EI_Restrictions
+*       Takes CPP/EI value, and uses this value to compare
+*       different ranges inorder for CPP/EI and EI_Ovrp/CPP_Ovrp
+*       values, in calculations, to be set.
+*       Function inputs double values and returns a double
+*       value.
+*/
+void CPP_EI_Restrictions(double *cppOvrp, double *cpp, double *eiOvrp, double *ei)
+{
+        /*---CPP/EI Overpayments---*/
+        /*setting the CPP/EI restrictions*/
+        if(*cpp>CPP_MAX)
+        {
+                *cppOvrp=*cpp-CPP_MAX;
+                *cpp=CPP_MAX;
+        }
+        if(*ei>EI_MAX)
+        {
+                *eiOvrp=*ei-EI_MAX;
+                *ei=EI_MAX;
+        }
+
+}
+
+
+/*
+* Results
+*       Where user variables, conditional variables and local variables
+*       are processed inorder for calculations are processed
+*       and presented to the display screen.
+*       Function returns nothing, and inputs doubles
+*/
+void results(double *Inc_14, double *CPP_16, double *EI_18, double *Inc_Tax_Ddct_22, double *Stk_Opt_41, double *Un_Dues44, int *Nod, double *F_rate, double *F_base, double *F_Tbase, double *O_rate, double *O_base, double *O_Tbase, double *EI_Ovrp, double *CPP_Ovrp)
+{
+        double F8;
+        double Net_Ftax;               /*Net Federal tax*/
+        double P8;
+        double Stax_a, Stax_b;         /*surtaxes*/
+        double O_tax_lsCrdts;          /*Ontario Tax Less Tax Credits*/
+        double O_TAft;                 /*Ontario Tax After Surtaxes*/
+        double O_NetTax;               /*Net Provincial tax*/
+        double Net_Inc, Tax_Inc;       /*Net Income and Taxable Income*/
+        double Tot_Pay, Tot_Crdt;      /*Total Payable and Total Credits*/
+        double diff, Refund=0, Owing=0;
+
+        /*******Calculations*******/
+        Net_Inc=*Inc_14-*Un_Dues44;
+        Tax_Inc=Net_Inc-*Stk_Opt_41;
+
+        /*---------Federal Tax-----------*/
+        F8=((Tax_Inc-*F_base)*(*F_rate))+*F_Tbase;
+        Net_Ftax=(F8-((F_BEXEMP+*CPP_16+*EI_18)*(F_TCRD_RATE)));
+
+        /*negative restriction*/
+        if(Net_Ftax<=0)
+                Net_Ftax=0;
+        Net_Ftax=SigDigs(Net_Ftax);
+
+        /*---------Ontario Tax--------------*/
+        P8=((Tax_Inc-*O_base)*(*O_rate))+*O_Tbase;
+
+        O_tax_lsCrdts=(P8-((O_BEXEMP+*CPP_16+*EI_18)*(O_TCRD_RATE)));
+
+        if(O_tax_lsCrdts<=0)  /*restriction*/
+                O_tax_lsCrdts=0;
+
+        Stax_a=(O_tax_lsCrdts-SURTAXA)*(SURTAXA_PRCT);
+        Stax_b=(O_tax_lsCrdts-SURTAXB)*(SURTAXB_PRCT);
+
+        /*negative restriction*/
+        if(Stax_a <0)
+                Stax_a=0;
+
+        /*negative restriction*/
+        if(Stax_b <0)
+                Stax_b=0;
+
+        O_TAft=(O_tax_lsCrdts+Stax_a+Stax_b);
+        O_NetTax=(((*Nod*(DEPDT))+B_RDTN)*2)-O_TAft;
+
+        /*negative restriction*/
+        if(O_NetTax<0)
+                O_NetTax=0;
+
+        O_NetTax=O_TAft-O_NetTax;
+
+        /*negative restriction*/
+        if(O_NetTax<0)
+                O_NetTax=0;
+
+        O_NetTax=SigDigs(O_NetTax);
+
+        /*-----refund or Balance Owing-----*/
+        Tot_Pay=(Net_Ftax+O_NetTax);
+
+        Tot_Crdt=*Inc_Tax_Ddct_22+*CPP_Ovrp+*EI_Ovrp;
+
+        diff=Tot_Pay-Tot_Crdt;
+
+        /*negative restriction*/
+        if(diff<0)
+                Refund=(-(diff));
+        else
+                Owing=diff;
+
+        /*******Final Statements*******/
+        printf("\n");
+        printf("Employment Income (box 14 on all T4 slips)\t\t101\t%.2lf\n",*Inc_14);
+        printf("Total Income\t\t\t\t\t\t150\t%.2lf\n",*Inc_14);
+        printf("Net Income\t\t\t\t\t\t236\t%.2lf\n",Net_Inc);
+        printf("Taxable Income\t\t\t\t\t\t260\t%.2lf\n",Tax_Inc);
+        printf("Net Federal Tax\t\t\t\t\t\t420\t%.2lf\n",Net_Ftax);
+        printf("Net Provincial Tax\t\t\t\t\t428\t%.2lf\n",O_NetTax);
+        printf("Total Payable\t\t\t\t\t\t435\t%.2lf\n",Tot_Pay);
+        printf("Total Income Tax Deducted\t\t437\t%.2lf\n",*Inc_Tax_Ddct_22);
+        printf("CPP Overpayment\t\t\t\t448\t%.2lf\n",*CPP_Ovrp);
+        printf("Employment Insurance Overpayment\t450\t%.2lf\n",*EI_Ovrp);
+        printf("Total Credits\t\t\t\t482\t%.2lf\n",Tot_Crdt);
+        printf("Total Payable less Credits\t\t\t\t\t%.2lf\n",diff);
+        printf("\n");
+        printf("Refund\t\t\t\t\t\t\t484\t%.2lf\n",Refund);
+        printf("Balance Owing\t\t\t\t\t\t485\t%.2lf\n",Owing);
+
+}
+
+/*---Function Tools---*/
+
+/*
+* SigDigs:
+*       Specifies the signicant digit, inorder for correct
+*       number of decimal places.
+*/
+double SigDigs(double value)
+{
+        int truncated, remainder,rounding_test;
+        double decimal;
+
+        /*------Rounding Conversions------*/
+
+        truncated=value;                /*convert value into whole value*/
+        decimal=value-truncated;        /*get the decimal*/
+        remainder=decimal*1000000;      /*turn decimal into a whole value*/
+        remainder/=1000;                /*truncate the last three values*/
+        rounding_test=remainder%10;     /*value to determine to round or not*/
+        remainder/=10;          /*truncate the test value*/
+        decimal=remainder;
+        decimal/=100;           /*convert into decimal*/
+        value=truncated+decimal;
+
+        /*greater than 4 and less than -4 round up*/
+        if((rounding_test>4 && rounding_test>0) || (rounding_test<(-4) && rounding_test<0))
+                value+=0.01;
+
+        return value;
+}
+
+/*
+* Buffer Clear
+*       Clears buffer, so there are no garbage after user input.
+*       Functions takes nothing in and returns nothing.
+*/
+void bufferClear(void)
+{
+        /*clears input buffer*/
+        while(getchar()!='\n')
+                ;/*null statement*/
+}
+$ cc tjduavis3.c
+$ a.out
+
+Welcome to the BTP100 Income Tax Return Calculator
+==================================================
+
+Please enter the T4 slip infomation:
+        Employment Income -             box 14  :24000.00
+        CPP Contributions -             box 16  :836.70
+        Employee's EI premiums -        box 18  :420.00
+        Income Tax Deducted -           box 22  :4897.68
+        Stock Options and Shares -      box 41  :0.00
+        Professional/Union Dues -       box 44  :0.00
+
+Number of Dependents -                  ------  :1
+
+Employment Income (box 14 on all T4 slips)              101     24000.00
+Total Income                                            150     24000.00
+Net Income                                              236     24000.00
+Taxable Income                                          260     24000.00
+Net Federal Tax                                         420     2357.01
+Net Provincial Tax                                      428     720.62
+Total Payable                                           435     3077.63
+Total Income Tax Deducted               437     4897.68
+CPP Overpayment                         448     0.00
+Employment Insurance Overpayment        450     0.00
+Total Credits                           482     4897.68
+Total Payable less Credits                                      -1820.05
+
+Refund                                                  484     1820.05
+Balance Owing                                           485     0.00
+
+
+
+Continue with another return (y or n) ?y
+
+Welcome to the BTP100 Income Tax Return Calculator
+==================================================
+
+Please enter the T4 slip infomation:
+        Employment Income -             box 14  :32300.00
+        CPP Contributions -             box 16  :1550.40
+        Employee's EI premiums -        box 18  :672.00
+        Income Tax Deducted -           box 22  :4111.76
+        Stock Options and Shares -      box 41  :0.00
+        Professional/Union Dues -       box 44  :0.00
+
+Number of Dependents -                  ------  :4
+
+Employment Income (box 14 on all T4 slips)              101     32300.00
+Total Income                                            150     32300.00
+Net Income                                              236     32300.00
+Taxable Income                                          260     32300.00
+Net Federal Tax                                         420     3530.50
+Net Provincial Tax                                      428     0.00
+Total Payable                                           435     3530.50
+Total Income Tax Deducted               437     4111.76
+CPP Overpayment                         448     0.00
+Employment Insurance Overpayment        450     0.00
+Total Credits                           482     4111.76
+Total Payable less Credits                                      -581.26
+
+Refund                                                  484     581.26
+Balance Owing                                           485     0.00
+
+
+
+Continue with another return (y or n) ?y
+
+Welcome to the BTP100 Income Tax Return Calculator
+==================================================
+
+Please enter the T4 slip infomation:
+        Employment Income -             box 14  :64500.00
+        CPP Contributions -             box 16  :1801.80
+        Employee's EI premiums -        box 18  :819.00
+        Income Tax Deducted -           box 22  :13970.60
+        Stock Options and Shares -      box 41  :0.00
+        Professional/Union Dues -       box 44  :0.00
+
+Number of Dependents -                  ------  :1
+
+Employment Income (box 14 on all T4 slips)              101     64500.00
+Total Income                                            150     64500.00
+Net Income                                              236     64500.00
+Taxable Income                                          260     64500.00
+Net Federal Tax                                         420     10396.24
+Net Provincial Tax                                      428     4298.26
+Total Payable                                           435     14694.50
+Total Income Tax Deducted               437     13970.60
+CPP Overpayment                         448     0.00
+Employment Insurance Overpayment        450     46.80
+Total Credits                           482     14017.40
+Total Payable less Credits                                      677.10
+
+Refund                                                  484     0.00
+Balance Owing                                           485     677.10
+
+
+
+Continue with another return (y or n) ?y
+
+Welcome to the BTP100 Income Tax Return Calculator
+==================================================
+
+Please enter the T4 slip infomation:
+        Employment Income -             box 14  :96000.00
+        CPP Contributions -             box 16  :2100.00
+        Employee's EI premiums -        box 18  :904.00
+        Income Tax Deducted -           box 22  :25631.04
+        Stock Options and Shares -      box 41  :0.00
+        Professional/Union Dues -       box 44  :0.00
+
+Number of Dependents -                  ------  :0
+
+Employment Income (box 14 on all T4 slips)              101     96000.00
+Total Income                                            150     96000.00
+Net Income                                              236     96000.00
+Taxable Income                                          260     96000.00
+Net Federal Tax                                         420     18361.49
+Net Provincial Tax                                      428     9478.67
+Total Payable                                           435     27840.16
+Total Income Tax Deducted               437     25631.04
+CPP Overpayment                         448     268.50
+Employment Insurance Overpayment        450     131.80
+Total Credits                           482     26031.34
+Total Payable less Credits                                      1808.82
+
+Refund                                                  484     0.00
+Balance Owing                                           485     1808.82
+
+
+
+Continue with another return (y or n) ?y
+
+Welcome to the BTP100 Income Tax Return Calculator
+==================================================
+
+Please enter the T4 slip infomation:
+        Employment Income -             box 14  :110000.00
+        CPP Contributions -             box 16  :1801.80
+        Employee's EI premiums -        box 18  :819.00
+        Income Tax Deducted -           box 22  :29343.00
+        Stock Options and Shares -      box 41  :0.00
+        Professional/Union Dues -       box 44  :1853.40
+
+Number of Dependents -                  ------  :3
+
+Employment Income (box 14 on all T4 slips)              101     110000.00
+Total Income                                            150     110000.00
+Net Income                                              236     108146.60
+Taxable Income                                          260     108146.60
+Net Federal Tax                                         420     21524.36
+Net Provincial Tax                                      428     11596.15
+Total Payable                                           435     33120.51
+Total Income Tax Deducted               437     29343.00
+CPP Overpayment                         448     0.00
+Employment Insurance Overpayment        450     46.80
+Total Credits                           482     29389.80
+Total Payable less Credits                                      3730.71
+
+Refund                                                  484     0.00
+Balance Owing                                           485     3730.71
+
+
+
+Continue with another return (y or n) ?y
+
+Welcome to the BTP100 Income Tax Return Calculator
+==================================================
+
+Please enter the T4 slip infomation:
+        Employment Income -             box 14  :1670.00
+        CPP Contributions -             box 16  :0.00
+        Employee's EI premiums -        box 18  :0.00
+        Income Tax Deducted -           box 22  :0.00
+        Stock Options and Shares -      box 41  :0.00
+        Professional/Union Dues -       box 44  :0.00
+
+Number of Dependents -                  ------  :0
+
+Employment Income (box 14 on all T4 slips)              101     1670.00
+Total Income                                            150     1670.00
+Net Income                                              236     1670.00
+Taxable Income                                          260     1670.00
+Net Federal Tax                                         420     0.00
+Net Provincial Tax                                      428     0.00
+Total Payable                                           435     0.00
+Total Income Tax Deducted               437     0.00
+CPP Overpayment                         448     0.00
+Employment Insurance Overpayment        450     0.00
+Total Credits                           482     0.00
+Total Payable less Credits                                      0.00
+
+Refund                                                  484     0.00
+Balance Owing                                           485     0.00
+
+
+
+Continue with another return (y or n) ?n
+
+Have a Nice Day!
+$ exit
+
+Script command is complete on Fri Oct 29 16:07:09 EDT 2004.
